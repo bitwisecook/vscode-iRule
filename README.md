@@ -15,3 +15,5 @@ Windows: %USERPROFILE%\.vscode\extensions
 Mac/Linux: $HOME/.vscode/extensions
 Restart VSCode. 
 
+OR you can install from marketplace: https://marketplace.visualstudio.com/items?itemName=yigituslu.iRule
+
