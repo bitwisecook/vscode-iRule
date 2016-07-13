@@ -6,6 +6,8 @@ F5 Networks iRule extention for Visual Studio Code. This extension gives TCL bas
 
 ### 1.0.0
 
+Support for TMOS 12.1.0
+
 ## Installation
 
 Copy whole files to a folder named "irule" under:
@@ -13,4 +15,3 @@ Windows: %USERPROFILE%\.vscode\extensions
 Mac/Linux: $HOME/.vscode/extensions
 Restart VSCode. 
 
-Support for TMOS 12.1.0
