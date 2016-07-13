@@ -1,0 +1,32 @@
+{
+    "name": "iRule",
+    "displayName": "f5-networks-iRule",
+    "description": "",
+    "version": "0.0.1",
+    "publisher": "yigituslu",
+    "engines": {
+        "vscode": "^1.0.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "iRule",
+            "aliases": ["iRules", "iRule"],
+            "extensions": [".iRule"],
+            "configuration": "./iRule.configuration.json"
+        }],
+        "grammars": [{
+            "language": "iRule",
+            "scopeName": "source.iRule",
+            "path": "./syntaxes/iRule.tmLanguage"
+        }],
+         "snippets": [
+            {
+                "language": "iRule",
+                "path": "./snippets/iRuleSnippets.json"
+            }
+        ]
+    }
+}

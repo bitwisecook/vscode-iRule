@@ -1,0 +1,4867 @@
+{
+	"if_elseif": {
+		"prefix": "if",
+		"body": "if {${1:condition}} {\n\t${2}\n} elseif {${3:condition}} {\n\t${4}\n}\n",
+		"description": "if...elseif",
+		"scope": "source.iRule"
+	},
+	"for": {
+		"prefix": "for",
+		"body": "for {${1:set i 0}} {${2:$i < $n}} {${3:incr i}} {\n\t${4}\n}\n",
+		"description": "for...",
+		"scope": "source.iRule"
+	},
+	"foreach": {
+		"prefix": "foreach",
+		"body": "foreach ${1:var} ${2:$list} {\n\t${3}\n}\n",
+		"description": "foreach...",
+		"scope": "source.iRule"
+	},
+	"if": {
+		"prefix": "if",
+		"body": "if {${1:condition}} {\n\t${2}\n}\n",
+		"description": "if...",
+		"scope": "source.iRule"
+	},
+	"if_esle": {
+		"prefix": "if",
+		"body": "if {${1:condition}} {\n\t${2}\n} else {\n\t${3}\n}\n",
+		"description": "if...else",
+		"scope": "source.iRule"
+	},
+	"proc": {
+		"prefix": "proc",
+		"body": "proc ${1:name} {${2:args}} {\n\t${3}\n}\n",
+		"description": "proc...",
+		"scope": "source.iRule"
+	},
+	"switch": {
+		"prefix": "switch",
+		"body": "switch ${1:-exact} -- ${2:$var} {\n\t${3:match} {\n\t\t${4}\n\t}\n\tdefault {${5}}\n}\n",
+		"description": "switch...",
+		"scope": "source.iRule"
+	},
+	"when": {
+		"prefix": "when",
+		"body": "when ${1:event} {\n\t${2}\n}\n",
+		"description": "when...",
+		"scope": "source.iRule"
+	},
+	"while": {
+		"prefix": "while",
+		"body": "while {${1:condition}} {\n\t${2}\n}\n",
+		"description": "while...",
+		"scope": "source.iRule"
+	},
+	"AAA::acct_result": {
+  "prefix": "AAA::acct_result",
+  "body": "AAA::acct_result",
+  "description": "AAA::acct_result",
+  "scope": "source.irule"
+},"AAA::acct_send": {
+  "prefix": "AAA::acct_send",
+  "body": "AAA::acct_send",
+  "description": "AAA::acct_send",
+  "scope": "source.irule"
+},"AAA::auth_result": {
+  "prefix": "AAA::auth_result",
+  "body": "AAA::auth_result",
+  "description": "AAA::auth_result",
+  "scope": "source.irule"
+},"AAA::auth_send": {
+  "prefix": "AAA::auth_send",
+  "body": "AAA::auth_send",
+  "description": "AAA::auth_send",
+  "scope": "source.irule"
+},"ACCESS2::access2_proc": {
+  "prefix": "ACCESS2::access2_proc",
+  "body": "ACCESS2::access2_proc",
+  "description": "ACCESS2::access2_proc",
+  "scope": "source.irule"
+},"ACCESS2_POLICY_EXPRESSION_EVAL": {
+  "prefix": "ACCESS2_POLICY_EXPRESSION_EVAL",
+  "body": "ACCESS2_POLICY_EXPRESSION_EVAL",
+  "description": "ACCESS2_POLICY_EXPRESSION_EVAL",
+  "scope": "source.irule"
+},"ACCESS::acl": {
+  "prefix": "ACCESS::acl",
+  "body": "ACCESS::acl",
+  "description": "ACCESS::acl",
+  "scope": "source.irule"
+},"ACCESS::disable": {
+  "prefix": "ACCESS::disable",
+  "body": "ACCESS::disable",
+  "description": "ACCESS::disable",
+  "scope": "source.irule"
+},"ACCESS::enable": {
+  "prefix": "ACCESS::enable",
+  "body": "ACCESS::enable",
+  "description": "ACCESS::enable",
+  "scope": "source.irule"
+},"ACCESS::perflow": {
+  "prefix": "ACCESS::perflow",
+  "body": "ACCESS::perflow",
+  "description": "ACCESS::perflow",
+  "scope": "source.irule"
+},"ACCESS::policy": {
+  "prefix": "ACCESS::policy",
+  "body": "ACCESS::policy",
+  "description": "ACCESS::policy",
+  "scope": "source.irule"
+},"ACCESS::respond": {
+  "prefix": "ACCESS::respond",
+  "body": "ACCESS::respond",
+  "description": "ACCESS::respond",
+  "scope": "source.irule"
+},"ACCESS::restrict_irule_events": {
+  "prefix": "ACCESS::restrict_irule_events",
+  "body": "ACCESS::restrict_irule_events",
+  "description": "ACCESS::restrict_irule_events",
+  "scope": "source.irule"
+},"ACCESS::session": {
+  "prefix": "ACCESS::session",
+  "body": "ACCESS::session",
+  "description": "ACCESS::session",
+  "scope": "source.irule"
+},"ACCESS::user": {
+  "prefix": "ACCESS::user",
+  "body": "ACCESS::user",
+  "description": "ACCESS::user",
+  "scope": "source.irule"
+},"ACCESS::uuid": {
+  "prefix": "ACCESS::uuid",
+  "body": "ACCESS::uuid",
+  "description": "ACCESS::uuid",
+  "scope": "source.irule"
+},"ACCESS_ACL_ALLOWED": {
+  "prefix": "ACCESS_ACL_ALLOWED",
+  "body": "ACCESS_ACL_ALLOWED",
+  "description": "ACCESS_ACL_ALLOWED",
+  "scope": "source.irule"
+},"ACCESS_ACL_DENIED": {
+  "prefix": "ACCESS_ACL_DENIED",
+  "body": "ACCESS_ACL_DENIED",
+  "description": "ACCESS_ACL_DENIED",
+  "scope": "source.irule"
+},"ACCESS_PER_REQUEST_AGENT_EVENT": {
+  "prefix": "ACCESS_PER_REQUEST_AGENT_EVENT",
+  "body": "ACCESS_PER_REQUEST_AGENT_EVENT",
+  "description": "ACCESS_PER_REQUEST_AGENT_EVENT",
+  "scope": "source.irule"
+},"ACCESS_POLICY_AGENT_EVENT": {
+  "prefix": "ACCESS_POLICY_AGENT_EVENT",
+  "body": "ACCESS_POLICY_AGENT_EVENT",
+  "description": "ACCESS_POLICY_AGENT_EVENT",
+  "scope": "source.irule"
+},"ACCESS_POLICY_COMPLETED": {
+  "prefix": "ACCESS_POLICY_COMPLETED",
+  "body": "ACCESS_POLICY_COMPLETED",
+  "description": "ACCESS_POLICY_COMPLETED",
+  "scope": "source.irule"
+},"ACCESS_SESSION_CLOSED": {
+  "prefix": "ACCESS_SESSION_CLOSED",
+  "body": "ACCESS_SESSION_CLOSED",
+  "description": "ACCESS_SESSION_CLOSED",
+  "scope": "source.irule"
+},"ACCESS_SESSION_STARTED": {
+  "prefix": "ACCESS_SESSION_STARTED",
+  "body": "ACCESS_SESSION_STARTED",
+  "description": "ACCESS_SESSION_STARTED",
+  "scope": "source.irule"
+},"ACL::action": {
+  "prefix": "ACL::action",
+  "body": "ACL::action",
+  "description": "ACL::action",
+  "scope": "source.irule"
+},"ADAPT::allow": {
+  "prefix": "ADAPT::allow",
+  "body": "ADAPT::allow",
+  "description": "ADAPT::allow",
+  "scope": "source.irule"
+},"ADAPT::context_create": {
+  "prefix": "ADAPT::context_create",
+  "body": "ADAPT::context_create",
+  "description": "ADAPT::context_create",
+  "scope": "source.irule"
+},"ADAPT::context_current": {
+  "prefix": "ADAPT::context_current",
+  "body": "ADAPT::context_current",
+  "description": "ADAPT::context_current",
+  "scope": "source.irule"
+},"ADAPT::context_delete_all": {
+  "prefix": "ADAPT::context_delete_all",
+  "body": "ADAPT::context_delete_all",
+  "description": "ADAPT::context_delete_all",
+  "scope": "source.irule"
+},"ADAPT::context_name": {
+  "prefix": "ADAPT::context_name",
+  "body": "ADAPT::context_name",
+  "description": "ADAPT::context_name",
+  "scope": "source.irule"
+},"ADAPT::context_static": {
+  "prefix": "ADAPT::context_static",
+  "body": "ADAPT::context_static",
+  "description": "ADAPT::context_static",
+  "scope": "source.irule"
+},"ADAPT::enable": {
+  "prefix": "ADAPT::enable",
+  "body": "ADAPT::enable",
+  "description": "ADAPT::enable",
+  "scope": "source.irule"
+},"ADAPT::preview_size": {
+  "prefix": "ADAPT::preview_size",
+  "body": "ADAPT::preview_size",
+  "description": "ADAPT::preview_size",
+  "scope": "source.irule"
+},"ADAPT::result": {
+  "prefix": "ADAPT::result",
+  "body": "ADAPT::result",
+  "description": "ADAPT::result",
+  "scope": "source.irule"
+},"ADAPT::select": {
+  "prefix": "ADAPT::select",
+  "body": "ADAPT::select",
+  "description": "ADAPT::select",
+  "scope": "source.irule"
+},"ADAPT::service_down_action": {
+  "prefix": "ADAPT::service_down_action",
+  "body": "ADAPT::service_down_action",
+  "description": "ADAPT::service_down_action",
+  "scope": "source.irule"
+},"ADAPT::timeout": {
+  "prefix": "ADAPT::timeout",
+  "body": "ADAPT::timeout",
+  "description": "ADAPT::timeout",
+  "scope": "source.irule"
+},"ADAPT_REQUEST_HEADERS": {
+  "prefix": "ADAPT_REQUEST_HEADERS",
+  "body": "ADAPT_REQUEST_HEADERS",
+  "description": "ADAPT_REQUEST_HEADERS",
+  "scope": "source.irule"
+},"ADAPT_REQUEST_RESULT": {
+  "prefix": "ADAPT_REQUEST_RESULT",
+  "body": "ADAPT_REQUEST_RESULT",
+  "description": "ADAPT_REQUEST_RESULT",
+  "scope": "source.irule"
+},"ADAPT_RESPONSE_HEADERS": {
+  "prefix": "ADAPT_RESPONSE_HEADERS",
+  "body": "ADAPT_RESPONSE_HEADERS",
+  "description": "ADAPT_RESPONSE_HEADERS",
+  "scope": "source.irule"
+},"ADAPT_RESPONSE_RESULT": {
+  "prefix": "ADAPT_RESPONSE_RESULT",
+  "body": "ADAPT_RESPONSE_RESULT",
+  "description": "ADAPT_RESPONSE_RESULT",
+  "scope": "source.irule"
+},"ADM::disable": {
+  "prefix": "ADM::disable",
+  "body": "ADM::disable",
+  "description": "ADM::disable",
+  "scope": "source.irule"
+},"ADM::health": {
+  "prefix": "ADM::health",
+  "body": "ADM::health",
+  "description": "ADM::health",
+  "scope": "source.irule"
+},"ADM::is_ip_slowdown": {
+  "prefix": "ADM::is_ip_slowdown",
+  "body": "ADM::is_ip_slowdown",
+  "description": "ADM::is_ip_slowdown",
+  "scope": "source.irule"
+},"ADM::is_mitigated": {
+  "prefix": "ADM::is_mitigated",
+  "body": "ADM::is_mitigated",
+  "description": "ADM::is_mitigated",
+  "scope": "source.irule"
+},"ADM::slowdown": {
+  "prefix": "ADM::slowdown",
+  "body": "ADM::slowdown",
+  "description": "ADM::slowdown",
+  "scope": "source.irule"
+},"AES::decrypt": {
+  "prefix": "AES::decrypt",
+  "body": "AES::decrypt",
+  "description": "AES::decrypt",
+  "scope": "source.irule"
+},"AES::encrypt": {
+  "prefix": "AES::encrypt",
+  "body": "AES::encrypt",
+  "description": "AES::encrypt",
+  "scope": "source.irule"
+},"AES::key": {
+  "prefix": "AES::key",
+  "body": "AES::key",
+  "description": "AES::key",
+  "scope": "source.irule"
+},"AM::age": {
+  "prefix": "AM::age",
+  "body": "AM::age",
+  "description": "AM::age",
+  "scope": "source.irule"
+},"AM::application": {
+  "prefix": "AM::application",
+  "body": "AM::application",
+  "description": "AM::application",
+  "scope": "source.irule"
+},"AM::cache": {
+  "prefix": "AM::cache",
+  "body": "AM::cache",
+  "description": "AM::cache",
+  "scope": "source.irule"
+},"AM::disable": {
+  "prefix": "AM::disable",
+  "body": "AM::disable",
+  "description": "AM::disable",
+  "scope": "source.irule"
+},"AM::expires": {
+  "prefix": "AM::expires",
+  "body": "AM::expires",
+  "description": "AM::expires",
+  "scope": "source.irule"
+},"AM::media_playlist": {
+  "prefix": "AM::media_playlist",
+  "body": "AM::media_playlist",
+  "description": "AM::media_playlist",
+  "scope": "source.irule"
+},"AM::policy_node": {
+  "prefix": "AM::policy_node",
+  "body": "AM::policy_node",
+  "description": "AM::policy_node",
+  "scope": "source.irule"
+},"AM_CACHE_RESPONSE": {
+  "prefix": "AM_CACHE_RESPONSE",
+  "body": "AM_CACHE_RESPONSE",
+  "description": "AM_CACHE_RESPONSE",
+  "scope": "source.irule"
+},"AM_CACHE_UPDATE": {
+  "prefix": "AM_CACHE_UPDATE",
+  "body": "AM_CACHE_UPDATE",
+  "description": "AM_CACHE_UPDATE",
+  "scope": "source.irule"
+},"AM_MEDIA_PLAYLIST": {
+  "prefix": "AM_MEDIA_PLAYLIST",
+  "body": "AM_MEDIA_PLAYLIST",
+  "description": "AM_MEDIA_PLAYLIST",
+  "scope": "source.irule"
+},"AM_REQUEST": {
+  "prefix": "AM_REQUEST",
+  "body": "AM_REQUEST",
+  "description": "AM_REQUEST",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_additional_info": {
+  "prefix": "ANTIFRAUD::alert_additional_info",
+  "body": "ANTIFRAUD::alert_additional_info",
+  "description": "ANTIFRAUD::alert_additional_info",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_bait_signatures": {
+  "prefix": "ANTIFRAUD::alert_bait_signatures",
+  "body": "ANTIFRAUD::alert_bait_signatures",
+  "description": "ANTIFRAUD::alert_bait_signatures",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_component": {
+  "prefix": "ANTIFRAUD::alert_component",
+  "body": "ANTIFRAUD::alert_component",
+  "description": "ANTIFRAUD::alert_component",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_defined_value": {
+  "prefix": "ANTIFRAUD::alert_defined_value",
+  "body": "ANTIFRAUD::alert_defined_value",
+  "description": "ANTIFRAUD::alert_defined_value",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_details": {
+  "prefix": "ANTIFRAUD::alert_details",
+  "body": "ANTIFRAUD::alert_details",
+  "description": "ANTIFRAUD::alert_details",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_device_id": {
+  "prefix": "ANTIFRAUD::alert_device_id",
+  "body": "ANTIFRAUD::alert_device_id",
+  "description": "ANTIFRAUD::alert_device_id",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_forbidden_added_element": {
+  "prefix": "ANTIFRAUD::alert_forbidden_added_element",
+  "body": "ANTIFRAUD::alert_forbidden_added_element",
+  "description": "ANTIFRAUD::alert_forbidden_added_element",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_guid": {
+  "prefix": "ANTIFRAUD::alert_guid",
+  "body": "ANTIFRAUD::alert_guid",
+  "description": "ANTIFRAUD::alert_guid",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_html": {
+  "prefix": "ANTIFRAUD::alert_html",
+  "body": "ANTIFRAUD::alert_html",
+  "description": "ANTIFRAUD::alert_html",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_http_referrer": {
+  "prefix": "ANTIFRAUD::alert_http_referrer",
+  "body": "ANTIFRAUD::alert_http_referrer",
+  "description": "ANTIFRAUD::alert_http_referrer",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_id": {
+  "prefix": "ANTIFRAUD::alert_id",
+  "body": "ANTIFRAUD::alert_id",
+  "description": "ANTIFRAUD::alert_id",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_license_id": {
+  "prefix": "ANTIFRAUD::alert_license_id",
+  "body": "ANTIFRAUD::alert_license_id",
+  "description": "ANTIFRAUD::alert_license_id",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_resolved_value": {
+  "prefix": "ANTIFRAUD::alert_resolved_value",
+  "body": "ANTIFRAUD::alert_resolved_value",
+  "description": "ANTIFRAUD::alert_resolved_value",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_score": {
+  "prefix": "ANTIFRAUD::alert_score",
+  "body": "ANTIFRAUD::alert_score",
+  "description": "ANTIFRAUD::alert_score",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_transaction_data": {
+  "prefix": "ANTIFRAUD::alert_transaction_data",
+  "body": "ANTIFRAUD::alert_transaction_data",
+  "description": "ANTIFRAUD::alert_transaction_data",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_type": {
+  "prefix": "ANTIFRAUD::alert_type",
+  "body": "ANTIFRAUD::alert_type",
+  "description": "ANTIFRAUD::alert_type",
+  "scope": "source.irule"
+},"ANTIFRAUD::alert_username": {
+  "prefix": "ANTIFRAUD::alert_username",
+  "body": "ANTIFRAUD::alert_username",
+  "description": "ANTIFRAUD::alert_username",
+  "scope": "source.irule"
+},"ANTIFRAUD::disable": {
+  "prefix": "ANTIFRAUD::disable",
+  "body": "ANTIFRAUD::disable",
+  "description": "ANTIFRAUD::disable",
+  "scope": "source.irule"
+},"ANTIFRAUD::disable_alert": {
+  "prefix": "ANTIFRAUD::disable_alert",
+  "body": "ANTIFRAUD::disable_alert",
+  "description": "ANTIFRAUD::disable_alert",
+  "scope": "source.irule"
+},"ANTIFRAUD::enable": {
+  "prefix": "ANTIFRAUD::enable",
+  "body": "ANTIFRAUD::enable",
+  "description": "ANTIFRAUD::enable",
+  "scope": "source.irule"
+},"ANTIFRAUD::guid": {
+  "prefix": "ANTIFRAUD::guid",
+  "body": "ANTIFRAUD::guid",
+  "description": "ANTIFRAUD::guid",
+  "scope": "source.irule"
+},"ANTIFRAUD::username": {
+  "prefix": "ANTIFRAUD::username",
+  "body": "ANTIFRAUD::username",
+  "description": "ANTIFRAUD::username",
+  "scope": "source.irule"
+},"ANTIFRAUD_ALERT": {
+  "prefix": "ANTIFRAUD_ALERT",
+  "body": "ANTIFRAUD_ALERT",
+  "description": "ANTIFRAUD_ALERT",
+  "scope": "source.irule"
+},"ANTIFRAUD_LOGIN": {
+  "prefix": "ANTIFRAUD_LOGIN",
+  "body": "ANTIFRAUD_LOGIN",
+  "description": "ANTIFRAUD_LOGIN",
+  "scope": "source.irule"
+},"ASM::client_ip": {
+  "prefix": "ASM::client_ip",
+  "body": "ASM::client_ip",
+  "description": "ASM::client_ip",
+  "scope": "source.irule"
+},"ASM::disable": {
+  "prefix": "ASM::disable",
+  "body": "ASM::disable",
+  "description": "ASM::disable",
+  "scope": "source.irule"
+},"ASM::enable": {
+  "prefix": "ASM::enable",
+  "body": "ASM::enable",
+  "description": "ASM::enable",
+  "scope": "source.irule"
+},"ASM::fingerprint": {
+  "prefix": "ASM::fingerprint",
+  "body": "ASM::fingerprint",
+  "description": "ASM::fingerprint",
+  "scope": "source.irule"
+},"ASM::payload": {
+  "prefix": "ASM::payload",
+  "body": "ASM::payload",
+  "description": "ASM::payload",
+  "scope": "source.irule"
+},"ASM::policy": {
+  "prefix": "ASM::policy",
+  "body": "ASM::policy",
+  "description": "ASM::policy",
+  "scope": "source.irule"
+},"ASM::raise": {
+  "prefix": "ASM::raise",
+  "body": "ASM::raise",
+  "description": "ASM::raise",
+  "scope": "source.irule"
+},"ASM::severity": {
+  "prefix": "ASM::severity",
+  "body": "ASM::severity",
+  "description": "ASM::severity",
+  "scope": "source.irule"
+},"ASM::status": {
+  "prefix": "ASM::status",
+  "body": "ASM::status",
+  "description": "ASM::status",
+  "scope": "source.irule"
+},"ASM::support_id": {
+  "prefix": "ASM::support_id",
+  "body": "ASM::support_id",
+  "description": "ASM::support_id",
+  "scope": "source.irule"
+},"ASM::unblock": {
+  "prefix": "ASM::unblock",
+  "body": "ASM::unblock",
+  "description": "ASM::unblock",
+  "scope": "source.irule"
+},"ASM::violation": {
+  "prefix": "ASM::violation",
+  "body": "ASM::violation",
+  "description": "ASM::violation",
+  "scope": "source.irule"
+},"ASM_REQUEST_BLOCKING": {
+  "prefix": "ASM_REQUEST_BLOCKING",
+  "body": "ASM_REQUEST_BLOCKING",
+  "description": "ASM_REQUEST_BLOCKING",
+  "scope": "source.irule"
+},"ASM_REQUEST_DONE": {
+  "prefix": "ASM_REQUEST_DONE",
+  "body": "ASM_REQUEST_DONE",
+  "description": "ASM_REQUEST_DONE",
+  "scope": "source.irule"
+},"ASM_RESPONSE_VIOLATION": {
+  "prefix": "ASM_RESPONSE_VIOLATION",
+  "body": "ASM_RESPONSE_VIOLATION",
+  "description": "ASM_RESPONSE_VIOLATION",
+  "scope": "source.irule"
+},"ASN1::decode": {
+  "prefix": "ASN1::decode",
+  "body": "ASN1::decode",
+  "description": "ASN1::decode",
+  "scope": "source.irule"
+},"ASN1::element": {
+  "prefix": "ASN1::element",
+  "body": "ASN1::element",
+  "description": "ASN1::element",
+  "scope": "source.irule"
+},"ASN1::encode": {
+  "prefix": "ASN1::encode",
+  "body": "ASN1::encode",
+  "description": "ASN1::encode",
+  "scope": "source.irule"
+},"AUTH::abort": {
+  "prefix": "AUTH::abort",
+  "body": "AUTH::abort",
+  "description": "AUTH::abort",
+  "scope": "source.irule"
+},"AUTH::authenticate": {
+  "prefix": "AUTH::authenticate",
+  "body": "AUTH::authenticate",
+  "description": "AUTH::authenticate",
+  "scope": "source.irule"
+},"AUTH::authenticate_continue": {
+  "prefix": "AUTH::authenticate_continue",
+  "body": "AUTH::authenticate_continue",
+  "description": "AUTH::authenticate_continue",
+  "scope": "source.irule"
+},"AUTH::cert_credential": {
+  "prefix": "AUTH::cert_credential",
+  "body": "AUTH::cert_credential",
+  "description": "AUTH::cert_credential",
+  "scope": "source.irule"
+},"AUTH::cert_issuer_credential": {
+  "prefix": "AUTH::cert_issuer_credential",
+  "body": "AUTH::cert_issuer_credential",
+  "description": "AUTH::cert_issuer_credential",
+  "scope": "source.irule"
+},"AUTH::last_event_session_id": {
+  "prefix": "AUTH::last_event_session_id",
+  "body": "AUTH::last_event_session_id",
+  "description": "AUTH::last_event_session_id",
+  "scope": "source.irule"
+},"AUTH::password_credential": {
+  "prefix": "AUTH::password_credential",
+  "body": "AUTH::password_credential",
+  "description": "AUTH::password_credential",
+  "scope": "source.irule"
+},"AUTH::response_data": {
+  "prefix": "AUTH::response_data",
+  "body": "AUTH::response_data",
+  "description": "AUTH::response_data",
+  "scope": "source.irule"
+},"AUTH::ssl_cc_ldap_status": {
+  "prefix": "AUTH::ssl_cc_ldap_status",
+  "body": "AUTH::ssl_cc_ldap_status",
+  "description": "AUTH::ssl_cc_ldap_status",
+  "scope": "source.irule"
+},"AUTH::ssl_cc_ldap_username": {
+  "prefix": "AUTH::ssl_cc_ldap_username",
+  "body": "AUTH::ssl_cc_ldap_username",
+  "description": "AUTH::ssl_cc_ldap_username",
+  "scope": "source.irule"
+},"AUTH::start": {
+  "prefix": "AUTH::start",
+  "body": "AUTH::start",
+  "description": "AUTH::start",
+  "scope": "source.irule"
+},"AUTH::status": {
+  "prefix": "AUTH::status",
+  "body": "AUTH::status",
+  "description": "AUTH::status",
+  "scope": "source.irule"
+},"AUTH::subscribe": {
+  "prefix": "AUTH::subscribe",
+  "body": "AUTH::subscribe",
+  "description": "AUTH::subscribe",
+  "scope": "source.irule"
+},"AUTH::unsubscribe": {
+  "prefix": "AUTH::unsubscribe",
+  "body": "AUTH::unsubscribe",
+  "description": "AUTH::unsubscribe",
+  "scope": "source.irule"
+},"AUTH::username_credential": {
+  "prefix": "AUTH::username_credential",
+  "body": "AUTH::username_credential",
+  "description": "AUTH::username_credential",
+  "scope": "source.irule"
+},"AUTH::wantcredential_prompt": {
+  "prefix": "AUTH::wantcredential_prompt",
+  "body": "AUTH::wantcredential_prompt",
+  "description": "AUTH::wantcredential_prompt",
+  "scope": "source.irule"
+},"AUTH::wantcredential_prompt_style": {
+  "prefix": "AUTH::wantcredential_prompt_style",
+  "body": "AUTH::wantcredential_prompt_style",
+  "description": "AUTH::wantcredential_prompt_style",
+  "scope": "source.irule"
+},"AUTH::wantcredential_type": {
+  "prefix": "AUTH::wantcredential_type",
+  "body": "AUTH::wantcredential_type",
+  "description": "AUTH::wantcredential_type",
+  "scope": "source.irule"
+},"AUTH_RESULT": {
+  "prefix": "AUTH_RESULT",
+  "body": "AUTH_RESULT",
+  "description": "AUTH_RESULT",
+  "scope": "source.irule"
+},"AVR::disable": {
+  "prefix": "AVR::disable",
+  "body": "AVR::disable",
+  "description": "AVR::disable",
+  "scope": "source.irule"
+},"AVR::disable_cspm_injection": {
+  "prefix": "AVR::disable_cspm_injection",
+  "body": "AVR::disable_cspm_injection",
+  "description": "AVR::disable_cspm_injection",
+  "scope": "source.irule"
+},"AVR::enable": {
+  "prefix": "AVR::enable",
+  "body": "AVR::enable",
+  "description": "AVR::enable",
+  "scope": "source.irule"
+},"BIGTCP::release_flow": {
+  "prefix": "BIGTCP::release_flow",
+  "body": "BIGTCP::release_flow",
+  "description": "BIGTCP::release_flow",
+  "scope": "source.irule"
+},"BOTDEFENSE::action": {
+  "prefix": "BOTDEFENSE::action",
+  "body": "BOTDEFENSE::action",
+  "description": "BOTDEFENSE::action",
+  "scope": "source.irule"
+},"BOTDEFENSE::captcha_age": {
+  "prefix": "BOTDEFENSE::captcha_age",
+  "body": "BOTDEFENSE::captcha_age",
+  "description": "BOTDEFENSE::captcha_age",
+  "scope": "source.irule"
+},"BOTDEFENSE::captcha_status": {
+  "prefix": "BOTDEFENSE::captcha_status",
+  "body": "BOTDEFENSE::captcha_status",
+  "description": "BOTDEFENSE::captcha_status",
+  "scope": "source.irule"
+},"BOTDEFENSE::cookie_age": {
+  "prefix": "BOTDEFENSE::cookie_age",
+  "body": "BOTDEFENSE::cookie_age",
+  "description": "BOTDEFENSE::cookie_age",
+  "scope": "source.irule"
+},"BOTDEFENSE::cookie_status": {
+  "prefix": "BOTDEFENSE::cookie_status",
+  "body": "BOTDEFENSE::cookie_status",
+  "description": "BOTDEFENSE::cookie_status",
+  "scope": "source.irule"
+},"BOTDEFENSE::cs_allowed": {
+  "prefix": "BOTDEFENSE::cs_allowed",
+  "body": "BOTDEFENSE::cs_allowed",
+  "description": "BOTDEFENSE::cs_allowed",
+  "scope": "source.irule"
+},"BOTDEFENSE::cs_attribute": {
+  "prefix": "BOTDEFENSE::cs_attribute",
+  "body": "BOTDEFENSE::cs_attribute",
+  "description": "BOTDEFENSE::cs_attribute",
+  "scope": "source.irule"
+},"BOTDEFENSE::cs_possible": {
+  "prefix": "BOTDEFENSE::cs_possible",
+  "body": "BOTDEFENSE::cs_possible",
+  "description": "BOTDEFENSE::cs_possible",
+  "scope": "source.irule"
+},"BOTDEFENSE::device_id": {
+  "prefix": "BOTDEFENSE::device_id",
+  "body": "BOTDEFENSE::device_id",
+  "description": "BOTDEFENSE::device_id",
+  "scope": "source.irule"
+},"BOTDEFENSE::disable": {
+  "prefix": "BOTDEFENSE::disable",
+  "body": "BOTDEFENSE::disable",
+  "description": "BOTDEFENSE::disable",
+  "scope": "source.irule"
+},"BOTDEFENSE::enable": {
+  "prefix": "BOTDEFENSE::enable",
+  "body": "BOTDEFENSE::enable",
+  "description": "BOTDEFENSE::enable",
+  "scope": "source.irule"
+},"BOTDEFENSE::reason": {
+  "prefix": "BOTDEFENSE::reason",
+  "body": "BOTDEFENSE::reason",
+  "description": "BOTDEFENSE::reason",
+  "scope": "source.irule"
+},"BOTDEFENSE_ACTION": {
+  "prefix": "BOTDEFENSE_ACTION",
+  "body": "BOTDEFENSE_ACTION",
+  "description": "BOTDEFENSE_ACTION",
+  "scope": "source.irule"
+},"BOTDEFENSE_REQUEST": {
+  "prefix": "BOTDEFENSE_REQUEST",
+  "body": "BOTDEFENSE_REQUEST",
+  "description": "BOTDEFENSE_REQUEST",
+  "scope": "source.irule"
+},"BWC::color": {
+  "prefix": "BWC::color",
+  "body": "BWC::color",
+  "description": "BWC::color",
+  "scope": "source.irule"
+},"BWC::debug": {
+  "prefix": "BWC::debug",
+  "body": "BWC::debug",
+  "description": "BWC::debug",
+  "scope": "source.irule"
+},"BWC::mark": {
+  "prefix": "BWC::mark",
+  "body": "BWC::mark",
+  "description": "BWC::mark",
+  "scope": "source.irule"
+},"BWC::measure": {
+  "prefix": "BWC::measure",
+  "body": "BWC::measure",
+  "description": "BWC::measure",
+  "scope": "source.irule"
+},"BWC::policy": {
+  "prefix": "BWC::policy",
+  "body": "BWC::policy",
+  "description": "BWC::policy",
+  "scope": "source.irule"
+},"BWC::pps": {
+  "prefix": "BWC::pps",
+  "body": "BWC::pps",
+  "description": "BWC::pps",
+  "scope": "source.irule"
+},"BWC::priority": {
+  "prefix": "BWC::priority",
+  "body": "BWC::priority",
+  "description": "BWC::priority",
+  "scope": "source.irule"
+},"BWC::rate": {
+  "prefix": "BWC::rate",
+  "body": "BWC::rate",
+  "description": "BWC::rate",
+  "scope": "source.irule"
+},"CACHE::accept_encoding": {
+  "prefix": "CACHE::accept_encoding",
+  "body": "CACHE::accept_encoding",
+  "description": "CACHE::accept_encoding",
+  "scope": "source.irule"
+},"CACHE::age": {
+  "prefix": "CACHE::age",
+  "body": "CACHE::age",
+  "description": "CACHE::age",
+  "scope": "source.irule"
+},"CACHE::disable": {
+  "prefix": "CACHE::disable",
+  "body": "CACHE::disable",
+  "description": "CACHE::disable",
+  "scope": "source.irule"
+},"CACHE::disabled": {
+  "prefix": "CACHE::disabled",
+  "body": "CACHE::disabled",
+  "description": "CACHE::disabled",
+  "scope": "source.irule"
+},"CACHE::enable": {
+  "prefix": "CACHE::enable",
+  "body": "CACHE::enable",
+  "description": "CACHE::enable",
+  "scope": "source.irule"
+},"CACHE::expire": {
+  "prefix": "CACHE::expire",
+  "body": "CACHE::expire",
+  "description": "CACHE::expire",
+  "scope": "source.irule"
+},"CACHE::fresh": {
+  "prefix": "CACHE::fresh",
+  "body": "CACHE::fresh",
+  "description": "CACHE::fresh",
+  "scope": "source.irule"
+},"CACHE::header": {
+  "prefix": "CACHE::header",
+  "body": "CACHE::header",
+  "description": "CACHE::header",
+  "scope": "source.irule"
+},"CACHE::headers": {
+  "prefix": "CACHE::headers",
+  "body": "CACHE::headers",
+  "description": "CACHE::headers",
+  "scope": "source.irule"
+},"CACHE::hits": {
+  "prefix": "CACHE::hits",
+  "body": "CACHE::hits",
+  "description": "CACHE::hits",
+  "scope": "source.irule"
+},"CACHE::payload": {
+  "prefix": "CACHE::payload",
+  "body": "CACHE::payload",
+  "description": "CACHE::payload",
+  "scope": "source.irule"
+},"CACHE::priority": {
+  "prefix": "CACHE::priority",
+  "body": "CACHE::priority",
+  "description": "CACHE::priority",
+  "scope": "source.irule"
+},"CACHE::statskey": {
+  "prefix": "CACHE::statskey",
+  "body": "CACHE::statskey",
+  "description": "CACHE::statskey",
+  "scope": "source.irule"
+},"CACHE::trace": {
+  "prefix": "CACHE::trace",
+  "body": "CACHE::trace",
+  "description": "CACHE::trace",
+  "scope": "source.irule"
+},"CACHE::uri": {
+  "prefix": "CACHE::uri",
+  "body": "CACHE::uri",
+  "description": "CACHE::uri",
+  "scope": "source.irule"
+},"CACHE::useragent": {
+  "prefix": "CACHE::useragent",
+  "body": "CACHE::useragent",
+  "description": "CACHE::useragent",
+  "scope": "source.irule"
+},"CACHE::userkey": {
+  "prefix": "CACHE::userkey",
+  "body": "CACHE::userkey",
+  "description": "CACHE::userkey",
+  "scope": "source.irule"
+},"CACHE_REQUEST": {
+  "prefix": "CACHE_REQUEST",
+  "body": "CACHE_REQUEST",
+  "description": "CACHE_REQUEST",
+  "scope": "source.irule"
+},"CACHE_RESPONSE": {
+  "prefix": "CACHE_RESPONSE",
+  "body": "CACHE_RESPONSE",
+  "description": "CACHE_RESPONSE",
+  "scope": "source.irule"
+},"CACHE_UPDATE": {
+  "prefix": "CACHE_UPDATE",
+  "body": "CACHE_UPDATE",
+  "description": "CACHE_UPDATE",
+  "scope": "source.irule"
+},"CATEGORY::analytics": {
+  "prefix": "CATEGORY::analytics",
+  "body": "CATEGORY::analytics",
+  "description": "CATEGORY::analytics",
+  "scope": "source.irule"
+},"CATEGORY::filetype": {
+  "prefix": "CATEGORY::filetype",
+  "body": "CATEGORY::filetype",
+  "description": "CATEGORY::filetype",
+  "scope": "source.irule"
+},"CATEGORY::lookup": {
+  "prefix": "CATEGORY::lookup",
+  "body": "CATEGORY::lookup",
+  "description": "CATEGORY::lookup",
+  "scope": "source.irule"
+},"CATEGORY::matchtype": {
+  "prefix": "CATEGORY::matchtype",
+  "body": "CATEGORY::matchtype",
+  "description": "CATEGORY::matchtype",
+  "scope": "source.irule"
+},"CATEGORY::result": {
+  "prefix": "CATEGORY::result",
+  "body": "CATEGORY::result",
+  "description": "CATEGORY::result",
+  "scope": "source.irule"
+},"CATEGORY::safesearch": {
+  "prefix": "CATEGORY::safesearch",
+  "body": "CATEGORY::safesearch",
+  "description": "CATEGORY::safesearch",
+  "scope": "source.irule"
+},"CATEGORY_MATCHED": {
+  "prefix": "CATEGORY_MATCHED",
+  "body": "CATEGORY_MATCHED",
+  "description": "CATEGORY_MATCHED",
+  "scope": "source.irule"
+},"CLASSIFICATION::app": {
+  "prefix": "CLASSIFICATION::app",
+  "body": "CLASSIFICATION::app",
+  "description": "CLASSIFICATION::app",
+  "scope": "source.irule"
+},"CLASSIFICATION::category": {
+  "prefix": "CLASSIFICATION::category",
+  "body": "CLASSIFICATION::category",
+  "description": "CLASSIFICATION::category",
+  "scope": "source.irule"
+},"CLASSIFICATION::disable": {
+  "prefix": "CLASSIFICATION::disable",
+  "body": "CLASSIFICATION::disable",
+  "description": "CLASSIFICATION::disable",
+  "scope": "source.irule"
+},"CLASSIFICATION::enable": {
+  "prefix": "CLASSIFICATION::enable",
+  "body": "CLASSIFICATION::enable",
+  "description": "CLASSIFICATION::enable",
+  "scope": "source.irule"
+},"CLASSIFICATION::protocol": {
+  "prefix": "CLASSIFICATION::protocol",
+  "body": "CLASSIFICATION::protocol",
+  "description": "CLASSIFICATION::protocol",
+  "scope": "source.irule"
+},"CLASSIFICATION::result": {
+  "prefix": "CLASSIFICATION::result",
+  "body": "CLASSIFICATION::result",
+  "description": "CLASSIFICATION::result",
+  "scope": "source.irule"
+},"CLASSIFICATION::urlcat": {
+  "prefix": "CLASSIFICATION::urlcat",
+  "body": "CLASSIFICATION::urlcat",
+  "description": "CLASSIFICATION::urlcat",
+  "scope": "source.irule"
+},"CLASSIFICATION_DETECTED": {
+  "prefix": "CLASSIFICATION_DETECTED",
+  "body": "CLASSIFICATION_DETECTED",
+  "description": "CLASSIFICATION_DETECTED",
+  "scope": "source.irule"
+},"CLASSIFY::application": {
+  "prefix": "CLASSIFY::application",
+  "body": "CLASSIFY::application",
+  "description": "CLASSIFY::application",
+  "scope": "source.irule"
+},"CLASSIFY::category": {
+  "prefix": "CLASSIFY::category",
+  "body": "CLASSIFY::category",
+  "description": "CLASSIFY::category",
+  "scope": "source.irule"
+},"CLASSIFY::defer": {
+  "prefix": "CLASSIFY::defer",
+  "body": "CLASSIFY::defer",
+  "description": "CLASSIFY::defer",
+  "scope": "source.irule"
+},"CLASSIFY::disable": {
+  "prefix": "CLASSIFY::disable",
+  "body": "CLASSIFY::disable",
+  "description": "CLASSIFY::disable",
+  "scope": "source.irule"
+},"CLASSIFY::urlcat": {
+  "prefix": "CLASSIFY::urlcat",
+  "body": "CLASSIFY::urlcat",
+  "description": "CLASSIFY::urlcat",
+  "scope": "source.irule"
+},"CLIENTSSL_CLIENTCERT": {
+  "prefix": "CLIENTSSL_CLIENTCERT",
+  "body": "CLIENTSSL_CLIENTCERT",
+  "description": "CLIENTSSL_CLIENTCERT",
+  "scope": "source.irule"
+},"CLIENTSSL_CLIENTHELLO": {
+  "prefix": "CLIENTSSL_CLIENTHELLO",
+  "body": "CLIENTSSL_CLIENTHELLO",
+  "description": "CLIENTSSL_CLIENTHELLO",
+  "scope": "source.irule"
+},"CLIENTSSL_DATA": {
+  "prefix": "CLIENTSSL_DATA",
+  "body": "CLIENTSSL_DATA",
+  "description": "CLIENTSSL_DATA",
+  "scope": "source.irule"
+},"CLIENTSSL_HANDSHAKE": {
+  "prefix": "CLIENTSSL_HANDSHAKE",
+  "body": "CLIENTSSL_HANDSHAKE",
+  "description": "CLIENTSSL_HANDSHAKE",
+  "scope": "source.irule"
+},"CLIENTSSL_SERVERHELLO_SEND": {
+  "prefix": "CLIENTSSL_SERVERHELLO_SEND",
+  "body": "CLIENTSSL_SERVERHELLO_SEND",
+  "description": "CLIENTSSL_SERVERHELLO_SEND",
+  "scope": "source.irule"
+},"CLIENT_ACCEPTED": {
+  "prefix": "CLIENT_ACCEPTED",
+  "body": "CLIENT_ACCEPTED",
+  "description": "CLIENT_ACCEPTED",
+  "scope": "source.irule"
+},"CLIENT_CLOSED": {
+  "prefix": "CLIENT_CLOSED",
+  "body": "CLIENT_CLOSED",
+  "description": "CLIENT_CLOSED",
+  "scope": "source.irule"
+},"CLIENT_DATA": {
+  "prefix": "CLIENT_DATA",
+  "body": "CLIENT_DATA",
+  "description": "CLIENT_DATA",
+  "scope": "source.irule"
+},"CLIENT_LINE": {
+  "prefix": "CLIENT_LINE",
+  "body": "CLIENT_LINE",
+  "description": "CLIENT_LINE",
+  "scope": "source.irule"
+},"COMPRESS::buffer_size": {
+  "prefix": "COMPRESS::buffer_size",
+  "body": "COMPRESS::buffer_size",
+  "description": "COMPRESS::buffer_size",
+  "scope": "source.irule"
+},"COMPRESS::disable": {
+  "prefix": "COMPRESS::disable",
+  "body": "COMPRESS::disable",
+  "description": "COMPRESS::disable",
+  "scope": "source.irule"
+},"COMPRESS::enable": {
+  "prefix": "COMPRESS::enable",
+  "body": "COMPRESS::enable",
+  "description": "COMPRESS::enable",
+  "scope": "source.irule"
+},"COMPRESS::gzip": {
+  "prefix": "COMPRESS::gzip",
+  "body": "COMPRESS::gzip",
+  "description": "COMPRESS::gzip",
+  "scope": "source.irule"
+},"COMPRESS::method": {
+  "prefix": "COMPRESS::method",
+  "body": "COMPRESS::method",
+  "description": "COMPRESS::method",
+  "scope": "source.irule"
+},"COMPRESS::nodelay": {
+  "prefix": "COMPRESS::nodelay",
+  "body": "COMPRESS::nodelay",
+  "description": "COMPRESS::nodelay",
+  "scope": "source.irule"
+},"CRYPTO::decrypt": {
+  "prefix": "CRYPTO::decrypt",
+  "body": "CRYPTO::decrypt",
+  "description": "CRYPTO::decrypt",
+  "scope": "source.irule"
+},"CRYPTO::encrypt": {
+  "prefix": "CRYPTO::encrypt",
+  "body": "CRYPTO::encrypt",
+  "description": "CRYPTO::encrypt",
+  "scope": "source.irule"
+},"CRYPTO::hash": {
+  "prefix": "CRYPTO::hash",
+  "body": "CRYPTO::hash",
+  "description": "CRYPTO::hash",
+  "scope": "source.irule"
+},"CRYPTO::keygen": {
+  "prefix": "CRYPTO::keygen",
+  "body": "CRYPTO::keygen",
+  "description": "CRYPTO::keygen",
+  "scope": "source.irule"
+},"CRYPTO::sign": {
+  "prefix": "CRYPTO::sign",
+  "body": "CRYPTO::sign",
+  "description": "CRYPTO::sign",
+  "scope": "source.irule"
+},"CRYPTO::verify": {
+  "prefix": "CRYPTO::verify",
+  "body": "CRYPTO::verify",
+  "description": "CRYPTO::verify",
+  "scope": "source.irule"
+},"DATAGRAM::dns": {
+  "prefix": "DATAGRAM::dns",
+  "body": "DATAGRAM::dns",
+  "description": "DATAGRAM::dns",
+  "scope": "source.irule"
+},"DATAGRAM::ip": {
+  "prefix": "DATAGRAM::ip",
+  "body": "DATAGRAM::ip",
+  "description": "DATAGRAM::ip",
+  "scope": "source.irule"
+},"DATAGRAM::ip6": {
+  "prefix": "DATAGRAM::ip6",
+  "body": "DATAGRAM::ip6",
+  "description": "DATAGRAM::ip6",
+  "scope": "source.irule"
+},"DATAGRAM::tcp": {
+  "prefix": "DATAGRAM::tcp",
+  "body": "DATAGRAM::tcp",
+  "description": "DATAGRAM::tcp",
+  "scope": "source.irule"
+},"DATAGRAM::udp": {
+  "prefix": "DATAGRAM::udp",
+  "body": "DATAGRAM::udp",
+  "description": "DATAGRAM::udp",
+  "scope": "source.irule"
+},"DECOMPRESS::disable": {
+  "prefix": "DECOMPRESS::disable",
+  "body": "DECOMPRESS::disable",
+  "description": "DECOMPRESS::disable",
+  "scope": "source.irule"
+},"DECOMPRESS::enable": {
+  "prefix": "DECOMPRESS::enable",
+  "body": "DECOMPRESS::enable",
+  "description": "DECOMPRESS::enable",
+  "scope": "source.irule"
+},"DEMANGLE::disable": {
+  "prefix": "DEMANGLE::disable",
+  "body": "DEMANGLE::disable",
+  "description": "DEMANGLE::disable",
+  "scope": "source.irule"
+},"DEMANGLE::enable": {
+  "prefix": "DEMANGLE::enable",
+  "body": "DEMANGLE::enable",
+  "description": "DEMANGLE::enable",
+  "scope": "source.irule"
+},"DHCP::version": {
+  "prefix": "DHCP::version",
+  "body": "DHCP::version",
+  "description": "DHCP::version",
+  "scope": "source.irule"
+},"DHCPv4::chaddr": {
+  "prefix": "DHCPv4::chaddr",
+  "body": "DHCPv4::chaddr",
+  "description": "DHCPv4::chaddr",
+  "scope": "source.irule"
+},"DHCPv4::ciaddr": {
+  "prefix": "DHCPv4::ciaddr",
+  "body": "DHCPv4::ciaddr",
+  "description": "DHCPv4::ciaddr",
+  "scope": "source.irule"
+},"DHCPv4::drop": {
+  "prefix": "DHCPv4::drop",
+  "body": "DHCPv4::drop",
+  "description": "DHCPv4::drop",
+  "scope": "source.irule"
+},"DHCPv4::giaddr": {
+  "prefix": "DHCPv4::giaddr",
+  "body": "DHCPv4::giaddr",
+  "description": "DHCPv4::giaddr",
+  "scope": "source.irule"
+},"DHCPv4::hlen": {
+  "prefix": "DHCPv4::hlen",
+  "body": "DHCPv4::hlen",
+  "description": "DHCPv4::hlen",
+  "scope": "source.irule"
+},"DHCPv4::hops": {
+  "prefix": "DHCPv4::hops",
+  "body": "DHCPv4::hops",
+  "description": "DHCPv4::hops",
+  "scope": "source.irule"
+},"DHCPv4::htype": {
+  "prefix": "DHCPv4::htype",
+  "body": "DHCPv4::htype",
+  "description": "DHCPv4::htype",
+  "scope": "source.irule"
+},"DHCPv4::len": {
+  "prefix": "DHCPv4::len",
+  "body": "DHCPv4::len",
+  "description": "DHCPv4::len",
+  "scope": "source.irule"
+},"DHCPv4::opcode": {
+  "prefix": "DHCPv4::opcode",
+  "body": "DHCPv4::opcode",
+  "description": "DHCPv4::opcode",
+  "scope": "source.irule"
+},"DHCPv4::option": {
+  "prefix": "DHCPv4::option",
+  "body": "DHCPv4::option",
+  "description": "DHCPv4::option",
+  "scope": "source.irule"
+},"DHCPv4::reject": {
+  "prefix": "DHCPv4::reject",
+  "body": "DHCPv4::reject",
+  "description": "DHCPv4::reject",
+  "scope": "source.irule"
+},"DHCPv4::secs": {
+  "prefix": "DHCPv4::secs",
+  "body": "DHCPv4::secs",
+  "description": "DHCPv4::secs",
+  "scope": "source.irule"
+},"DHCPv4::siaddr": {
+  "prefix": "DHCPv4::siaddr",
+  "body": "DHCPv4::siaddr",
+  "description": "DHCPv4::siaddr",
+  "scope": "source.irule"
+},"DHCPv4::type": {
+  "prefix": "DHCPv4::type",
+  "body": "DHCPv4::type",
+  "description": "DHCPv4::type",
+  "scope": "source.irule"
+},"DHCPv4::xid": {
+  "prefix": "DHCPv4::xid",
+  "body": "DHCPv4::xid",
+  "description": "DHCPv4::xid",
+  "scope": "source.irule"
+},"DHCPv4::yiaddr": {
+  "prefix": "DHCPv4::yiaddr",
+  "body": "DHCPv4::yiaddr",
+  "description": "DHCPv4::yiaddr",
+  "scope": "source.irule"
+},"DHCPv6::drop": {
+  "prefix": "DHCPv6::drop",
+  "body": "DHCPv6::drop",
+  "description": "DHCPv6::drop",
+  "scope": "source.irule"
+},"DHCPv6::hop_count": {
+  "prefix": "DHCPv6::hop_count",
+  "body": "DHCPv6::hop_count",
+  "description": "DHCPv6::hop_count",
+  "scope": "source.irule"
+},"DHCPv6::len": {
+  "prefix": "DHCPv6::len",
+  "body": "DHCPv6::len",
+  "description": "DHCPv6::len",
+  "scope": "source.irule"
+},"DHCPv6::link_address": {
+  "prefix": "DHCPv6::link_address",
+  "body": "DHCPv6::link_address",
+  "description": "DHCPv6::link_address",
+  "scope": "source.irule"
+},"DHCPv6::msg_type": {
+  "prefix": "DHCPv6::msg_type",
+  "body": "DHCPv6::msg_type",
+  "description": "DHCPv6::msg_type",
+  "scope": "source.irule"
+},"DHCPv6::option": {
+  "prefix": "DHCPv6::option",
+  "body": "DHCPv6::option",
+  "description": "DHCPv6::option",
+  "scope": "source.irule"
+},"DHCPv6::peer_address": {
+  "prefix": "DHCPv6::peer_address",
+  "body": "DHCPv6::peer_address",
+  "description": "DHCPv6::peer_address",
+  "scope": "source.irule"
+},"DHCPv6::reject": {
+  "prefix": "DHCPv6::reject",
+  "body": "DHCPv6::reject",
+  "description": "DHCPv6::reject",
+  "scope": "source.irule"
+},"DHCPv6::transaction_id": {
+  "prefix": "DHCPv6::transaction_id",
+  "body": "DHCPv6::transaction_id",
+  "description": "DHCPv6::transaction_id",
+  "scope": "source.irule"
+},"DIAG::test": {
+  "prefix": "DIAG::test",
+  "body": "DIAG::test",
+  "description": "DIAG::test",
+  "scope": "source.irule"
+},"DIAMETER::avp": {
+  "prefix": "DIAMETER::avp",
+  "body": "DIAMETER::avp",
+  "description": "DIAMETER::avp",
+  "scope": "source.irule"
+},"DIAMETER::command": {
+  "prefix": "DIAMETER::command",
+  "body": "DIAMETER::command",
+  "description": "DIAMETER::command",
+  "scope": "source.irule"
+},"DIAMETER::disconnect": {
+  "prefix": "DIAMETER::disconnect",
+  "body": "DIAMETER::disconnect",
+  "description": "DIAMETER::disconnect",
+  "scope": "source.irule"
+},"DIAMETER::drop": {
+  "prefix": "DIAMETER::drop",
+  "body": "DIAMETER::drop",
+  "description": "DIAMETER::drop",
+  "scope": "source.irule"
+},"DIAMETER::header": {
+  "prefix": "DIAMETER::header",
+  "body": "DIAMETER::header",
+  "description": "DIAMETER::header",
+  "scope": "source.irule"
+},"DIAMETER::host": {
+  "prefix": "DIAMETER::host",
+  "body": "DIAMETER::host",
+  "description": "DIAMETER::host",
+  "scope": "source.irule"
+},"DIAMETER::is_request": {
+  "prefix": "DIAMETER::is_request",
+  "body": "DIAMETER::is_request",
+  "description": "DIAMETER::is_request",
+  "scope": "source.irule"
+},"DIAMETER::is_response": {
+  "prefix": "DIAMETER::is_response",
+  "body": "DIAMETER::is_response",
+  "description": "DIAMETER::is_response",
+  "scope": "source.irule"
+},"DIAMETER::length": {
+  "prefix": "DIAMETER::length",
+  "body": "DIAMETER::length",
+  "description": "DIAMETER::length",
+  "scope": "source.irule"
+},"DIAMETER::message": {
+  "prefix": "DIAMETER::message",
+  "body": "DIAMETER::message",
+  "description": "DIAMETER::message",
+  "scope": "source.irule"
+},"DIAMETER::payload": {
+  "prefix": "DIAMETER::payload",
+  "body": "DIAMETER::payload",
+  "description": "DIAMETER::payload",
+  "scope": "source.irule"
+},"DIAMETER::persist": {
+  "prefix": "DIAMETER::persist",
+  "body": "DIAMETER::persist",
+  "description": "DIAMETER::persist",
+  "scope": "source.irule"
+},"DIAMETER::realm": {
+  "prefix": "DIAMETER::realm",
+  "body": "DIAMETER::realm",
+  "description": "DIAMETER::realm",
+  "scope": "source.irule"
+},"DIAMETER::respond": {
+  "prefix": "DIAMETER::respond",
+  "body": "DIAMETER::respond",
+  "description": "DIAMETER::respond",
+  "scope": "source.irule"
+},"DIAMETER::result": {
+  "prefix": "DIAMETER::result",
+  "body": "DIAMETER::result",
+  "description": "DIAMETER::result",
+  "scope": "source.irule"
+},"DIAMETER::retry": {
+  "prefix": "DIAMETER::retry",
+  "body": "DIAMETER::retry",
+  "description": "DIAMETER::retry",
+  "scope": "source.irule"
+},"DIAMETER::session": {
+  "prefix": "DIAMETER::session",
+  "body": "DIAMETER::session",
+  "description": "DIAMETER::session",
+  "scope": "source.irule"
+},"DIAMETER::state": {
+  "prefix": "DIAMETER::state",
+  "body": "DIAMETER::state",
+  "description": "DIAMETER::state",
+  "scope": "source.irule"
+},"DIAMETER_EGRESS": {
+  "prefix": "DIAMETER_EGRESS",
+  "body": "DIAMETER_EGRESS",
+  "description": "DIAMETER_EGRESS",
+  "scope": "source.irule"
+},"DIAMETER_INGRESS": {
+  "prefix": "DIAMETER_INGRESS",
+  "body": "DIAMETER_INGRESS",
+  "description": "DIAMETER_INGRESS",
+  "scope": "source.irule"
+},"DNS::additional": {
+  "prefix": "DNS::additional",
+  "body": "DNS::additional",
+  "description": "DNS::additional",
+  "scope": "source.irule"
+},"DNS::answer": {
+  "prefix": "DNS::answer",
+  "body": "DNS::answer",
+  "description": "DNS::answer",
+  "scope": "source.irule"
+},"DNS::authority": {
+  "prefix": "DNS::authority",
+  "body": "DNS::authority",
+  "description": "DNS::authority",
+  "scope": "source.irule"
+},"DNS::class": {
+  "prefix": "DNS::class",
+  "body": "DNS::class",
+  "description": "DNS::class",
+  "scope": "source.irule"
+},"DNS::disable": {
+  "prefix": "DNS::disable",
+  "body": "DNS::disable",
+  "description": "DNS::disable",
+  "scope": "source.irule"
+},"DNS::drop": {
+  "prefix": "DNS::drop",
+  "body": "DNS::drop",
+  "description": "DNS::drop",
+  "scope": "source.irule"
+},"DNS::edns0": {
+  "prefix": "DNS::edns0",
+  "body": "DNS::edns0",
+  "description": "DNS::edns0",
+  "scope": "source.irule"
+},"DNS::enable": {
+  "prefix": "DNS::enable",
+  "body": "DNS::enable",
+  "description": "DNS::enable",
+  "scope": "source.irule"
+},"DNS::header": {
+  "prefix": "DNS::header",
+  "body": "DNS::header",
+  "description": "DNS::header",
+  "scope": "source.irule"
+},"DNS::is_wideip": {
+  "prefix": "DNS::is_wideip",
+  "body": "DNS::is_wideip",
+  "description": "DNS::is_wideip",
+  "scope": "source.irule"
+},"DNS::last_act": {
+  "prefix": "DNS::last_act",
+  "body": "DNS::last_act",
+  "description": "DNS::last_act",
+  "scope": "source.irule"
+},"DNS::len": {
+  "prefix": "DNS::len",
+  "body": "DNS::len",
+  "description": "DNS::len",
+  "scope": "source.irule"
+},"DNS::log": {
+  "prefix": "DNS::log",
+  "body": "DNS::log",
+  "description": "DNS::log",
+  "scope": "source.irule"
+},"DNS::name": {
+  "prefix": "DNS::name",
+  "body": "DNS::name",
+  "description": "DNS::name",
+  "scope": "source.irule"
+},"DNS::origin": {
+  "prefix": "DNS::origin",
+  "body": "DNS::origin",
+  "description": "DNS::origin",
+  "scope": "source.irule"
+},"DNS::ptype": {
+  "prefix": "DNS::ptype",
+  "body": "DNS::ptype",
+  "description": "DNS::ptype",
+  "scope": "source.irule"
+},"DNS::query": {
+  "prefix": "DNS::query",
+  "body": "DNS::query",
+  "description": "DNS::query",
+  "scope": "source.irule"
+},"DNS::question": {
+  "prefix": "DNS::question",
+  "body": "DNS::question",
+  "description": "DNS::question",
+  "scope": "source.irule"
+},"DNS::rdata": {
+  "prefix": "DNS::rdata",
+  "body": "DNS::rdata",
+  "description": "DNS::rdata",
+  "scope": "source.irule"
+},"DNS::return": {
+  "prefix": "DNS::return",
+  "body": "DNS::return",
+  "description": "DNS::return",
+  "scope": "source.irule"
+},"DNS::rpz_policy": {
+  "prefix": "DNS::rpz_policy",
+  "body": "DNS::rpz_policy",
+  "description": "DNS::rpz_policy",
+  "scope": "source.irule"
+},"DNS::rr": {
+  "prefix": "DNS::rr",
+  "body": "DNS::rr",
+  "description": "DNS::rr",
+  "scope": "source.irule"
+},"DNS::rrname": {
+  "prefix": "DNS::rrname",
+  "body": "DNS::rrname",
+  "description": "DNS::rrname",
+  "scope": "source.irule"
+},"DNS::rrtype": {
+  "prefix": "DNS::rrtype",
+  "body": "DNS::rrtype",
+  "description": "DNS::rrtype",
+  "scope": "source.irule"
+},"DNS::scrape": {
+  "prefix": "DNS::scrape",
+  "body": "DNS::scrape",
+  "description": "DNS::scrape",
+  "scope": "source.irule"
+},"DNS::tsig": {
+  "prefix": "DNS::tsig",
+  "body": "DNS::tsig",
+  "description": "DNS::tsig",
+  "scope": "source.irule"
+},"DNS::ttl": {
+  "prefix": "DNS::ttl",
+  "body": "DNS::ttl",
+  "description": "DNS::ttl",
+  "scope": "source.irule"
+},"DNS::type": {
+  "prefix": "DNS::type",
+  "body": "DNS::type",
+  "description": "DNS::type",
+  "scope": "source.irule"
+},"DNS_REQUEST": {
+  "prefix": "DNS_REQUEST",
+  "body": "DNS_REQUEST",
+  "description": "DNS_REQUEST",
+  "scope": "source.irule"
+},"DNS_RESPONSE": {
+  "prefix": "DNS_RESPONSE",
+  "body": "DNS_RESPONSE",
+  "description": "DNS_RESPONSE",
+  "scope": "source.irule"
+},"DOSL7::disable": {
+  "prefix": "DOSL7::disable",
+  "body": "DOSL7::disable",
+  "description": "DOSL7::disable",
+  "scope": "source.irule"
+},"DOSL7::enable": {
+  "prefix": "DOSL7::enable",
+  "body": "DOSL7::enable",
+  "description": "DOSL7::enable",
+  "scope": "source.irule"
+},"DOSL7::profile": {
+  "prefix": "DOSL7::profile",
+  "body": "DOSL7::profile",
+  "description": "DOSL7::profile",
+  "scope": "source.irule"
+},"DSLITE::remote_addr": {
+  "prefix": "DSLITE::remote_addr",
+  "body": "DSLITE::remote_addr",
+  "description": "DSLITE::remote_addr",
+  "scope": "source.irule"
+},"ECA::client_machine_name": {
+  "prefix": "ECA::client_machine_name",
+  "body": "ECA::client_machine_name",
+  "description": "ECA::client_machine_name",
+  "scope": "source.irule"
+},"ECA::disable": {
+  "prefix": "ECA::disable",
+  "body": "ECA::disable",
+  "description": "ECA::disable",
+  "scope": "source.irule"
+},"ECA::domainname": {
+  "prefix": "ECA::domainname",
+  "body": "ECA::domainname",
+  "description": "ECA::domainname",
+  "scope": "source.irule"
+},"ECA::enable": {
+  "prefix": "ECA::enable",
+  "body": "ECA::enable",
+  "description": "ECA::enable",
+  "scope": "source.irule"
+},"ECA::metadata": {
+  "prefix": "ECA::metadata",
+  "body": "ECA::metadata",
+  "description": "ECA::metadata",
+  "scope": "source.irule"
+},"ECA::select": {
+  "prefix": "ECA::select",
+  "body": "ECA::select",
+  "description": "ECA::select",
+  "scope": "source.irule"
+},"ECA::status": {
+  "prefix": "ECA::status",
+  "body": "ECA::status",
+  "description": "ECA::status",
+  "scope": "source.irule"
+},"ECA::username": {
+  "prefix": "ECA::username",
+  "body": "ECA::username",
+  "description": "ECA::username",
+  "scope": "source.irule"
+},"ECA_REQUEST_ALLOWED": {
+  "prefix": "ECA_REQUEST_ALLOWED",
+  "body": "ECA_REQUEST_ALLOWED",
+  "description": "ECA_REQUEST_ALLOWED",
+  "scope": "source.irule"
+},"ECA_REQUEST_DENIED": {
+  "prefix": "ECA_REQUEST_DENIED",
+  "body": "ECA_REQUEST_DENIED",
+  "description": "ECA_REQUEST_DENIED",
+  "scope": "source.irule"
+},"FIX::tag": {
+  "prefix": "FIX::tag",
+  "body": "FIX::tag",
+  "description": "FIX::tag",
+  "scope": "source.irule"
+},"FIX_HEADER": {
+  "prefix": "FIX_HEADER",
+  "body": "FIX_HEADER",
+  "description": "FIX_HEADER",
+  "scope": "source.irule"
+},"FIX_MESSAGE": {
+  "prefix": "FIX_MESSAGE",
+  "body": "FIX_MESSAGE",
+  "description": "FIX_MESSAGE",
+  "scope": "source.irule"
+},"FLOW::priority": {
+  "prefix": "FLOW::priority",
+  "body": "FLOW::priority",
+  "description": "FLOW::priority",
+  "scope": "source.irule"
+},"FLOWTABLE::count": {
+  "prefix": "FLOWTABLE::count",
+  "body": "FLOWTABLE::count",
+  "description": "FLOWTABLE::count",
+  "scope": "source.irule"
+},"FLOWTABLE::limit": {
+  "prefix": "FLOWTABLE::limit",
+  "body": "FLOWTABLE::limit",
+  "description": "FLOWTABLE::limit",
+  "scope": "source.irule"
+},"FLOW_INIT": {
+  "prefix": "FLOW_INIT",
+  "body": "FLOW_INIT",
+  "description": "FLOW_INIT",
+  "scope": "source.irule"
+},"FTP::port": {
+  "prefix": "FTP::port",
+  "body": "FTP::port",
+  "description": "FTP::port",
+  "scope": "source.irule"
+},"GENERICMESSAGE::message": {
+  "prefix": "GENERICMESSAGE::message",
+  "body": "GENERICMESSAGE::message",
+  "description": "GENERICMESSAGE::message",
+  "scope": "source.irule"
+},"GENERICMESSAGE::peer": {
+  "prefix": "GENERICMESSAGE::peer",
+  "body": "GENERICMESSAGE::peer",
+  "description": "GENERICMESSAGE::peer",
+  "scope": "source.irule"
+},"GENERICMESSAGE::route": {
+  "prefix": "GENERICMESSAGE::route",
+  "body": "GENERICMESSAGE::route",
+  "description": "GENERICMESSAGE::route",
+  "scope": "source.irule"
+},"GENERICMESSAGE_EGRESS": {
+  "prefix": "GENERICMESSAGE_EGRESS",
+  "body": "GENERICMESSAGE_EGRESS",
+  "description": "GENERICMESSAGE_EGRESS",
+  "scope": "source.irule"
+},"GENERICMESSAGE_INGRESS": {
+  "prefix": "GENERICMESSAGE_INGRESS",
+  "body": "GENERICMESSAGE_INGRESS",
+  "description": "GENERICMESSAGE_INGRESS",
+  "scope": "source.irule"
+},"GTP::clone": {
+  "prefix": "GTP::clone",
+  "body": "GTP::clone",
+  "description": "GTP::clone",
+  "scope": "source.irule"
+},"GTP::discard": {
+  "prefix": "GTP::discard",
+  "body": "GTP::discard",
+  "description": "GTP::discard",
+  "scope": "source.irule"
+},"GTP::forward": {
+  "prefix": "GTP::forward",
+  "body": "GTP::forward",
+  "description": "GTP::forward",
+  "scope": "source.irule"
+},"GTP::header": {
+  "prefix": "GTP::header",
+  "body": "GTP::header",
+  "description": "GTP::header",
+  "scope": "source.irule"
+},"GTP::header extension": {
+  "prefix": "GTP::header extension",
+  "body": "GTP::header extension",
+  "description": "GTP::header extension",
+  "scope": "source.irule"
+},"GTP::ie": {
+  "prefix": "GTP::ie",
+  "body": "GTP::ie",
+  "description": "GTP::ie",
+  "scope": "source.irule"
+},"GTP::length": {
+  "prefix": "GTP::length",
+  "body": "GTP::length",
+  "description": "GTP::length",
+  "scope": "source.irule"
+},"GTP::message": {
+  "prefix": "GTP::message",
+  "body": "GTP::message",
+  "description": "GTP::message",
+  "scope": "source.irule"
+},"GTP::new": {
+  "prefix": "GTP::new",
+  "body": "GTP::new",
+  "description": "GTP::new",
+  "scope": "source.irule"
+},"GTP::parse": {
+  "prefix": "GTP::parse",
+  "body": "GTP::parse",
+  "description": "GTP::parse",
+  "scope": "source.irule"
+},"GTP::payload": {
+  "prefix": "GTP::payload",
+  "body": "GTP::payload",
+  "description": "GTP::payload",
+  "scope": "source.irule"
+},"GTP::respond": {
+  "prefix": "GTP::respond",
+  "body": "GTP::respond",
+  "description": "GTP::respond",
+  "scope": "source.irule"
+},"GTP::tunnel": {
+  "prefix": "GTP::tunnel",
+  "body": "GTP::tunnel",
+  "description": "GTP::tunnel",
+  "scope": "source.irule"
+},"GTP_GPDU_EGRESS": {
+  "prefix": "GTP_GPDU_EGRESS",
+  "body": "GTP_GPDU_EGRESS",
+  "description": "GTP_GPDU_EGRESS",
+  "scope": "source.irule"
+},"GTP_GPDU_INGRESS": {
+  "prefix": "GTP_GPDU_INGRESS",
+  "body": "GTP_GPDU_INGRESS",
+  "description": "GTP_GPDU_INGRESS",
+  "scope": "source.irule"
+},"GTP_PRIME_EGRESS": {
+  "prefix": "GTP_PRIME_EGRESS",
+  "body": "GTP_PRIME_EGRESS",
+  "description": "GTP_PRIME_EGRESS",
+  "scope": "source.irule"
+},"GTP_PRIME_INGRESS": {
+  "prefix": "GTP_PRIME_INGRESS",
+  "body": "GTP_PRIME_INGRESS",
+  "description": "GTP_PRIME_INGRESS",
+  "scope": "source.irule"
+},"GTP_SIGNALLING_EGRESS": {
+  "prefix": "GTP_SIGNALLING_EGRESS",
+  "body": "GTP_SIGNALLING_EGRESS",
+  "description": "GTP_SIGNALLING_EGRESS",
+  "scope": "source.irule"
+},"GTP_SIGNALLING_INGRESS": {
+  "prefix": "GTP_SIGNALLING_INGRESS",
+  "body": "GTP_SIGNALLING_INGRESS",
+  "description": "GTP_SIGNALLING_INGRESS",
+  "scope": "source.irule"
+},"HA::status": {
+  "prefix": "HA::status",
+  "body": "HA::status",
+  "description": "HA::status",
+  "scope": "source.irule"
+},"HSL::open": {
+  "prefix": "HSL::open",
+  "body": "HSL::open",
+  "description": "HSL::open",
+  "scope": "source.irule"
+},"HSL::send": {
+  "prefix": "HSL::send",
+  "body": "HSL::send",
+  "description": "HSL::send",
+  "scope": "source.irule"
+},"HTML::comment": {
+  "prefix": "HTML::comment",
+  "body": "HTML::comment",
+  "description": "HTML::comment",
+  "scope": "source.irule"
+},"HTML::disable": {
+  "prefix": "HTML::disable",
+  "body": "HTML::disable",
+  "description": "HTML::disable",
+  "scope": "source.irule"
+},"HTML::enable": {
+  "prefix": "HTML::enable",
+  "body": "HTML::enable",
+  "description": "HTML::enable",
+  "scope": "source.irule"
+},"HTML::tag": {
+  "prefix": "HTML::tag",
+  "body": "HTML::tag",
+  "description": "HTML::tag",
+  "scope": "source.irule"
+},"HTML::tag attribute": {
+  "prefix": "HTML::tag attribute",
+  "body": "HTML::tag attribute",
+  "description": "HTML::tag attribute",
+  "scope": "source.irule"
+},"HTML_COMMENT_MATCHED": {
+  "prefix": "HTML_COMMENT_MATCHED",
+  "body": "HTML_COMMENT_MATCHED",
+  "description": "HTML_COMMENT_MATCHED",
+  "scope": "source.irule"
+},"HTML_TAG_MATCHED": {
+  "prefix": "HTML_TAG_MATCHED",
+  "body": "HTML_TAG_MATCHED",
+  "description": "HTML_TAG_MATCHED",
+  "scope": "source.irule"
+},"HTTP2::active": {
+  "prefix": "HTTP2::active",
+  "body": "HTTP2::active",
+  "description": "HTTP2::active",
+  "scope": "source.irule"
+},"HTTP2::concurrency": {
+  "prefix": "HTTP2::concurrency",
+  "body": "HTTP2::concurrency",
+  "description": "HTTP2::concurrency",
+  "scope": "source.irule"
+},"HTTP2::disconnect": {
+  "prefix": "HTTP2::disconnect",
+  "body": "HTTP2::disconnect",
+  "description": "HTTP2::disconnect",
+  "scope": "source.irule"
+},"HTTP2::requests": {
+  "prefix": "HTTP2::requests",
+  "body": "HTTP2::requests",
+  "description": "HTTP2::requests",
+  "scope": "source.irule"
+},"HTTP2::stream": {
+  "prefix": "HTTP2::stream",
+  "body": "HTTP2::stream",
+  "description": "HTTP2::stream",
+  "scope": "source.irule"
+},"HTTP2::version": {
+  "prefix": "HTTP2::version",
+  "body": "HTTP2::version",
+  "description": "HTTP2::version",
+  "scope": "source.irule"
+},"HTTP::close": {
+  "prefix": "HTTP::close",
+  "body": "HTTP::close",
+  "description": "HTTP::close",
+  "scope": "source.irule"
+},"HTTP::collect": {
+  "prefix": "HTTP::collect",
+  "body": "HTTP::collect",
+  "description": "HTTP::collect",
+  "scope": "source.irule"
+},"HTTP::cookie": {
+  "prefix": "HTTP::cookie",
+  "body": "HTTP::cookie",
+  "description": "HTTP::cookie",
+  "scope": "source.irule"
+},"HTTP::disable": {
+  "prefix": "HTTP::disable",
+  "body": "HTTP::disable",
+  "description": "HTTP::disable",
+  "scope": "source.irule"
+},"HTTP::enable": {
+  "prefix": "HTTP::enable",
+  "body": "HTTP::enable",
+  "description": "HTTP::enable",
+  "scope": "source.irule"
+},"HTTP::fallback": {
+  "prefix": "HTTP::fallback",
+  "body": "HTTP::fallback",
+  "description": "HTTP::fallback",
+  "scope": "source.irule"
+},"HTTP::header": {
+  "prefix": "HTTP::header",
+  "body": "HTTP::header",
+  "description": "HTTP::header",
+  "scope": "source.irule"
+},"HTTP::host": {
+  "prefix": "HTTP::host",
+  "body": "HTTP::host",
+  "description": "HTTP::host",
+  "scope": "source.irule"
+},"HTTP::hsts": {
+  "prefix": "HTTP::hsts",
+  "body": "HTTP::hsts",
+  "description": "HTTP::hsts",
+  "scope": "source.irule"
+},"HTTP::is_keepalive": {
+  "prefix": "HTTP::is_keepalive",
+  "body": "HTTP::is_keepalive",
+  "description": "HTTP::is_keepalive",
+  "scope": "source.irule"
+},"HTTP::is_redirect": {
+  "prefix": "HTTP::is_redirect",
+  "body": "HTTP::is_redirect",
+  "description": "HTTP::is_redirect",
+  "scope": "source.irule"
+},"HTTP::method": {
+  "prefix": "HTTP::method",
+  "body": "HTTP::method",
+  "description": "HTTP::method",
+  "scope": "source.irule"
+},"HTTP::passthrough_reason": {
+  "prefix": "HTTP::passthrough_reason",
+  "body": "HTTP::passthrough_reason",
+  "description": "HTTP::passthrough_reason",
+  "scope": "source.irule"
+},"HTTP::password": {
+  "prefix": "HTTP::password",
+  "body": "HTTP::password",
+  "description": "HTTP::password",
+  "scope": "source.irule"
+},"HTTP::path": {
+  "prefix": "HTTP::path",
+  "body": "HTTP::path",
+  "description": "HTTP::path",
+  "scope": "source.irule"
+},"HTTP::payload": {
+  "prefix": "HTTP::payload",
+  "body": "HTTP::payload",
+  "description": "HTTP::payload",
+  "scope": "source.irule"
+},"HTTP::proxy": {
+  "prefix": "HTTP::proxy",
+  "body": "HTTP::proxy",
+  "description": "HTTP::proxy",
+  "scope": "source.irule"
+},"HTTP::query": {
+  "prefix": "HTTP::query",
+  "body": "HTTP::query",
+  "description": "HTTP::query",
+  "scope": "source.irule"
+},"HTTP::redirect": {
+  "prefix": "HTTP::redirect",
+  "body": "HTTP::redirect",
+  "description": "HTTP::redirect",
+  "scope": "source.irule"
+},"HTTP::reject_reason": {
+  "prefix": "HTTP::reject_reason",
+  "body": "HTTP::reject_reason",
+  "description": "HTTP::reject_reason",
+  "scope": "source.irule"
+},"HTTP::release": {
+  "prefix": "HTTP::release",
+  "body": "HTTP::release",
+  "description": "HTTP::release",
+  "scope": "source.irule"
+},"HTTP::request": {
+  "prefix": "HTTP::request",
+  "body": "HTTP::request",
+  "description": "HTTP::request",
+  "scope": "source.irule"
+},"HTTP::request_num": {
+  "prefix": "HTTP::request_num",
+  "body": "HTTP::request_num",
+  "description": "HTTP::request_num",
+  "scope": "source.irule"
+},"HTTP::respond": {
+  "prefix": "HTTP::respond",
+  "body": "HTTP::respond",
+  "description": "HTTP::respond",
+  "scope": "source.irule"
+},"HTTP::response": {
+  "prefix": "HTTP::response",
+  "body": "HTTP::response",
+  "description": "HTTP::response",
+  "scope": "source.irule"
+},"HTTP::retry": {
+  "prefix": "HTTP::retry",
+  "body": "HTTP::retry",
+  "description": "HTTP::retry",
+  "scope": "source.irule"
+},"HTTP::status": {
+  "prefix": "HTTP::status",
+  "body": "HTTP::status",
+  "description": "HTTP::status",
+  "scope": "source.irule"
+},"HTTP::uri": {
+  "prefix": "HTTP::uri",
+  "body": "HTTP::uri",
+  "description": "HTTP::uri",
+  "scope": "source.irule"
+},"HTTP::username": {
+  "prefix": "HTTP::username",
+  "body": "HTTP::username",
+  "description": "HTTP::username",
+  "scope": "source.irule"
+},"HTTP::version": {
+  "prefix": "HTTP::version",
+  "body": "HTTP::version",
+  "description": "HTTP::version",
+  "scope": "source.irule"
+},"HTTPLOG::disable": {
+  "prefix": "HTTPLOG::disable",
+  "body": "HTTPLOG::disable",
+  "description": "HTTPLOG::disable",
+  "scope": "source.irule"
+},"HTTPLOG::enable": {
+  "prefix": "HTTPLOG::enable",
+  "body": "HTTPLOG::enable",
+  "description": "HTTPLOG::enable",
+  "scope": "source.irule"
+},"HTTP_DISABLED": {
+  "prefix": "HTTP_DISABLED",
+  "body": "HTTP_DISABLED",
+  "description": "HTTP_DISABLED",
+  "scope": "source.irule"
+},"HTTP_PROXY_REQUEST": {
+  "prefix": "HTTP_PROXY_REQUEST",
+  "body": "HTTP_PROXY_REQUEST",
+  "description": "HTTP_PROXY_REQUEST",
+  "scope": "source.irule"
+},"HTTP_REJECT": {
+  "prefix": "HTTP_REJECT",
+  "body": "HTTP_REJECT",
+  "description": "HTTP_REJECT",
+  "scope": "source.irule"
+},"HTTP_REQUEST": {
+  "prefix": "HTTP_REQUEST",
+  "body": "HTTP_REQUEST",
+  "description": "HTTP_REQUEST",
+  "scope": "source.irule"
+},"HTTP_REQUEST_DATA": {
+  "prefix": "HTTP_REQUEST_DATA",
+  "body": "HTTP_REQUEST_DATA",
+  "description": "HTTP_REQUEST_DATA",
+  "scope": "source.irule"
+},"HTTP_REQUEST_RELEASE": {
+  "prefix": "HTTP_REQUEST_RELEASE",
+  "body": "HTTP_REQUEST_RELEASE",
+  "description": "HTTP_REQUEST_RELEASE",
+  "scope": "source.irule"
+},"HTTP_REQUEST_SEND": {
+  "prefix": "HTTP_REQUEST_SEND",
+  "body": "HTTP_REQUEST_SEND",
+  "description": "HTTP_REQUEST_SEND",
+  "scope": "source.irule"
+},"HTTP_RESPONSE": {
+  "prefix": "HTTP_RESPONSE",
+  "body": "HTTP_RESPONSE",
+  "description": "HTTP_RESPONSE",
+  "scope": "source.irule"
+},"HTTP_RESPONSE_CONTINUE": {
+  "prefix": "HTTP_RESPONSE_CONTINUE",
+  "body": "HTTP_RESPONSE_CONTINUE",
+  "description": "HTTP_RESPONSE_CONTINUE",
+  "scope": "source.irule"
+},"HTTP_RESPONSE_DATA": {
+  "prefix": "HTTP_RESPONSE_DATA",
+  "body": "HTTP_RESPONSE_DATA",
+  "description": "HTTP_RESPONSE_DATA",
+  "scope": "source.irule"
+},"HTTP_RESPONSE_RELEASE": {
+  "prefix": "HTTP_RESPONSE_RELEASE",
+  "body": "HTTP_RESPONSE_RELEASE",
+  "description": "HTTP_RESPONSE_RELEASE",
+  "scope": "source.irule"
+},"ICAP::header": {
+  "prefix": "ICAP::header",
+  "body": "ICAP::header",
+  "description": "ICAP::header",
+  "scope": "source.irule"
+},"ICAP::method": {
+  "prefix": "ICAP::method",
+  "body": "ICAP::method",
+  "description": "ICAP::method",
+  "scope": "source.irule"
+},"ICAP::status": {
+  "prefix": "ICAP::status",
+  "body": "ICAP::status",
+  "description": "ICAP::status",
+  "scope": "source.irule"
+},"ICAP::uri": {
+  "prefix": "ICAP::uri",
+  "body": "ICAP::uri",
+  "description": "ICAP::uri",
+  "scope": "source.irule"
+},"ICAP_REQUEST": {
+  "prefix": "ICAP_REQUEST",
+  "body": "ICAP_REQUEST",
+  "description": "ICAP_REQUEST",
+  "scope": "source.irule"
+},"ICAP_RESPONSE": {
+  "prefix": "ICAP_RESPONSE",
+  "body": "ICAP_RESPONSE",
+  "description": "ICAP_RESPONSE",
+  "scope": "source.irule"
+},"ILX::call": {
+  "prefix": "ILX::call",
+  "body": "ILX::call",
+  "description": "ILX::call",
+  "scope": "source.irule"
+},"ILX::init": {
+  "prefix": "ILX::init",
+  "body": "ILX::init",
+  "description": "ILX::init",
+  "scope": "source.irule"
+},"ILX::notify": {
+  "prefix": "ILX::notify",
+  "body": "ILX::notify",
+  "description": "ILX::notify",
+  "scope": "source.irule"
+},"IN_DOSL7_ATTACK": {
+  "prefix": "IN_DOSL7_ATTACK",
+  "body": "IN_DOSL7_ATTACK",
+  "description": "IN_DOSL7_ATTACK",
+  "scope": "source.irule"
+},"IP::addr": {
+  "prefix": "IP::addr",
+  "body": "IP::addr",
+  "description": "IP::addr",
+  "scope": "source.irule"
+},"IP::client_addr": {
+  "prefix": "IP::client_addr",
+  "body": "IP::client_addr",
+  "description": "IP::client_addr",
+  "scope": "source.irule"
+},"IP::hops": {
+  "prefix": "IP::hops",
+  "body": "IP::hops",
+  "description": "IP::hops",
+  "scope": "source.irule"
+},"IP::idle_timeout": {
+  "prefix": "IP::idle_timeout",
+  "body": "IP::idle_timeout",
+  "description": "IP::idle_timeout",
+  "scope": "source.irule"
+},"IP::ingress_drop_rate": {
+  "prefix": "IP::ingress_drop_rate",
+  "body": "IP::ingress_drop_rate",
+  "description": "IP::ingress_drop_rate",
+  "scope": "source.irule"
+},"IP::ingress_rate_limit": {
+  "prefix": "IP::ingress_rate_limit",
+  "body": "IP::ingress_rate_limit",
+  "description": "IP::ingress_rate_limit",
+  "scope": "source.irule"
+},"IP::intelligence": {
+  "prefix": "IP::intelligence",
+  "body": "IP::intelligence",
+  "description": "IP::intelligence",
+  "scope": "source.irule"
+},"IP::local_addr": {
+  "prefix": "IP::local_addr",
+  "body": "IP::local_addr",
+  "description": "IP::local_addr",
+  "scope": "source.irule"
+},"IP::protocol": {
+  "prefix": "IP::protocol",
+  "body": "IP::protocol",
+  "description": "IP::protocol",
+  "scope": "source.irule"
+},"IP::remote_addr": {
+  "prefix": "IP::remote_addr",
+  "body": "IP::remote_addr",
+  "description": "IP::remote_addr",
+  "scope": "source.irule"
+},"IP::reputation": {
+  "prefix": "IP::reputation",
+  "body": "IP::reputation",
+  "description": "IP::reputation",
+  "scope": "source.irule"
+},"IP::server_addr": {
+  "prefix": "IP::server_addr",
+  "body": "IP::server_addr",
+  "description": "IP::server_addr",
+  "scope": "source.irule"
+},"IP::stats": {
+  "prefix": "IP::stats",
+  "body": "IP::stats",
+  "description": "IP::stats",
+  "scope": "source.irule"
+},"IP::tos": {
+  "prefix": "IP::tos",
+  "body": "IP::tos",
+  "description": "IP::tos",
+  "scope": "source.irule"
+},"IP::ttl": {
+  "prefix": "IP::ttl",
+  "body": "IP::ttl",
+  "description": "IP::ttl",
+  "scope": "source.irule"
+},"IP::version": {
+  "prefix": "IP::version",
+  "body": "IP::version",
+  "description": "IP::version",
+  "scope": "source.irule"
+},"IPFIX::destination": {
+  "prefix": "IPFIX::destination",
+  "body": "IPFIX::destination",
+  "description": "IPFIX::destination",
+  "scope": "source.irule"
+},"IPFIX::msg": {
+  "prefix": "IPFIX::msg",
+  "body": "IPFIX::msg",
+  "description": "IPFIX::msg",
+  "scope": "source.irule"
+},"IPFIX::template": {
+  "prefix": "IPFIX::template",
+  "body": "IPFIX::template",
+  "description": "IPFIX::template",
+  "scope": "source.irule"
+},"ISESSION::deduplication": {
+  "prefix": "ISESSION::deduplication",
+  "body": "ISESSION::deduplication",
+  "description": "ISESSION::deduplication",
+  "scope": "source.irule"
+},"ISTATS::get": {
+  "prefix": "ISTATS::get",
+  "body": "ISTATS::get",
+  "description": "ISTATS::get",
+  "scope": "source.irule"
+},"ISTATS::incr": {
+  "prefix": "ISTATS::incr",
+  "body": "ISTATS::incr",
+  "description": "ISTATS::incr",
+  "scope": "source.irule"
+},"ISTATS::remove": {
+  "prefix": "ISTATS::remove",
+  "body": "ISTATS::remove",
+  "description": "ISTATS::remove",
+  "scope": "source.irule"
+},"ISTATS::set": {
+  "prefix": "ISTATS::set",
+  "body": "ISTATS::set",
+  "description": "ISTATS::set",
+  "scope": "source.irule"
+},"IVS_ENTRY::result": {
+  "prefix": "IVS_ENTRY::result",
+  "body": "IVS_ENTRY::result",
+  "description": "IVS_ENTRY::result",
+  "scope": "source.irule"
+},"IVS_ENTRY_REQUEST": {
+  "prefix": "IVS_ENTRY_REQUEST",
+  "body": "IVS_ENTRY_REQUEST",
+  "description": "IVS_ENTRY_REQUEST",
+  "scope": "source.irule"
+},"IVS_ENTRY_RESPONSE": {
+  "prefix": "IVS_ENTRY_RESPONSE",
+  "body": "IVS_ENTRY_RESPONSE",
+  "description": "IVS_ENTRY_RESPONSE",
+  "scope": "source.irule"
+},"LB::bias": {
+  "prefix": "LB::bias",
+  "body": "LB::bias",
+  "description": "LB::bias",
+  "scope": "source.irule"
+},"LB::class": {
+  "prefix": "LB::class",
+  "body": "LB::class",
+  "description": "LB::class",
+  "scope": "source.irule"
+},"LB::command": {
+  "prefix": "LB::command",
+  "body": "LB::command",
+  "description": "LB::command",
+  "scope": "source.irule"
+},"LB::connect": {
+  "prefix": "LB::connect",
+  "body": "LB::connect",
+  "description": "LB::connect",
+  "scope": "source.irule"
+},"LB::connlimit": {
+  "prefix": "LB::connlimit",
+  "body": "LB::connlimit",
+  "description": "LB::connlimit",
+  "scope": "source.irule"
+},"LB::context_id": {
+  "prefix": "LB::context_id",
+  "body": "LB::context_id",
+  "description": "LB::context_id",
+  "scope": "source.irule"
+},"LB::detach": {
+  "prefix": "LB::detach",
+  "body": "LB::detach",
+  "description": "LB::detach",
+  "scope": "source.irule"
+},"LB::down": {
+  "prefix": "LB::down",
+  "body": "LB::down",
+  "description": "LB::down",
+  "scope": "source.irule"
+},"LB::dst_tag": {
+  "prefix": "LB::dst_tag",
+  "body": "LB::dst_tag",
+  "description": "LB::dst_tag",
+  "scope": "source.irule"
+},"LB::mode": {
+  "prefix": "LB::mode",
+  "body": "LB::mode",
+  "description": "LB::mode",
+  "scope": "source.irule"
+},"LB::persist": {
+  "prefix": "LB::persist",
+  "body": "LB::persist",
+  "description": "LB::persist",
+  "scope": "source.irule"
+},"LB::prime": {
+  "prefix": "LB::prime",
+  "body": "LB::prime",
+  "description": "LB::prime",
+  "scope": "source.irule"
+},"LB::queue": {
+  "prefix": "LB::queue",
+  "body": "LB::queue",
+  "description": "LB::queue",
+  "scope": "source.irule"
+},"LB::reselect": {
+  "prefix": "LB::reselect",
+  "body": "LB::reselect",
+  "description": "LB::reselect",
+  "scope": "source.irule"
+},"LB::select": {
+  "prefix": "LB::select",
+  "body": "LB::select",
+  "description": "LB::select",
+  "scope": "source.irule"
+},"LB::server": {
+  "prefix": "LB::server",
+  "body": "LB::server",
+  "description": "LB::server",
+  "scope": "source.irule"
+},"LB::snat": {
+  "prefix": "LB::snat",
+  "body": "LB::snat",
+  "description": "LB::snat",
+  "scope": "source.irule"
+},"LB::src_tag": {
+  "prefix": "LB::src_tag",
+  "body": "LB::src_tag",
+  "description": "LB::src_tag",
+  "scope": "source.irule"
+},"LB::status": {
+  "prefix": "LB::status",
+  "body": "LB::status",
+  "description": "LB::status",
+  "scope": "source.irule"
+},"LB::up": {
+  "prefix": "LB::up",
+  "body": "LB::up",
+  "description": "LB::up",
+  "scope": "source.irule"
+},"LB_FAILED": {
+  "prefix": "LB_FAILED",
+  "body": "LB_FAILED",
+  "description": "LB_FAILED",
+  "scope": "source.irule"
+},"LB_QUEUED": {
+  "prefix": "LB_QUEUED",
+  "body": "LB_QUEUED",
+  "description": "LB_QUEUED",
+  "scope": "source.irule"
+},"LB_SELECTED": {
+  "prefix": "LB_SELECTED",
+  "body": "LB_SELECTED",
+  "description": "LB_SELECTED",
+  "scope": "source.irule"
+},"LDAP::activation_mode": {
+  "prefix": "LDAP::activation_mode",
+  "body": "LDAP::activation_mode",
+  "description": "LDAP::activation_mode",
+  "scope": "source.irule"
+},"LDAP::disable": {
+  "prefix": "LDAP::disable",
+  "body": "LDAP::disable",
+  "description": "LDAP::disable",
+  "scope": "source.irule"
+},"LDAP::enable": {
+  "prefix": "LDAP::enable",
+  "body": "LDAP::enable",
+  "description": "LDAP::enable",
+  "scope": "source.irule"
+},"LINE::get": {
+  "prefix": "LINE::get",
+  "body": "LINE::get",
+  "description": "LINE::get",
+  "scope": "source.irule"
+},"LINE::set": {
+  "prefix": "LINE::set",
+  "body": "LINE::set",
+  "description": "LINE::set",
+  "scope": "source.irule"
+},"LINK::lasthop": {
+  "prefix": "LINK::lasthop",
+  "body": "LINK::lasthop",
+  "description": "LINK::lasthop",
+  "scope": "source.irule"
+},"LINK::nexthop": {
+  "prefix": "LINK::nexthop",
+  "body": "LINK::nexthop",
+  "description": "LINK::nexthop",
+  "scope": "source.irule"
+},"LINK::qos": {
+  "prefix": "LINK::qos",
+  "body": "LINK::qos",
+  "description": "LINK::qos",
+  "scope": "source.irule"
+},"LINK::vlan_id": {
+  "prefix": "LINK::vlan_id",
+  "body": "LINK::vlan_id",
+  "description": "LINK::vlan_id",
+  "scope": "source.irule"
+},"LSN::address": {
+  "prefix": "LSN::address",
+  "body": "LSN::address",
+  "description": "LSN::address",
+  "scope": "source.irule"
+},"LSN::disable": {
+  "prefix": "LSN::disable",
+  "body": "LSN::disable",
+  "description": "LSN::disable",
+  "scope": "source.irule"
+},"LSN::inbound": {
+  "prefix": "LSN::inbound",
+  "body": "LSN::inbound",
+  "description": "LSN::inbound",
+  "scope": "source.irule"
+},"LSN::inbound-entry": {
+  "prefix": "LSN::inbound-entry",
+  "body": "LSN::inbound-entry",
+  "description": "LSN::inbound-entry",
+  "scope": "source.irule"
+},"LSN::persistence": {
+  "prefix": "LSN::persistence",
+  "body": "LSN::persistence",
+  "description": "LSN::persistence",
+  "scope": "source.irule"
+},"LSN::persistence-entry": {
+  "prefix": "LSN::persistence-entry",
+  "body": "LSN::persistence-entry",
+  "description": "LSN::persistence-entry",
+  "scope": "source.irule"
+},"LSN::pool": {
+  "prefix": "LSN::pool",
+  "body": "LSN::pool",
+  "description": "LSN::pool",
+  "scope": "source.irule"
+},"LSN::port": {
+  "prefix": "LSN::port",
+  "body": "LSN::port",
+  "description": "LSN::port",
+  "scope": "source.irule"
+},"MR::flow_id": {
+  "prefix": "MR::flow_id",
+  "body": "MR::flow_id",
+  "description": "MR::flow_id",
+  "scope": "source.irule"
+},"MR::instance": {
+  "prefix": "MR::instance",
+  "body": "MR::instance",
+  "description": "MR::instance",
+  "scope": "source.irule"
+},"MR::message": {
+  "prefix": "MR::message",
+  "body": "MR::message",
+  "description": "MR::message",
+  "scope": "source.irule"
+},"MR::peer": {
+  "prefix": "MR::peer",
+  "body": "MR::peer",
+  "description": "MR::peer",
+  "scope": "source.irule"
+},"MR::protocol": {
+  "prefix": "MR::protocol",
+  "body": "MR::protocol",
+  "description": "MR::protocol",
+  "scope": "source.irule"
+},"MR::restore": {
+  "prefix": "MR::restore",
+  "body": "MR::restore",
+  "description": "MR::restore",
+  "scope": "source.irule"
+},"MR::store": {
+  "prefix": "MR::store",
+  "body": "MR::store",
+  "description": "MR::store",
+  "scope": "source.irule"
+},"MR::transport": {
+  "prefix": "MR::transport",
+  "body": "MR::transport",
+  "description": "MR::transport",
+  "scope": "source.irule"
+},"MR_EGRESS": {
+  "prefix": "MR_EGRESS",
+  "body": "MR_EGRESS",
+  "description": "MR_EGRESS",
+  "scope": "source.irule"
+},"MR_FAILED": {
+  "prefix": "MR_FAILED",
+  "body": "MR_FAILED",
+  "description": "MR_FAILED",
+  "scope": "source.irule"
+},"MR_INGRESS": {
+  "prefix": "MR_INGRESS",
+  "body": "MR_INGRESS",
+  "description": "MR_INGRESS",
+  "scope": "source.irule"
+},"NAME::lookup": {
+  "prefix": "NAME::lookup",
+  "body": "NAME::lookup",
+  "description": "NAME::lookup",
+  "scope": "source.irule"
+},"NAME::response": {
+  "prefix": "NAME::response",
+  "body": "NAME::response",
+  "description": "NAME::response",
+  "scope": "source.irule"
+},"NAME_RESOLVED": {
+  "prefix": "NAME_RESOLVED",
+  "body": "NAME_RESOLVED",
+  "description": "NAME_RESOLVED",
+  "scope": "source.irule"
+},"NSH::context": {
+  "prefix": "NSH::context",
+  "body": "NSH::context",
+  "description": "NSH::context",
+  "scope": "source.irule"
+},"NSH::mimic": {
+  "prefix": "NSH::mimic",
+  "body": "NSH::mimic",
+  "description": "NSH::mimic",
+  "scope": "source.irule"
+},"NSH::path_id": {
+  "prefix": "NSH::path_id",
+  "body": "NSH::path_id",
+  "description": "NSH::path_id",
+  "scope": "source.irule"
+},"NSH::service_index": {
+  "prefix": "NSH::service_index",
+  "body": "NSH::service_index",
+  "description": "NSH::service_index",
+  "scope": "source.irule"
+},"NTLM::disable": {
+  "prefix": "NTLM::disable",
+  "body": "NTLM::disable",
+  "description": "NTLM::disable",
+  "scope": "source.irule"
+},"NTLM::enable": {
+  "prefix": "NTLM::enable",
+  "body": "NTLM::enable",
+  "description": "NTLM::enable",
+  "scope": "source.irule"
+},"ONECONNECT::detach": {
+  "prefix": "ONECONNECT::detach",
+  "body": "ONECONNECT::detach",
+  "description": "ONECONNECT::detach",
+  "scope": "source.irule"
+},"ONECONNECT::label": {
+  "prefix": "ONECONNECT::label",
+  "body": "ONECONNECT::label",
+  "description": "ONECONNECT::label",
+  "scope": "source.irule"
+},"ONECONNECT::reuse": {
+  "prefix": "ONECONNECT::reuse",
+  "body": "ONECONNECT::reuse",
+  "description": "ONECONNECT::reuse",
+  "scope": "source.irule"
+},"ONECONNECT::select": {
+  "prefix": "ONECONNECT::select",
+  "body": "ONECONNECT::select",
+  "description": "ONECONNECT::select",
+  "scope": "source.irule"
+},"Operators": {
+  "prefix": "Operators",
+  "body": "Operators",
+  "description": "Operators",
+  "scope": "source.irule"
+},"PCP::reject": {
+  "prefix": "PCP::reject",
+  "body": "PCP::reject",
+  "description": "PCP::reject",
+  "scope": "source.irule"
+},"PCP::request": {
+  "prefix": "PCP::request",
+  "body": "PCP::request",
+  "description": "PCP::request",
+  "scope": "source.irule"
+},"PCP::response": {
+  "prefix": "PCP::response",
+  "body": "PCP::response",
+  "description": "PCP::response",
+  "scope": "source.irule"
+},"PCP_REQUEST": {
+  "prefix": "PCP_REQUEST",
+  "body": "PCP_REQUEST",
+  "description": "PCP_REQUEST",
+  "scope": "source.irule"
+},"PCP_RESPONSE": {
+  "prefix": "PCP_RESPONSE",
+  "body": "PCP_RESPONSE",
+  "description": "PCP_RESPONSE",
+  "scope": "source.irule"
+},"PEM::disable": {
+  "prefix": "PEM::disable",
+  "body": "PEM::disable",
+  "description": "PEM::disable",
+  "scope": "source.irule"
+},"PEM::enable": {
+  "prefix": "PEM::enable",
+  "body": "PEM::enable",
+  "description": "PEM::enable",
+  "scope": "source.irule"
+},"PEM::flow": {
+  "prefix": "PEM::flow",
+  "body": "PEM::flow",
+  "description": "PEM::flow",
+  "scope": "source.irule"
+},"PEM::policy": {
+  "prefix": "PEM::policy",
+  "body": "PEM::policy",
+  "description": "PEM::policy",
+  "scope": "source.irule"
+},"PEM::session": {
+  "prefix": "PEM::session",
+  "body": "PEM::session",
+  "description": "PEM::session",
+  "scope": "source.irule"
+},"PEM::subscriber": {
+  "prefix": "PEM::subscriber",
+  "body": "PEM::subscriber",
+  "description": "PEM::subscriber",
+  "scope": "source.irule"
+},"PEM_POLICY": {
+  "prefix": "PEM_POLICY",
+  "body": "PEM_POLICY",
+  "description": "PEM_POLICY",
+  "scope": "source.irule"
+},"PERSIST_DOWN": {
+  "prefix": "PERSIST_DOWN",
+  "body": "PERSIST_DOWN",
+  "description": "PERSIST_DOWN",
+  "scope": "source.irule"
+},"POLICY::controls": {
+  "prefix": "POLICY::controls",
+  "body": "POLICY::controls",
+  "description": "POLICY::controls",
+  "scope": "source.irule"
+},"POLICY::names": {
+  "prefix": "POLICY::names",
+  "body": "POLICY::names",
+  "description": "POLICY::names",
+  "scope": "source.irule"
+},"POLICY::rules": {
+  "prefix": "POLICY::rules",
+  "body": "POLICY::rules",
+  "description": "POLICY::rules",
+  "scope": "source.irule"
+},"POLICY::targets": {
+  "prefix": "POLICY::targets",
+  "body": "POLICY::targets",
+  "description": "POLICY::targets",
+  "scope": "source.irule"
+},"PROFILE::access": {
+  "prefix": "PROFILE::access",
+  "body": "PROFILE::access",
+  "description": "PROFILE::access",
+  "scope": "source.irule"
+},"PROFILE::antifraud": {
+  "prefix": "PROFILE::antifraud",
+  "body": "PROFILE::antifraud",
+  "description": "PROFILE::antifraud",
+  "scope": "source.irule"
+},"PROFILE::auth": {
+  "prefix": "PROFILE::auth",
+  "body": "PROFILE::auth",
+  "description": "PROFILE::auth",
+  "scope": "source.irule"
+},"PROFILE::avr": {
+  "prefix": "PROFILE::avr",
+  "body": "PROFILE::avr",
+  "description": "PROFILE::avr",
+  "scope": "source.irule"
+},"PROFILE::clientssl": {
+  "prefix": "PROFILE::clientssl",
+  "body": "PROFILE::clientssl",
+  "description": "PROFILE::clientssl",
+  "scope": "source.irule"
+},"PROFILE::diameter": {
+  "prefix": "PROFILE::diameter",
+  "body": "PROFILE::diameter",
+  "description": "PROFILE::diameter",
+  "scope": "source.irule"
+},"PROFILE::exchange": {
+  "prefix": "PROFILE::exchange",
+  "body": "PROFILE::exchange",
+  "description": "PROFILE::exchange",
+  "scope": "source.irule"
+},"PROFILE::exists": {
+  "prefix": "PROFILE::exists",
+  "body": "PROFILE::exists",
+  "description": "PROFILE::exists",
+  "scope": "source.irule"
+},"PROFILE::fastL4": {
+  "prefix": "PROFILE::fastL4",
+  "body": "PROFILE::fastL4",
+  "description": "PROFILE::fastL4",
+  "scope": "source.irule"
+},"PROFILE::fasthttp": {
+  "prefix": "PROFILE::fasthttp",
+  "body": "PROFILE::fasthttp",
+  "description": "PROFILE::fasthttp",
+  "scope": "source.irule"
+},"PROFILE::ftp": {
+  "prefix": "PROFILE::ftp",
+  "body": "PROFILE::ftp",
+  "description": "PROFILE::ftp",
+  "scope": "source.irule"
+},"PROFILE::http": {
+  "prefix": "PROFILE::http",
+  "body": "PROFILE::http",
+  "description": "PROFILE::http",
+  "scope": "source.irule"
+},"PROFILE::httpclass": {
+  "prefix": "PROFILE::httpclass",
+  "body": "PROFILE::httpclass",
+  "description": "PROFILE::httpclass",
+  "scope": "source.irule"
+},"PROFILE::httpcompression": {
+  "prefix": "PROFILE::httpcompression",
+  "body": "PROFILE::httpcompression",
+  "description": "PROFILE::httpcompression",
+  "scope": "source.irule"
+},"PROFILE::list": {
+  "prefix": "PROFILE::list",
+  "body": "PROFILE::list",
+  "description": "PROFILE::list",
+  "scope": "source.irule"
+},"PROFILE::oneconnect": {
+  "prefix": "PROFILE::oneconnect",
+  "body": "PROFILE::oneconnect",
+  "description": "PROFILE::oneconnect",
+  "scope": "source.irule"
+},"PROFILE::persist": {
+  "prefix": "PROFILE::persist",
+  "body": "PROFILE::persist",
+  "description": "PROFILE::persist",
+  "scope": "source.irule"
+},"PROFILE::serverssl": {
+  "prefix": "PROFILE::serverssl",
+  "body": "PROFILE::serverssl",
+  "description": "PROFILE::serverssl",
+  "scope": "source.irule"
+},"PROFILE::stream": {
+  "prefix": "PROFILE::stream",
+  "body": "PROFILE::stream",
+  "description": "PROFILE::stream",
+  "scope": "source.irule"
+},"PROFILE::tcp": {
+  "prefix": "PROFILE::tcp",
+  "body": "PROFILE::tcp",
+  "description": "PROFILE::tcp",
+  "scope": "source.irule"
+},"PROFILE::tftp": {
+  "prefix": "PROFILE::tftp",
+  "body": "PROFILE::tftp",
+  "description": "PROFILE::tftp",
+  "scope": "source.irule"
+},"PROFILE::udp": {
+  "prefix": "PROFILE::udp",
+  "body": "PROFILE::udp",
+  "description": "PROFILE::udp",
+  "scope": "source.irule"
+},"PROFILE::vdi": {
+  "prefix": "PROFILE::vdi",
+  "body": "PROFILE::vdi",
+  "description": "PROFILE::vdi",
+  "scope": "source.irule"
+},"PROFILE::webacceleration": {
+  "prefix": "PROFILE::webacceleration",
+  "body": "PROFILE::webacceleration",
+  "description": "PROFILE::webacceleration",
+  "scope": "source.irule"
+},"PROFILE::xml": {
+  "prefix": "PROFILE::xml",
+  "body": "PROFILE::xml",
+  "description": "PROFILE::xml",
+  "scope": "source.irule"
+},"PSC::aaa_reporting_interval": {
+  "prefix": "PSC::aaa_reporting_interval",
+  "body": "PSC::aaa_reporting_interval",
+  "description": "PSC::aaa_reporting_interval",
+  "scope": "source.irule"
+},"PSC::attr": {
+  "prefix": "PSC::attr",
+  "body": "PSC::attr",
+  "description": "PSC::attr",
+  "scope": "source.irule"
+},"PSC::auth_user_name": {
+  "prefix": "PSC::auth_user_name",
+  "body": "PSC::auth_user_name",
+  "description": "PSC::auth_user_name",
+  "scope": "source.irule"
+},"PSC::calling_id": {
+  "prefix": "PSC::calling_id",
+  "body": "PSC::calling_id",
+  "description": "PSC::calling_id",
+  "scope": "source.irule"
+},"PSC::imeisv": {
+  "prefix": "PSC::imeisv",
+  "body": "PSC::imeisv",
+  "description": "PSC::imeisv",
+  "scope": "source.irule"
+},"PSC::imsi": {
+  "prefix": "PSC::imsi",
+  "body": "PSC::imsi",
+  "description": "PSC::imsi",
+  "scope": "source.irule"
+},"PSC::ip_address": {
+  "prefix": "PSC::ip_address",
+  "body": "PSC::ip_address",
+  "description": "PSC::ip_address",
+  "scope": "source.irule"
+},"PSC::lease_time": {
+  "prefix": "PSC::lease_time",
+  "body": "PSC::lease_time",
+  "description": "PSC::lease_time",
+  "scope": "source.irule"
+},"PSC::policy": {
+  "prefix": "PSC::policy",
+  "body": "PSC::policy",
+  "description": "PSC::policy",
+  "scope": "source.irule"
+},"PSC::subscriber_id": {
+  "prefix": "PSC::subscriber_id",
+  "body": "PSC::subscriber_id",
+  "description": "PSC::subscriber_id",
+  "scope": "source.irule"
+},"PSC::tower_id": {
+  "prefix": "PSC::tower_id",
+  "body": "PSC::tower_id",
+  "description": "PSC::tower_id",
+  "scope": "source.irule"
+},"PSC::user_name": {
+  "prefix": "PSC::user_name",
+  "body": "PSC::user_name",
+  "description": "PSC::user_name",
+  "scope": "source.irule"
+},"PSM::FTP::disable": {
+  "prefix": "PSM::FTP::disable",
+  "body": "PSM::FTP::disable",
+  "description": "PSM::FTP::disable",
+  "scope": "source.irule"
+},"PSM::FTP::enable": {
+  "prefix": "PSM::FTP::enable",
+  "body": "PSM::FTP::enable",
+  "description": "PSM::FTP::enable",
+  "scope": "source.irule"
+},"PSM::HTTP::disable": {
+  "prefix": "PSM::HTTP::disable",
+  "body": "PSM::HTTP::disable",
+  "description": "PSM::HTTP::disable",
+  "scope": "source.irule"
+},"PSM::HTTP::enable": {
+  "prefix": "PSM::HTTP::enable",
+  "body": "PSM::HTTP::enable",
+  "description": "PSM::HTTP::enable",
+  "scope": "source.irule"
+},"PSM::SMTP::disable": {
+  "prefix": "PSM::SMTP::disable",
+  "body": "PSM::SMTP::disable",
+  "description": "PSM::SMTP::disable",
+  "scope": "source.irule"
+},"PSM::SMTP::enable": {
+  "prefix": "PSM::SMTP::enable",
+  "body": "PSM::SMTP::enable",
+  "description": "PSM::SMTP::enable",
+  "scope": "source.irule"
+},"QOE::disable": {
+  "prefix": "QOE::disable",
+  "body": "QOE::disable",
+  "description": "QOE::disable",
+  "scope": "source.irule"
+},"QOE::enable": {
+  "prefix": "QOE::enable",
+  "body": "QOE::enable",
+  "description": "QOE::enable",
+  "scope": "source.irule"
+},"QOE::video": {
+  "prefix": "QOE::video",
+  "body": "QOE::video",
+  "description": "QOE::video",
+  "scope": "source.irule"
+},"QOE_PARSE_DONE": {
+  "prefix": "QOE_PARSE_DONE",
+  "body": "QOE_PARSE_DONE",
+  "description": "QOE_PARSE_DONE",
+  "scope": "source.irule"
+},"RADIUS::avp": {
+  "prefix": "RADIUS::avp",
+  "body": "RADIUS::avp",
+  "description": "RADIUS::avp",
+  "scope": "source.irule"
+},"RADIUS::code": {
+  "prefix": "RADIUS::code",
+  "body": "RADIUS::code",
+  "description": "RADIUS::code",
+  "scope": "source.irule"
+},"RADIUS::id": {
+  "prefix": "RADIUS::id",
+  "body": "RADIUS::id",
+  "description": "RADIUS::id",
+  "scope": "source.irule"
+},"RADIUS::rtdom": {
+  "prefix": "RADIUS::rtdom",
+  "body": "RADIUS::rtdom",
+  "description": "RADIUS::rtdom",
+  "scope": "source.irule"
+},"RADIUS::subscriber": {
+  "prefix": "RADIUS::subscriber",
+  "body": "RADIUS::subscriber",
+  "description": "RADIUS::subscriber",
+  "scope": "source.irule"
+},"RADIUS_AAA_ACCT_REQUEST": {
+  "prefix": "RADIUS_AAA_ACCT_REQUEST",
+  "body": "RADIUS_AAA_ACCT_REQUEST",
+  "description": "RADIUS_AAA_ACCT_REQUEST",
+  "scope": "source.irule"
+},"RADIUS_AAA_ACCT_RESPONSE": {
+  "prefix": "RADIUS_AAA_ACCT_RESPONSE",
+  "body": "RADIUS_AAA_ACCT_RESPONSE",
+  "description": "RADIUS_AAA_ACCT_RESPONSE",
+  "scope": "source.irule"
+},"RADIUS_AAA_AUTH_REQUEST": {
+  "prefix": "RADIUS_AAA_AUTH_REQUEST",
+  "body": "RADIUS_AAA_AUTH_REQUEST",
+  "description": "RADIUS_AAA_AUTH_REQUEST",
+  "scope": "source.irule"
+},"RADIUS_AAA_AUTH_RESPONSE": {
+  "prefix": "RADIUS_AAA_AUTH_RESPONSE",
+  "body": "RADIUS_AAA_AUTH_RESPONSE",
+  "description": "RADIUS_AAA_AUTH_RESPONSE",
+  "scope": "source.irule"
+},"RESOLV::lookup": {
+  "prefix": "RESOLV::lookup",
+  "body": "RESOLV::lookup",
+  "description": "RESOLV::lookup",
+  "scope": "source.irule"
+},"REST::send": {
+  "prefix": "REST::send",
+  "body": "REST::send",
+  "description": "REST::send",
+  "scope": "source.irule"
+},"REWRITE::disable": {
+  "prefix": "REWRITE::disable",
+  "body": "REWRITE::disable",
+  "description": "REWRITE::disable",
+  "scope": "source.irule"
+},"REWRITE::enable": {
+  "prefix": "REWRITE::enable",
+  "body": "REWRITE::enable",
+  "description": "REWRITE::enable",
+  "scope": "source.irule"
+},"REWRITE::payload": {
+  "prefix": "REWRITE::payload",
+  "body": "REWRITE::payload",
+  "description": "REWRITE::payload",
+  "scope": "source.irule"
+},"REWRITE::post_process": {
+  "prefix": "REWRITE::post_process",
+  "body": "REWRITE::post_process",
+  "description": "REWRITE::post_process",
+  "scope": "source.irule"
+},"REWRITE_REQUEST": {
+  "prefix": "REWRITE_REQUEST",
+  "body": "REWRITE_REQUEST",
+  "description": "REWRITE_REQUEST",
+  "scope": "source.irule"
+},"REWRITE_REQUEST_DONE": {
+  "prefix": "REWRITE_REQUEST_DONE",
+  "body": "REWRITE_REQUEST_DONE",
+  "description": "REWRITE_REQUEST_DONE",
+  "scope": "source.irule"
+},"REWRITE_RESPONSE": {
+  "prefix": "REWRITE_RESPONSE",
+  "body": "REWRITE_RESPONSE",
+  "description": "REWRITE_RESPONSE",
+  "scope": "source.irule"
+},"REWRITE_RESPONSE_DONE": {
+  "prefix": "REWRITE_RESPONSE_DONE",
+  "body": "REWRITE_RESPONSE_DONE",
+  "description": "REWRITE_RESPONSE_DONE",
+  "scope": "source.irule"
+},"ROUTE::bandwidth": {
+  "prefix": "ROUTE::bandwidth",
+  "body": "ROUTE::bandwidth",
+  "description": "ROUTE::bandwidth",
+  "scope": "source.irule"
+},"ROUTE::clear": {
+  "prefix": "ROUTE::clear",
+  "body": "ROUTE::clear",
+  "description": "ROUTE::clear",
+  "scope": "source.irule"
+},"ROUTE::cwnd": {
+  "prefix": "ROUTE::cwnd",
+  "body": "ROUTE::cwnd",
+  "description": "ROUTE::cwnd",
+  "scope": "source.irule"
+},"ROUTE::domain": {
+  "prefix": "ROUTE::domain",
+  "body": "ROUTE::domain",
+  "description": "ROUTE::domain",
+  "scope": "source.irule"
+},"ROUTE::expiration": {
+  "prefix": "ROUTE::expiration",
+  "body": "ROUTE::expiration",
+  "description": "ROUTE::expiration",
+  "scope": "source.irule"
+},"ROUTE::mtu": {
+  "prefix": "ROUTE::mtu",
+  "body": "ROUTE::mtu",
+  "description": "ROUTE::mtu",
+  "scope": "source.irule"
+},"ROUTE::rtt": {
+  "prefix": "ROUTE::rtt",
+  "body": "ROUTE::rtt",
+  "description": "ROUTE::rtt",
+  "scope": "source.irule"
+},"ROUTE::rttvar": {
+  "prefix": "ROUTE::rttvar",
+  "body": "ROUTE::rttvar",
+  "description": "ROUTE::rttvar",
+  "scope": "source.irule"
+},"RTSP::collect": {
+  "prefix": "RTSP::collect",
+  "body": "RTSP::collect",
+  "description": "RTSP::collect",
+  "scope": "source.irule"
+},"RTSP::header": {
+  "prefix": "RTSP::header",
+  "body": "RTSP::header",
+  "description": "RTSP::header",
+  "scope": "source.irule"
+},"RTSP::method": {
+  "prefix": "RTSP::method",
+  "body": "RTSP::method",
+  "description": "RTSP::method",
+  "scope": "source.irule"
+},"RTSP::msg_source": {
+  "prefix": "RTSP::msg_source",
+  "body": "RTSP::msg_source",
+  "description": "RTSP::msg_source",
+  "scope": "source.irule"
+},"RTSP::payload": {
+  "prefix": "RTSP::payload",
+  "body": "RTSP::payload",
+  "description": "RTSP::payload",
+  "scope": "source.irule"
+},"RTSP::release": {
+  "prefix": "RTSP::release",
+  "body": "RTSP::release",
+  "description": "RTSP::release",
+  "scope": "source.irule"
+},"RTSP::respond": {
+  "prefix": "RTSP::respond",
+  "body": "RTSP::respond",
+  "description": "RTSP::respond",
+  "scope": "source.irule"
+},"RTSP::status": {
+  "prefix": "RTSP::status",
+  "body": "RTSP::status",
+  "description": "RTSP::status",
+  "scope": "source.irule"
+},"RTSP::uri": {
+  "prefix": "RTSP::uri",
+  "body": "RTSP::uri",
+  "description": "RTSP::uri",
+  "scope": "source.irule"
+},"RTSP::version": {
+  "prefix": "RTSP::version",
+  "body": "RTSP::version",
+  "description": "RTSP::version",
+  "scope": "source.irule"
+},"RTSP_REQUEST": {
+  "prefix": "RTSP_REQUEST",
+  "body": "RTSP_REQUEST",
+  "description": "RTSP_REQUEST",
+  "scope": "source.irule"
+},"RTSP_REQUEST_DATA": {
+  "prefix": "RTSP_REQUEST_DATA",
+  "body": "RTSP_REQUEST_DATA",
+  "description": "RTSP_REQUEST_DATA",
+  "scope": "source.irule"
+},"RTSP_RESPONSE": {
+  "prefix": "RTSP_RESPONSE",
+  "body": "RTSP_RESPONSE",
+  "description": "RTSP_RESPONSE",
+  "scope": "source.irule"
+},"RTSP_RESPONSE_DATA": {
+  "prefix": "RTSP_RESPONSE_DATA",
+  "body": "RTSP_RESPONSE_DATA",
+  "description": "RTSP_RESPONSE_DATA",
+  "scope": "source.irule"
+},"RULE_INIT": {
+  "prefix": "RULE_INIT",
+  "body": "RULE_INIT",
+  "description": "RULE_INIT",
+  "scope": "source.irule"
+},"SCTP::client_port": {
+  "prefix": "SCTP::client_port",
+  "body": "SCTP::client_port",
+  "description": "SCTP::client_port",
+  "scope": "source.irule"
+},"SCTP::collect": {
+  "prefix": "SCTP::collect",
+  "body": "SCTP::collect",
+  "description": "SCTP::collect",
+  "scope": "source.irule"
+},"SCTP::local_port": {
+  "prefix": "SCTP::local_port",
+  "body": "SCTP::local_port",
+  "description": "SCTP::local_port",
+  "scope": "source.irule"
+},"SCTP::mss": {
+  "prefix": "SCTP::mss",
+  "body": "SCTP::mss",
+  "description": "SCTP::mss",
+  "scope": "source.irule"
+},"SCTP::payload": {
+  "prefix": "SCTP::payload",
+  "body": "SCTP::payload",
+  "description": "SCTP::payload",
+  "scope": "source.irule"
+},"SCTP::ppi": {
+  "prefix": "SCTP::ppi",
+  "body": "SCTP::ppi",
+  "description": "SCTP::ppi",
+  "scope": "source.irule"
+},"SCTP::release": {
+  "prefix": "SCTP::release",
+  "body": "SCTP::release",
+  "description": "SCTP::release",
+  "scope": "source.irule"
+},"SCTP::remote_port": {
+  "prefix": "SCTP::remote_port",
+  "body": "SCTP::remote_port",
+  "description": "SCTP::remote_port",
+  "scope": "source.irule"
+},"SCTP::respond": {
+  "prefix": "SCTP::respond",
+  "body": "SCTP::respond",
+  "description": "SCTP::respond",
+  "scope": "source.irule"
+},"SCTP::server_port": {
+  "prefix": "SCTP::server_port",
+  "body": "SCTP::server_port",
+  "description": "SCTP::server_port",
+  "scope": "source.irule"
+},"SDP::field": {
+  "prefix": "SDP::field",
+  "body": "SDP::field",
+  "description": "SDP::field",
+  "scope": "source.irule"
+},"SDP::media": {
+  "prefix": "SDP::media",
+  "body": "SDP::media",
+  "description": "SDP::media",
+  "scope": "source.irule"
+},"SDP::session_id": {
+  "prefix": "SDP::session_id",
+  "body": "SDP::session_id",
+  "description": "SDP::session_id",
+  "scope": "source.irule"
+},"SERVERSSL_CLIENTHELLO_SEND": {
+  "prefix": "SERVERSSL_CLIENTHELLO_SEND",
+  "body": "SERVERSSL_CLIENTHELLO_SEND",
+  "description": "SERVERSSL_CLIENTHELLO_SEND",
+  "scope": "source.irule"
+},"SERVERSSL_DATA": {
+  "prefix": "SERVERSSL_DATA",
+  "body": "SERVERSSL_DATA",
+  "description": "SERVERSSL_DATA",
+  "scope": "source.irule"
+},"SERVERSSL_HANDSHAKE": {
+  "prefix": "SERVERSSL_HANDSHAKE",
+  "body": "SERVERSSL_HANDSHAKE",
+  "description": "SERVERSSL_HANDSHAKE",
+  "scope": "source.irule"
+},"SERVERSSL_SERVERHELLO": {
+  "prefix": "SERVERSSL_SERVERHELLO",
+  "body": "SERVERSSL_SERVERHELLO",
+  "description": "SERVERSSL_SERVERHELLO",
+  "scope": "source.irule"
+},"SERVER_CLOSED": {
+  "prefix": "SERVER_CLOSED",
+  "body": "SERVER_CLOSED",
+  "description": "SERVER_CLOSED",
+  "scope": "source.irule"
+},"SERVER_CONNECTED": {
+  "prefix": "SERVER_CONNECTED",
+  "body": "SERVER_CONNECTED",
+  "description": "SERVER_CONNECTED",
+  "scope": "source.irule"
+},"SERVER_DATA": {
+  "prefix": "SERVER_DATA",
+  "body": "SERVER_DATA",
+  "description": "SERVER_DATA",
+  "scope": "source.irule"
+},"SERVER_LINE": {
+  "prefix": "SERVER_LINE",
+  "body": "SERVER_LINE",
+  "description": "SERVER_LINE",
+  "scope": "source.irule"
+},"SIP::call_id": {
+  "prefix": "SIP::call_id",
+  "body": "SIP::call_id",
+  "description": "SIP::call_id",
+  "scope": "source.irule"
+},"SIP::discard": {
+  "prefix": "SIP::discard",
+  "body": "SIP::discard",
+  "description": "SIP::discard",
+  "scope": "source.irule"
+},"SIP::from": {
+  "prefix": "SIP::from",
+  "body": "SIP::from",
+  "description": "SIP::from",
+  "scope": "source.irule"
+},"SIP::header": {
+  "prefix": "SIP::header",
+  "body": "SIP::header",
+  "description": "SIP::header",
+  "scope": "source.irule"
+},"SIP::message": {
+  "prefix": "SIP::message",
+  "body": "SIP::message",
+  "description": "SIP::message",
+  "scope": "source.irule"
+},"SIP::method": {
+  "prefix": "SIP::method",
+  "body": "SIP::method",
+  "description": "SIP::method",
+  "scope": "source.irule"
+},"SIP::payload": {
+  "prefix": "SIP::payload",
+  "body": "SIP::payload",
+  "description": "SIP::payload",
+  "scope": "source.irule"
+},"SIP::persist": {
+  "prefix": "SIP::persist",
+  "body": "SIP::persist",
+  "description": "SIP::persist",
+  "scope": "source.irule"
+},"SIP::respond": {
+  "prefix": "SIP::respond",
+  "body": "SIP::respond",
+  "description": "SIP::respond",
+  "scope": "source.irule"
+},"SIP::response": {
+  "prefix": "SIP::response",
+  "body": "SIP::response",
+  "description": "SIP::response",
+  "scope": "source.irule"
+},"SIP::route_status": {
+  "prefix": "SIP::route_status",
+  "body": "SIP::route_status",
+  "description": "SIP::route_status",
+  "scope": "source.irule"
+},"SIP::to": {
+  "prefix": "SIP::to",
+  "body": "SIP::to",
+  "description": "SIP::to",
+  "scope": "source.irule"
+},"SIP::uri": {
+  "prefix": "SIP::uri",
+  "body": "SIP::uri",
+  "description": "SIP::uri",
+  "scope": "source.irule"
+},"SIP::via": {
+  "prefix": "SIP::via",
+  "body": "SIP::via",
+  "description": "SIP::via",
+  "scope": "source.irule"
+},"SIP_REQUEST": {
+  "prefix": "SIP_REQUEST",
+  "body": "SIP_REQUEST",
+  "description": "SIP_REQUEST",
+  "scope": "source.irule"
+},"SIP_REQUEST_DONE": {
+  "prefix": "SIP_REQUEST_DONE",
+  "body": "SIP_REQUEST_DONE",
+  "description": "SIP_REQUEST_DONE",
+  "scope": "source.irule"
+},"SIP_REQUEST_SEND": {
+  "prefix": "SIP_REQUEST_SEND",
+  "body": "SIP_REQUEST_SEND",
+  "description": "SIP_REQUEST_SEND",
+  "scope": "source.irule"
+},"SIP_RESPONSE": {
+  "prefix": "SIP_RESPONSE",
+  "body": "SIP_RESPONSE",
+  "description": "SIP_RESPONSE",
+  "scope": "source.irule"
+},"SIP_RESPONSE_DONE": {
+  "prefix": "SIP_RESPONSE_DONE",
+  "body": "SIP_RESPONSE_DONE",
+  "description": "SIP_RESPONSE_DONE",
+  "scope": "source.irule"
+},"SIP_RESPONSE_SEND": {
+  "prefix": "SIP_RESPONSE_SEND",
+  "body": "SIP_RESPONSE_SEND",
+  "description": "SIP_RESPONSE_SEND",
+  "scope": "source.irule"
+},"SMTPS::disable": {
+  "prefix": "SMTPS::disable",
+  "body": "SMTPS::disable",
+  "description": "SMTPS::disable",
+  "scope": "source.irule"
+},"SMTPS::enable": {
+  "prefix": "SMTPS::enable",
+  "body": "SMTPS::enable",
+  "description": "SMTPS::enable",
+  "scope": "source.irule"
+},"SOCKS::allowed": {
+  "prefix": "SOCKS::allowed",
+  "body": "SOCKS::allowed",
+  "description": "SOCKS::allowed",
+  "scope": "source.irule"
+},"SOCKS::destination": {
+  "prefix": "SOCKS::destination",
+  "body": "SOCKS::destination",
+  "description": "SOCKS::destination",
+  "scope": "source.irule"
+},"SOCKS::version": {
+  "prefix": "SOCKS::version",
+  "body": "SOCKS::version",
+  "description": "SOCKS::version",
+  "scope": "source.irule"
+},"SOCKS_REQUEST": {
+  "prefix": "SOCKS_REQUEST",
+  "body": "SOCKS_REQUEST",
+  "description": "SOCKS_REQUEST",
+  "scope": "source.irule"
+},"SPDY::active": {
+  "prefix": "SPDY::active",
+  "body": "SPDY::active",
+  "description": "SPDY::active",
+  "scope": "source.irule"
+},"SPDY::concurrency": {
+  "prefix": "SPDY::concurrency",
+  "body": "SPDY::concurrency",
+  "description": "SPDY::concurrency",
+  "scope": "source.irule"
+},"SPDY::disconnect": {
+  "prefix": "SPDY::disconnect",
+  "body": "SPDY::disconnect",
+  "description": "SPDY::disconnect",
+  "scope": "source.irule"
+},"SPDY::priority": {
+  "prefix": "SPDY::priority",
+  "body": "SPDY::priority",
+  "description": "SPDY::priority",
+  "scope": "source.irule"
+},"SPDY::requests": {
+  "prefix": "SPDY::requests",
+  "body": "SPDY::requests",
+  "description": "SPDY::requests",
+  "scope": "source.irule"
+},"SPDY::stream": {
+  "prefix": "SPDY::stream",
+  "body": "SPDY::stream",
+  "description": "SPDY::stream",
+  "scope": "source.irule"
+},"SPDY::streamid": {
+  "prefix": "SPDY::streamid",
+  "body": "SPDY::streamid",
+  "description": "SPDY::streamid",
+  "scope": "source.irule"
+},"SPDY::version": {
+  "prefix": "SPDY::version",
+  "body": "SPDY::version",
+  "description": "SPDY::version",
+  "scope": "source.irule"
+},"SSL::allow_dynamic_record_sizing": {
+  "prefix": "SSL::allow_dynamic_record_sizing",
+  "body": "SSL::allow_dynamic_record_sizing",
+  "description": "SSL::allow_dynamic_record_sizing",
+  "scope": "source.irule"
+},"SSL::alpn": {
+  "prefix": "SSL::alpn",
+  "body": "SSL::alpn",
+  "description": "SSL::alpn",
+  "scope": "source.irule"
+},"SSL::authenticate": {
+  "prefix": "SSL::authenticate",
+  "body": "SSL::authenticate",
+  "description": "SSL::authenticate",
+  "scope": "source.irule"
+},"SSL::cert": {
+  "prefix": "SSL::cert",
+  "body": "SSL::cert",
+  "description": "SSL::cert",
+  "scope": "source.irule"
+},"SSL::cipher": {
+  "prefix": "SSL::cipher",
+  "body": "SSL::cipher",
+  "description": "SSL::cipher",
+  "scope": "source.irule"
+},"SSL::clientrandom": {
+  "prefix": "SSL::clientrandom",
+  "body": "SSL::clientrandom",
+  "description": "SSL::clientrandom",
+  "scope": "source.irule"
+},"SSL::collect": {
+  "prefix": "SSL::collect",
+  "body": "SSL::collect",
+  "description": "SSL::collect",
+  "scope": "source.irule"
+},"SSL::disable": {
+  "prefix": "SSL::disable",
+  "body": "SSL::disable",
+  "description": "SSL::disable",
+  "scope": "source.irule"
+},"SSL::enable": {
+  "prefix": "SSL::enable",
+  "body": "SSL::enable",
+  "description": "SSL::enable",
+  "scope": "source.irule"
+},"SSL::extensions": {
+  "prefix": "SSL::extensions",
+  "body": "SSL::extensions",
+  "description": "SSL::extensions",
+  "scope": "source.irule"
+},"SSL::forward_proxy": {
+  "prefix": "SSL::forward_proxy",
+  "body": "SSL::forward_proxy",
+  "description": "SSL::forward_proxy",
+  "scope": "source.irule"
+},"SSL::handshake": {
+  "prefix": "SSL::handshake",
+  "body": "SSL::handshake",
+  "description": "SSL::handshake",
+  "scope": "source.irule"
+},"SSL::is_renegotiation_secure": {
+  "prefix": "SSL::is_renegotiation_secure",
+  "body": "SSL::is_renegotiation_secure",
+  "description": "SSL::is_renegotiation_secure",
+  "scope": "source.irule"
+},"SSL::maximum_record_size": {
+  "prefix": "SSL::maximum_record_size",
+  "body": "SSL::maximum_record_size",
+  "description": "SSL::maximum_record_size",
+  "scope": "source.irule"
+},"SSL::mode": {
+  "prefix": "SSL::mode",
+  "body": "SSL::mode",
+  "description": "SSL::mode",
+  "scope": "source.irule"
+},"SSL::modssl_sessionid_headers": {
+  "prefix": "SSL::modssl_sessionid_headers",
+  "body": "SSL::modssl_sessionid_headers",
+  "description": "SSL::modssl_sessionid_headers",
+  "scope": "source.irule"
+},"SSL::nextproto": {
+  "prefix": "SSL::nextproto",
+  "body": "SSL::nextproto",
+  "description": "SSL::nextproto",
+  "scope": "source.irule"
+},"SSL::payload": {
+  "prefix": "SSL::payload",
+  "body": "SSL::payload",
+  "description": "SSL::payload",
+  "scope": "source.irule"
+},"SSL::profile": {
+  "prefix": "SSL::profile",
+  "body": "SSL::profile",
+  "description": "SSL::profile",
+  "scope": "source.irule"
+},"SSL::release": {
+  "prefix": "SSL::release",
+  "body": "SSL::release",
+  "description": "SSL::release",
+  "scope": "source.irule"
+},"SSL::renegotiate": {
+  "prefix": "SSL::renegotiate",
+  "body": "SSL::renegotiate",
+  "description": "SSL::renegotiate",
+  "scope": "source.irule"
+},"SSL::respond": {
+  "prefix": "SSL::respond",
+  "body": "SSL::respond",
+  "description": "SSL::respond",
+  "scope": "source.irule"
+},"SSL::secure_renegotiation": {
+  "prefix": "SSL::secure_renegotiation",
+  "body": "SSL::secure_renegotiation",
+  "description": "SSL::secure_renegotiation",
+  "scope": "source.irule"
+},"SSL::session": {
+  "prefix": "SSL::session",
+  "body": "SSL::session",
+  "description": "SSL::session",
+  "scope": "source.irule"
+},"SSL::sessionid": {
+  "prefix": "SSL::sessionid",
+  "body": "SSL::sessionid",
+  "description": "SSL::sessionid",
+  "scope": "source.irule"
+},"SSL::sessionsecret": {
+  "prefix": "SSL::sessionsecret",
+  "body": "SSL::sessionsecret",
+  "description": "SSL::sessionsecret",
+  "scope": "source.irule"
+},"SSL::sessionticket": {
+  "prefix": "SSL::sessionticket",
+  "body": "SSL::sessionticket",
+  "description": "SSL::sessionticket",
+  "scope": "source.irule"
+},"SSL::sni": {
+  "prefix": "SSL::sni",
+  "body": "SSL::sni",
+  "description": "SSL::sni",
+  "scope": "source.irule"
+},"SSL::unclean_shutdown": {
+  "prefix": "SSL::unclean_shutdown",
+  "body": "SSL::unclean_shutdown",
+  "description": "SSL::unclean_shutdown",
+  "scope": "source.irule"
+},"SSL::verify_result": {
+  "prefix": "SSL::verify_result",
+  "body": "SSL::verify_result",
+  "description": "SSL::verify_result",
+  "scope": "source.irule"
+},"STATS::get": {
+  "prefix": "STATS::get",
+  "body": "STATS::get",
+  "description": "STATS::get",
+  "scope": "source.irule"
+},"STATS::incr": {
+  "prefix": "STATS::incr",
+  "body": "STATS::incr",
+  "description": "STATS::incr",
+  "scope": "source.irule"
+},"STATS::set": {
+  "prefix": "STATS::set",
+  "body": "STATS::set",
+  "description": "STATS::set",
+  "scope": "source.irule"
+},"STATS::setmax": {
+  "prefix": "STATS::setmax",
+  "body": "STATS::setmax",
+  "description": "STATS::setmax",
+  "scope": "source.irule"
+},"STATS::setmin": {
+  "prefix": "STATS::setmin",
+  "body": "STATS::setmin",
+  "description": "STATS::setmin",
+  "scope": "source.irule"
+},"STREAM::disable": {
+  "prefix": "STREAM::disable",
+  "body": "STREAM::disable",
+  "description": "STREAM::disable",
+  "scope": "source.irule"
+},"STREAM::enable": {
+  "prefix": "STREAM::enable",
+  "body": "STREAM::enable",
+  "description": "STREAM::enable",
+  "scope": "source.irule"
+},"STREAM::encoding": {
+  "prefix": "STREAM::encoding",
+  "body": "STREAM::encoding",
+  "description": "STREAM::encoding",
+  "scope": "source.irule"
+},"STREAM::expression": {
+  "prefix": "STREAM::expression",
+  "body": "STREAM::expression",
+  "description": "STREAM::expression",
+  "scope": "source.irule"
+},"STREAM::match": {
+  "prefix": "STREAM::match",
+  "body": "STREAM::match",
+  "description": "STREAM::match",
+  "scope": "source.irule"
+},"STREAM::max_matchsize": {
+  "prefix": "STREAM::max_matchsize",
+  "body": "STREAM::max_matchsize",
+  "description": "STREAM::max_matchsize",
+  "scope": "source.irule"
+},"STREAM::replace": {
+  "prefix": "STREAM::replace",
+  "body": "STREAM::replace",
+  "description": "STREAM::replace",
+  "scope": "source.irule"
+},"STREAM_MATCHED": {
+  "prefix": "STREAM_MATCHED",
+  "body": "STREAM_MATCHED",
+  "description": "STREAM_MATCHED",
+  "scope": "source.irule"
+},"SafeBase": {
+  "prefix": "SafeBase",
+  "body": "SafeBase",
+  "description": "SafeBase",
+  "scope": "source.irule"
+},"TCP::abc": {
+  "prefix": "TCP::abc",
+  "body": "TCP::abc",
+  "description": "TCP::abc",
+  "scope": "source.irule"
+},"TCP::analytics": {
+  "prefix": "TCP::analytics",
+  "body": "TCP::analytics",
+  "description": "TCP::analytics",
+  "scope": "source.irule"
+},"TCP::autowin": {
+  "prefix": "TCP::autowin",
+  "body": "TCP::autowin",
+  "description": "TCP::autowin",
+  "scope": "source.irule"
+},"TCP::bandwidth": {
+  "prefix": "TCP::bandwidth",
+  "body": "TCP::bandwidth",
+  "description": "TCP::bandwidth",
+  "scope": "source.irule"
+},"TCP::client_port": {
+  "prefix": "TCP::client_port",
+  "body": "TCP::client_port",
+  "description": "TCP::client_port",
+  "scope": "source.irule"
+},"TCP::close": {
+  "prefix": "TCP::close",
+  "body": "TCP::close",
+  "description": "TCP::close",
+  "scope": "source.irule"
+},"TCP::collect": {
+  "prefix": "TCP::collect",
+  "body": "TCP::collect",
+  "description": "TCP::collect",
+  "scope": "source.irule"
+},"TCP::congestion": {
+  "prefix": "TCP::congestion",
+  "body": "TCP::congestion",
+  "description": "TCP::congestion",
+  "scope": "source.irule"
+},"TCP::delayed_ack": {
+  "prefix": "TCP::delayed_ack",
+  "body": "TCP::delayed_ack",
+  "description": "TCP::delayed_ack",
+  "scope": "source.irule"
+},"TCP::dsack": {
+  "prefix": "TCP::dsack",
+  "body": "TCP::dsack",
+  "description": "TCP::dsack",
+  "scope": "source.irule"
+},"TCP::ecn": {
+  "prefix": "TCP::ecn",
+  "body": "TCP::ecn",
+  "description": "TCP::ecn",
+  "scope": "source.irule"
+},"TCP::idletime": {
+  "prefix": "TCP::idletime",
+  "body": "TCP::idletime",
+  "description": "TCP::idletime",
+  "scope": "source.irule"
+},"TCP::limxmit": {
+  "prefix": "TCP::limxmit",
+  "body": "TCP::limxmit",
+  "description": "TCP::limxmit",
+  "scope": "source.irule"
+},"TCP::local_port": {
+  "prefix": "TCP::local_port",
+  "body": "TCP::local_port",
+  "description": "TCP::local_port",
+  "scope": "source.irule"
+},"TCP::lossfilter": {
+  "prefix": "TCP::lossfilter",
+  "body": "TCP::lossfilter",
+  "description": "TCP::lossfilter",
+  "scope": "source.irule"
+},"TCP::mss": {
+  "prefix": "TCP::mss",
+  "body": "TCP::mss",
+  "description": "TCP::mss",
+  "scope": "source.irule"
+},"TCP::nagle": {
+  "prefix": "TCP::nagle",
+  "body": "TCP::nagle",
+  "description": "TCP::nagle",
+  "scope": "source.irule"
+},"TCP::naglemode": {
+  "prefix": "TCP::naglemode",
+  "body": "TCP::naglemode",
+  "description": "TCP::naglemode",
+  "scope": "source.irule"
+},"TCP::naglestate": {
+  "prefix": "TCP::naglestate",
+  "body": "TCP::naglestate",
+  "description": "TCP::naglestate",
+  "scope": "source.irule"
+},"TCP::notify": {
+  "prefix": "TCP::notify",
+  "body": "TCP::notify",
+  "description": "TCP::notify",
+  "scope": "source.irule"
+},"TCP::offset": {
+  "prefix": "TCP::offset",
+  "body": "TCP::offset",
+  "description": "TCP::offset",
+  "scope": "source.irule"
+},"TCP::option": {
+  "prefix": "TCP::option",
+  "body": "TCP::option",
+  "description": "TCP::option",
+  "scope": "source.irule"
+},"TCP::pacing": {
+  "prefix": "TCP::pacing",
+  "body": "TCP::pacing",
+  "description": "TCP::pacing",
+  "scope": "source.irule"
+},"TCP::payload": {
+  "prefix": "TCP::payload",
+  "body": "TCP::payload",
+  "description": "TCP::payload",
+  "scope": "source.irule"
+},"TCP::proxybuffer": {
+  "prefix": "TCP::proxybuffer",
+  "body": "TCP::proxybuffer",
+  "description": "TCP::proxybuffer",
+  "scope": "source.irule"
+},"TCP::rcv_scale": {
+  "prefix": "TCP::rcv_scale",
+  "body": "TCP::rcv_scale",
+  "description": "TCP::rcv_scale",
+  "scope": "source.irule"
+},"TCP::rcv_size": {
+  "prefix": "TCP::rcv_size",
+  "body": "TCP::rcv_size",
+  "description": "TCP::rcv_size",
+  "scope": "source.irule"
+},"TCP::recvwnd": {
+  "prefix": "TCP::recvwnd",
+  "body": "TCP::recvwnd",
+  "description": "TCP::recvwnd",
+  "scope": "source.irule"
+},"TCP::release": {
+  "prefix": "TCP::release",
+  "body": "TCP::release",
+  "description": "TCP::release",
+  "scope": "source.irule"
+},"TCP::remote_port": {
+  "prefix": "TCP::remote_port",
+  "body": "TCP::remote_port",
+  "description": "TCP::remote_port",
+  "scope": "source.irule"
+},"TCP::respond": {
+  "prefix": "TCP::respond",
+  "body": "TCP::respond",
+  "description": "TCP::respond",
+  "scope": "source.irule"
+},"TCP::rexmt_thresh": {
+  "prefix": "TCP::rexmt_thresh",
+  "body": "TCP::rexmt_thresh",
+  "description": "TCP::rexmt_thresh",
+  "scope": "source.irule"
+},"TCP::rt_metrics_timeout": {
+  "prefix": "TCP::rt_metrics_timeout",
+  "body": "TCP::rt_metrics_timeout",
+  "description": "TCP::rt_metrics_timeout",
+  "scope": "source.irule"
+},"TCP::rto": {
+  "prefix": "TCP::rto",
+  "body": "TCP::rto",
+  "description": "TCP::rto",
+  "scope": "source.irule"
+},"TCP::rtt": {
+  "prefix": "TCP::rtt",
+  "body": "TCP::rtt",
+  "description": "TCP::rtt",
+  "scope": "source.irule"
+},"TCP::rttvar": {
+  "prefix": "TCP::rttvar",
+  "body": "TCP::rttvar",
+  "description": "TCP::rttvar",
+  "scope": "source.irule"
+},"TCP::sendbuf": {
+  "prefix": "TCP::sendbuf",
+  "body": "TCP::sendbuf",
+  "description": "TCP::sendbuf",
+  "scope": "source.irule"
+},"TCP::server_port": {
+  "prefix": "TCP::server_port",
+  "body": "TCP::server_port",
+  "description": "TCP::server_port",
+  "scope": "source.irule"
+},"TCP::setmss": {
+  "prefix": "TCP::setmss",
+  "body": "TCP::setmss",
+  "description": "TCP::setmss",
+  "scope": "source.irule"
+},"TCP::snd_cwnd": {
+  "prefix": "TCP::snd_cwnd",
+  "body": "TCP::snd_cwnd",
+  "description": "TCP::snd_cwnd",
+  "scope": "source.irule"
+},"TCP::snd_scale": {
+  "prefix": "TCP::snd_scale",
+  "body": "TCP::snd_scale",
+  "description": "TCP::snd_scale",
+  "scope": "source.irule"
+},"TCP::snd_ssthresh": {
+  "prefix": "TCP::snd_ssthresh",
+  "body": "TCP::snd_ssthresh",
+  "description": "TCP::snd_ssthresh",
+  "scope": "source.irule"
+},"TCP::snd_wnd": {
+  "prefix": "TCP::snd_wnd",
+  "body": "TCP::snd_wnd",
+  "description": "TCP::snd_wnd",
+  "scope": "source.irule"
+},"TCP::unused_port": {
+  "prefix": "TCP::unused_port",
+  "body": "TCP::unused_port",
+  "description": "TCP::unused_port",
+  "scope": "source.irule"
+},"TDS::msg": {
+  "prefix": "TDS::msg",
+  "body": "TDS::msg",
+  "description": "TDS::msg",
+  "scope": "source.irule"
+},"TDS::session": {
+  "prefix": "TDS::session",
+  "body": "TDS::session",
+  "description": "TDS::session",
+  "scope": "source.irule"
+},"TDS_REQUEST": {
+  "prefix": "TDS_REQUEST",
+  "body": "TDS_REQUEST",
+  "description": "TDS_REQUEST",
+  "scope": "source.irule"
+},"TDS_RESPONSE": {
+  "prefix": "TDS_RESPONSE",
+  "body": "TDS_RESPONSE",
+  "description": "TDS_RESPONSE",
+  "scope": "source.irule"
+},"TMM::cmp_cluster_primary": {
+  "prefix": "TMM::cmp_cluster_primary",
+  "body": "TMM::cmp_cluster_primary",
+  "description": "TMM::cmp_cluster_primary",
+  "scope": "source.irule"
+},"TMM::cmp_count": {
+  "prefix": "TMM::cmp_count",
+  "body": "TMM::cmp_count",
+  "description": "TMM::cmp_count",
+  "scope": "source.irule"
+},"TMM::cmp_group": {
+  "prefix": "TMM::cmp_group",
+  "body": "TMM::cmp_group",
+  "description": "TMM::cmp_group",
+  "scope": "source.irule"
+},"TMM::cmp_groups": {
+  "prefix": "TMM::cmp_groups",
+  "body": "TMM::cmp_groups",
+  "description": "TMM::cmp_groups",
+  "scope": "source.irule"
+},"TMM::cmp_primary_group": {
+  "prefix": "TMM::cmp_primary_group",
+  "body": "TMM::cmp_primary_group",
+  "description": "TMM::cmp_primary_group",
+  "scope": "source.irule"
+},"TMM::cmp_unit": {
+  "prefix": "TMM::cmp_unit",
+  "body": "TMM::cmp_unit",
+  "description": "TMM::cmp_unit",
+  "scope": "source.irule"
+},"UDP::client_port": {
+  "prefix": "UDP::client_port",
+  "body": "UDP::client_port",
+  "description": "UDP::client_port",
+  "scope": "source.irule"
+},"UDP::drop": {
+  "prefix": "UDP::drop",
+  "body": "UDP::drop",
+  "description": "UDP::drop",
+  "scope": "source.irule"
+},"UDP::local_port": {
+  "prefix": "UDP::local_port",
+  "body": "UDP::local_port",
+  "description": "UDP::local_port",
+  "scope": "source.irule"
+},"UDP::mss": {
+  "prefix": "UDP::mss",
+  "body": "UDP::mss",
+  "description": "UDP::mss",
+  "scope": "source.irule"
+},"UDP::payload": {
+  "prefix": "UDP::payload",
+  "body": "UDP::payload",
+  "description": "UDP::payload",
+  "scope": "source.irule"
+},"UDP::remote_port": {
+  "prefix": "UDP::remote_port",
+  "body": "UDP::remote_port",
+  "description": "UDP::remote_port",
+  "scope": "source.irule"
+},"UDP::respond": {
+  "prefix": "UDP::respond",
+  "body": "UDP::respond",
+  "description": "UDP::respond",
+  "scope": "source.irule"
+},"UDP::server_port": {
+  "prefix": "UDP::server_port",
+  "body": "UDP::server_port",
+  "description": "UDP::server_port",
+  "scope": "source.irule"
+},"UDP::unused_port": {
+  "prefix": "UDP::unused_port",
+  "body": "UDP::unused_port",
+  "description": "UDP::unused_port",
+  "scope": "source.irule"
+},"URI::basename": {
+  "prefix": "URI::basename",
+  "body": "URI::basename",
+  "description": "URI::basename",
+  "scope": "source.irule"
+},"URI::compare": {
+  "prefix": "URI::compare",
+  "body": "URI::compare",
+  "description": "URI::compare",
+  "scope": "source.irule"
+},"URI::decode": {
+  "prefix": "URI::decode",
+  "body": "URI::decode",
+  "description": "URI::decode",
+  "scope": "source.irule"
+},"URI::encode": {
+  "prefix": "URI::encode",
+  "body": "URI::encode",
+  "description": "URI::encode",
+  "scope": "source.irule"
+},"URI::host": {
+  "prefix": "URI::host",
+  "body": "URI::host",
+  "description": "URI::host",
+  "scope": "source.irule"
+},"URI::path": {
+  "prefix": "URI::path",
+  "body": "URI::path",
+  "description": "URI::path",
+  "scope": "source.irule"
+},"URI::port": {
+  "prefix": "URI::port",
+  "body": "URI::port",
+  "description": "URI::port",
+  "scope": "source.irule"
+},"URI::protocol": {
+  "prefix": "URI::protocol",
+  "body": "URI::protocol",
+  "description": "URI::protocol",
+  "scope": "source.irule"
+},"URI::query": {
+  "prefix": "URI::query",
+  "body": "URI::query",
+  "description": "URI::query",
+  "scope": "source.irule"
+},"USER_REQUEST": {
+  "prefix": "USER_REQUEST",
+  "body": "USER_REQUEST",
+  "description": "USER_REQUEST",
+  "scope": "source.irule"
+},"USER_RESPONSE": {
+  "prefix": "USER_RESPONSE",
+  "body": "USER_RESPONSE",
+  "description": "USER_RESPONSE",
+  "scope": "source.irule"
+},"VALIDATE::protocol": {
+  "prefix": "VALIDATE::protocol",
+  "body": "VALIDATE::protocol",
+  "description": "VALIDATE::protocol",
+  "scope": "source.irule"
+},"VDI::disable": {
+  "prefix": "VDI::disable",
+  "body": "VDI::disable",
+  "description": "VDI::disable",
+  "scope": "source.irule"
+},"VDI::enable": {
+  "prefix": "VDI::enable",
+  "body": "VDI::enable",
+  "description": "VDI::enable",
+  "scope": "source.irule"
+},"WEBSSO::disable": {
+  "prefix": "WEBSSO::disable",
+  "body": "WEBSSO::disable",
+  "description": "WEBSSO::disable",
+  "scope": "source.irule"
+},"WEBSSO::enable": {
+  "prefix": "WEBSSO::enable",
+  "body": "WEBSSO::enable",
+  "description": "WEBSSO::enable",
+  "scope": "source.irule"
+},"WEBSSO::select": {
+  "prefix": "WEBSSO::select",
+  "body": "WEBSSO::select",
+  "description": "WEBSSO::select",
+  "scope": "source.irule"
+},"WS::collect": {
+  "prefix": "WS::collect",
+  "body": "WS::collect",
+  "description": "WS::collect",
+  "scope": "source.irule"
+},"WS::disconnect": {
+  "prefix": "WS::disconnect",
+  "body": "WS::disconnect",
+  "description": "WS::disconnect",
+  "scope": "source.irule"
+},"WS::enabled": {
+  "prefix": "WS::enabled",
+  "body": "WS::enabled",
+  "description": "WS::enabled",
+  "scope": "source.irule"
+},"WS::frame": {
+  "prefix": "WS::frame",
+  "body": "WS::frame",
+  "description": "WS::frame",
+  "scope": "source.irule"
+},"WS::masking": {
+  "prefix": "WS::masking",
+  "body": "WS::masking",
+  "description": "WS::masking",
+  "scope": "source.irule"
+},"WS::message": {
+  "prefix": "WS::message",
+  "body": "WS::message",
+  "description": "WS::message",
+  "scope": "source.irule"
+},"WS::payload": {
+  "prefix": "WS::payload",
+  "body": "WS::payload",
+  "description": "WS::payload",
+  "scope": "source.irule"
+},"WS::release": {
+  "prefix": "WS::release",
+  "body": "WS::release",
+  "description": "WS::release",
+  "scope": "source.irule"
+},"WS::request": {
+  "prefix": "WS::request",
+  "body": "WS::request",
+  "description": "WS::request",
+  "scope": "source.irule"
+},"WS::response": {
+  "prefix": "WS::response",
+  "body": "WS::response",
+  "description": "WS::response",
+  "scope": "source.irule"
+},"WS_CLIENT_DATA": {
+  "prefix": "WS_CLIENT_DATA",
+  "body": "WS_CLIENT_DATA",
+  "description": "WS_CLIENT_DATA",
+  "scope": "source.irule"
+},"WS_CLIENT_FRAME": {
+  "prefix": "WS_CLIENT_FRAME",
+  "body": "WS_CLIENT_FRAME",
+  "description": "WS_CLIENT_FRAME",
+  "scope": "source.irule"
+},"WS_CLIENT_FRAME_DONE": {
+  "prefix": "WS_CLIENT_FRAME_DONE",
+  "body": "WS_CLIENT_FRAME_DONE",
+  "description": "WS_CLIENT_FRAME_DONE",
+  "scope": "source.irule"
+},"WS_REQUEST": {
+  "prefix": "WS_REQUEST",
+  "body": "WS_REQUEST",
+  "description": "WS_REQUEST",
+  "scope": "source.irule"
+},"WS_RESPONSE": {
+  "prefix": "WS_RESPONSE",
+  "body": "WS_RESPONSE",
+  "description": "WS_RESPONSE",
+  "scope": "source.irule"
+},"WS_SERVER_DATA": {
+  "prefix": "WS_SERVER_DATA",
+  "body": "WS_SERVER_DATA",
+  "description": "WS_SERVER_DATA",
+  "scope": "source.irule"
+},"WS_SERVER_FRAME": {
+  "prefix": "WS_SERVER_FRAME",
+  "body": "WS_SERVER_FRAME",
+  "description": "WS_SERVER_FRAME",
+  "scope": "source.irule"
+},"WS_SERVER_FRAME_DONE": {
+  "prefix": "WS_SERVER_FRAME_DONE",
+  "body": "WS_SERVER_FRAME_DONE",
+  "description": "WS_SERVER_FRAME_DONE",
+  "scope": "source.irule"
+},"X509::cert_fields": {
+  "prefix": "X509::cert_fields",
+  "body": "X509::cert_fields",
+  "description": "X509::cert_fields",
+  "scope": "source.irule"
+},"X509::extensions": {
+  "prefix": "X509::extensions",
+  "body": "X509::extensions",
+  "description": "X509::extensions",
+  "scope": "source.irule"
+},"X509::hash": {
+  "prefix": "X509::hash",
+  "body": "X509::hash",
+  "description": "X509::hash",
+  "scope": "source.irule"
+},"X509::issuer": {
+  "prefix": "X509::issuer",
+  "body": "X509::issuer",
+  "description": "X509::issuer",
+  "scope": "source.irule"
+},"X509::not_valid_after": {
+  "prefix": "X509::not_valid_after",
+  "body": "X509::not_valid_after",
+  "description": "X509::not_valid_after",
+  "scope": "source.irule"
+},"X509::not_valid_before": {
+  "prefix": "X509::not_valid_before",
+  "body": "X509::not_valid_before",
+  "description": "X509::not_valid_before",
+  "scope": "source.irule"
+},"X509::serial_number": {
+  "prefix": "X509::serial_number",
+  "body": "X509::serial_number",
+  "description": "X509::serial_number",
+  "scope": "source.irule"
+},"X509::signature_algorithm": {
+  "prefix": "X509::signature_algorithm",
+  "body": "X509::signature_algorithm",
+  "description": "X509::signature_algorithm",
+  "scope": "source.irule"
+},"X509::subject": {
+  "prefix": "X509::subject",
+  "body": "X509::subject",
+  "description": "X509::subject",
+  "scope": "source.irule"
+},"X509::subject_public_key": {
+  "prefix": "X509::subject_public_key",
+  "body": "X509::subject_public_key",
+  "description": "X509::subject_public_key",
+  "scope": "source.irule"
+},"X509::subject_public_key_RSA_bits": {
+  "prefix": "X509::subject_public_key_RSA_bits",
+  "body": "X509::subject_public_key_RSA_bits",
+  "description": "X509::subject_public_key_RSA_bits",
+  "scope": "source.irule"
+},"X509::subject_public_key_type": {
+  "prefix": "X509::subject_public_key_type",
+  "body": "X509::subject_public_key_type",
+  "description": "X509::subject_public_key_type",
+  "scope": "source.irule"
+},"X509::verify_cert_error_string": {
+  "prefix": "X509::verify_cert_error_string",
+  "body": "X509::verify_cert_error_string",
+  "description": "X509::verify_cert_error_string",
+  "scope": "source.irule"
+},"X509::version": {
+  "prefix": "X509::version",
+  "body": "X509::version",
+  "description": "X509::version",
+  "scope": "source.irule"
+},"X509::whole": {
+  "prefix": "X509::whole",
+  "body": "X509::whole",
+  "description": "X509::whole",
+  "scope": "source.irule"
+},"XML_CONTENT_BASED_ROUTING": {
+  "prefix": "XML_CONTENT_BASED_ROUTING",
+  "body": "XML_CONTENT_BASED_ROUTING",
+  "description": "XML_CONTENT_BASED_ROUTING",
+  "scope": "source.irule"
+},"XML::disable": {
+  "prefix": "XML::disable",
+  "body": "XML::disable",
+  "description": "XML::disable",
+  "scope": "source.irule"
+},"XML::enable": {
+  "prefix": "XML::enable",
+  "body": "XML::enable",
+  "description": "XML::enable",
+  "scope": "source.irule"
+},"XML::payload": {
+  "prefix": "XML::payload",
+  "body": "XML::payload",
+  "description": "XML::payload",
+  "scope": "source.irule"
+},"active_members": {
+  "prefix": "active_members",
+  "body": "active_members",
+  "description": "active_members",
+  "scope": "source.irule"
+},"active_nodes": {
+  "prefix": "active_nodes",
+  "body": "active_nodes",
+  "description": "active_nodes",
+  "scope": "source.irule"
+},"after": {
+  "prefix": "after",
+  "body": "after",
+  "description": "after",
+  "scope": "source.irule"
+},"append": {
+  "prefix": "append",
+  "body": "append",
+  "description": "append",
+  "scope": "source.irule"
+},"array": {
+  "prefix": "array",
+  "body": "array",
+  "description": "array",
+  "scope": "source.irule"
+},"b64decode": {
+  "prefix": "b64decode",
+  "body": "b64decode",
+  "description": "b64decode",
+  "scope": "source.irule"
+},"b64encode": {
+  "prefix": "b64encode",
+  "body": "b64encode",
+  "description": "b64encode",
+  "scope": "source.irule"
+},"binary": {
+  "prefix": "binary",
+  "body": "binary",
+  "description": "binary",
+  "scope": "source.irule"
+},"binaryclock": {
+  "prefix": "binaryclock",
+  "body": "binaryclock",
+  "description": "binaryclock",
+  "scope": "source.irule"
+},"call": {
+  "prefix": "call",
+  "body": "call",
+  "description": "call",
+  "scope": "source.irule"
+},"check": {
+  "prefix": "check",
+  "body": "check",
+  "description": "check",
+  "scope": "source.irule"
+},"class": {
+  "prefix": "class",
+  "body": "class",
+  "description": "class",
+  "scope": "source.irule"
+},"client_addr": {
+  "prefix": "client_addr",
+  "body": "client_addr",
+  "description": "client_addr",
+  "scope": "source.irule"
+},"client_port": {
+  "prefix": "client_port",
+  "body": "client_port",
+  "description": "client_port",
+  "scope": "source.irule"
+},"clientside": {
+  "prefix": "clientside",
+  "body": "clientside",
+  "description": "clientside",
+  "scope": "source.irule"
+},"clone": {
+  "prefix": "clone",
+  "body": "clone",
+  "description": "clone",
+  "scope": "source.irule"
+},"close": {
+  "prefix": "close",
+  "body": "close",
+  "description": "close",
+  "scope": "source.irule"
+},"concat": {
+  "prefix": "concat",
+  "body": "concat",
+  "description": "concat",
+  "scope": "source.irule"
+},"connect": {
+  "prefix": "connect",
+  "body": "connect",
+  "description": "connect",
+  "scope": "source.irule"
+},"connect info": {
+  "prefix": "connect info",
+  "body": "connect info",
+  "description": "connect info",
+  "scope": "source.irule"
+},"cpu": {
+  "prefix": "cpu",
+  "body": "cpu",
+  "description": "cpu",
+  "scope": "source.irule"
+},"crc32": {
+  "prefix": "crc32",
+  "body": "crc32",
+  "description": "crc32",
+  "scope": "source.irule"
+},"dde": {
+  "prefix": "dde",
+  "body": "dde",
+  "description": "dde",
+  "scope": "source.irule"
+},"decode_uri": {
+  "prefix": "decode_uri",
+  "body": "decode_uri",
+  "description": "decode_uri",
+  "scope": "source.irule"
+},"discard": {
+  "prefix": "discard",
+  "body": "discard",
+  "description": "discard",
+  "scope": "source.irule"
+},"domain": {
+  "prefix": "domain",
+  "body": "domain",
+  "description": "domain",
+  "scope": "source.irule"
+},"drop": {
+  "prefix": "drop",
+  "body": "drop",
+  "description": "drop",
+  "scope": "source.irule"
+},"error": {
+  "prefix": "error",
+  "body": "error",
+  "description": "error",
+  "scope": "source.irule"
+},"eval": {
+  "prefix": "eval",
+  "body": "eval",
+  "description": "eval",
+  "scope": "source.irule"
+},"event": {
+  "prefix": "event",
+  "body": "event",
+  "description": "event",
+  "scope": "source.irule"
+},"expr": {
+  "prefix": "expr",
+  "body": "expr",
+  "description": "expr",
+  "scope": "source.irule"
+},"fasthash": {
+  "prefix": "fasthash",
+  "body": "fasthash",
+  "description": "fasthash",
+  "scope": "source.irule"
+},"findstr": {
+  "prefix": "findstr",
+  "body": "findstr",
+  "description": "findstr",
+  "scope": "source.irule"
+},"format": {
+  "prefix": "format",
+  "body": "format",
+  "description": "format",
+  "scope": "source.irule"
+},"forward": {
+  "prefix": "forward",
+  "body": "forward",
+  "description": "forward",
+  "scope": "source.irule"
+},"getfield": {
+  "prefix": "getfield",
+  "body": "getfield",
+  "description": "getfield",
+  "scope": "source.irule"
+},"global": {
+  "prefix": "global",
+  "body": "global",
+  "description": "global",
+  "scope": "source.irule"
+},"history": {
+  "prefix": "history",
+  "body": "history",
+  "description": "history",
+  "scope": "source.irule"
+},"htonl": {
+  "prefix": "htonl",
+  "body": "htonl",
+  "description": "htonl",
+  "scope": "source.irule"
+},"htons": {
+  "prefix": "htons",
+  "body": "htons",
+  "description": "htons",
+  "scope": "source.irule"
+},"http_cookie": {
+  "prefix": "http_cookie",
+  "body": "http_cookie",
+  "description": "http_cookie",
+  "scope": "source.irule"
+},"http_header": {
+  "prefix": "http_header",
+  "body": "http_header",
+  "description": "http_header",
+  "scope": "source.irule"
+},"http_host": {
+  "prefix": "http_host",
+  "body": "http_host",
+  "description": "http_host",
+  "scope": "source.irule"
+},"http_method": {
+  "prefix": "http_method",
+  "body": "http_method",
+  "description": "http_method",
+  "scope": "source.irule"
+},"http_uri": {
+  "prefix": "http_uri",
+  "body": "http_uri",
+  "description": "http_uri",
+  "scope": "source.irule"
+},"http_version": {
+  "prefix": "http_version",
+  "body": "http_version",
+  "description": "http_version",
+  "scope": "source.irule"
+},"ifile": {
+  "prefix": "ifile",
+  "body": "ifile",
+  "description": "ifile",
+  "scope": "source.irule"
+},"imid": {
+  "prefix": "imid",
+  "body": "imid",
+  "description": "imid",
+  "scope": "source.irule"
+},"incr": {
+  "prefix": "incr",
+  "body": "incr",
+  "description": "incr",
+  "scope": "source.irule"
+},"info": {
+  "prefix": "info",
+  "body": "info",
+  "description": "info",
+  "scope": "source.irule"
+},"ip::remote_addr": {
+  "prefix": "ip::remote_addr",
+  "body": "ip::remote_addr",
+  "description": "ip::remote_addr",
+  "scope": "source.irule"
+},"ip_addr": {
+  "prefix": "ip_addr",
+  "body": "ip_addr",
+  "description": "ip_addr",
+  "scope": "source.irule"
+},"ip_protocol": {
+  "prefix": "ip_protocol",
+  "body": "ip_protocol",
+  "description": "ip_protocol",
+  "scope": "source.irule"
+},"ip_tos": {
+  "prefix": "ip_tos",
+  "body": "ip_tos",
+  "description": "ip_tos",
+  "scope": "source.irule"
+},"ip_ttl": {
+  "prefix": "ip_ttl",
+  "body": "ip_ttl",
+  "description": "ip_ttl",
+  "scope": "source.irule"
+},"join": {
+  "prefix": "join",
+  "body": "join",
+  "description": "join",
+  "scope": "source.irule"
+},"lappend": {
+  "prefix": "lappend",
+  "body": "lappend",
+  "description": "lappend",
+  "scope": "source.irule"
+},"lasthop": {
+  "prefix": "lasthop",
+  "body": "lasthop",
+  "description": "lasthop",
+  "scope": "source.irule"
+},"library": {
+  "prefix": "library",
+  "body": "library",
+  "description": "library",
+  "scope": "source.irule"
+},"lindex": {
+  "prefix": "lindex",
+  "body": "lindex",
+  "description": "lindex",
+  "scope": "source.irule"
+},"link_qos": {
+  "prefix": "link_qos",
+  "body": "link_qos",
+  "description": "link_qos",
+  "scope": "source.irule"
+},"linsert": {
+  "prefix": "linsert",
+  "body": "linsert",
+  "description": "linsert",
+  "scope": "source.irule"
+},"list": {
+  "prefix": "list",
+  "body": "list",
+  "description": "list",
+  "scope": "source.irule"
+},"listen": {
+  "prefix": "listen",
+  "body": "listen",
+  "description": "listen",
+  "scope": "source.irule"
+},"llength": {
+  "prefix": "llength",
+  "body": "llength",
+  "description": "llength",
+  "scope": "source.irule"
+},"llookup": {
+  "prefix": "llookup",
+  "body": "llookup",
+  "description": "llookup",
+  "scope": "source.irule"
+},"log": {
+  "prefix": "log",
+  "body": "log",
+  "description": "log",
+  "scope": "source.irule"
+},"lrange": {
+  "prefix": "lrange",
+  "body": "lrange",
+  "description": "lrange",
+  "scope": "source.irule"
+},"lreplace": {
+  "prefix": "lreplace",
+  "body": "lreplace",
+  "description": "lreplace",
+  "scope": "source.irule"
+},"lsearch": {
+  "prefix": "lsearch",
+  "body": "lsearch",
+  "description": "lsearch",
+  "scope": "source.irule"
+},"lset": {
+  "prefix": "lset",
+  "body": "lset",
+  "description": "lset",
+  "scope": "source.irule"
+},"lsort": {
+  "prefix": "lsort",
+  "body": "lsort",
+  "description": "lsort",
+  "scope": "source.irule"
+},"matchclass": {
+  "prefix": "matchclass",
+  "body": "matchclass",
+  "description": "matchclass",
+  "scope": "source.irule"
+},"md4": {
+  "prefix": "md4",
+  "body": "md4",
+  "description": "md4",
+  "scope": "source.irule"
+},"md5": {
+  "prefix": "md5",
+  "body": "md5",
+  "description": "md5",
+  "scope": "source.irule"
+},"members": {
+  "prefix": "members",
+  "body": "members",
+  "description": "members",
+  "scope": "source.irule"
+},"msgcat": {
+  "prefix": "msgcat",
+  "body": "msgcat",
+  "description": "msgcat",
+  "scope": "source.irule"
+},"nexthop": {
+  "prefix": "nexthop",
+  "body": "nexthop",
+  "description": "nexthop",
+  "scope": "source.irule"
+},"node": {
+  "prefix": "node",
+  "body": "node",
+  "description": "node",
+  "scope": "source.irule"
+},"nodes": {
+  "prefix": "nodes",
+  "body": "nodes",
+  "description": "nodes",
+  "scope": "source.irule"
+},"ntohl": {
+  "prefix": "ntohl",
+  "body": "ntohl",
+  "description": "ntohl",
+  "scope": "source.irule"
+},"ntohs": {
+  "prefix": "ntohs",
+  "body": "ntohs",
+  "description": "ntohs",
+  "scope": "source.irule"
+},"parray": {
+  "prefix": "parray",
+  "body": "parray",
+  "description": "parray",
+  "scope": "source.irule"
+},"peer": {
+  "prefix": "peer",
+  "body": "peer",
+  "description": "peer",
+  "scope": "source.irule"
+},"pem_dtos": {
+  "prefix": "pem_dtos",
+  "body": "pem_dtos",
+  "description": "pem_dtos",
+  "scope": "source.irule"
+},"persist": {
+  "prefix": "persist",
+  "body": "persist",
+  "description": "persist",
+  "scope": "source.irule"
+},"pool": {
+  "prefix": "pool",
+  "body": "pool",
+  "description": "pool",
+  "scope": "source.irule"
+},"priority": {
+  "prefix": "priority",
+  "body": "priority",
+  "description": "priority",
+  "scope": "source.irule"
+},"puts": {
+  "prefix": "puts",
+  "body": "puts",
+  "description": "puts",
+  "scope": "source.irule"
+},"rateclass": {
+  "prefix": "rateclass",
+  "body": "rateclass",
+  "description": "rateclass",
+  "scope": "source.irule"
+},"re_syntax": {
+  "prefix": "re_syntax",
+  "body": "re_syntax",
+  "description": "re_syntax",
+  "scope": "source.irule"
+},"read": {
+  "prefix": "read",
+  "body": "read",
+  "description": "read",
+  "scope": "source.irule"
+},"recv": {
+  "prefix": "recv",
+  "body": "recv",
+  "description": "recv",
+  "scope": "source.irule"
+},"redirect": {
+  "prefix": "redirect",
+  "body": "redirect",
+  "description": "redirect",
+  "scope": "source.irule"
+},"registry": {
+  "prefix": "registry",
+  "body": "registry",
+  "description": "registry",
+  "scope": "source.irule"
+},"reject": {
+  "prefix": "reject",
+  "body": "reject",
+  "description": "reject",
+  "scope": "source.irule"
+},"relate_client": {
+  "prefix": "relate_client",
+  "body": "relate_client",
+  "description": "relate_client",
+  "scope": "source.irule"
+},"relate_server": {
+  "prefix": "relate_server",
+  "body": "relate_server",
+  "description": "relate_server",
+  "scope": "source.irule"
+},"resource": {
+  "prefix": "resource",
+  "body": "resource",
+  "description": "resource",
+  "scope": "source.irule"
+},"rmd160": {
+  "prefix": "rmd160",
+  "body": "rmd160",
+  "description": "rmd160",
+  "scope": "source.irule"
+},"scan": {
+  "prefix": "scan",
+  "body": "scan",
+  "description": "scan",
+  "scope": "source.irule"
+},"send": {
+  "prefix": "send",
+  "body": "send",
+  "description": "send",
+  "scope": "source.irule"
+},"server_addr": {
+  "prefix": "server_addr",
+  "body": "server_addr",
+  "description": "server_addr",
+  "scope": "source.irule"
+},"server_port": {
+  "prefix": "server_port",
+  "body": "server_port",
+  "description": "server_port",
+  "scope": "source.irule"
+},"serverside": {
+  "prefix": "serverside",
+  "body": "serverside",
+  "description": "serverside",
+  "scope": "source.irule"
+},"session": {
+  "prefix": "session",
+  "body": "session",
+  "description": "session",
+  "scope": "source.irule"
+},"set": {
+  "prefix": "set",
+  "body": "set",
+  "description": "set",
+  "scope": "source.irule"
+},"sha1": {
+  "prefix": "sha1",
+  "body": "sha1",
+  "description": "sha1",
+  "scope": "source.irule"
+},"sha256": {
+  "prefix": "sha256",
+  "body": "sha256",
+  "description": "sha256",
+  "scope": "source.irule"
+},"sha384": {
+  "prefix": "sha384",
+  "body": "sha384",
+  "description": "sha384",
+  "scope": "source.irule"
+},"sha512": {
+  "prefix": "sha512",
+  "body": "sha512",
+  "description": "sha512",
+  "scope": "source.irule"
+},"sharedvar": {
+  "prefix": "sharedvar",
+  "body": "sharedvar",
+  "description": "sharedvar",
+  "scope": "source.irule"
+},"snat": {
+  "prefix": "snat",
+  "body": "snat",
+  "description": "snat",
+  "scope": "source.irule"
+},"snatpool": {
+  "prefix": "snatpool",
+  "body": "snatpool",
+  "description": "snatpool",
+  "scope": "source.irule"
+},"split": {
+  "prefix": "split",
+  "body": "split",
+  "description": "split",
+  "scope": "source.irule"
+},"static": {
+  "prefix": "static",
+  "body": "static",
+  "description": "static",
+  "scope": "source.irule"
+},"string": {
+  "prefix": "string",
+  "body": "string",
+  "description": "string",
+  "scope": "source.irule"
+},"subst": {
+  "prefix": "subst",
+  "body": "subst",
+  "description": "subst",
+  "scope": "source.irule"
+},"substr": {
+  "prefix": "substr",
+  "body": "substr",
+  "description": "substr",
+  "scope": "source.irule"
+},"table": {
+  "prefix": "table",
+  "body": "table",
+  "description": "table",
+  "scope": "source.irule"
+},"tcl_endOfWord": {
+  "prefix": "tcl_endOfWord",
+  "body": "tcl_endOfWord",
+  "description": "tcl_endOfWord",
+  "scope": "source.irule"
+},"tcl_platform": {
+  "prefix": "tcl_platform",
+  "body": "tcl_platform",
+  "description": "tcl_platform",
+  "scope": "source.irule"
+},"tcl_startOfNextWord": {
+  "prefix": "tcl_startOfNextWord",
+  "body": "tcl_startOfNextWord",
+  "description": "tcl_startOfNextWord",
+  "scope": "source.irule"
+},"tcl_startOfPreviousWord": {
+  "prefix": "tcl_startOfPreviousWord",
+  "body": "tcl_startOfPreviousWord",
+  "description": "tcl_startOfPreviousWord",
+  "scope": "source.irule"
+},"tcl_wordBreakAfter": {
+  "prefix": "tcl_wordBreakAfter",
+  "body": "tcl_wordBreakAfter",
+  "description": "tcl_wordBreakAfter",
+  "scope": "source.irule"
+},"tcl_wordBreakBefore": {
+  "prefix": "tcl_wordBreakBefore",
+  "body": "tcl_wordBreakBefore",
+  "description": "tcl_wordBreakBefore",
+  "scope": "source.irule"
+},"tcltest": {
+  "prefix": "tcltest",
+  "body": "tcltest",
+  "description": "tcltest",
+  "scope": "source.irule"
+},"tclvars": {
+  "prefix": "tclvars",
+  "body": "tclvars",
+  "description": "tclvars",
+  "scope": "source.irule"
+},"timing": {
+  "prefix": "timing",
+  "body": "timing",
+  "description": "timing",
+  "scope": "source.irule"
+},"trace": {
+  "prefix": "trace",
+  "body": "trace",
+  "description": "trace",
+  "scope": "source.irule"
+},"traffic_group": {
+  "prefix": "traffic_group",
+  "body": "traffic_group",
+  "description": "traffic_group",
+  "scope": "source.irule"
+},"translate": {
+  "prefix": "translate",
+  "body": "translate",
+  "description": "translate",
+  "scope": "source.irule"
+},"unset": {
+  "prefix": "unset",
+  "body": "unset",
+  "description": "unset",
+  "scope": "source.irule"
+},"uplevel": {
+  "prefix": "uplevel",
+  "body": "uplevel",
+  "description": "uplevel",
+  "scope": "source.irule"
+},"upvar": {
+  "prefix": "upvar",
+  "body": "upvar",
+  "description": "upvar",
+  "scope": "source.irule"
+},"use": {
+  "prefix": "use",
+  "body": "use",
+  "description": "use",
+  "scope": "source.irule"
+},"variable": {
+  "prefix": "variable",
+  "body": "variable",
+  "description": "variable",
+  "scope": "source.irule"
+},"virtual": {
+  "prefix": "virtual",
+  "body": "virtual",
+  "description": "virtual",
+  "scope": "source.irule"
+},"vlan_id": {
+  "prefix": "vlan_id",
+  "body": "vlan_id",
+  "description": "vlan_id",
+  "scope": "source.irule"
+},"whereis": {
+  "prefix": "whereis",
+  "body": "whereis",
+  "description": "whereis",
+  "scope": "source.irule"
+}
+}
