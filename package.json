@@ -2,27 +2,47 @@
     "name": "iRule",
     "displayName": "f5-networks-iRule",
     "description": "",
-    "version": "0.0.1",
+    "version": "1.1.0",
     "publisher": "yigituslu",
     "engines": {
-        "vscode": "^1.0.0"
+        "vscode": "^1.1.0"
+    },
+    "icon": "images/f5.png",
+    "galleryBanner": {
+        "color": "#DF0832",
+        "theme": "dark"
+    },
+    "homepage": "https://github.com/yigituslu/vscode-iRule/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yigituslu/vscode-iRule.git"
     },
     "categories": [
-        "Languages"
+        "Languages",
+        "Snippets"
     ],
     "contributes": {
-        "languages": [{
-            "id": "iRule",
-            "aliases": ["iRules", "iRule"],
-            "extensions": [".iRule"],
-            "configuration": "./iRule.configuration.json"
-        }],
-        "grammars": [{
-            "language": "iRule",
-            "scopeName": "source.iRule",
-            "path": "./syntaxes/iRule.tmLanguage"
-        }],
-         "snippets": [
+        "languages": [
+            {
+                "id": "iRule",
+                "aliases": [
+                    "iRules",
+                    "iRule"
+                ],
+                "extensions": [
+                    ".iRule"
+                ],
+                "configuration": "./iRule.configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "iRule",
+                "scopeName": "source.iRule",
+                "path": "./syntaxes/iRule.tmLanguage"
+            }
+        ],
+        "snippets": [
             {
                 "language": "iRule",
                 "path": "./snippets/iRuleSnippets.json"
