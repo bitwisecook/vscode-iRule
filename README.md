@@ -21,7 +21,7 @@ Improve the basic snippets to get some suggestions in
 
 ## Installation
 
-Copy whole files to a folder named "irule" under:
+Copy whole files to a folder named "irule" under:  
 Windows: `%USERPROFILE%\.vscode\extensions`  
 Mac/Linux: `$HOME/.vscode/extensions`  
 Restart VSCode.  
