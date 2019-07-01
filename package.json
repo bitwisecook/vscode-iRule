@@ -2,7 +2,7 @@
     "name": "iRule",
     "displayName": "f5-networks-iRule",
     "description": "",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "publisher": "bitwisecook",
     "engines": {
         "vscode": "^1.3.0"

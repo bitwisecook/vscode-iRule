@@ -15,12 +15,15 @@ Fixed pairings
 Removed unused files from inside syntaxes
 Fixed some typos in snippets
 
+### 1.3.1
+
+Improve the basic snippets to get some suggestions in
+
 ## Installation
 
 Copy whole files to a folder named "irule" under:
-Windows: %USERPROFILE%\.vscode\extensions
-Mac/Linux: $HOME/.vscode/extensions
-Restart VSCode. 
+Windows: `%USERPROFILE%\.vscode\extensions`  
+Mac/Linux: `$HOME/.vscode/extensions`  
+Restart VSCode.  
 
-OR you can install from marketplace: https://marketplace.visualstudio.com/items?itemName=yigituslu.iRule
-
+OR you can install from marketplace: https://marketplace.visualstudio.com/items?itemName=bitwisecook.iRule
