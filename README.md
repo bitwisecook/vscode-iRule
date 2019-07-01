@@ -8,6 +8,13 @@ F5 Networks iRule extension for Visual Studio Code. This extension gives TCL bas
 
 Support for TMOS 12.1.0
 
+### 1.3.0
+
+Support for TMOS 15.0.0 and below
+Fixed pairings
+Removed unused files from inside syntaxes
+Fixed some typos in snippets
+
 ## Installation
 
 Copy whole files to a folder named "irule" under:
