@@ -91,7 +91,7 @@
 
  "table": {
     "prefix": "table",
-    "body": "table",
+    "body": "table ${1|set,add,replace,lookup,incr,append,delete,timeout,timeout,lifetime,lifetime,keys|}",
     "description": "table",
     "scope": "source.irule"
   },
