@@ -21,6 +21,12 @@ Fixed some typos in snippets
 
 Improve the basic snippets to get some suggestions in
 
+### 1.3.2
+
+Add a simple Makefile
+Fix up missing Tcl commands
+Start trying to add an error for double-substitution
+
 ## Installation
 
 Copy whole files to a folder named "irule" under:  
