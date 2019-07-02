@@ -62,6 +62,18 @@
 					<key>1</key>
 					<dict>
 						<key>name</key>
+						<string>keyword.other.iRule</string>
+					</dict>
+				</dict>
+				<key>match</key>
+				<string>\b(append|array|binary|clock|concat|error|eval|expr|format|incr|info|join|lappend|lindex|linsert|list|llength|lrange|lrepeat|lreplace|lsearch|lset|lsort|scan|set|split|string|subst|unset|uplevel|upvar|variable)\b</string>
+			</dict>
+			<dict>
+				<key>captures</key>
+				<dict>
+					<key>1</key>
+					<dict>
+						<key>name</key>
 						<string>keyword.control.iRule</string>
 					</dict>
 				</dict>
@@ -144,6 +156,18 @@
 				</dict>
 				<key>match</key>
 				<string>\b(auto_execok|auto_import|auto_load|auto_mkindex|auto_mkindex_old|auto_qualify|auto_reset|bgerror|cd|close|dict|eof|encoding|exec|exit|fblocked|fconfigure|fcopy|file|fileevent|filename|flush|gets|glob|http|interp|load|lrepeat|lreverse|memory|namespace|open|package|pid|pkg::create|pkg_mkIndex|pwd|rename|seek|socket|source|tcl_findLibrary|tell|time|unknown|update|vwait)\b</string>
+			</dict>
+			<dict>
+				<key>captures</key>
+				<dict>
+					<key>1</key>
+					<dict>
+						<key>name</key>
+						<string>invalid.dangerous.iRule</string>
+					</dict>
+				</dict>
+				<key>match</key>
+				<string>\b(expr\s+[^\{]|eval\s+[^\{]|if\s+[^\{]|switch\s+(-glob|-exact|-regex)\s+[^-][^-]\s+)\b</string>
 			</dict>
 			<dict>
 				<key>begin</key>
