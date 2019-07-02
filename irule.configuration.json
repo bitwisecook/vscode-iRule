@@ -1,13 +1,16 @@
 {
-    "capabilities" : {
-        "documentOnTypeFormattingProvider" : {
+    "capabilities": {
+        "documentOnTypeFormattingProvider": {
             "firstTriggerCharacter": "}",
-            "moreTriggerCharacter": [";", ","]
+            "moreTriggerCharacter": [
+                ";",
+                ","
+            ]
         },
-        "documentRangeFormattingProvider" : "true",
-        "renameProvider" : "true",
-        "documentHighlightProvider" : "true",
-        "referencesProvider" : "true"
+        "documentRangeFormattingProvider": "true",
+        "renameProvider": "true",
+        "documentHighlightProvider": "true",
+        "referencesProvider": "true"
     },
     "comments": {
         // symbol used for single line comment. Remove this entry if your language does not support line comments
@@ -15,22 +18,58 @@
     },
     // symbols used as brackets
     "brackets": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"]
+        [
+            "{",
+            "}"
+        ],
+        [
+            "[",
+            "]"
+        ],
+        [
+            "(",
+            ")"
+        ]
     ],
     // symbols that are auto closed when typing
-    "autoClosingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""]
-    ],
+	"autoClosingPairs": [
+		{
+			"open": "{",
+			"close": "}"
+		},
+		{
+			"open": "[",
+			"close": "]"
+		},
+		{
+			"open": "(",
+			"close": ")"
+		},
+		{
+			"open": "\"",
+			"close": "\"",
+			"notIn": [
+				"string"
+			]
+		}
+	],
     // symbols that that can be used to surround a selection
     "surroundingPairs": [
-        ["{", "}"],
-        ["[", "]"],
-        ["(", ")"],
-        ["\"", "\""]
+        [
+            "{",
+            "}"
+        ],
+        [
+            "[",
+            "]"
+        ],
+        [
+            "(",
+            ")"
+        ],
+        [
+            "\"",
+            "\""
+        ]
     ]
 }
