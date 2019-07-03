@@ -11,5 +11,5 @@ make install
 
 Restart VSCode.  
 
-TODO:
-OR you can install from marketplace: https://marketplace.visualstudio.com/items?itemName=bitwisecook.iRule
+### From the marketplace
+https://marketplace.visualstudio.com/items?itemName=bitwisecook.iRule
