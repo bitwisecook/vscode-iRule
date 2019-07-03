@@ -1,4 +1,4 @@
-VERSION?=1.4.0
+VERSION?=1.4.1
 
 install:
 	mkdir -p ~/.vscode/extensions/f5-irule
