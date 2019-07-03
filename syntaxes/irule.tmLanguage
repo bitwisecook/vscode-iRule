@@ -54,7 +54,7 @@
 					</dict>
 				</dict>
 				<key>match</key>
-				<string>(?<=^|[\[{;])\s*(expr\s+[^\{].*?|eval\s+[^\{].*?|if\s+[^\{].*?|(?:switch|class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub|glob|unset)(\s+(-glob|-exact|-regex))?\s+[^-][^-]?.*?)(?:\s+[\];{}]$|$)</string>
+				<string>(?<=^|[\[{;])\s*((expr|eval|if)(?!.*{)|(switch|class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub|glob|unset)(?!.*--))</string>
 			</dict>
 			<dict>
 				<key>captures</key>
