@@ -1,7 +1,10 @@
 NAME?=f5-iapp
 VERSION?=1.4.1
 
-out/extension.js: src/extension.ts
+node_modules/:
+	npm install
+
+out/extension.js: src/extension.ts node_modules/
 	npm run compile
 
 build: out/extension.js
