@@ -36,6 +36,7 @@ Start trying to add an error for double-substitution
 ### Added
 A stub of a code formatter
 A stub of a more complex completion provider
+Numeric and operator recognition (including octal and hex)
 
 ### Changed
 Update to a more modern structure

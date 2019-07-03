@@ -230,6 +230,14 @@
 				<string>#variable</string>
 			</dict>
 			<dict>
+				<key>include</key>
+				<string>#operator</string>
+			</dict>
+			<dict>
+				<key>include</key>
+				<string>#numeric</string>
+			</dict>
+			<dict>
 				<key>begin</key>
 				<string>"</string>
 				<key>beginCaptures</key>
@@ -494,6 +502,20 @@
 				<string>(\$)((?:[a-zA-Z0-9_]|::)+(\([^\)]+\))?|\{[^\}]*\})</string>
 				<key>name</key>
 				<string>variable.other.irule</string>
+			</dict>
+			<key>numeric</key>
+			<dict>
+				<key>match</key>
+				<string>(?&lt;![a-zA-Z])([0-7][0-7][0-7]|0x[0-9a-fA-F]|[+-]?([0-9]*[.])?[0-9]+f?)(?![\.a-zA-Z])</string>
+				<key>name</key>
+				<string>constant.numeric.irule</string>
+			</dict>
+			<key>operator</key>
+			<dict>
+				<key>match</key>
+				<string>(?&lt;= |\d)(-|\+|~|starts_with|ends_with|contains|matches_regex|matches_glob|&amp;{1,2}|and|\|{1,2}|or|&lt;{1,2}|&gt;{1,2}|\*{1,2}|!|not|%|\/|&lt;=|&gt;=|={1,2}|!=|\^)(?= |\d)</string>
+				<key>name</key>
+				<string>keyword.operator.irule</string>
 			</dict>
 		</dict>
 		<key>scopeName</key>
