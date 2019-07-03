@@ -55,6 +55,10 @@
 			{
 				"language": "irule-lang",
 				"path": "./snippets/snippets.json"
+			},
+			{
+				"language": "irule-lang",
+				"path": "./snippets/iRuleSnippets.json"
 			}
 		]
 	},
