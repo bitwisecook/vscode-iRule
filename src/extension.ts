@@ -10,20 +10,25 @@ function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
 function formatRule(input_code: string): string {
 	let tl = 0;
 
-	let out = '';
+	let out: string[] = [];
 	input_code.split('\n').forEach(element => {
 		let line = element.trim();
-		if (/\{$/.test(line)) {
+		if (line === '') {
+			out.push('');
+		} else if (/\{$/.test(line)) {
 			if (/^\}/.test(line)) {
 				tl -= 4;
 			}
+			out.push(' '.repeat(tl) + line);
 			tl += 4;
 		} else if (/^\}/.test(line)) {
 			tl -= 4;
+			out.push(' '.repeat(tl) + line);
+		} else {
+			out.push(' '.repeat(tl) + line);
 		}
-		out.concat(' '.repeat(tl) + line + '\n');
 	});
-	return out;
+	return out.join('\n');
 }
 
 // this method is called when your extension is activated
@@ -31,8 +36,6 @@ function formatRule(input_code: string): string {
 export function activate(context: vscode.ExtensionContext) {
 	vscode.languages.registerDocumentFormattingEditProvider('irule-lang', {
 		provideDocumentFormattingEdits(document: vscode.TextDocument): vscode.TextEdit[] {
-			console.log('formatting');
-			
 			return [vscode.TextEdit.replace(fullDocumentRange(document), formatRule(document.getText()))];
 		}
 	});
