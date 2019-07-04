@@ -8,6 +8,15 @@ function fullDocumentRange(document: vscode.TextDocument): vscode.Range {
 }
 
 function formatRule(input_code: string): string {
+	const config = vscode.workspace.getConfiguration('workbench');
+	let tc: string, td: number;
+	if (config.get('editor.insertSpaces')) {
+		tc = ' ';
+		td = config.get('editor.tabSize', 4);
+	} else {
+		tc = '\t';
+		td = 1;
+	}
 	let tl = 0;
 
 	let out: string[] = [];
@@ -17,15 +26,15 @@ function formatRule(input_code: string): string {
 			out.push('');
 		} else if (/\{$/.test(line)) {
 			if (/^\}/.test(line)) {
-				tl -= 4;
+				tl -= td;
 			}
-			out.push(' '.repeat(tl) + line);
-			tl += 4;
+			out.push(tc.repeat(tl) + line);
+			tl += td;
 		} else if (/^\}/.test(line)) {
-			tl -= 4;
-			out.push(' '.repeat(tl) + line);
+			tl -= td;
+			out.push(tc.repeat(tl) + line);
 		} else {
-			out.push(' '.repeat(tl) + line);
+			out.push(tc.repeat(tl) + line);
 		}
 	});
 	return out.join('\n');
