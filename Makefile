@@ -15,5 +15,5 @@ install: build
 
 package: irule-$(VERSION).vsix
 
-irule-$(VERSION).vsix:
+irule-$(VERSION).vsix: build
 	vsce package
