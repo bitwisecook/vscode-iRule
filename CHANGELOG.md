@@ -42,8 +42,23 @@ Highlight potential double-substitution errors
 ### Changed
 Update to a more modern structure
 
-### 1.4.3
+## 1.4.1
+
+### Changed
+Improve code completion
+
+## 1.4.2
+
+### Changed
+Improve highlighting double-substitution errors
+
+## 1.4.3
 
 ### Changed
 Improve the code formatter to support selected regions
 Improve the code formatter to use the defined tab style
+
+## 1.4.4
+
+### Changed
+Improve the code formatter to ignore braces inside lines that are comments
