@@ -1,5 +1,5 @@
 NAME?=f5-iapp
-VERSION?=1.4.2
+VERSION?=1.4.3
 
 node_modules/:
 	npm install

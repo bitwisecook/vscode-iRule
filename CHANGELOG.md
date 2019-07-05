@@ -42,7 +42,7 @@ Highlight potential double-substitution errors
 ### Changed
 Update to a more modern structure
 
-### 1.4.2
+### 1.4.3
 
 ### Changed
 Improve the code formatter to support selected regions
