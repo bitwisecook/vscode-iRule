@@ -41,3 +41,9 @@ Highlight potential double-substitution errors
 
 ### Changed
 Update to a more modern structure
+
+### 1.4.2
+
+### Changed
+Improve the code formatter to support selected regions
+Improve the code formatter to use the defined tab style
