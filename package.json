@@ -48,7 +48,7 @@
 			{
 				"language": "irule-lang",
 				"scopeName": "source.irule",
-				"path": "./syntaxes/irule.tmLanguage"
+				"path": "./out/syntaxes/irule.tmLanguage"
 			}
 		],
 		"snippets": [
@@ -64,16 +64,17 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
+		"compile": "tsc -p ./ && node out/build.js",
 		"watch": "tsc -watch -p ./",
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
 	"devDependencies": {
-		"typescript": "^3.3.1",
-		"vscode": "^1.1.28",
-		"tslint": "^5.12.1",
+		"@types/mocha": "^2.2.42",
 		"@types/node": "^10.12.21",
-		"@types/mocha": "^2.2.42"
+		"converter": "0.0.5",
+		"tslint": "^5.12.1",
+		"typescript": "^3.3.1",
+		"vscode": "^1.1.28"
 	}
 }
