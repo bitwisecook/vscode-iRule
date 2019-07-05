@@ -2,6 +2,7 @@ BASENAME?=irule
 NAME?=f5-$(BASENAME)
 VERSION?=1.4.4
 VSIX?=$(BASENAME)-$(VERSION).vsix
+PKG_ID?=bitwisecook.$(BASENAME)
 
 node_modules/:
 	npm install
@@ -17,9 +18,11 @@ dist-clean: clean
 
 build: out/extension.js
 
-install: build
-	mkdir -p ~/.vscode/extensions/$(NAME)
-	cp -r LICENSE README.md CHANGELOG.md images language-configuration.json package.json snippets syntaxes out ~/.vscode/extensions/$(NAME)
+install: package
+	code --install-extension $(VSIX)
+
+uninstall:
+	code --uninstall-extension $(PKG_ID)
 
 package: $(VSIX)
 
