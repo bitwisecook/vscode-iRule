@@ -1,4 +1,4 @@
-NAME?=f5-iapp
+NAME?=f5-irule
 VERSION?=1.4.4
 
 node_modules/:
