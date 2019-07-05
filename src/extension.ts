@@ -46,7 +46,9 @@ function guessPreIndentation(priorLine: vscode.TextLine, tabChar: string, tabDep
 	} else {
 		preIndent = whiteSpace.replace(new RegExp(' '.repeat(tabSize), 'g'), '\t').length;
 	}
-	if (/\{$/.test(priorLine.text.trim())) {
+	if (/^#/.test(priorLine.text.trim())) {
+		// do nothing
+	} else if (/\{$/.test(priorLine.text.trim())) {
 		preIndent += tabDepth;
 	} else if (/\{\s*\}$/.test(priorLine.text.trim())) {
 		// do nothing
