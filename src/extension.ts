@@ -67,9 +67,9 @@ function formatRule(inputCode: string, preIndent: string = '', tabChar: string =
             out.push('');
         } else if (/^#/.test(line)) {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
-        } else if (/\b\{\s*\}$/.test(line)) {
+        } else if (/\b([^\\]+(\\\\)+|[^\\])\{\s*\}$/.test(line)) {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
-        } else if (/\{$/.test(line) || /^\{$/.test(line)) {
+        } else if (/([^\\]+(\\\\)+|[^\\]){$/.test(line) || /^\{$/.test(line)) {
             if (/^\}/.test(line)) {
                 tabLevel = tabLevel - tabDepth;
                 if (tabLevel < 0) {
