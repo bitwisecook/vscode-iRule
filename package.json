@@ -18,6 +18,7 @@
 		"url": "https://github.com/bitwisecook/vscode-iRule.git"
 	},
 	"categories": [
+		"Formatters",
 		"Other",
 		"Programming Languages",
 		"Snippets"
