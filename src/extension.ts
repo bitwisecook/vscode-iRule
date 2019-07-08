@@ -162,14 +162,14 @@ export function activate(context: vscode.ExtensionContext) {
                             ];
                         } else if (words.length === 2 && words[1].includes('.')) {
                             return [
-                                new vscode.CompletionItem('emerg ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('alert ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('crit ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('err ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('warning ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('notice ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('info ', vscode.CompletionItemKind.EnumMember),
-                                new vscode.CompletionItem('debug ', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('emerg', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('alert', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('crit', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('err', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('warning', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('notice', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('info', vscode.CompletionItemKind.EnumMember),
+                                new vscode.CompletionItem('debug', vscode.CompletionItemKind.EnumMember),
                             ];
                         }
                         break;
@@ -336,7 +336,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             }
         },
-        ' ' // triggered whenever a '.' is being typed
+        ' ', '.' // triggered whenever a ' ' or '.' is being typed
     );
 
     context.subscriptions.push(completionProvider);
