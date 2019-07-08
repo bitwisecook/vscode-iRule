@@ -21,8 +21,8 @@ function getIndentationStyle(options: vscode.FormattingOptions) {
     return { tc, td, ts };
 }
 
-function getSelectedLines(document: vscode.TextDocument, selection: vscode.Selection): vscode.Range {
-    return new vscode.Range(document.lineAt(selection.start.line).range.start, document.lineAt(selection.end.line).range.end);
+function getSelectedLines(document: vscode.TextDocument, range: vscode.Range): vscode.Range {
+    return new vscode.Range(document.lineAt(range.start.line).range.start, document.lineAt(range.end.line).range.end);
 }
 
 function getPreviousLineContaintingText(document: vscode.TextDocument, selectedLines: vscode.Range) {
@@ -104,18 +104,25 @@ export function activate(context: vscode.ExtensionContext) {
             if (!editor) {
                 return []; // No open text editor
             }
+            return [vscode.TextEdit.replace(fullDocumentRange(document), formatRule(document.getText(), '', tc, td))];
+        }
+    });
 
-            const selection = editor.selection;
-            if (selection.isEmpty) {
-                return [vscode.TextEdit.replace(fullDocumentRange(document), formatRule(document.getText(), '', tc, td))];
+    vscode.languages.registerDocumentRangeFormattingEditProvider('irule-lang', {
+        provideDocumentRangeFormattingEdits(document: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions): vscode.TextEdit[] {
+            const { tc, td, ts }: { tc: string; td: number, ts: number } = getIndentationStyle(options);
+
+            const editor = vscode.window.activeTextEditor;
+            if (!editor) {
+                return []; // No open text editor
             }
 
             let preIndent = '';
-            let priorLine = getPreviousLineContaintingText(document, selection);
+            let priorLine = getPreviousLineContaintingText(document, range);
             if (priorLine !== undefined) {
                 preIndent = guessPreIndentation(priorLine, tc, td, ts);
             }
-            let selectedLines = getSelectedLines(document, selection);
+            let selectedLines = getSelectedLines(document, range);
             return [vscode.TextEdit.replace(selectedLines, formatRule(document.getText(selectedLines), preIndent, tc, td))];
         }
     });
