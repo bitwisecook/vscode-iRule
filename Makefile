@@ -1,6 +1,6 @@
 BASENAME?=irule
 NAME?=f5-$(BASENAME)
-VERSION?=1.4.5
+VERSION?=$(shell jq -r .version package.json)
 VSIX?=$(BASENAME)-$(VERSION).vsix
 PKG_ID?=bitwisecook.$(BASENAME)
 
