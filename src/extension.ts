@@ -58,36 +58,74 @@ function guessPreIndentation(priorLine: vscode.TextLine, tabChar: string, tabDep
     return tabChar.repeat(preIndent) + ' '.repeat(preIndentRemainder);
 }
 
-function formatRule(inputCode: string, preIndent: string = '', tabChar: string = ' ', tabDepth: number = 4): string {
+function formatIRule(inputCode: string, preIndent: string = '', tabChar: string = ' ', tabDepth: number = 4): string {
     let tabLevel = 0;
     let out: string[] = [];
+    let continuation = false;
+
     inputCode.split('\n').forEach(element => {
         let line = element.trim();
         if (line === '') {
             out.push('');
         } else if (/^#/.test(line)) {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
-        } else if (/\b([^\\]+(\\\\)+|[^\\])\{\s*\}$/.test(line)) {
+        } else if (/\b\{\s*\}$/.test(line)) {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
-        } else if (/([^\\]+(\\\\)+|[^\\]){$/.test(line) || /^\{$/.test(line)) {
+        } else if (/\{$/.test(line) || /^\{$/.test(line)) {
             if (/^\}/.test(line)) {
-                tabLevel = tabLevel - tabDepth;
-                if (tabLevel < 0) {
-                    tabLevel = 0;
-                    preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
-                }
+                tabLevel -= tabDepth;
             }
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
             tabLevel += tabDepth;
         } else if (/^\}$/.test(line)) {
-            tabLevel = tabLevel - tabDepth;
+            tabLevel -= tabDepth;
             if (tabLevel < 0) {
                 tabLevel = 0;
                 preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
             }
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        } else if (!continuation && /\\$/.test(line)) {
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel += tabDepth;
+            continuation = true;
+        } else if (continuation && /\{\s+\\$/.test(line)) {
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel += tabDepth;
+        } else if (continuation && /\[[^\t {\[["()\]}]+\s+\\$/.test(line)) {
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel += tabDepth;
+        } else if (continuation && /^\\?[\]})]\s*\\$/.test(line)) {
+            tabLevel -= tabDepth;
+            if (tabLevel < 0) {
+                tabLevel = 0;
+                preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
+            }
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        } else if (continuation && (/^\\?[\]})"]$/.test(line))) {
+            tabLevel -= tabDepth;
+            if (tabLevel < 0) {
+                tabLevel = 0;
+                preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
+            }
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel -= tabDepth;
+            continuation = false;
+        } else if (continuation && (/\\?[\]})"]$/.test(line))) {
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel -= tabDepth;
+            continuation = false;
+        } else if (continuation && /\\$/.test(line)) {
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        } else if (continuation && !(/\\$/.test(line))) {
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel -= tabDepth;
+            continuation = false;
         } else {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        }
+        if (tabLevel < 0) {
+            tabLevel = 0;
+            preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
         }
     });
     return out.join('\n');
@@ -104,7 +142,7 @@ export function activate(context: vscode.ExtensionContext) {
             if (!editor) {
                 return []; // No open text editor
             }
-            return [vscode.TextEdit.replace(fullDocumentRange(document), formatRule(document.getText(), '', tc, td))];
+            return [vscode.TextEdit.replace(fullDocumentRange(document), formatIRule(document.getText(), '', tc, td))];
         }
     });
 
@@ -123,7 +161,7 @@ export function activate(context: vscode.ExtensionContext) {
                 preIndent = guessPreIndentation(priorLine, tc, td, ts);
             }
             let selectedLines = getSelectedLines(document, range);
-            return [vscode.TextEdit.replace(selectedLines, formatRule(document.getText(selectedLines), preIndent, tc, td))];
+            return [vscode.TextEdit.replace(selectedLines, formatIRule(document.getText(selectedLines), preIndent, tc, td))];
         }
     });
 

@@ -62,3 +62,18 @@ Improve the code formatter to use the defined tab style
 
 ### Changed
 Improve the code formatter to ignore braces inside lines that are comments
+
+## 1.4.5
+
+### Added
+Completions for table and class
+
+### Changed
+Improve the code formatter around escaped open curlies at the end of a line
+Improve the build system
+Improve completion triggers
+
+## 1.4.6
+
+### Changed
+Improve the code formatter around continuations
