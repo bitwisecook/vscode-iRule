@@ -68,7 +68,7 @@ patterns:
         captures:
             '1':
                 name: invalid.illegal.irule
-        match: '\s(auto_execok|auto_import|auto_load|auto_mkindex|auto_mkindex_old|auto_qualify|auto_reset|bgerror|cd|close|dict|eof|encoding|exec|exit|fblocked|fconfigure|fcopy|file|fileevent|filename|flush|gets|glob|http|interp|load|lrepeat|lreverse|memory|namespace|open|package|pid|pkg::create|pkg_mkIndex|pwd|rename|seek|socket|source|tcl_findLibrary|tell|time|unknown|update|vwait)\b'
+        match: '\s(auto_execok|auto_import|auto_load|auto_mkindex|auto_mkindex_old|auto_qualify|auto_reset|bgerror|cd|close|dict|eof|encoding|exec|exit|fblocked|fconfigure|fcopy|file|fileevent|filename|flush|gets|glob|http|interp|load|lrepeat|lreverse|memory|namespace|open|package|pid|pkg::create|pkg_mkIndex|pwd|rename|seek|socket|source|tcl_findLibrary|tell|time|trace|unknown|update|vwait)\b'
     -
         begin: '(?<=^|[\[{;])\s*(regexp|regsub)\b\s*'
         beginCaptures:
