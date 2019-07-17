@@ -29,7 +29,57 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [],
+		"commands": [
+			{
+				"command": "icrfs.workspaceInit",
+				"title": "Setup Workspace",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.init",
+				"title": "Create Files",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.reset",
+				"title": "Delete Files",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.deleteFile",
+				"title": "Delete \"file.txt\"",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.addFile",
+				"title": "Add \"file.txt\"",
+				"category": "IcrFS"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "icrfs.init",
+					"when": "workbenchState == workspace"
+				},
+				{
+					"command": "icrfs.reset",
+					"when": "workbenchState == workspace"
+				},
+				{
+					"command": "icrfs.deleteFile",
+					"when": "workbenchState == workspace"
+				},
+				{
+					"command": "icrfs.addFile",
+					"when": "workbenchState == workspace"
+				},
+				{
+					"command": "icrfs.workspaceInit",
+					"when": "workbenchState != workspace"
+				}
+			]
+		},
 		"languages": [
 			{
 				"id": "irule-lang",
@@ -77,5 +127,9 @@
 		"tslint": "^5.12.1",
 		"typescript": "^3.3.1",
 		"vscode": "^1.1.28"
+	},
+	"dependencies": {
+		"@types/request": "^2.48.2",
+		"fetch": "^1.1.0"
 	}
 }
