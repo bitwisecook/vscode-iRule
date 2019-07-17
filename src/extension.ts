@@ -117,6 +117,9 @@ export function activate(context: vscode.ExtensionContext) {
         )
     );
 
+
+    console.log('IcrFS says "Hello"');
+
     const icrFs = new IcrFS();
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
     let initialized = false;
