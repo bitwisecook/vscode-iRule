@@ -158,21 +158,29 @@ export function activate(context: vscode.ExtensionContext) {
         }
         initialized = true;
 
-        var options = {
+        let apiUrl: string = 'https://' + vscode.workspace.getConfiguration().get('conf.resource.bigip.hostname') + '/mgmt/tm';
+        let apiAuth: string = 'Basic ' + Buffer.from(vscode.workspace.getConfiguration().get('conf.resource.bigip.username') +
+            ':' + vscode.workspace.getConfiguration().get('conf.resource.bigip.password')).toString('base64');
+        let options: request.OptionsWithUrl = {
             method: 'GET',
-            url: 'https://xxx/mgmt/tm/sys/folder',
+            url: apiUrl + '/sys/folder',
             headers:
             {
                 Connection: 'keep-alive',
-                Host: 'xxx',
+                Host: vscode.workspace.getConfiguration().get('conf.resource.bigip.hostname'),
                 'Cache-Control': 'no-cache',
                 Accept: '*/*',
-                Authorization: 'Basic xxxxxx'
-            }
+                Authorization: apiAuth
+            },
+            rejectUnauthorized: vscode.workspace.getConfiguration().get('conf.resource.bigip.validateCert')
         };
 
+        console.log(options);
+
         let dirs: fs.Directory[] = [];
+
         request(options.url, options, function (error, response, body) {
+            console.log('loading...');
             if (error) {
                 throw new Error(error);
             }
@@ -188,8 +196,7 @@ export function activate(context: vscode.ExtensionContext) {
                     console.log(error);
                 }
             });
-            console.log('fetched ' + dirs.length + ' dirs');
-            options.url = 'https://xxx/mgmt/tm/ltm/rule';
+            options.url = apiUrl + '/ltm/rule';
             request(options.url, options, function (error, response, body) {
                 if (error) {
                     throw new Error(error);

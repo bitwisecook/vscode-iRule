@@ -56,6 +56,17 @@
 						"default": true,
 						"description": "Enable/disable code diagnostic for 'argument injection' diagnostic.",
 						"scope": "workspace"
+					},
+					"conf.resource.bigip": {
+						"type": "object",
+						"default": {
+							"hostname": "",
+							"username": "",
+							"password": "",
+							"validateCert": false
+						},
+						"description": "The connection details for the BIG-IP",
+						"scope": "workspace"
 					}
 				}
 			}
@@ -68,7 +79,7 @@
 			},
 			{
 				"command": "icrfs.init",
-				"title": "Create Files",
+				"title": "Connect and fetch iRules",
 				"category": "IcrFS"
 			},
 			{
@@ -79,11 +90,6 @@
 			{
 				"command": "icrfs.deleteFile",
 				"title": "Delete \"file.txt\"",
-				"category": "IcrFS"
-			},
-			{
-				"command": "icrfs.addFile",
-				"title": "Add \"file.txt\"",
 				"category": "IcrFS"
 			}
 		],
@@ -99,10 +105,6 @@
 				},
 				{
 					"command": "icrfs.deleteFile",
-					"when": "workbenchState == workspace"
-				},
-				{
-					"command": "icrfs.addFile",
 					"when": "workbenchState == workspace"
 				},
 				{
