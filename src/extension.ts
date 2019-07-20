@@ -7,7 +7,6 @@ import * as diagnostic from "./diagnosticsProvider";
 import * as fs from './fsProvider';
 import { IcrFS } from './fsProvider';
 import * as request from 'request';
-import * as fetch from 'fetch';
 
 export function activate(context: vscode.ExtensionContext) {
     vscode.languages.registerDocumentFormattingEditProvider("irule-lang", {
@@ -53,11 +52,6 @@ export function activate(context: vscode.ExtensionContext) {
                 td: number;
                 ts: number;
             } = dochelp.getIndentationStyle(options);
-
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                return []; // No open text editor
-            }
 
             let preIndent = "";
             let priorLine = dochelp.getPreviousLineContaintingText(
@@ -122,9 +116,6 @@ export function activate(context: vscode.ExtensionContext) {
             diagnostic.updateDiagnostics(changeEvent.document, collection)
         )
     );
-
-
-    console.log('IcrFS says "Hello"');
 
     const icrFs = new IcrFS();
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
