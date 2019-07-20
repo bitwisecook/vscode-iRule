@@ -73,43 +73,25 @@
 		],
 		"commands": [
 			{
-				"command": "icrfs.workspaceInit",
-				"title": "Setup Workspace",
+				"command": "icrfs.connect",
+				"title": "Connect and fetch iRules from BIG-IP",
 				"category": "IcrFS"
 			},
 			{
-				"command": "icrfs.init",
-				"title": "Connect and fetch iRules",
-				"category": "IcrFS"
-			},
-			{
-				"command": "icrfs.reset",
-				"title": "Delete Files",
-				"category": "IcrFS"
-			},
-			{
-				"command": "icrfs.deleteFile",
-				"title": "Delete \"file.txt\"",
+				"command": "icrfs.refresh",
+				"title": "Refresh iRules from BIG-IP",
 				"category": "IcrFS"
 			}
 		],
 		"menus": {
 			"commandPalette": [
 				{
-					"command": "icrfs.init",
-					"when": "workbenchState == workspace"
-				},
-				{
-					"command": "icrfs.reset",
-					"when": "workbenchState == workspace"
-				},
-				{
-					"command": "icrfs.deleteFile",
-					"when": "workbenchState == workspace"
-				},
-				{
-					"command": "icrfs.workspaceInit",
+					"command": "icrfs.connect",
 					"when": "workbenchState != workspace"
+				},
+				{
+					"command": "icrfs.refresh",
+					"when": "workbenchState == workspace"
 				}
 			]
 		},
