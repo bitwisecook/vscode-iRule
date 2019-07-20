@@ -57,7 +57,7 @@
 						"description": "Enable/disable code diagnostic for 'argument injection' diagnostic.",
 						"scope": "workspace"
 					},
-					"conf.resource.bigip": {
+					"conf.icrfs.bigip": {
 						"type": "object",
 						"default": {
 							"hostname": "",
