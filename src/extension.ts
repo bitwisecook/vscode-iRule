@@ -53,77 +53,26 @@ export function activate(context: vscode.ExtensionContext) {
                 ts: number;
             } = dochelp.getIndentationStyle(options);
 
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                return []; // No open text editor
-            }
 
-            let preIndent = "";
-            let priorLine = dochelp.getPreviousLineContaintingText(
-                document,
-                range
-            );
-            if (priorLine !== undefined) {
-                preIndent = format.guessPreIndentation(priorLine, tc, td, ts);
+                let preIndent = '';
+                let priorLine = format.getPreviousLineContaintingText(document, range);
+                if (priorLine !== undefined) {
+                    preIndent = format.guessPreIndentation(priorLine, tc, td, ts);
+                }
+                let selectedLines = format.getSelectedLines(document, range);
+                return [vscode.TextEdit.replace(selectedLines, format.formatIRule(document.getText(selectedLines), preIndent, tc, td))];
             }
-            let selectedLines = dochelp.getSelectedLines(document, range);
-            return [
-                vscode.TextEdit.replace(
-                    selectedLines,
-                    format.formatIRule(
-                        document.getText(selectedLines),
-                        preIndent,
-                        tc,
-                        td
-                    )
-                )
-            ];
-        }
-    });
+        });
 
-    vscode.languages.registerCompletionItemProvider(
-        "irule-lang",
-        {
-            provideCompletionItems(
-                document: vscode.TextDocument,
-                position: vscode.Position
-            ) {
+    vscode.languages.registerCompletionItemProvider([
+        { scheme: 'file', language: 'irule-lang' },
+        { scheme: 'icrfs', language: 'irule-lang' },
+    ], {
+            provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
                 return complete.complete(document, position);
             }
-        },
-        " ",
-        "." // triggered whenever a ' ' or '.' is being typed
+        }, ' ', '.' // triggered whenever a ' ' or '.' is being typed
     );
-
-    const collection = vscode.languages.createDiagnosticCollection(
-        "irule-lang"
-    );
-    if (vscode.window.activeTextEditor) {
-        diagnostic.updateDiagnostics(
-            vscode.window.activeTextEditor.document,
-            collection
-        );
-    }
-    context.subscriptions.push(
-        vscode.window.onDidChangeActiveTextEditor(editor => {
-            if (editor) {
-                diagnostic.updateDiagnostics(editor.document, collection);
-            }
-        })
-    );
-    context.subscriptions.push(
-        vscode.workspace.onDidSaveTextDocument(document =>
-            diagnostic.updateDiagnostics(document, collection)
-        )
-    );
-    context.subscriptions.push(
-        vscode.workspace.onDidChangeTextDocument(changeEvent =>
-            diagnostic.updateDiagnostics(changeEvent.document, collection)
-        )
-    );
-
-
-    console.log('IcrFS says "Hello"');
 
     const icrFs = new IcrFS();
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
