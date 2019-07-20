@@ -67,13 +67,6 @@ export function activate(context: vscode.ExtensionContext) {
         initialized = false;
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('icrfs.addFile', _ => {
-        console.log('execute addFile');
-        if (initialized) {
-            icrFs.writeFile(vscode.Uri.parse(`icrfs:/file.txt`), Buffer.from('foo'), { create: true, overwrite: true });
-        }
-    }));
-
     context.subscriptions.push(vscode.commands.registerCommand('icrfs.deleteFile', _ => {
         console.log('execute deleteFile');
         if (initialized) {
@@ -88,28 +81,30 @@ export function activate(context: vscode.ExtensionContext) {
         }
         initialized = true;
 
-        let apiUrl: string = 'https://' + vscode.workspace.getConfiguration().get('conf.resource.bigip.hostname') + '/mgmt/tm';
-        let apiAuth: string = 'Basic ' + Buffer.from(vscode.workspace.getConfiguration().get('conf.resource.bigip.username') +
-            ':' + vscode.workspace.getConfiguration().get('conf.resource.bigip.password')).toString('base64');
+        let apiUrl: string = 'https://' + vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname') + '/mgmt/tm';
+        let apiAuth: string = 'Basic ' + Buffer.from(vscode.workspace.getConfiguration().get('conf.icrfs.bigip.username') +
+            ':' + vscode.workspace.getConfiguration().get('conf.icrfs.bigip.password')).toString('base64');
         let options: request.OptionsWithUrl = {
             method: 'GET',
             url: apiUrl + '/sys/folder',
             headers:
             {
                 Connection: 'keep-alive',
-                Host: vscode.workspace.getConfiguration().get('conf.resource.bigip.hostname'),
+                Host: vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname'),
                 'Cache-Control': 'no-cache',
                 Accept: '*/*',
                 Authorization: apiAuth
             },
-            rejectUnauthorized: vscode.workspace.getConfiguration().get('conf.resource.bigip.validateCert')
+            rejectUnauthorized: vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert')
         };
 
         console.log(options);
 
         let dirs: fs.Directory[] = [];
 
-        request(options.url, options, function (error, response, body) {
+        // not sure why the compiler is whining about the type without me redefining it here
+        options.url = apiUrl + '/sys/folder';
+        request(options.url, options, (error, response, body) => {
             console.log('loading...');
             if (error) {
                 throw new Error(error);
@@ -127,7 +122,7 @@ export function activate(context: vscode.ExtensionContext) {
                 }
             });
             options.url = apiUrl + '/ltm/rule';
-            request(options.url, options, function (error, response, body) {
+            request(options.url, options, (error, response, body) => {
                 if (error) {
                     throw new Error(error);
                 }

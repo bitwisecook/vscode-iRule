@@ -33,7 +33,7 @@
 			{
 				"title": "BIG-IP Connection Configuration",
 				"properties": {
-					"conf.resource.bigip": {
+					"conf.icrfs.bigip": {
 						"type": "object",
 						"default": {
 							"hostname": "",
