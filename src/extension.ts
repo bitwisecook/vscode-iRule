@@ -59,43 +59,55 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
     let initialized = false;
 
-    context.subscriptions.push(vscode.commands.registerCommand('icrfs.reset', _ => {
-        console.log('execute reset');
+    context.subscriptions.push(vscode.commands.registerCommand('icrfs.refresh', _ => {
+        console.log('execute refresh');
         for (const [name] of icrFs.readDirectory(vscode.Uri.parse('icrfs:/'))) {
             icrFs.delete(vscode.Uri.parse(`icrfs:/${name}`));
         }
         initialized = false;
+        vscode.commands.executeCommand('icrfs.connect');
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('icrfs.deleteFile', _ => {
-        console.log('execute deleteFile');
-        if (initialized) {
-            icrFs.delete(vscode.Uri.parse('icrfs:/file.txt'));
-        }
-    }));
-
-    context.subscriptions.push(vscode.commands.registerCommand('icrfs.init', _ => {
+    context.subscriptions.push(vscode.commands.registerCommand('icrfs.connect', _ => {
         console.log('execute init');
         if (initialized) {
             return;
         }
         initialized = true;
 
-        let apiUrl: string = 'https://' + vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname') + '/mgmt/tm';
-        let apiAuth: string = 'Basic ' + Buffer.from(vscode.workspace.getConfiguration().get('conf.icrfs.bigip.username') +
-            ':' + vscode.workspace.getConfiguration().get('conf.icrfs.bigip.password')).toString('base64');
+        let hostname: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname', '');
+        let username: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.username', '');
+        let password: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.password', '');
+        let validateCert: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert', true);
+
+        if (hostname === '') {
+            console.error('missing configuration conf.icrfs.bigip.hostname');
+            throw EvalError;
+        }
+        if (username === '') {
+            console.error('missing configuration conf.icrfs.bigip.username');
+            throw EvalError;
+        }
+        if (password === '') {
+            console.error('missing configuration conf.icrfs.bigip.password');
+            throw EvalError;
+        }
+        vscode.workspace.updateWorkspaceFolders(0, 0, { uri: vscode.Uri.parse('icrfs:/'), name: hostname });
+
+        let apiUrl: string = 'https://' + hostname + '/mgmt/tm';
+        let apiAuth: string = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
         let options: request.OptionsWithUrl = {
             method: 'GET',
-            url: apiUrl + '/sys/folder',
+            url: '',
             headers:
             {
-                Connection: 'keep-alive',
-                Host: vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname'),
+                'Connection': 'keep-alive',
+                'Host': hostname,
                 'Cache-Control': 'no-cache',
-                Accept: '*/*',
-                Authorization: apiAuth
+                'Accept': '*/*',
+                'Authorization': apiAuth
             },
-            rejectUnauthorized: vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert')
+            rejectUnauthorized: validateCert
         };
 
         console.log(options);
@@ -140,12 +152,8 @@ export function activate(context: vscode.ExtensionContext) {
                 });
                 console.log('fetched ' + dirs.length + ' dirs');
             });
+            vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
         });
-    }));
-
-    context.subscriptions.push(vscode.commands.registerCommand('icrfs.workspaceInit', _ => {
-        console.log('execute workspaceInit');
-        vscode.workspace.updateWorkspaceFolders(0, 0, { uri: vscode.Uri.parse('icrfs:/'), name: "IcrFS - Sample" });
     }));
 }
 
