@@ -4,49 +4,56 @@ import * as complete from './completionProvider';
 import * as fs from './fsProvider';
 import { IcrFS } from './fsProvider';
 import * as request from 'request';
-import * as fetch from 'fetch';
 
 export function activate(context: vscode.ExtensionContext) {
-    vscode.languages.registerDocumentFormattingEditProvider('irule-lang', {
-        provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
-            const { tc, td, ts }: { tc: string; td: number, ts: number } = format.getIndentationStyle(options);
+    vscode.languages.registerDocumentFormattingEditProvider(
+        [
+            { scheme: 'file', language: 'irule-lang' },
+            { scheme: 'icrfs', language: 'irule-lang' },
+        ], {
+            provideDocumentFormattingEdits(document: vscode.TextDocument, options: vscode.FormattingOptions): vscode.TextEdit[] {
+                const { tc, td, ts }: { tc: string; td: number, ts: number } = format.getIndentationStyle(options);
 
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                return []; // No open text editor
+                const editor = vscode.window.activeTextEditor;
+                if (!editor) {
+                    return []; // No open text editor
+                }
+                return [vscode.TextEdit.replace(format.fullDocumentRange(document), format.formatIRule(document.getText(), '', tc, td))];
             }
-            return [vscode.TextEdit.replace(format.fullDocumentRange(document), format.formatIRule(document.getText(), '', tc, td))];
-        }
-    });
+        });
 
-    vscode.languages.registerDocumentRangeFormattingEditProvider('irule-lang', {
-        provideDocumentRangeFormattingEdits(document: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions): vscode.TextEdit[] {
-            const { tc, td, ts }: { tc: string; td: number, ts: number } = format.getIndentationStyle(options);
+    vscode.languages.registerDocumentRangeFormattingEditProvider(
+        [
+            { scheme: 'file', language: 'irule-lang' },
+            { scheme: 'icrfs', language: 'irule-lang' },
+        ], {
+            provideDocumentRangeFormattingEdits(document: vscode.TextDocument, range: vscode.Range, options: vscode.FormattingOptions): vscode.TextEdit[] {
+                const { tc, td, ts }: { tc: string; td: number, ts: number } = format.getIndentationStyle(options);
 
-            const editor = vscode.window.activeTextEditor;
-            if (!editor) {
-                return []; // No open text editor
+                const editor = vscode.window.activeTextEditor;
+                if (!editor) {
+                    return []; // No open text editor
+                }
+
+                let preIndent = '';
+                let priorLine = format.getPreviousLineContaintingText(document, range);
+                if (priorLine !== undefined) {
+                    preIndent = format.guessPreIndentation(priorLine, tc, td, ts);
+                }
+                let selectedLines = format.getSelectedLines(document, range);
+                return [vscode.TextEdit.replace(selectedLines, format.formatIRule(document.getText(selectedLines), preIndent, tc, td))];
             }
+        });
 
-            let preIndent = '';
-            let priorLine = format.getPreviousLineContaintingText(document, range);
-            if (priorLine !== undefined) {
-                preIndent = format.guessPreIndentation(priorLine, tc, td, ts);
+    vscode.languages.registerCompletionItemProvider([
+        { scheme: 'file', language: 'irule-lang' },
+        { scheme: 'icrfs', language: 'irule-lang' },
+    ], {
+            provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
+                return complete.complete(document, position);
             }
-            let selectedLines = format.getSelectedLines(document, range);
-            return [vscode.TextEdit.replace(selectedLines, format.formatIRule(document.getText(selectedLines), preIndent, tc, td))];
-        }
-    });
-
-    vscode.languages.registerCompletionItemProvider('irule-lang', {
-        provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-            return complete.complete(document, position);
-        }
-    }, ' ', '.' // triggered whenever a ' ' or '.' is being typed
+        }, ' ', '.' // triggered whenever a ' ' or '.' is being typed
     );
-
-
-    console.log('IcrFS says "Hello"');
 
     const icrFs = new IcrFS();
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
