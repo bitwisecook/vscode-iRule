@@ -155,67 +155,8 @@ export function activate(context: vscode.ExtensionContext) {
             throw EvalError;
         }
         vscode.workspace.updateWorkspaceFolders(0, 0, { uri: vscode.Uri.parse('icrfs:/'), name: hostname });
+        icrFs.connect(hostname, username, password, validateCert);
 
-        let apiUrl: string = 'https://' + hostname + '/mgmt/tm';
-        let apiAuth: string = 'Basic ' + Buffer.from(username + ':' + password).toString('base64');
-        let options: request.OptionsWithUrl = {
-            method: 'GET',
-            url: '',
-            headers:
-            {
-                'Connection': 'keep-alive',
-                'Host': hostname,
-                'Cache-Control': 'no-cache',
-                'Accept': '*/*',
-                'Authorization': apiAuth
-            },
-            rejectUnauthorized: validateCert
-        };
-
-        console.log(options);
-
-        let dirs: fs.Directory[] = [];
-
-        // not sure why the compiler is whining about the type without me redefining it here
-        options.url = apiUrl + '/sys/folder';
-        request(options.url, options, (error, response, body) => {
-            console.log('loading...');
-            if (error) {
-                throw new Error(error);
-            }
-            let json = JSON.parse(body);
-            let items = json['items'];
-            items.forEach((item: { [x: string]: string; }) => {
-                if (item.fullPath === '/') {
-                    return;
-                }
-                try {
-                    icrFs.createDirectory(vscode.Uri.parse('icrfs://' + item.fullPath + '/'));
-                } catch (error) {
-                    console.log(error);
-                }
-            });
-            options.url = apiUrl + '/ltm/rule';
-            request(options.url, options, (error, response, body) => {
-                if (error) {
-                    throw new Error(error);
-                }
-                let json = JSON.parse(body);
-                let items = json['items'];
-                items.forEach((item: { [x: string]: string; }) => {
-                    if (item.fullPath === '/') {
-                        return;
-                    }
-                    try {
-                        icrFs.writeFile(vscode.Uri.parse('icrfs://' + item.fullPath + '.irul'), Buffer.from(item.apiAnonymous), { create: true, overwrite: true });
-                    } catch (error) {
-                        console.log(error);
-                    }
-                });
-                console.log('fetched ' + dirs.length + ' dirs');
-            });
-            vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
-        });
     }));
 }
 
