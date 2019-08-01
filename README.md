@@ -9,11 +9,12 @@ The syntax highlighting will highlight some potential double-substitution issues
 Since 1.4.0 this has been scratch rewritten.
 
 ## Installation
+### From the marketplace
+https://marketplace.visualstudio.com/items?itemName=bitwisecook.iRule
+
+### For Development
 ```sh
 make install
 ```
 
 Restart VSCode.  
-
-### From the marketplace
-https://marketplace.visualstudio.com/items?itemName=bitwisecook.iRule
