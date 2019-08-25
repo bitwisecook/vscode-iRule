@@ -77,3 +77,8 @@ Improve completion triggers
 
 ### Changed
 Improve the code formatter around continuations
+
+## 1.5.0
+
+### Added
+Create actual diagnostics for easy double-substitution and missing options terminator

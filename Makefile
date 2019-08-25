@@ -7,7 +7,7 @@ PKG_ID?=bitwisecook.$(BASENAME)
 node_modules/:
 	npm install
 
-out/extension.js: src/extension.ts node_modules/
+out/%.js: src/%.ts node_modules/
 	npm run compile
 
 clean:
@@ -28,3 +28,5 @@ package: $(VSIX)
 
 $(VSIX): build
 	vsce package
+
+vsix: $(VSIX)
