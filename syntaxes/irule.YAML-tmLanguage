@@ -20,11 +20,6 @@ patterns:
     -
         captures:
             '1':
-                name: invalid.illegal.irule
-        match: '(?<=^|[\[{;])\s*((expr|eval|if)(?!.*{)|(switch|class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub|glob|unset)(?!.*--))'
-    -
-        captures:
-            '1':
                 name: keyword.control.irule
         match: '(?<=^|[\[{;])\s*(if|while|for|catch|return|break|continue|switch|foreach|when|timing)\b'
     -
