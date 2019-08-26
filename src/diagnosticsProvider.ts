@@ -5,15 +5,9 @@ export function updateDiagnostics(
     document: vscode.TextDocument,
     collection: vscode.DiagnosticCollection
 ): void {
-    if (document) {
+    if (document && document.languageId === 'irule-lang') {
         collection.clear();
         let diags : vscode.Diagnostic[] = [];
-        // The following statements also allow some form of substitution, which may lead to unexpected behavior, but typically cannot be directly used to execute TCL commands:
-        // regexp
-        // regsub
-        // list
-        // set
-        // string match
         for (let lineNum = 0; lineNum < document.lineCount; lineNum++) {
             const line = document.lineAt(lineNum).text;
             if (/^\s*#/.test(line)) {
