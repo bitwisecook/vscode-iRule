@@ -82,3 +82,8 @@ Improve the code formatter around continuations
 
 ### Added
 Create actual diagnostics for easy double-substitution and missing options terminator
+
+## 1.5.1
+
+### Changed
+Make the diagnostics bail out if the languageId isn't 'irule-lang'
