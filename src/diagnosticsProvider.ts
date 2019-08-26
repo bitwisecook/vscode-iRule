@@ -13,38 +13,55 @@ export function updateDiagnostics(
             if (/^\s*#/.test(line)) {
                 continue;
             }
-            let matchDS = /(^\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{;]+(;|$)|\[\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{\}\];]+(\]|$))/.exec(
+            let match = /(^\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{;]+(;|$)|\[\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{\}\];]+(\]|$))/.exec(
                 line
             );
-            if (matchDS) {
+            if (match) {
+                diags.push({
+                    code: "",
+                    message: `\`${match[4]}\` permits double substitution, wrap the expression in \`{...}\``,
+                    range: new vscode.Range(
+                        new vscode.Position(lineNum, match.index),
+                        new vscode.Position(lineNum, line.length)
+                    ),
+                    severity: vscode.DiagnosticSeverity.Error,
+                    source: ""
+                });
+            }
+
+            match = /^\s*((switch|class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub|unset)(?!.*--)|\[(class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub)(?!.*--))\s*.*?/.exec(
+                line
+            );
+            if (match) {
                 diags.push(
                     {
                         code: "",
                         message:
-                            `\`${matchDS[4]}\` with possible double substitution issue, wrap the expression in \`{...}\``,
+                            `\`${match[1]}\` permits argument injection, add \`--\` to terminate options`,
                         range: new vscode.Range(
-                            new vscode.Position(lineNum, matchDS.index),
+                            new vscode.Position(lineNum, match.index),
                             new vscode.Position(lineNum, line.length)
                         ),
-                        severity: vscode.DiagnosticSeverity.Error,
+                        severity: vscode.DiagnosticSeverity.Warning,
                         source: ""
                     }
                 );
             }
-            let matchDD = /(^\s*(switch|class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub|unset)(?!.*--)\s+|\[(regexp|regsub)(?!.*--)\s+).*?/.exec(
+
+            match = /^\s*((when)(?!.*priority\s+\d+))\s*.*?/.exec(
                 line
             );
-            if (matchDD) {
+            if (match) {
                 diags.push(
                     {
                         code: "",
                         message:
-                            `\`${matchDD[1]}\` missing \`--\` to terminate options`,
+                            `\`when\` missing an explicit priority, add an explicit \`priority\``,
                         range: new vscode.Range(
-                            new vscode.Position(lineNum, matchDD.index),
+                            new vscode.Position(lineNum, match.index),
                             new vscode.Position(lineNum, line.length)
                         ),
-                        severity: vscode.DiagnosticSeverity.Error,
+                        severity: vscode.DiagnosticSeverity.Warning,
                         source: ""
                     }
                 );
