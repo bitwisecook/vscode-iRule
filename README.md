@@ -2,9 +2,17 @@
 
 F5 Networks iRule extension for Visual Studio Code. This extension gives Tcl based iRule language support for Visual Studio Code including syntax and intelliSense support for iRule events, commands and statements.
 
-Very basic code formatting is included, as is some small parts of completion. The code formatting at this point will attempt to correctly tab out an iRule, but is very rudamentary and static.
+## Intellisense
+This extension provides some code completion with Intellisense.
+![Completion Screenshot](images/completion_0.png)
 
-Diagnostics will highlight some potential double-substitution issues, such as `expr` missing curly braces or `switch` missing `--`.
+## Code Formatting
+Code formatting is included The code formatting at this point will attempt to correctly tab out an iRule, but will not split or join lines.
+![Formatting Screencast](images/format_code_0.gif)
+
+## Diagnostics
+Diagnostics will highlight some potential double-substitution issues, such as commands that work on expressions missing curly braces, commands that take options missing a `--`terminator, and `when` clauses missing priority.
+![Diagnostics Screenshot](images/diagnostics_0.png)
 
 Since 1.4.0 this has been scratch rewritten.
 
@@ -12,9 +20,9 @@ Since 1.4.0 this has been scratch rewritten.
 ### From the marketplace
 https://marketplace.visualstudio.com/items?itemName=bitwisecook.iRule
 
-### For Development
-```sh
-make install
-```
+## Development
+### Building the VSIX
 
-Restart VSCode.  
+```sh
+make vsix
+```
