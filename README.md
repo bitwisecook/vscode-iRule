@@ -7,7 +7,7 @@ This extension provides some code completion with Intellisense.
 ![Completion Screenshot](images/completion_0.png)
 
 ## Code Formatting
-Code formatting is included The code formatting at this point will attempt to correctly tab out an iRule, but will not split or join lines.
+Code formatting is included. The code formatting at this point will attempt to correctly tab out an iRule, but will not split or join lines.
 ![Formatting Screencast](images/format_code_0.gif)
 
 ## Diagnostics
