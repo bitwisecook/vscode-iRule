@@ -30,6 +30,31 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [],
+		"configuration": [
+			{
+				"title": "iRules",
+				"properties": {
+					"conf.irule-lang.diag.whenprio.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for 'when missing priority' diagnostic.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.doublesubst.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for 'double substition' diagnostic.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.arginject.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for 'argument injection' diagnostic.",
+						"scope": "workspace"
+					}
+				}
+			}
+		],
 		"languages": [
 			{
 				"id": "irule-lang",

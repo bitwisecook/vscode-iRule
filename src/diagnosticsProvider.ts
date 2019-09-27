@@ -16,7 +16,7 @@ export function updateDiagnostics(
             let match = /(^\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{;]+(;|$)|\[\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{\}\];]+(\]|$))/.exec(
                 line
             );
-            if (match) {
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.doublesubst.enable') && match) {
                 diags.push({
                     code: "",
                     message: `\`${match[4] || match[2]}\` permits double substitution, wrap the expression in \`{...}\``,
@@ -32,7 +32,7 @@ export function updateDiagnostics(
             match = /^\s*((switch|class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub|unset)(?!.*--)|\[(class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub)(?!.*--))\s*.*?/.exec(
                 line
             );
-            if (match) {
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.arginject.enable') && match) {
                 diags.push(
                     {
                         code: "",
@@ -51,7 +51,7 @@ export function updateDiagnostics(
             match = /^\s*((when)(?!.*priority\s+\d+))\s*.*?/.exec(
                 line
             );
-            if (match) {
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.whenprio.enable') && match) {
                 diags.push(
                     {
                         code: "",
