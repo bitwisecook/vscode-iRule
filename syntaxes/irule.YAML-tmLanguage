@@ -79,10 +79,9 @@ patterns:
                 comment: 'switch for regexp'
                 match: '-\w+\s*'
             -
-                applyEndPatternLast: 1
-                begin: '--\s*'
+                begin: '--'
                 comment: 'end of switches'
-                end: ""
+                end: '\s'
                 patterns:
                     - {include: '#regexp'}
             -
@@ -178,6 +177,7 @@ repository:
                     - {include: '#bare-string'}
                     - {include: '#escape'}
                     - {include: '#variable'}
+                    - {include: '#string'}
             -
                 begin: '[ \t]'
                 comment: 'swallow the rest of the command'
@@ -187,7 +187,7 @@ repository:
                     - {include: '#embedded'}
                     - {include: '#escape'}
                     - {include: '#braces'}
-                    - {include: '#string'}
+                    - {include: '#inner-braces'}
     string:
         applyEndPatternLast: 1
         begin: '(?:^|(?<=\s))(?=")'
