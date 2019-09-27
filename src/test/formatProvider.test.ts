@@ -200,4 +200,80 @@ proc tmp {a b} {
         const tabDepth = 4;
         assert.equal(fp.formatIRule(src, preIndent, tabChar, tabDepth), dst);
     });
+
+    test("RealRule1", function () {
+        const src: string = `
+when CLIENTSSL_CLIENTHELLO priority 150 {
+# A comment
+# a couple of 
+# lines long
+if { [SSL::command something] } {
+set vs [class lookup "[string tolower [string trimright [string range [SSL::extensions -type 0] 9 end] .]] [IP::local_addr] [TCP::local_port]" something]
+if { \$vs eq "" } {
+    if {[SSL::command] > 0} {
+        binary scan [SSL::command] H* ssl_thing
+    } else {
+        set ssl_thing ""
+    }
+            HSL::send [HSL::open -proto TCP -pool "/Common/loggingservers"] "..."
+event disable all
+    reject
+} else {
+    virtual \$vs
+}
+} else {
+# anothe comment
+# goes here
+if {[SSL::command] > 0} {
+     binary scan [SSL::command] H* ssl_thing
+} else {
+set ssl_thing ""
+}
+HSL::send [HSL::open -proto TCP -pool "/Common/loggingservers"] "..."
+            event disable all
+reject
+}
+unset -nocomplain -- vs
+}        
+`;
+        const dst: string = `
+when CLIENTSSL_CLIENTHELLO priority 150 {
+    # A comment
+    # a couple of
+    # lines long
+    if { [SSL::command something] } {
+        set vs [class lookup "[string tolower [string trimright [string range [SSL::extensions -type 0] 9 end] .]] [IP::local_addr] [TCP::local_port]" something]
+        if { \$vs eq "" } {
+            if {[SSL::command] > 0} {
+                binary scan [SSL::command] H* ssl_thing
+            } else {
+                set ssl_thing ""
+            }
+            HSL::send [HSL::open -proto TCP -pool "/Common/loggingservers"] "..."
+            event disable all
+            reject
+        } else {
+            virtual \$vs
+        }
+    } else {
+        # anothe comment
+        # goes here
+        if {[SSL::command] > 0} {
+            binary scan [SSL::command] H* ssl_thing
+        } else {
+            set ssl_thing ""
+        }
+        HSL::send [HSL::open -proto TCP -pool "/Common/loggingservers"] "..."
+        event disable all
+        reject
+    }
+    unset -nocomplain -- vs
+}
+`;
+        const preIndent = '';
+        const tabChar = ' ';
+        const tabDepth = 4;
+        assert.equal(fp.formatIRule(src, preIndent, tabChar, tabDepth), dst);
+    });
+
 });
