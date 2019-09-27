@@ -19,7 +19,7 @@ export function updateDiagnostics(
             if (match) {
                 diags.push({
                     code: "",
-                    message: `\`${match[4]?match[4]:match[2]}\` permits double substitution, wrap the expression in \`{...}\``,
+                    message: `\`${match[4] || match[2]}\` permits double substitution, wrap the expression in \`{...}\``,
                     range: new vscode.Range(
                         new vscode.Position(lineNum, match.index),
                         new vscode.Position(lineNum, line.length)
