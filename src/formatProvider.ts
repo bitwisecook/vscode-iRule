@@ -27,6 +27,7 @@ export function formatIRule(inputCode: string, preIndent: string = '', tabChar: 
     let tabLevel = 0;
     let out: string[] = [];
     let continuation = false;
+    let uglyif2 = false;
 
     inputCode.split('\n').forEach(element => {
         let line = element.trim();
@@ -41,7 +42,12 @@ export function formatIRule(inputCode: string, preIndent: string = '', tabChar: 
                 tabLevel -= tabDepth;
             }
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
-            tabLevel += tabDepth;
+            // second part of fixing UglyIf2
+            if (!uglyif2) {
+                tabLevel += tabDepth;
+            } else {
+                uglyif2 = false;
+            }
         } else if (/^\}$/.test(line)) {
             tabLevel -= tabDepth;
             if (tabLevel < 0) {
@@ -57,6 +63,19 @@ export function formatIRule(inputCode: string, preIndent: string = '', tabChar: 
                 preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
             }
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        } else if (!continuation && /^\}[^\]]+\]$/.test(line)) {
+            // this is a specific patch for UglyStringMap
+            tabLevel -= tabDepth;
+            if (tabLevel < 0) {
+                tabLevel = 0;
+                preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
+            }
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        } else if (!continuation && /\w+\s+\{[^\{\}]+$/.test(line)) {
+            // this is a specific patch for UglyIf2
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
+            tabLevel += tabDepth;
+            uglyif2 = true;
         } else if (!continuation && /\\$/.test(line)) {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
             tabLevel += tabDepth;

@@ -67,7 +67,7 @@ if {$a eq "a"} {
 
     // this form of if/elseif/else is valid in iRules
     // but not valid Tcl
-    // I'm not convinced I should fix it.
+    // I'm not convinced I should fix
     test("UglyIf", function () {
         const src: string = `
 proc tmp {a b} {
@@ -83,6 +83,50 @@ proc tmp {a b} {
         puts foo
     } elseif {$b} { puts bar }
     else { puts baz }
+}
+`;
+        const preIndent = '';
+        const tabChar = ' ';
+        const tabDepth = 4;
+        assert.equal(fp.formatIRule(src, preIndent, tabChar, tabDepth), dst);
+    });
+
+    test("UglyStringMap", function () {
+        const src: string = `
+proc escape {value} {
+return [string map {
+"\\\\"	"\\\\\\\\"
+"/"		"\\\\/"
+"\\""	"\\\\\\""
+} $value]
+}
+`;
+        const dst: string = `
+proc escape {value} {
+    return [string map {
+        "\\\\"	"\\\\\\\\"
+        "/"		"\\\\/"
+        "\\""	"\\\\\\""
+    } $value]
+}
+`;
+        const preIndent = '';
+        const tabChar = ' ';
+        const tabDepth = 4;
+        assert.equal(fp.formatIRule(src, preIndent, tabChar, tabDepth), dst);
+    });
+
+    test("UglyIf2", function () {
+        const src: string = `
+if {aaa &&
+(bbb || ccc)} {
+puts "cool"
+}
+`;
+        const dst: string = `
+if {aaa &&
+    (bbb || ccc)} {
+    puts "cool"
 }
 `;
         const preIndent = '';
