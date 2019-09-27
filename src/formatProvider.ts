@@ -49,6 +49,14 @@ export function formatIRule(inputCode: string, preIndent: string = '', tabChar: 
                 preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
             }
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
+        } else if (!continuation && /^\}[^\{]+\{[^\}]+\}\s*\{[^\}]+\}$/.test(line)) {
+            // this is a specific patch for UglyIf
+            tabLevel -= tabDepth;
+            if (tabLevel < 0) {
+                tabLevel = 0;
+                preIndent = preIndent.substr(tabDepth, preIndent.length - tabDepth);
+            }
+            out.push(preIndent + tabChar.repeat(tabLevel) + line);
         } else if (!continuation && /\\$/.test(line)) {
             out.push(preIndent + tabChar.repeat(tabLevel) + line);
             tabLevel += tabDepth;
