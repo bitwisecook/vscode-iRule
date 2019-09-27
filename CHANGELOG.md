@@ -87,3 +87,13 @@ Create actual diagnostics for easy double-substitution and missing options termi
 
 ### Changed
 Make the diagnostics bail out if the languageId isn't 'irule-lang'
+
+## 1.5.4
+
+### Changed
+Make the formatter work with some ugly cases
+Fix the regexp/regsub detection
+
+### Added
+Options for disabling diagnostics
+Tests for formatting
