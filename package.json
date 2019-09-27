@@ -3,14 +3,14 @@
 	"displayName": "F5 Networks iRule",
 	"description": "F5 Networks iRule Extension",
 	"publisher": "bitwisecook",
-	"version": "1.5.4",
+	"version": "1.5.5",
 	"engines": {
 		"vscode": "^1.35.0"
 	},
 	"icon": "images/f5.png",
 	"galleryBanner": {
 		"color": "#DCDCDC",
-		"theme": "dark"
+		"theme": "light"
 	},
 	"homepage": "https://github.com/bitwisecook/vscode-iRule/blob/master/README.md",
 	"repository": {
