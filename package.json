@@ -1,9 +1,15 @@
 {
 	"name": "irule",
-	"displayName": "F5 Networks iRule",
-	"description": "F5 Networks iRule Extension",
+	"displayName": "F5 Networks iRules",
+	"description": "F5 Networks iRules Extension",
 	"publisher": "bitwisecook",
 	"version": "1.5.5",
+	"keywords": [
+		"f5",
+		"f5networks",
+		"irule",
+		"irules"
+	],
 	"engines": {
 		"vscode": "^1.35.0"
 	},
