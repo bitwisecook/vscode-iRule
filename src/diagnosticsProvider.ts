@@ -13,7 +13,7 @@ export function updateDiagnostics(
             if (/^\s*#/.test(line)) {
                 continue;
             }
-            let match = /(^\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{;]+(;|$)|\[\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{\}\];]+(\]|$))/.exec(
+            let match = /(^\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{]|\[\s*(expr|eval|catch|after|proc|uplevel|if|while|for|foreach)\s+[^\{\}\];]+(\]|$))/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.doublesubst.enable') && match) {
