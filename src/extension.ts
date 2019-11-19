@@ -121,7 +121,7 @@ export function activate(context: vscode.ExtensionContext) {
             diagnostic.updateDiagnostics(changeEvent.document, collection)
         )
     );
-
+    
     const icrFs = new IcrFS();
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
     let initialized = false;
