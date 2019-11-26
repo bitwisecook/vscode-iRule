@@ -31,6 +31,7 @@
 	],
 	"activationEvents": [
 		"onLanguage:irule-lang",
+		"onCommand:icrfs.connect",
 		"*"
 	],
 	"main": "./out/extension.js",
@@ -139,18 +140,17 @@
 		"@types/chai": "^4.2.5",
 		"@types/mocha": "^2.2.48",
 		"@types/node": "^10.17.5",
+		"@types/request": "^2.48.3",
 		"chai": "^4.2.0",
 		"converter": "0.0.5",
 		"mocha": "^6.2.2",
+		"nyc": "^14.1.1",
 		"ts-node": "^8.5.2",
 		"tslint": "^5.20.1",
 		"typescript": "^3.7.2",
 		"vscode": "^1.1.36"
 	},
 	"dependencies": {
-		"@types/request": "^2.48.3",
-		"nyc": "^14.1.1",
-		"tslint": "^5.12.1",
-		"typescript": "^3.3.1"
+		"request": "2.88.0"
 	}
 }
