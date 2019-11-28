@@ -8,7 +8,14 @@
 		"f5",
 		"f5networks",
 		"irule",
-		"irules"
+		"irules",
+		"remote development",
+		"remote",
+		"icr",
+		"bigip",
+		"big-ip",
+		"icontrol",
+		"icontrolrest"
 	],
 	"engines": {
 		"vscode": "^1.35.0"
@@ -23,6 +30,10 @@
 		"type": "git",
 		"url": "https://github.com/bitwisecook/vscode-iRule.git"
 	},
+	"bugs": {
+		"url": "https://github.com/bitwisecook/vscode-iRule/issues"
+	},
+	"license": "SEE LICENSE IN LICENSE.txt",
 	"categories": [
 		"Formatters",
 		"Other",
@@ -64,6 +75,7 @@
 							"hostname": "",
 							"username": "",
 							"password": "",
+							"ignoreSys": true,
 							"validateCert": false
 						},
 						"description": "The connection details for the BIG-IP",
@@ -82,6 +94,11 @@
 				"command": "icrfs.refresh",
 				"title": "Refresh iRules from BIG-IP",
 				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.settings",
+				"title": "Settings",
+				"category": "Remote-SSH"
 			}
 		],
 		"menus": {
