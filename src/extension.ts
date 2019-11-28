@@ -121,6 +121,13 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
     let initialized = false;
 
+    context.subscriptions.push(vscode.commands.registerCommand('icrfs.settings', _ => {
+        return vscode.commands.executeCommand(
+            "workbench.action.openSettings",
+            "@ext:conf.icrfs.bigip"
+        );
+    }));
+
     context.subscriptions.push(vscode.commands.registerCommand('icrfs.refresh', _ => {
         console.log('execute refresh');
         for (const [name] of icrFs.readDirectory(vscode.Uri.parse('icrfs:/'))) {
@@ -140,7 +147,8 @@ export function activate(context: vscode.ExtensionContext) {
         let hostname: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname', '');
         let username: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.username', '');
         let password: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.password', '');
-        let validateCert: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert', true);
+        let ignoreSys: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.ignoreSys', true);
+        let validateCert: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert', false);
 
         if (hostname === '') {
             console.error('missing configuration conf.icrfs.bigip.hostname');
