@@ -3,16 +3,24 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension",
 	"publisher": "bitwisecook",
-	"version": "1.5.6",
+	"version": "1.5.9",
 	"keywords": [
 		"f5",
 		"f5networks",
 		"irule",
-		"irules"
+		"irules",
+		"remote development",
+		"remote",
+		"bigip",
+		"big-ip"
 	],
 	"engines": {
 		"vscode": "^1.35.0"
 	},
+	"bugs": {
+		"url": "https://github.com/bitwisecook/vscode-iRule/issues"
+	},
+	"license": "SEE LICENSE IN LICENSE.txt",
 	"icon": "images/f5.png",
 	"galleryBanner": {
 		"color": "#DCDCDC",
@@ -108,12 +116,11 @@
 		"chai": "^4.2.0",
 		"converter": "0.0.5",
 		"mocha": "^6.2.2",
+		"nyc": "^14.1.1",
 		"ts-node": "^8.4.1",
 		"tslint": "^5.20.1",
 		"typescript": "^3.7.2",
 		"vscode": "^1.1.36"
 	},
-	"dependencies": {
-		"nyc": "^14.1.1"
-	}
+	"dependencies": {}
 }
