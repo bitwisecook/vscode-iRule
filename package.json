@@ -69,17 +69,17 @@
 						"description": "Enable/disable code diagnostic for 'argument injection' diagnostic.",
 						"scope": "workspace"
 					},
-					"conf.icrfs.bigip": {
-						"type": "object",
-						"default": {
-							"hostname": "",
-							"username": "",
-							"password": "",
-							"ignoreSys": true,
-							"validateCert": false
+					"conf.icrfs.bigip.hosts": {
+						"type": "array",
+						"items": {
+							"type": "string",
+							"description": "BIG-IP Hostname",
+							"pattern": "^([^@]+@)?[a-z0-9-.]+(:[0-9]+)?$"
 						},
-						"description": "The connection details for the BIG-IP",
-						"scope": "workspace"
+						"default": [
+							"admin@192.168.1.245"
+						],
+						"description": "Specifies the hostnames icrfs has in its quick list."
 					}
 				}
 			}
@@ -87,18 +87,23 @@
 		"commands": [
 			{
 				"command": "icrfs.connect",
-				"title": "Connect and fetch iRules from BIG-IP",
+				"title": "Connect and fetch iRules from the BIG-IP",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.disconnect",
+				"title": "Disconnect from the BIG-IP",
 				"category": "IcrFS"
 			},
 			{
 				"command": "icrfs.refresh",
-				"title": "Refresh iRules from BIG-IP",
+				"title": "Refresh iRules from the BIG-IP",
 				"category": "IcrFS"
 			},
 			{
 				"command": "icrfs.settings",
 				"title": "Settings",
-				"category": "Remote-SSH"
+				"category": "IcrFS"
 			}
 		],
 		"menus": {
@@ -155,6 +160,7 @@
 	},
 	"devDependencies": {
 		"@types/chai": "^4.2.5",
+		"@types/keytar": "^4.0.1",
 		"@types/mocha": "^2.2.48",
 		"@types/node": "^10.17.5",
 		"@types/request": "^2.48.3",
