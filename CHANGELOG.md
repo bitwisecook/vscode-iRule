@@ -97,3 +97,13 @@ Fix the regexp/regsub detection
 ### Added
 Options for disabling diagnostics
 Tests for formatting
+
+## 1.5.9
+
+### Changed
+Fixed sytax highlighting on case-sensitive file system installations
+Fixed proc/foreach/while diagnostic excessive warnings
+Fixed extension node_modules inclusion
+
+### Added
+Nothing
