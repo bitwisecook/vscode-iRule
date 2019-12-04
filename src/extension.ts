@@ -7,8 +7,13 @@ import * as diagnostic from "./diagnosticsProvider";
 import * as fs from './fsProvider';
 import { IcrFS } from './fsProvider';
 import * as request from 'request';
+import * as Keychain from './auth/keychain';
 
 export function activate(context: vscode.ExtensionContext) {
+    console.log('init keychain');
+
+    Keychain.init(context);
+
     vscode.languages.registerDocumentFormattingEditProvider("irule-lang", {
         provideDocumentFormattingEdits(
             document: vscode.TextDocument,
@@ -142,33 +147,106 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.commands.executeCommand('icrfs.connect');
     }));
 
-    context.subscriptions.push(vscode.commands.registerCommand('icrfs.connect', _ => {
+    context.subscriptions.push(vscode.commands.registerCommand('icrfs.disconnect', _ => {
+        console.log('disconnecting...');
+        initialized = false;
+
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('icrfs.connect', async _ => {
         console.log('execute init');
-        if (initialized) {
-            return;
-        }
-        initialized = true;
+        // if (initialized) {
+        //     return;
+        // }
+        // initialized = true;
 
-        let hostname: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname', '');
-        let username: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.username', '');
-        let password: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.password', '');
-        let ignoreSys: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.ignoreSys', true);
-        let validateCert: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert', false);
+        let host = '';
+        let password: string | null | undefined = '';
+        const hostPick = vscode.window.createQuickPick();
+        hostPick.items = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hosts', ['']).map(label => ({ label }));
+        hostPick.onDidAccept(() => {
+            const selection = hostPick.activeItems;
+            hostPick.dispose();
+            if (selection[0]) {
+                host = selection[0].label;
+                Keychain.getToken(host).then((result) => {
+                    console.log(`found password '${result}' for ${host}`);
+                    if (result && result !== null) {
+                        password = result;
+                        console.log('using stored password');
+                    } else {
+                        console.log('password was empty or null');
+                        password = '';
+                    }
+                }).catch(() => {
+                    console.log(`couldn't find password for ${host}`);
+                    password = '';
+                }).then(() => {
+                    console.log(`step 2 '${selection[0].label}' '${password}'`);
 
-        if (hostname === '') {
-            console.error('missing configuration conf.icrfs.bigip.hostname');
-            throw EvalError;
-        }
-        if (username === '') {
-            console.error('missing configuration conf.icrfs.bigip.username');
-            throw EvalError;
-        }
-        if (password === '') {
-            console.error('missing configuration conf.icrfs.bigip.password');
-            throw EvalError;
-        }
-        vscode.workspace.updateWorkspaceFolders(0, 0, { uri: vscode.Uri.parse('icrfs:/'), name: hostname });
-        icrFs.connect(hostname, username, password, validateCert);
+                    if (host !== '' && password === '') {
+                        const authInput = vscode.window.createInputBox();
+                        authInput.title = 'Password';
+                        authInput.placeholder = 'password';
+                        authInput.password = true;
+                        authInput.onDidHide(() => authInput.dispose());
+                        authInput.onDidAccept(() => {
+                            const input = authInput.value;
+                            authInput.dispose();
+                            if (input) {
+                                console.log(input);
+                                const saveAuth = vscode.window.createQuickPick();
+                                saveAuth.items = ['Encrypt and Save', 'Never store, ask every time', 'Ask again next time'].map(label => ({ label }));
+                                saveAuth.onDidHide(() => saveAuth.dispose());
+                                saveAuth.onDidAccept(() => {
+                                    console.log(saveAuth);
+                                    const saveAuthSelection = saveAuth.activeItems;
+                                    saveAuth.dispose();
+                                    console.log(saveAuthSelection[0].label.toString());
+                                    if (saveAuthSelection[0].label.toString() === 'Encrypt and Save') {
+                                        console.log('saving password');
+                                        Keychain.setToken(host, input);
+                                    } else {
+                                        console.log('storing to not ask about saving again');
+                                        Keychain.setToken(host, '');
+                                    }
+                                });
+                                saveAuth.show();
+                            }
+                        });
+                        authInput.show();
+                    }
+                    if (password && password !== '') {
+                        vscode.workspace.updateWorkspaceFolders(0, 0, { uri: vscode.Uri.parse('icrfs:/'), name: host });
+                        icrFs.connect(host.split('@')[1], host.split('@')[0], password, false, true);
+                        initialized = true;
+                    }
+                });
+            }
+        });
+        hostPick.onDidHide(() => hostPick.dispose());
+        hostPick.show();
+
+        // let hostname: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.hostname', '');
+        // let username: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.username', '');
+        // let password: string = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.password', '');
+        // let ignoreSys: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.ignoreSys', true);
+        // let validateCert: boolean = vscode.workspace.getConfiguration().get('conf.icrfs.bigip.validateCert', false);
+
+        // if (hostname === '') {
+        //     console.error('missing configuration conf.icrfs.bigip.hostname');
+        //     throw EvalError;
+        // }
+        // if (username === '') {
+        //     console.error('missing configuration conf.icrfs.bigip.username');
+        //     throw EvalError;
+        // }
+        // if (password === '') {
+        //     console.error('missing configuration conf.icrfs.bigip.password');
+        //     throw EvalError;
+        // }
+        // vscode.workspace.updateWorkspaceFolders(0, 0, { uri: vscode.Uri.parse('icrfs:/'), name: hostname });
+        // icrFs.connect(hostname, username, password, validateCert);
 
     }));
 }

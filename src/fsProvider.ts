@@ -55,7 +55,8 @@ export class IcrFS implements vscode.FileSystemProvider {
 
     root = new Directory('');
 
-    connect(hostname: string, username: string, password: string, validateCert: boolean) {
+    connect(hostname: string, username: string, password: string, validateCert: boolean, ignoreSys: boolean) {
+        console.log(`connecting to ${hostname} as ${username}`);
         this.options = {
             method: 'GET',
             url: '',
@@ -78,13 +79,15 @@ export class IcrFS implements vscode.FileSystemProvider {
 
         // not sure why the compiler is whining about the type without me redefining it here
         this.options.url = apiUrl + '/sys/folder';
+        console.log('fetching sys folders...');
         return request(this.options.url, this.options, (error, response, body) => {
-            console.log('loading...');
+            console.log('loading folders...');
             if (error) {
                 throw new Error(error);
             }
             let json = JSON.parse(body);
             let items = json['items'];
+            console.log(`got ${items.length} folders...`);
             items.forEach((item: { [x: string]: string; }) => {
                 if (item.fullPath === '/') {
                     return;
@@ -96,17 +99,23 @@ export class IcrFS implements vscode.FileSystemProvider {
                 }
             });
             this.options!.url = apiUrl + '/ltm/rule';
+            console.log('fetching irules...');
             request(this.options!.url, this.options, (error, response, body) => {
                 if (error) {
                     throw new Error(error);
                 }
                 let json = JSON.parse(body);
                 let items = json['items'];
+                console.log(`got ${items.length} rules...`);
                 items.forEach((item: { [x: string]: string; }) => {
                     if (item.fullPath === '/') {
                         return;
                     }
+                    if (ignoreSys && item.fullPath.startsWith('/Common/_sys_')) {
+                        return;
+                    }
                     try {
+                        console.log(`caching ${item.fullPath}`)
                         this.cacheRule(vscode.Uri.parse('icrfs://' + item.fullPath + '.irul'), Buffer.from(item.apiAnonymous), { create: true, overwrite: true });
                     } catch (error) {
                         console.log(error);
@@ -114,9 +123,10 @@ export class IcrFS implements vscode.FileSystemProvider {
                 });
                 console.log('request complete');
             });
+            console.log('refreshing files');
             vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
+            console.log('files refreshed');
         });
-
     }
 
     stat(uri: vscode.Uri): vscode.FileStat {
@@ -155,14 +165,14 @@ export class IcrFS implements vscode.FileSystemProvider {
         let apiUrl: string = 'https://' + this.options!.headers!.Host + '/mgmt/tm';
 
         // not sure why the compiler is whining about the type without me redefining it here
-        this.options!.url = apiUrl + '/ltm/rule/' + uri.path.replace(/\//g,'~').substr(0, uri.path.length-5);
+        this.options!.url = apiUrl + '/ltm/rule/' + uri.path.replace(/\//g, '~').substr(0, uri.path.length - 5);
         this.options!.method = 'PUT';
         this.options!.headers!['Content-Type'] = 'application/json';
         let path = uri.path.split('/');
         this.options!.body = {
             'apiAnonymous': content.toString(),
         };
-        this.options!.json=true;
+        this.options!.json = true;
         console.log(this.options);
         request(this.options!.url, this.options, (error, response, body) => {
             console.log('saving...');
@@ -202,7 +212,7 @@ export class IcrFS implements vscode.FileSystemProvider {
     // --- manage files/folders
 
     rename(oldUri: vscode.Uri, newUri: vscode.Uri, options: { overwrite: boolean }): void {
-        console.log('rename ' + oldUri + ' -> ' + newUri) ;
+        console.log('rename ' + oldUri + ' -> ' + newUri);
 
         if (!options.overwrite && this._lookup(newUri, true)) {
             throw vscode.FileSystemError.FileExists(newUri);
@@ -221,59 +231,59 @@ export class IcrFS implements vscode.FileSystemProvider {
         this._fireSoon(
             { type: vscode.FileChangeType.Deleted, uri: oldUri },
             { type: vscode.FileChangeType.Created, uri: newUri }
-            );
-        }
+        );
+    }
 
-        delete(uri: vscode.Uri): void {
-            let dirname = uri.with({ path: path.posix.dirname(uri.path) });
-            let basename = path.posix.basename(uri.path);
-            let parent = this._lookupAsDirectory(dirname, false);
-            if (!parent.entries.has(basename)) {
-                throw vscode.FileSystemError.FileNotFound(uri);
+    delete(uri: vscode.Uri): void {
+        let dirname = uri.with({ path: path.posix.dirname(uri.path) });
+        let basename = path.posix.basename(uri.path);
+        let parent = this._lookupAsDirectory(dirname, false);
+        if (!parent.entries.has(basename)) {
+            throw vscode.FileSystemError.FileNotFound(uri);
+        }
+        parent.entries.delete(basename);
+        parent.mtime = Date.now();
+        parent.size -= 1;
+        this._fireSoon({ type: vscode.FileChangeType.Changed, uri: dirname }, { uri, type: vscode.FileChangeType.Deleted });
+    }
+
+    createDirectory(uri: vscode.Uri): void {
+        let basename = path.posix.basename(uri.path);
+        let dirname = uri.with({ path: path.posix.dirname(uri.path) });
+        let parent = this._lookupAsDirectory(dirname, false);
+
+        let entry = new Directory(basename);
+        parent.entries.set(entry.name, entry);
+        parent.mtime = Date.now();
+        parent.size += 1;
+        this._fireSoon({ type: vscode.FileChangeType.Changed, uri: dirname }, { type: vscode.FileChangeType.Created, uri });
+    }
+
+    // --- lookup
+
+    private _lookup(uri: vscode.Uri, silent: false): Entry;
+    private _lookup(uri: vscode.Uri, silent: boolean): Entry | undefined;
+    private _lookup(uri: vscode.Uri, silent: boolean): Entry | undefined {
+        console.log('_lookup ' + uri);
+        let parts = uri.path.split('/');
+        let entry: Entry = this.root;
+        for (const part of parts) {
+            if (!part) {
+                continue;
             }
-            parent.entries.delete(basename);
-            parent.mtime = Date.now();
-            parent.size -= 1;
-            this._fireSoon({ type: vscode.FileChangeType.Changed, uri: dirname }, { uri, type: vscode.FileChangeType.Deleted });
-        }
-
-        createDirectory(uri: vscode.Uri): void {
-            let basename = path.posix.basename(uri.path);
-            let dirname = uri.with({ path: path.posix.dirname(uri.path) });
-            let parent = this._lookupAsDirectory(dirname, false);
-
-            let entry = new Directory(basename);
-            parent.entries.set(entry.name, entry);
-            parent.mtime = Date.now();
-            parent.size += 1;
-            this._fireSoon({ type: vscode.FileChangeType.Changed, uri: dirname }, { type: vscode.FileChangeType.Created, uri });
-        }
-
-        // --- lookup
-
-        private _lookup(uri: vscode.Uri, silent: false): Entry;
-        private _lookup(uri: vscode.Uri, silent: boolean): Entry | undefined;
-        private _lookup(uri: vscode.Uri, silent: boolean): Entry | undefined {
-            console.log('_lookup ' + uri);
-            let parts = uri.path.split('/');
-            let entry: Entry = this.root;
-            for (const part of parts) {
-                if (!part) {
-                    continue;
-                }
-                let child: Entry | undefined;
-                if (entry instanceof Directory) {
-                    child = entry.entries.get(part);
-                }
-                if (!child) {
-                    if (!silent) {
-                        throw vscode.FileSystemError.FileNotFound(uri);
-                    } else {
-                        return undefined;
-                    }
-                }
-                entry = child;
+            let child: Entry | undefined;
+            if (entry instanceof Directory) {
+                child = entry.entries.get(part);
             }
+            if (!child) {
+                if (!silent) {
+                    throw vscode.FileSystemError.FileNotFound(uri);
+                } else {
+                    return undefined;
+                }
+            }
+            entry = child;
+        }
         console.log('looked up "' + entry.name + '"');
         console.log(entry);
         return entry;
