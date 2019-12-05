@@ -61,9 +61,9 @@ patterns:
         match: \b(AUTH_ERROR|AUTH_FAILURE|AUTH_SUCCESS|AUTH_WANTCREDENTIAL|ASM_REQUEST_VIOLATION|HTTP_CLASS_FAILED|HTTP_CLASS_SELECTED|QOE|XML_END_DOCUMENT|XML_END_ELEMENT|XML_EVENT|XML_BEGIN_DOCUMENT|XML_BEGIN_ELEMENT|XML_CDATA)\b
     -
         captures:
-            '1':
+            '2':
                 name: invalid.illegal.irule
-        match: '((^\s*|[\[\{;]\s*)(auto_execok|auto_import|auto_load|auto_mkindex|auto_mkindex_old|auto_qualify|auto_reset|bgerror|cd|dict|eof|encoding|exec|exit|fblocked|fconfigure|fcopy|file|fileevent|filename|flush|gets|glob|http|interp|load|lrepeat|lreverse|memory|namespace|open|package|pid|pkg::create|pkg_mkIndex|pwd|rename|seek|socket|source|tcl_findLibrary|tell|time|trace|unknown|update|vwait))\b'
+        match: '(^\s*|[\[\{;]\s*)(auto_execok|auto_import|auto_load|auto_mkindex|auto_mkindex_old|auto_qualify|auto_reset|bgerror|cd|dict|eof|encoding|exec|exit|fblocked|fconfigure|fcopy|file|fileevent|filename|flush|gets|glob|http|interp|load|lrepeat|lreverse|memory|namespace|open|package|pid|pkg::create|pkg_mkIndex|pwd|rename|seek|socket|source|tcl_findLibrary|tell|time|trace|unknown|update|vwait)\b'
     -
         begin: '(?<=^|[\[{;])\s*(regexp|regsub)\b\s*'
         beginCaptures:
