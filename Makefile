@@ -30,3 +30,8 @@ $(VSIX): build
 	vsce package
 
 vsix: $(VSIX)
+
+out/syntaxes/%.tmLanguage: syntaxes/%.YAML-tmLanguage
+	tsc -p ./ && node out/build.js
+
+syntax: out/syntaxes/irule.tmLanguage
