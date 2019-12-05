@@ -174,7 +174,6 @@
 		"vscode": "^1.1.36"
 	},
 	"dependencies": {
-		"@types/request": "^2.48.2",
-		"fetch": "^1.1.0"
+		"request": "2.88.0"
 	}
 }

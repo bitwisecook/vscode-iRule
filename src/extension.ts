@@ -58,6 +58,11 @@ export function activate(context: vscode.ExtensionContext) {
                 ts: number;
             } = dochelp.getIndentationStyle(options);
 
+            const editor = vscode.window.activeTextEditor;
+            if (!editor) {
+                return []; // No open text editor
+            }
+
             let preIndent = "";
             let priorLine = dochelp.getPreviousLineContaintingText(
                 document,
