@@ -43,7 +43,6 @@
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [],
 		"configuration": [
 			{
 				"title": "iRules",
@@ -67,6 +66,13 @@
 						"scope": "workspace"
 					}
 				}
+			}
+		],
+		"commands": [
+			{
+				"command": "irule-lang.escapeToQuotedTcl",
+				"title": "Escape Selections to Tcl Quoted String",
+				"category": "irule"
 			}
 		],
 		"languages": [

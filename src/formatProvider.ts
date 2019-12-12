@@ -1,6 +1,23 @@
 'use strict';
 import * as vscode from 'vscode';
 
+export function escapeToQuotedTcl(input: string): string {
+    return input
+        .replace(/\\/g, '\\\\')
+        .replace(/\$/g, '\\$')
+        .replace(/\[/g, '\\[')
+        .replace(/\]/g, '\\]')
+        .replace(/"/g, '\\"')
+        .replace(/\t/g, '\\t')
+        .replace(/\r/g, '\\r')
+        .replace(/\n/g, '\\n')
+        .replace(/\x0b/g, '\\v')
+        .replace(/\x07/g, '\\a')
+        .replace(/\x08/g, '\\b')
+        .replace(/\x0c/g, '\\f')
+        ;
+}
+
 export function guessPreIndentation(priorLine: vscode.TextLine, tabChar: string, tabDepth: number, tabSize: number) {
     let whiteSpace: string = priorLine.text.substr(0, priorLine.firstNonWhitespaceCharacterIndex);
     let preIndent = 0;
