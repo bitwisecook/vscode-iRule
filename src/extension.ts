@@ -127,6 +127,21 @@ export function activate(context: vscode.ExtensionContext) {
         )
     );
 
+    context.subscriptions.push(vscode.commands.registerCommand('irule-lang.escapeToQuotedTcl', _ => {
+        const editor = vscode.window.activeTextEditor;
+        if (!editor) {
+            return; // No open text editor
+        }
+
+        const selections: vscode.Selection[] = editor.selections;
+
+        editor.edit(builder => {
+            for (const selection of selections) {
+                builder.replace(selection, format.escapeToQuotedTcl(editor.document.getText(selection)));
+            }
+        });
+    }));
+
     const icrFs = new IcrFS();
     context.subscriptions.push(vscode.workspace.registerFileSystemProvider('icrfs', icrFs, { isCaseSensitive: true }));
     let initialized = false;

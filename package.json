@@ -86,6 +86,11 @@
 		],
 		"commands": [
 			{
+				"command": "irule-lang.escapeToQuotedTcl",
+				"title": "Escape Selections to Tcl Quoted String",
+				"category": "irule"
+			},
+			{
 				"command": "icrfs.connect",
 				"title": "Connect and fetch iRules from the BIG-IP",
 				"category": "IcrFS"
