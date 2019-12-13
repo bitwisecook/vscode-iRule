@@ -125,3 +125,11 @@ Mark more deprecated commands as illegal (v4.x compat commands)
 ### Added
 BIG-IP version 15.1.0 new commands
 A menu command to escape selections as a quoted Tcl string
+
+## 1.5.12
+
+### Changed
+Improve the highlighting of all the diagnostics
+
+### Added
+Add diagnostics for double substitution around if, while, for
