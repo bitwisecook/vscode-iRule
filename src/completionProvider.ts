@@ -195,6 +195,7 @@ export function complete(document: vscode.TextDocument, position: vscode.Positio
                     new vscode.CompletionItem('AUTH_SUCCESS', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('AUTH_WANTCREDENTIAL', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('ASM_REQUEST_VIOLATION', vscode.CompletionItemKind.Event),
+                    new vscode.CompletionItem('XML_CONTENT_BASED_ROUTING', vscode.CompletionItemKind.Event),
                 ];
             } else if (words.length === 2) {
                 return [new vscode.CompletionItem('priority '),];
