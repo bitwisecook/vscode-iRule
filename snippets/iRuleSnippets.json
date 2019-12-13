@@ -47,12 +47,6 @@
     "description": "virtual",
     "scope": "source.irule"
   },
-  "vlan_id": {
-    "prefix": "vlan_id",
-    "body": "vlan_id",
-    "description": "vlan_id",
-    "scope": "source.irule"
-  },
   "forward": {
     "prefix": "forward",
     "body": "forward",
@@ -63,12 +57,6 @@
     "prefix": "snat",
     "body": "snat",
     "description": "snat",
-    "scope": "source.irule"
-  },
-  "urlcatblindquery": {
-    "prefix": "urlcatblindquery",
-    "body": "urlcatblindquery",
-    "description": "urlcatblindquery",
     "scope": "source.irule"
   },
   "pem_dtos": {
@@ -105,18 +93,6 @@
     "prefix": "md5",
     "body": "md5",
     "description": "md5",
-    "scope": "source.irule"
-  },
-  "client_addr": {
-    "prefix": "client_addr",
-    "body": "client_addr",
-    "description": "client_addr",
-    "scope": "source.irule"
-  },
-  "client_port": {
-    "prefix": "client_port",
-    "body": "client_port",
-    "description": "client_port",
     "scope": "source.irule"
   },
   "clone": {
@@ -179,12 +155,6 @@
     "description": "cpu",
     "scope": "source.irule"
   },
-  "decode_uri": {
-    "prefix": "decode_uri",
-    "body": "decode_uri",
-    "description": "decode_uri",
-    "scope": "source.irule"
-  },
   "discard": {
     "prefix": "discard",
     "body": "discard",
@@ -213,12 +183,6 @@
     "prefix": "fasthash",
     "body": "fasthash",
     "description": "fasthash",
-    "scope": "source.irule"
-  },
-  "findclass": {
-    "prefix": "findclass",
-    "body": "findclass",
-    "description": "findclass",
     "scope": "source.irule"
   },
   "findstr": {
@@ -263,70 +227,10 @@
     "description": "ntohs",
     "scope": "source.irule"
   },
-  "http_cookie": {
-    "prefix": "http_cookie",
-    "body": "http_cookie",
-    "description": "http_cookie",
-    "scope": "source.irule"
-  },
-  "http_header": {
-    "prefix": "http_header",
-    "body": "http_header",
-    "description": "http_header",
-    "scope": "source.irule"
-  },
-  "http_host": {
-    "prefix": "http_host",
-    "body": "http_host",
-    "description": "http_host",
-    "scope": "source.irule"
-  },
-  "http_method": {
-    "prefix": "http_method",
-    "body": "http_method",
-    "description": "http_method",
-    "scope": "source.irule"
-  },
-  "http_uri": {
-    "prefix": "http_uri",
-    "body": "http_uri",
-    "description": "http_uri",
-    "scope": "source.irule"
-  },
-  "http_version": {
-    "prefix": "http_version",
-    "body": "http_version",
-    "description": "http_version",
-    "scope": "source.irule"
-  },
   "ifile": {
     "prefix": "ifile",
     "body": "ifile",
     "description": "ifile",
-    "scope": "source.irule"
-  },
-  "imid": {
-    "prefix": "imid",
-    "body": "imid",
-    "description": "imid",
-    "scope": "source.irule"
-  },
-  "ip_protocol": {
-    "prefix": "ip_protocol",
-    "body": "ip_protocol",
-    "description": "ip_protocol",
-    "scope": "source.irule"
-  },
-  "ip_tos": {
-    "prefix": "ip_tos",
-    "body": "ip_tos",
-    "description": "ip_tos",
-    "scope": "source.irule"
-  },
-  "ip_ttl": {
-    "prefix": "ip_ttl",
-    "body": "ip_ttl",
-    "description": "ip_ttl",
     "scope": "source.irule"
   },
   "lasthop": {
@@ -335,28 +239,10 @@
     "description": "lasthop",
     "scope": "source.irule"
   },
-  "link_qos": {
-    "prefix": "link_qos",
-    "body": "link_qos",
-    "description": "link_qos",
-    "scope": "source.irule"
-  },
   "llookup": {
     "prefix": "llookup",
     "body": "llookup",
     "description": "llookup",
-    "scope": "source.irule"
-  },
-  "local_addr": {
-    "prefix": "local_addr",
-    "body": "local_addr",
-    "description": "local_addr",
-    "scope": "source.irule"
-  },
-  "matchclass": {
-    "prefix": "matchclass",
-    "body": "matchclass",
-    "description": "matchclass",
     "scope": "source.irule"
   },
   "members": {
@@ -413,28 +299,10 @@
     "description": "relate_server",
     "scope": "source.irule"
   },
-  "remote_addr": {
-    "prefix": "remote_addr",
-    "body": "remote_addr",
-    "description": "remote_addr",
-    "scope": "source.irule"
-  },
   "rmd160": {
     "prefix": "rmd160",
     "body": "rmd160",
     "description": "rmd160",
-    "scope": "source.irule"
-  },
-  "server_addr": {
-    "prefix": "server_addr",
-    "body": "server_addr",
-    "description": "server_addr",
-    "scope": "source.irule"
-  },
-  "server_port": {
-    "prefix": "server_port",
-    "body": "server_port",
-    "description": "server_port",
     "scope": "source.irule"
   },
   "session": {
@@ -501,18 +369,6 @@
     "prefix": "translate",
     "body": "translate",
     "description": "translate",
-    "scope": "source.irule"
-  },
-  "urlcatquery": {
-    "prefix": "urlcatquery",
-    "body": "urlcatquery",
-    "description": "urlcatquery",
-    "scope": "source.irule"
-  },
-  "use": {
-    "prefix": "use",
-    "body": "use",
-    "description": "use",
     "scope": "source.irule"
   },
   "whereis": {
@@ -659,12 +515,6 @@
     "description": "ASM::violation",
     "scope": "source.irule"
   },
-  "ASM::violation_data": {
-    "prefix": "ASM::violation_data",
-    "body": "ASM::violation_data",
-    "description": "ASM::violation_data",
-    "scope": "source.irule"
-  },
   "DECOMPRESS::disable": {
     "prefix": "DECOMPRESS::disable",
     "body": "DECOMPRESS::disable",
@@ -777,18 +627,6 @@
     "prefix": "HA::status",
     "body": "HA::status",
     "description": "HA::status",
-    "scope": "source.irule"
-  },
-  "WAM::disable": {
-    "prefix": "WAM::disable",
-    "body": "WAM::disable",
-    "description": "WAM::disable",
-    "scope": "source.irule"
-  },
-  "WAM::enable": {
-    "prefix": "WAM::enable",
-    "body": "WAM::enable",
-    "description": "WAM::enable",
     "scope": "source.irule"
   },
   "FTP::port": {
@@ -3465,12 +3303,6 @@
     "prefix": "AUTH::wantcredential_type",
     "body": "AUTH::wantcredential_type",
     "description": "AUTH::wantcredential_type",
-    "scope": "source.irule"
-  },
-  "ROUTE::age": {
-    "prefix": "ROUTE::age",
-    "body": "ROUTE::age",
-    "description": "ROUTE::age",
     "scope": "source.irule"
   },
   "ROUTE::bandwidth": {
