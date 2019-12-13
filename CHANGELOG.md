@@ -107,3 +107,21 @@ Fixed extension node_modules inclusion
 
 ### Added
 Nothing
+
+## 1.5.10
+
+### Changed
+Fixed #2 by detecting command boundaries more reliably
+
+### Added
+Nothing
+
+## 1.5.11
+
+### Changed
+Fix how events are syntax highlighted
+Mark more deprecated commands as illegal (v4.x compat commands)
+
+### Added
+BIG-IP version 15.1.0 new commands
+A menu command to escape selections as a quoted Tcl string
