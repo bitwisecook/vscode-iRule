@@ -29,17 +29,18 @@ export function updateDiagnostics(
                 });
             }
 
-            match = /^\s*((switch|class\s+search|class\s+match|class\s+nextelement|regexp|regsub|unset)(?!.*--)|\[(class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub)(?!.*--))\s*.*?/.exec(
+            match = /(^\s*(switch|class\s+search|class\s+match|class\s+nextelement|regexp|regsub|unset)(?!.*\s+--)|\[(class\s+search|class\s+match|class\s+search|class\s+nextelement|regexp|regsub)(?!.*\s+--))\s*.*?/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.arginject.enable') && match) {
+                const idx = line.indexOf((match[2] ? match[2] : match[4]));
                 diags.push(
                     {
                         code: "",
                         message:
                             `\`${match[1]}\` permits argument injection, add \`--\` to terminate options`,
                         range: new vscode.Range(
-                            new vscode.Position(lineNum, match.index),
+                            new vscode.Position(lineNum, idx),
                             new vscode.Position(lineNum, line.length)
                         ),
                         severity: vscode.DiagnosticSeverity.Warning,
@@ -48,17 +49,18 @@ export function updateDiagnostics(
                 );
             }
 
-            match = /^\s*((table\s+(set|add|replace|lookup|incr|append|delete|timeout|lifetime|keys))(?!.*--)|\[(table\s+(set|add|replace|lookup|incr|append|delete|timeout|lifetime|keys))(?!.*--))\s*.*?/.exec(
+            match = /(^\s*(table\s+(set|add|replace|lookup|incr|append|delete|timeout|lifetime|keys))(?!.*\s+--)|\[(table\s+(set|add|replace|lookup|incr|append|delete|timeout|lifetime|keys))\b(?!.*\s+--))\s*.*?/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.arginject.enable') && match) {
+                const idx = line.indexOf((match[2] ? match[2] : match[4]));
                 diags.push(
                     {
                         code: "",
                         message:
                             `\`${match[1]}\` permits argument injection, add \`--\` to terminate options (on v12+). Before v12 ensure the first argument doesn't start with a \`-\``,
                         range: new vscode.Range(
-                            new vscode.Position(lineNum, match.index),
+                            new vscode.Position(lineNum, idx),
                             new vscode.Position(lineNum, line.length)
                         ),
                         severity: vscode.DiagnosticSeverity.Warning,
