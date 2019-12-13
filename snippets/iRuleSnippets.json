@@ -5146,5 +5146,143 @@
     "body": "VALIDATE::protocol",
     "description": "VALIDATE::protocol",
     "scope": "source.irule"
+  },
+  "ACCESS::ephemeral-auth": {
+    "prefix": "ACCESS::ephemeral-auth",
+    "body": "ACCESS::ephemeral-auth",
+    "description": "ACCESS::ephemeral-auth",
+    "scope": "source.irule"
+  },
+  "ASM::conviction": {
+    "prefix": "ASM::conviction",
+    "body": "ASM::conviction",
+    "description": "ASM::conviction",
+    "scope": "source.irule"
+  },
+  "DNSMSG::header": {
+    "prefix": "DNSMSG::header",
+    "body": "DNSMSG::header",
+    "description": "DNSMSG::header",
+    "scope": "source.irule"
+  },
+  "DNSMSG::record": {
+    "prefix": "DNSMSG::record",
+    "body": "DNSMSG::record",
+    "description": "DNSMSG::record",
+    "scope": "source.irule"
+  },
+  "DNSMSG::section": {
+    "prefix": "DNSMSG::section",
+    "body": "DNSMSG::section",
+    "description": "DNSMSG::section",
+    "scope": "source.irule"
+  },
+  "IKE::auth_success": {
+    "prefix": "IKE::auth_success",
+    "body": "IKE::auth_success",
+    "description": "IKE::auth_success",
+    "scope": "source.irule"
+  },
+  "IKE::cert": {
+    "prefix": "IKE::cert",
+    "body": "IKE::cert",
+    "description": "IKE::cert",
+    "scope": "source.irule"
+  },
+  "IKE::san_dirname": {
+    "prefix": "IKE::san_dirname",
+    "body": "IKE::san_dirname",
+    "description": "IKE::san_dirname",
+    "scope": "source.irule"
+  },
+  "IKE::san_dns": {
+    "prefix": "IKE::san_dns",
+    "body": "IKE::san_dns",
+    "description": "IKE::san_dns",
+    "scope": "source.irule"
+  },
+  "IKE::san_ediparty": {
+    "prefix": "IKE::san_ediparty",
+    "body": "IKE::san_ediparty",
+    "description": "IKE::san_ediparty",
+    "scope": "source.irule"
+  },
+  "IKE::san_email": {
+    "prefix": "IKE::san_email",
+    "body": "IKE::san_email",
+    "description": "IKE::san_email",
+    "scope": "source.irule"
+  },
+  "IKE::san_ipadd": {
+    "prefix": "IKE::san_ipadd",
+    "body": "IKE::san_ipadd",
+    "description": "IKE::san_ipadd",
+    "scope": "source.irule"
+  },
+  "IKE::san_othername": {
+    "prefix": "IKE::san_othername",
+    "body": "IKE::san_othername",
+    "description": "IKE::san_othername",
+    "scope": "source.irule"
+  },
+  "IKE::san_rid": {
+    "prefix": "IKE::san_rid",
+    "body": "IKE::san_rid",
+    "description": "IKE::san_rid",
+    "scope": "source.irule"
+  },
+  "IKE::san_uri": {
+    "prefix": "IKE::san_uri",
+    "body": "IKE::san_uri",
+    "description": "IKE::san_uri",
+    "scope": "source.irule"
+  },
+  "IKE::san_x400": {
+    "prefix": "IKE::san_x400",
+    "body": "IKE::san_x400",
+    "description": "IKE::san_x400",
+    "scope": "source.irule"
+  },
+  "IKE::subjectAltName": {
+    "prefix": "IKE::subjectAltName",
+    "body": "IKE::subjectAltName",
+    "description": "IKE::subjectAltName",
+    "scope": "source.irule"
+  },
+  "proc": {
+    "prefix": "proc",
+    "body": "proc",
+    "description": "proc",
+    "scope": "source.irule"
+  },
+  "RESOLVER::name_lookup": {
+    "prefix": "RESOLVER::name_lookup",
+    "body": "RESOLVER::name_lookup",
+    "description": "RESOLVER::name_lookup",
+    "scope": "source.irule"
+  },
+  "RESOLVER::summarize": {
+    "prefix": "RESOLVER::summarize",
+    "body": "RESOLVER::summarize",
+    "description": "RESOLVER::summarize",
+    "scope": "source.irule"
+  },
+  "ROUTE::age": {
+    "prefix": "ROUTE::age",
+    "body": "ROUTE::age",
+    "description": "ROUTE::age",
+    "scope": "source.irule"
+  },
+  "SSL::c3d": {
+    "prefix": "SSL::c3d",
+    "body": "SSL::c3d",
+    "description": "SSL::c3d",
+    "scope": "source.irule"
+  },
+  "X509::pem2der": {
+    "prefix": "X509::pem2der",
+    "body": "X509::pem2der",
+    "description": "X509::pem2der",
+    "scope": "source.irule"
   }
 }
