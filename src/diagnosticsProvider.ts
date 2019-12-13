@@ -13,15 +13,17 @@ export function updateDiagnostics(
             if (/^\s*#/.test(line)) {
                 continue;
             }
-            let match = /(^\s*(expr|eval|catch|after|if|for)\s+[^\{]|\[\s*(expr|eval|catch|after|uplevel|if|while|for|proc|foreach)\s+[^\{\}\];]+(\]|$))/.exec(
+            let match = /(^\s*((expr|eval|catch|after|if|for|while|foreach)\s+[^\{]+)|\[\s*((expr|eval|catch|after|uplevel)\s+[^\{\}\];]+)(;|]|$))/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.doublesubst.enable') && match) {
+                const idx = line.indexOf((match[4] ? match[4] : match[2]));
+                console.log(match);
                 diags.push({
                     code: "",
-                    message: `\`${match[4] || match[2]}\` permits double substitution, wrap the expression in \`{...}\``,
+                    message: `\`${match[5] || match[3]}\` permits double substitution, wrap the expression in \`{...}\``,
                     range: new vscode.Range(
-                        new vscode.Position(lineNum, match.index),
+                        new vscode.Position(lineNum, idx),
                         new vscode.Position(lineNum, line.length)
                     ),
                     severity: vscode.DiagnosticSeverity.Error,
@@ -38,7 +40,7 @@ export function updateDiagnostics(
                     {
                         code: "",
                         message:
-                            `\`${match[1]}\` permits argument injection, add \`--\` to terminate options`,
+                            `\`${match[2] || match[4]}\` permits argument injection, add \`--\` to terminate options`,
                         range: new vscode.Range(
                             new vscode.Position(lineNum, idx),
                             new vscode.Position(lineNum, line.length)
@@ -58,7 +60,7 @@ export function updateDiagnostics(
                     {
                         code: "",
                         message:
-                            `\`${match[1]}\` permits argument injection, add \`--\` to terminate options (on v12+). Before v12 ensure the first argument doesn't start with a \`-\``,
+                            `\`${match[2] || match [4]}\` permits argument injection, add \`--\` to terminate options (on v12+). Before v12 ensure the first argument doesn't start with a \`-\``,
                         range: new vscode.Range(
                             new vscode.Position(lineNum, idx),
                             new vscode.Position(lineNum, line.length)
