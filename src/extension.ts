@@ -4,14 +4,31 @@ import * as dochelp from "./documentHelpers";
 import * as format from "./formatProvider";
 import * as complete from "./completionProvider";
 import * as diagnostic from "./diagnosticsProvider";
-import * as fs from './fsProvider';
+import * as hover from "./hoverProvider";
 import { IcrFS } from './fsProvider';
 import * as request from 'request';
 import * as Keychain from './auth/keychain';
 
 export function activate(context: vscode.ExtensionContext) {
-    console.log('init keychain');
 
+    // https://github.com/Microsoft/vscode/issues/42649
+    // settig the wordpattern in language-configuration isn't sufficent
+    const lang = vscode.languages.setLanguageConfiguration('irule-lang', {
+        wordPattern: /(-?\d*\.\d\w*)|([^\`\~\!\@\#\%\^\&\*\(\)\-\=\+\[\{\]\}\\\|\;\\"\,\.\<\>\/\?\s]+)/
+    });
+    console.log('loading schema');
+    const schema = require("../data/irule-schema-15.1.0.json");
+    const schemaLookup = new Map();
+
+    for (const el of schema) {
+        if (el.eventName) {
+            schemaLookup.set(el.eventName, el);
+        } else {
+            schemaLookup.set(el.commandName, el);
+        }
+    }
+
+    console.log('init keychain');
     Keychain.init(context);
 
     vscode.languages.registerDocumentFormattingEditProvider("irule-lang", {
@@ -99,6 +116,24 @@ export function activate(context: vscode.ExtensionContext) {
         " ",
         "." // triggered whenever a ' ' or '.' is being typed
     );
+
+    vscode.languages.registerHoverProvider('irule-lang', {
+        provideHover(document, position, token) {
+            if (!vscode.window.activeTextEditor) {
+                return;
+            }
+            const range = document.getWordRangeAtPosition(position);
+            const word = document.getText(range);
+            console.log(`lookup ${word} for hover`);
+            const data = schemaLookup.get(word);
+            console.log(`found ${data.description} for hover`);
+            if (data) {
+                return new vscode.Hover({ language: 'markdown', value: data.description }, range);
+            } else {
+                return null;
+            }
+        }
+    });
 
     const collection = vscode.languages.createDiagnosticCollection(
         "irule-lang"

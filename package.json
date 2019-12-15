@@ -3,7 +3,7 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 15.1",
 	"publisher": "bitwisecook",
-	"version": "1.5.11",
+	"version": "1.5.13",
 	"keywords": [
 		"f5",
 		"f5networks",
