@@ -45,7 +45,13 @@ patterns:
         captures:
             '1':
                 name: keyword.other.irule
-        match: \b(append|array|binary|clock|concat|error|eval|expr|format|incr|info|join|lappend|lindex|linsert|list|llength|lrange|lreplace|lsearch|lset|lsort|scan|set|split|string|subst|unset|uplevel|upvar|variable)\b
+        match: \b(append|array|binary|clock|concat|error|eval|expr|format|incr|info|join|lappend|lindex|linsert|list|llength|lrange|lreplace|lsearch|lset|lsort|scan|set|split|string|subst|unset|uplevel|upvar)\b
+    -
+        # these are all possible in irules but should generally be avoided
+        captures:
+            '1':
+                name: keyword.deprecated.irule
+        match: \b(global|variable|puts)\b
     -
         captures:
             '1':
@@ -69,11 +75,13 @@ patterns:
                 name: entity.name.irule
         match: '\b\b'
     -
+        # these are all commands that have been deprecated at some point
         captures:
             '1':
                 name: invalid.deprecated.irule
         match: '(?<=^|[\[{;])\s*(local_addr|local_port|remote_addr|remote_port|server_addr|server_port|client_addr|client_port|accumulate|urlcatquery|urlcatblindquery|ASM::violation_data|HTTP::class|WAM::disable|WAM::enable|NAME::lookup|NAME::response|findclass|matchclass|PLUGIN::disable|ROUTE::age|XML::address|XML::collect|XML::element|XML::event|XML::eventid|XML::parse|XML::release|XML::soap|XML::subscribe|imid|http_cookie|http_header|http_host|http_method|http_uri|http_version|decode_uri|ip_protocol|ip_tos|ip_ttl|link_qos|use|vlan_id)\b'
     -
+        # these are all commands that are actually disabled in iRules
         captures:
             '1':
                 name: invalid.illegal.irule
@@ -221,7 +229,7 @@ repository:
         match: '(?<![a-zA-Z])([0-7][0-7][0-7]|0x[0-9a-fA-F]|[+-]?([0-9]*[.])?[0-9]+f?)(?![\.a-zA-Z])'
         name: constant.numeric.irule
     operator:
-        match: '(?<= |\d)(-|\+|~|starts_with|ends_with|contains|matches_regex|matches_glob|&{1,2}|and|\|{1,2}|or|<{1,2}|>{1,2}|\*{1,2}|!|not|%|\/|<=|>=|={1,2}|!=|\^)(?= |\d)'
+        match: '(?<= |\d)(-|\+|~|starts_with|ends_with|contains|matches_regex|matches_glob|&|&&|and|\||\|\||or|<|<<|>|>>|\*|!|not|%|\/|<=|>=|==|eq|ne|equals|!=|\^)(?= |\d)'
         name: keyword.operator.irule
 scopeName: source.irule
 uuid: 1c34148a-d795-11e3-bbdd-84383557b0f8
