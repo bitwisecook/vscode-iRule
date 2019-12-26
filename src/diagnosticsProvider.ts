@@ -88,7 +88,7 @@ export function updateDiagnostics(
                 );
             }
 
-            match = /(^\s*|[\[;\{]\s*)(accumulate|ANTIFRAUD::alert_forbidden_added_element|ANTIFRAUD::alert_device_id|ANTIFRAUD::alert_bait_signatures|ASM::violation_data|client_addr|client_port|decode_uri|findclass|http_cookie|http_header|http_host|http_method|http_uri|http_version|HTTP::class|imid|ip_protocol|ip_tos|ip_ttl|link_qos|local_addr|local_port|matchclass|NAME::lookup|NAME::response|PLUGIN::disable|PLUGIN::enable|PROFILE::httpclass|QOE::disable|QOE::enable|QOE::video|redirect|remote_addr|remote_port|ROUTE::age|server_addr|server_port|SSL::nextproto|urlcatblindquery|urlcatquery|use|vlan_id|WAM::disable|WAM::enable|XML::address|XML::collect|XML::element|XML::event|XML::eventid|XML::parse|XML::release|XML::soap|XML::subscribe)/.exec(
+            match = /(^\s*|[\[;\{]\s*)(accumulate|ANTIFRAUD::alert_forbidden_added_element|ANTIFRAUD::alert_device_id|ANTIFRAUD::alert_bait_signatures|ASM::violation_data|client_addr|client_port|decode_uri|findclass|http_cookie|http_header|http_host|http_method|http_uri|http_version|HTTP::class|imid|ip_protocol|ip_tos|ip_ttl|link_qos|local_addr|local_port|matchclass|NAME::lookup|NAME::response|PLUGIN::disable|PLUGIN::enable|PROFILE::httpclass|QOE::disable|QOE::enable|QOE::video|redirect|remote_addr|remote_port|ROUTE::age|server_addr|server_port|SSL::nextproto|urlcatblindquery|urlcatquery|use|vlan_id|WAM::disable|WAM::enable|XML::address|XML::collect|XML::element|XML::event|XML::eventid|XML::parse|XML::release|XML::soap|XML::subscribe)\b/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.deprecated_commands.enable') && match) {
