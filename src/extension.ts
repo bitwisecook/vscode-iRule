@@ -4,6 +4,7 @@ import * as dochelp from "./documentHelpers";
 import * as format from "./formatProvider";
 import * as complete from "./completionProvider";
 import * as diagnostic from "./diagnosticsProvider";
+import * as codeAction from "./codeActionProvider";
 import * as hover from "./hoverProvider";
 import { IcrFS } from './fsProvider';
 import * as request from 'request';
@@ -134,6 +135,12 @@ export function activate(context: vscode.ExtensionContext) {
             }
         }
     });
+
+    context.subscriptions.push(
+        vscode.languages.registerCodeActionsProvider('irule-lang', new codeAction.InvalidCharFix(), {
+            providedCodeActionKinds: codeAction.InvalidCharFix.providedCodeActionKinds
+        })
+    );
 
     const collection = vscode.languages.createDiagnosticCollection(
         "irule-lang"
