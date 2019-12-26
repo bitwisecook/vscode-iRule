@@ -68,6 +68,86 @@ export function updateDiagnostics(
                 );
             }
 
+            match = /^\s*when\s+(ASM_REQUEST_VIOLATION|AUTH_ERROR|AUTH_FAILURE|AUTH_SUCCESS|AUTH_WANTCREDENTIAL|HTTP_CLASS_FAILED|HTTP_CLASS_SELECTED|NAME_RESOLVED|QOE_PARSE_DONE|XML_BEGIN_DOCUMENT|XML_BEGIN_ELEMENT|XML_CDATA|XML_END_DOCUMENT|XML_END_ELEMENT|XML_EVENT)/.exec(
+                line
+            );
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.deprecated_events.enable') && match) {
+                const idx = line.indexOf(match[1]);
+                diags.push(
+                    {
+                        code: "",
+                        message:
+                            `\`${match[1]}\` event is deprecated`,
+                        range: new vscode.Range(
+                            new vscode.Position(lineNum, idx),
+                            new vscode.Position(lineNum, line.length)
+                        ),
+                        severity: vscode.DiagnosticSeverity.Warning,
+                        source: ""
+                    }
+                );
+            }
+
+            match = /(^\s*|[\[;\{]\s*)(accumulate|ANTIFRAUD::alert_forbidden_added_element|ANTIFRAUD::alert_device_id|ANTIFRAUD::alert_bait_signatures|ASM::violation_data|client_addr|client_port|decode_uri|findclass|http_cookie|http_header|http_host|http_method|http_uri|http_version|HTTP::class|imid|ip_protocol|ip_tos|ip_ttl|link_qos|local_addr|local_port|matchclass|NAME::lookup|NAME::response|PLUGIN::disable|PLUGIN::enable|PROFILE::httpclass|QOE::disable|QOE::enable|QOE::video|redirect|remote_addr|remote_port|ROUTE::age|server_addr|server_port|SSL::nextproto|urlcatblindquery|urlcatquery|use|vlan_id|WAM::disable|WAM::enable|XML::address|XML::collect|XML::element|XML::event|XML::eventid|XML::parse|XML::release|XML::soap|XML::subscribe)/.exec(
+                line
+            );
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.deprecated_commands.enable') && match) {
+                const idx = line.indexOf(match[2]);
+                diags.push(
+                    {
+                        code: "",
+                        message:
+                            `\`${match[2]}\` is deprecated`,
+                        range: new vscode.Range(
+                            new vscode.Position(lineNum, idx),
+                            new vscode.Position(lineNum, line.length)
+                        ),
+                        severity: vscode.DiagnosticSeverity.Warning,
+                        source: ""
+                    }
+                );
+            }
+
+            match = /([”“ ])/.exec(
+                line
+            );
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.invalid_char_auto.enable') && match) {
+                const idx = line.indexOf(match[1]);
+                diags.push(
+                    {
+                        code: "",
+                        message:
+                            `\`${match[1]}\` is an invalid character`,
+                        range: new vscode.Range(
+                            new vscode.Position(lineNum, idx),
+                            new vscode.Position(lineNum, idx + 1)
+                        ),
+                        severity: vscode.DiagnosticSeverity.Warning,
+                        source: ""
+                    }
+                );
+            }
+
+            match = /([^\x20-\x7E\r\n\t”“ ])/.exec(
+                line
+            );
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.invalid_char_manual.enable') && match) {
+                const idx = line.indexOf(match[1]);
+                diags.push(
+                    {
+                        code: "",
+                        message:
+                            `\`${match[1]}\` is an invalid character`,
+                        range: new vscode.Range(
+                            new vscode.Position(lineNum, idx),
+                            new vscode.Position(lineNum, idx + 1)
+                        ),
+                        severity: vscode.DiagnosticSeverity.Warning,
+                        source: ""
+                    }
+                );
+            }
+
             match = /(^\s*(table\s+(set|add|replace|lookup|incr|append|delete|timeout|lifetime|keys))(?!.*\s+--)|\[(table\s+(set|add|replace|lookup|incr|append|delete|timeout|lifetime|keys))\b(?!.*\s+--))\s*.*?/.exec(
                 line
             );
@@ -77,7 +157,7 @@ export function updateDiagnostics(
                     {
                         code: "",
                         message:
-                            `\`${match[2] || match [4]}\` permits argument injection, add \`--\` to terminate options (on v12+). Before v12 ensure the first argument doesn't start with a \`-\``,
+                            `\`${match[2] || match[4]}\` permits argument injection, add \`--\` to terminate options (on v12+). Before v12 ensure the first argument doesn't start with a \`-\``,
                         range: new vscode.Range(
                             new vscode.Position(lineNum, idx),
                             new vscode.Position(lineNum, line.length)

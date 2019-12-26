@@ -54,19 +54,43 @@
 					"conf.irule-lang.diag.whenprio.enable": {
 						"type": "boolean",
 						"default": true,
-						"description": "Enable/disable code diagnostic for 'when missing priority' diagnostic.",
+						"description": "Enable/disable code diagnostic for when missing priority.",
 						"scope": "workspace"
 					},
 					"conf.irule-lang.diag.doublesubst.enable": {
 						"type": "boolean",
 						"default": true,
-						"description": "Enable/disable code diagnostic for 'double substition' diagnostic.",
+						"description": "Enable/disable code diagnostic for double substition.",
 						"scope": "workspace"
 					},
 					"conf.irule-lang.diag.arginject.enable": {
 						"type": "boolean",
 						"default": true,
-						"description": "Enable/disable code diagnostic for 'argument injection' diagnostic.",
+						"description": "Enable/disable code diagnostic for argument injection.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.deprecated_events.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for deprecated events.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.deprecated_commands.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for deprecated commands.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.invalid_char_auto.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for obvious invalid characters that can be fixed automatically.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.invalid_char_manual.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for invalid characters that need manual interpretation.",
 						"scope": "workspace"
 					},
 					"conf.icrfs.bigip.hosts": {
