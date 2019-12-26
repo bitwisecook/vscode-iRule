@@ -125,9 +125,7 @@ export function activate(context: vscode.ExtensionContext) {
             }
             const range = document.getWordRangeAtPosition(position);
             const word = document.getText(range);
-            console.log(`lookup ${word} for hover`);
             const data = schemaLookup.get(word);
-            console.log(`found ${data.description} for hover`);
             if (data) {
                 return new vscode.Hover({ language: 'markdown', value: data.description }, range);
             } else {
