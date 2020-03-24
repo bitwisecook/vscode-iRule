@@ -31,7 +31,7 @@ $(VSIX): build
 
 vsix: $(VSIX)
 
-out/syntaxes/%.tmLanguage: syntaxes/%.YAML-tmLanguage
+out/syntaxes/%.tmLanguage: syntaxes/%.YAML-tmLanguage src/build.js
 	node src/build.js
 
 syntax: out/syntaxes/irule.tmLanguage

@@ -14,6 +14,6 @@ const tmLanguageText = plist.build(data);
 fs.mkdirSync('./out/syntaxes', { recursive: true }, (err) => {
     return;
 });
-fs.writeFileSync(outputTMLanguageFile, tmLanguageText, "utf8"); 
+fs.writeFileSync(outputTMLanguageFile, tmLanguageText, "utf8");
 
 console.log('complete');
