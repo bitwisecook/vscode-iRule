@@ -15,7 +15,7 @@
 		"big-ip"
 	],
 	"engines": {
-		"vscode": "^1.35.0"
+		"vscode": "^1.43.1"
 	},
 	"bugs": {
 		"url": "https://github.com/bitwisecook/vscode-iRule/issues"
@@ -120,9 +120,9 @@
 		"@types/mocha": "^2.2.48",
 		"@types/node": "^10.17.5",
 		"chai": "^4.2.0",
-		"converter": "0.0.5",
-		"mocha": "^6.2.2",
-		"nyc": "^14.1.1",
+		"mocha": "^7.1.1",
+		"nyc": "^15.0.0",
+		"plist": "^3.0.1",
 		"ts-node": "^8.4.1",
 		"tslint": "^5.20.1",
 		"typescript": "^3.7.2",
