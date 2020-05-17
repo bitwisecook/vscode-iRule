@@ -46,7 +46,15 @@
 		"*"
 	],
 	"main": "./out/extension.js",
-	"contributes": {
+		"contributes": {
+			"views": {
+				"explorer": [
+					{
+						"id": "f5iRule",
+						"name": "F5 iRules"
+					}
+				]
+			},
 		"configuration": [
 			{
 				"title": "iRules",
@@ -130,6 +138,21 @@
 				"category": "IcrFS"
 			},
 			{
+				"command": "icrfs.readDirectory",
+				"title": "Read directories",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.refreshView",
+				"title": "Refresh  directories view",
+				"category": "IcrFS"
+			},
+			{
+				"command": "icrfs.clearAllPasswords",
+				"title": "clear all passwords",
+				"category": "IcrFS"
+			},
+			{
 				"command": "icrfs.settings",
 				"title": "Settings",
 				"category": "IcrFS"
@@ -138,12 +161,10 @@
 		"menus": {
 			"commandPalette": [
 				{
-					"command": "icrfs.connect",
-					"when": "workbenchState != workspace"
+					"command": "icrfs.connect"
 				},
 				{
-					"command": "icrfs.refresh",
-					"when": "workbenchState == workspace"
+					"command": "icrfs.refresh"
 				}
 			]
 		},
