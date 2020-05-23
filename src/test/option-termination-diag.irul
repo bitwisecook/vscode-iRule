@@ -1,0 +1,30 @@
+when HTTP_REQUEST {
+    table set -- foo1 bar1
+    table set -subtable foo3 -- abc def
+    table add -- foo2 bar2
+    table replace -- foo1 1
+    set a [table lookup -- foo1]
+    set b [table incr -- foo1 1]
+    table append -- foo2 bar3
+    table delete -- foo2
+    table timeout -- foo1 60
+    table lifetime -- foo1 60
+    set c [table keys -subtable foo3 -count --]
+    switch -- $foo {
+        default {}
+    }    
+    table set foo1 bar1
+    table set -subtable foo3 abc def
+    table add foo2 bar2
+    table replace foo1 1
+    set a [table lookup foo1]
+    set b [table incr foo1 1]
+    table append foo2 bar3
+    table delete foo2
+    table timeout foo1 60
+    table lifetime foo1 60
+    set c [table keys -subtable foo3 -count]
+    switch $foo {
+        default {}
+    }
+}

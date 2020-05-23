@@ -7,7 +7,6 @@ import * as diagnostic from "./diagnosticsProvider";
 import * as codeAction from "./codeActionProvider";
 import * as hover from "./hoverProvider";
 import { IcrFS } from './fsProvider';
-import * as request from 'request';
 import * as Keychain from './auth/keychain';
 
 
@@ -39,16 +38,16 @@ export function activate(context: vscode.ExtensionContext) {
      */
     // const schema = require("../data/irule-schema-15.1.0.json");
     // const ben1 = context.extensionPath
-    const schema = require(`${context.extensionPath}/src/irule-schema-14.1.2.3.json`);
-    const schemaLookup = new Map();
+    // const schema = require(`${context.extensionPath}/src/irule-schema-14.1.2.3.json`);
+    // const schemaLookup = new Map();
 
-    for (const el of schema) {
-        if (el.eventName) {
-            schemaLookup.set(el.eventName, el);
-        } else {
-            schemaLookup.set(el.commandName, el);
-        }
-    }
+    // for (const el of schema) {
+    //     if (el.eventName) {
+    //         schemaLookup.set(el.eventName, el);
+    //     } else {
+    //         schemaLookup.set(el.commandName, el);
+    //     }
+    // }
 
     console.log('init keychain');
     Keychain.init(context);
@@ -139,21 +138,21 @@ export function activate(context: vscode.ExtensionContext) {
         "." // triggered whenever a ' ' or '.' is being typed
     );
 
-    vscode.languages.registerHoverProvider('irule-lang', {
-        provideHover(document, position, token) {
-            if (!vscode.window.activeTextEditor) {
-                return;
-            }
-            const range = document.getWordRangeAtPosition(position);
-            const word = document.getText(range);
-            const data = schemaLookup.get(word);
-            if (data) {
-                return new vscode.Hover({ language: 'markdown', value: data.description }, range);
-            } else {
-                return null;
-            }
-        }
-    });
+    // vscode.languages.registerHoverProvider('irule-lang', {
+    //     provideHover(document, position, token) {
+    //         if (!vscode.window.activeTextEditor) {
+    //             return;
+    //         }
+    //         const range = document.getWordRangeAtPosition(position);
+    //         const word = document.getText(range);
+    //         const data = schemaLookup.get(word);
+    //         if (data) {
+    //             return new vscode.Hover({ language: 'markdown', value: data.description }, range);
+    //         } else {
+    //             return null;
+    //         }
+    //     }
+    // });
 
     context.subscriptions.push(
         vscode.languages.registerCodeActionsProvider('irule-lang', new codeAction.InvalidCharFix(), {

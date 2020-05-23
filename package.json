@@ -18,7 +18,7 @@
 		"icontrolrest"
 	],
 	"engines": {
-		"vscode": "^1.35.0"
+		"vscode": "^1.45.0"
 	},
 	"bugs": {
 		"url": "https://github.com/bitwisecook/vscode-iRule/issues"
@@ -46,15 +46,15 @@
 		"*"
 	],
 	"main": "./out/extension.js",
-		"contributes": {
-			"views": {
-				"explorer": [
-					{
-						"id": "f5iRule",
-						"name": "F5 iRules"
-					}
-				]
-			},
+	"contributes": {
+		"views": {
+			"explorer": [
+				{
+					"id": "f5iRule",
+					"name": "F5 iRules"
+				}
+			]
+		},
 		"configuration": [
 			{
 				"title": "iRules",
@@ -187,43 +187,40 @@
 			{
 				"language": "irule-lang",
 				"scopeName": "source.irule",
-				"path": "./out/syntaxes/irule.tmLanguage"
+				"path": "./out/syntaxes/irule.json"
 			}
 		],
 		"snippets": [
 			{
 				"language": "irule-lang",
 				"path": "./snippets/snippets.json"
-			},
-			{
-				"language": "irule-lang",
-				"path": "./snippets/iRuleSnippets.json"
 			}
 		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./ && node out/build.js",
+		"compile": "tsc -p ./ && ./node_modules/.bin/js-yaml syntaxes/irule.YAML-tmLanguage > out/syntaxes/irule.json",
 		"watch": "tsc -watch -p ./",
-		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+		"lint": "eslint src --ext ts",
+		"pretest": "npm run compile && npm run lint",
+		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/chai": "^4.2.5",
-		"@types/keytar": "^4.0.1",
-		"@types/mocha": "^2.2.48",
-		"@types/node": "^10.17.5",
-		"@types/request": "^2.48.3",
-		"chai": "^4.2.0",
-		"converter": "0.0.5",
-		"mocha": "^6.2.2",
-		"nyc": "^14.1.1",
-		"ts-node": "^8.5.2",
-		"tslint": "^5.20.1",
-		"typescript": "^3.7.2",
-		"vscode": "^1.1.36"
+		"@types/glob": "^7.1.1",
+		"@types/keytar": "^4.4.2",
+		"@types/mocha": "^7.0.2",
+		"@types/node": "^13.11.0",
+		"@types/vscode": "^1.45.0",
+		"@typescript-eslint/eslint-plugin": "^2.30.0",
+		"@typescript-eslint/parser": "^2.30.0",
+		"eslint": "^6.8.0",
+		"glob": "^7.1.6",
+		"js-yaml": "^3.14.0",
+		"mocha": "^7.1.2",
+		"typescript": "^3.8.3",
+		"vscode-test": "^1.3.0"
 	},
 	"dependencies": {
-		"request": "2.88.0"
+		"node-fetch": "^2.6.0"
 	}
 }

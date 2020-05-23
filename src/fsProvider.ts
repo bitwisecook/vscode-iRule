@@ -6,7 +6,7 @@
 
 import * as path from 'path';
 import * as vscode from 'vscode';
-import * as request from 'request';
+import * as fetch from 'node-fetch';
 import { stringify } from 'querystring';
 import { setHostStatusBar, getPassword } from './utils';
 
@@ -52,7 +52,7 @@ export class Directory implements vscode.FileStat {
 export type Entry = File | Directory;
 
 export class IcrFS implements vscode.FileSystemProvider {
-    options?: request.OptionsWithUrl;
+    options?: fetch.OptionsWithUrl;
 
     root = new Directory('');
 
@@ -83,7 +83,7 @@ export class IcrFS implements vscode.FileSystemProvider {
         // not sure why the compiler is whining about the type without me redefining it here
         this.options.url = apiUrl + '/sys/folder';
         console.log('fetching sys folders...');
-        await request(this.options.url, this.options, (error, response, body) => {
+        await fetch(this.options.url, this.options, (error, response, body) => {
             console.log('loading folders...');
             if (error) {
                 throw new Error(error);
@@ -104,7 +104,7 @@ export class IcrFS implements vscode.FileSystemProvider {
         });
         this.options!.url = apiUrl + '/ltm/rule';
         console.log('fetching irules...');
-        await request(this.options!.url, this.options, (error, response, body) => {
+        await fetch(this.options!.url, this.options, (error, response, body) => {
             if (error) {
                 throw new Error(error);
             }
@@ -125,7 +125,7 @@ export class IcrFS implements vscode.FileSystemProvider {
                     console.error(`ERROR FROM CONNECT/LOADING RULES: ${error}`);
                 }
             });
-            console.log('CONNECT REQUEST COMPLETE');
+            console.log('CONNECT fetch COMPLETE');
         });
         console.log('refreshing files');
         // await vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
@@ -180,7 +180,7 @@ export class IcrFS implements vscode.FileSystemProvider {
         this.options!.json = true;
         console.log(`inside writeFile below`);
         console.log(this.options);
-        await request(this.options!.url, this.options, (error, response, body) => {
+        await fetch(this.options!.url, this.options, (error, response, body) => {
             console.log('saving...');
             console.log(`writeFile ERROR BELOW`);
             console.log(error);
