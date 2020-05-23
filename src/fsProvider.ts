@@ -8,6 +8,7 @@ import * as path from 'path';
 import * as vscode from 'vscode';
 import * as request from 'request';
 import { stringify } from 'querystring';
+import { setHostStatusBar, getPassword } from './utils';
 
 export class File implements vscode.FileStat {
 
@@ -77,6 +78,8 @@ export class IcrFS implements vscode.FileSystemProvider {
 
         let apiUrl: string = 'https://' + this.options.headers!.Host + '/mgmt/tm';
 
+        // setHostStatusBar(device);
+
         // not sure why the compiler is whining about the type without me redefining it here
         this.options.url = apiUrl + '/sys/folder';
         console.log('fetching sys folders...');
@@ -95,7 +98,7 @@ export class IcrFS implements vscode.FileSystemProvider {
                 try {
                     this.createDirectory(vscode.Uri.parse('icrfs://' + item.fullPath + '/'));
                 } catch (error) {
-                    console.log(error);
+                    console.error(`ERROR FROM CONNECT/LOADING FOLDERS: ${error}`);
                 }
             });
         });
@@ -119,14 +122,15 @@ export class IcrFS implements vscode.FileSystemProvider {
                     console.log(`caching ${item.fullPath}`)
                     this.cacheRule(vscode.Uri.parse('icrfs://' + item.fullPath + '.irul'), Buffer.from(item.apiAnonymous), { create: true, overwrite: true });
                 } catch (error) {
-                    console.log(error);
+                    console.error(`ERROR FROM CONNECT/LOADING RULES: ${error}`);
                 }
             });
-            console.log('request complete');
+            console.log('CONNECT REQUEST COMPLETE');
         });
         console.log('refreshing files');
-        await vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
+        // await vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
         console.log('files refreshed');
+        return 'connected/refreshed!!!'
     }
 
     stat(uri: vscode.Uri): vscode.FileStat {
@@ -140,7 +144,7 @@ export class IcrFS implements vscode.FileSystemProvider {
         let result: [string, vscode.FileType][] = [];
         for (const [name, child] of entry.entries) {
             if (name === '') {
-                console.log('oops');
+                console.log(`readDirectory - SOMETHING DID\'T READ RIGHT`);
                 continue;
             }
             result.push([name, child.type]);
@@ -161,6 +165,7 @@ export class IcrFS implements vscode.FileSystemProvider {
 
     async writeFile(uri: vscode.Uri, content: Uint8Array, options: { create: boolean, overwrite: boolean }): Promise<void> {
         console.log('writeFile ' + uri);
+        console.log(`content from writeFile below`);
         console.log(content);
         let apiUrl: string = 'https://' + this.options!.headers!.Host + '/mgmt/tm';
 
@@ -173,18 +178,22 @@ export class IcrFS implements vscode.FileSystemProvider {
             'apiAnonymous': content.toString(),
         };
         this.options!.json = true;
+        console.log(`inside writeFile below`);
         console.log(this.options);
         await request(this.options!.url, this.options, (error, response, body) => {
             console.log('saving...');
-            console.log('error');
+            console.log(`writeFile ERROR BELOW`);
             console.log(error);
-            console.log('response');
+            console.log(`writeFile RESPONSE BELOW`);
+            // console.log('response');
             console.log(response);
-            console.log('body');
+            console.log(`writeFile BODY`);
+            // console.log('body');
             console.log(body);
             if (response.statusCode !== 200) {
                 console.log('ERROR HIT WHILE SAVING', body.message);
                 const tcl_err = body.message.match(/^(\d{8}):(\d+):\s+Rule\s+\[([^\]]+)\]\s+error:\s+(.*?):(\d+):\s+error:\s+\[([^\]]+)\]\[(.*)]?$/);
+                console.error(`writeFile save error below`);
                 console.log(tcl_err);
                 const e = new vscode.FileSystemError();
                 e.message = tcl_err;
@@ -193,7 +202,7 @@ export class IcrFS implements vscode.FileSystemProvider {
             }
             // "01070151:3: Rule [/Common/tlsfp] error: /Common/tlsfp:7: error: [undefined procedure: xlog][xlog local0.info "grabbing full packet"]
 
-            console.log('request complete');
+            console.log('write file complete');
         });
     }
 
@@ -298,7 +307,8 @@ export class IcrFS implements vscode.FileSystemProvider {
             }
             entry = child;
         }
-        console.log('looked up "' + entry.name + '"');
+        console.log('looked up "' + entry.name + '" below');
+        // console.log(`lookup timing entry: ${JSON.stringify(entry)}`);
         console.log(entry);
         return entry;
     }
