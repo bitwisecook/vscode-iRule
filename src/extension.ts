@@ -293,10 +293,10 @@ export function activate(context: vscode.ExtensionContext) {
          * new stuff
          */
 
-        const connectedDevice = ext.context.workspaceState.get('connectedF5')
+        const connectedDevice = ext.context.workspaceState.get('connectedF5');
 
         if(connectedDevice) {
-            device = connectedDevice
+            device = connectedDevice;
         }
 
         // get list of bigips from config
@@ -314,15 +314,16 @@ export function activate(context: vscode.ExtensionContext) {
 			if (!device) {
 				throw new Error('user exited device input');
 			}
-			// console.log(`connectDevice, device quick pick answer: ${device}`);
+			console.log(`connectDevice, device quick pick answer: ${device}`);
 		}
-        // console.log(`connectDevice, pre-password device: ${device}`);
+        console.log(`connectDevice, pre-password device: ${device}`);
 
         // get password for device - reused current keytar implementation
         const newPassword: string = await getPassword(device);
         // const newPassword = await Keychain.getToken(device);
 
-
+        console.log(device);
+        console.log(newPassword);
 
         if (device && newPassword){
             const workLoad = await icrFs.connect(device.split('@')[1], device.split('@')[0], newPassword, false, true);

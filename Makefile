@@ -31,7 +31,7 @@ $(VSIX): build
 
 vsix: $(VSIX)
 
-out/syntaxes/%.json: syntaxes/%.YAML-tmLanguage
-	./node_modules/.bin/js-yaml $^ > $@
+out/syntaxes/%.json: syntaxes/%.tmlanguage.yaml
+	npx js-yaml $^ > $@
 
 syntax: out/syntaxes/irule.json

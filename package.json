@@ -3,7 +3,7 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 15.1",
 	"publisher": "bitwisecook",
-	"version": "1.5.13",
+	"version": "1.5.15",
 	"keywords": [
 		"f5",
 		"f5networks",
@@ -199,7 +199,7 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./ && ./node_modules/.bin/js-yaml syntaxes/irule.YAML-tmLanguage > out/syntaxes/irule.json",
+		"compile": "tsc -p ./ && npx js-yaml syntaxes/irule.tmlanguage.yaml > out/syntaxes/irule.json",
 		"watch": "tsc -watch -p ./",
 		"lint": "eslint src --ext ts",
 		"pretest": "npm run compile && npm run lint",
@@ -221,6 +221,7 @@
 		"vscode-test": "^1.3.0"
 	},
 	"dependencies": {
-		"node-fetch": "^2.6.0"
+		"node-fetch": "^2.6.0",
+		"yamljs": "^0.3.0"
 	}
 }
