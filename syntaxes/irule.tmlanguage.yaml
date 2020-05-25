@@ -1,0 +1,3398 @@
+fileTypes:
+  - irul
+  - irule
+  - iRule
+  - tcl
+scopeName: source.irule
+firstLineMatch: '^\s*when\s+[^\s]+\s+[^{]+{\b'
+foldingStartMarker: '([{(\[])'
+foldingEndMarker: '([})\]])'
+name: iRule
+patterns:
+  -
+    include: '#root'
+repository:
+  root:
+    patterns:
+      -
+        include: '#invariant'
+      -
+        include: '#comment-blocks'
+      -
+        include: '#irule-when'
+  invariant:
+    patterns:
+      -
+        include: '#no-starting-empty-brackets'
+      -
+        include: '#no-empty-square-brackets'
+  no-starting-empty-brackets:
+    patterns:
+      -
+        match: '(?<=^)\s*+(\{\}|\[\])'
+        captures:
+          '1':
+            name: invalid.illegal.termination.irule
+  no-empty-square-brackets:
+    patterns:
+      -
+        match: '(\[\])'
+        captures:
+          '1':
+            name: string.empty.square.brace
+  brackets:
+    patterns:
+      -
+        include: '#invariant'
+      -
+        include: '#empty-brackets'
+      -
+        include: '#square-brackets'
+      -
+        include: '#curly-brackets'
+  square-brackets:
+    patterns:
+      -
+        begin: '\s*+(?<!\\)(\[)'
+        end: '(?<!\\)(\])'
+        beginCaptures:
+          '1':
+            name: meta.brace.square.open.irule
+        endCaptures:
+          '1':
+            name: meta.brace.square.close.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#invariant'
+          -
+            include: '#proc-call'
+  curly-brackets:
+    patterns:
+      -
+        begin: '\s*+({)'
+        end: '(})'
+        name: meta.curly.enclosed
+        beginCaptures:
+          '1':
+            name: meta.brace.curly.open.irule
+        endCaptures:
+          '1':
+            name: meta.brace.curly.close.irule
+        patterns:
+          -
+            include: '#invariant'
+          -
+            include: '#special-brackets'
+          -
+            include: '#curly-brackets'
+          -
+            include: '#proc-call'
+  curly-string-brackets:
+    patterns:
+      -
+        include: '#empty-brackets'
+      -
+        begin: '\s*+({)'
+        end: '(})'
+        name: meta.curly.enclosed
+        contentName: string.quote.bracketed.nosubstitution.irule
+        beginCaptures:
+          '1':
+            name: meta.brace.curly.open.irule
+        endCaptures:
+          '1':
+            name: meta.brace.curly.close.irule
+          '2':
+            name: invalid.illegal.charafterbrace.irule
+        patterns:
+          -
+            match: '([\[\]])'
+            name: string
+          -
+            include: '#variable-non-substituting'
+          -
+            include: '#curly-string-brackets'
+          -
+            include: '#quoted-string'
+          -
+            include: '#bare-string'
+  empty-brackets:
+    patterns:
+      -
+        match: '\s*+(?={)({})'
+        captures:
+          '1':
+            name: punctuation.definition.string.brackets.irule
+      -
+        comment: 'enclosed brackets'
+        match: '\s*+{([{}]*)}'
+        captures:
+          '1':
+            name: punctuation.definition.string.brackets.irule
+  expression-brackets:
+    patterns:
+      -
+        comment: 'Expressions utilize special syntax highlighting'
+        begin: '(\{)'
+        end: '(\})'
+        beginCaptures:
+          '1':
+            name: meta.expression.start.irule
+        endCaptures:
+          '1':
+            name: meta.expression.end.irule
+        patterns:
+          -
+            include: '#empty-brackets'
+          -
+            include: '#curly-string-brackets'
+          -
+            include: '#square-brackets'
+          -
+            include: '#expressions'
+  proc-call:
+    comment: 'handles a proc call'
+    patterns:
+      -
+        include: '#invariant'
+      -
+        include: '#comment-blocks'
+      -
+        include: '#variable'
+      -
+        include: '#quoted-string'
+      -
+        include: '#keywords'
+      -
+        include: '#proc-call-args'
+  proc-call-args:
+    comment: 'Arguments given to a proc that is being called'
+    patterns:
+      -
+        include: '#brackets'
+      -
+        include: '#line-escape'
+      -
+        include: '#opt'
+      -
+        include: '#quoted-string'
+      -
+        include: '#variable'
+      -
+        include: '#constant-numeric'
+      -
+        include: '#bare-string'
+      -
+        begin: '(?=::)'
+        end: "\\s|(?=[\\]};\n])"
+  keywords:
+    patterns:
+      -
+        include: '#square-brackets'
+      -
+        include: '#irule-subst'
+      -
+        include: '#variable'
+      -
+        include: '#irule-when'
+      -
+        include: '#irule-proc'
+      -
+        include: '#irule-call'
+      -
+        include: '#irule-binary'
+      -
+        include: '#irule-string'
+      -
+        include: '#irule-switch'
+      -
+        include: '#irule-info'
+      -
+        include: '#irule-incr'
+      -
+        include: '#irule-setters'
+      -
+        include: '#irule-expression-keywords'
+      -
+        include: '#irule-foreach'
+      -
+        include: '#regexp'
+      -
+        include: '#irule-array'
+      -
+        include: '#irule-catch'
+      -
+        include: '#irule-puts'
+      -
+        include: '#irule-upvar'
+      -
+        include: '#irule-global'
+      -
+        include: '#irule-html-tag-command'
+      -
+        include: '#irule-illegal-tcl-commands'
+      -
+        include: '#irule-bare-deprecated-commands'
+      -
+        include: '#irule-commands'
+      -
+        include: '#irule-entity-commands'
+      -
+        include: '#irule-core-commands'
+      -
+        match: "(?:(?<=^|[\\[{;])\\s*|(?<=::)(?![\\s\"]))([^\\s}\\]{\\[;\\\\\"]*)(?=$|{}|[\\s\n\\]}\\[;])"
+        captures:
+          '1':
+            patterns: []
+  irule-core-commands:
+    patterns:
+      -
+        include: regexp
+      -
+        begin: '(?<=^|\[|{|;)\s*(::)?\b(format|scan)\b'
+        end: "(?=(?<!\\\\)(?:$|[\n\\]};]))"
+        captures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.format.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#square-brackets'
+          -
+            include: '#variable'
+          -
+            include: '#quoted-string'
+          -
+            include: '#constant-numeric'
+          -
+            match: '(%)([.])?([0-9]*)?([.duioxXcsfegG])'
+            captures:
+              '1':
+                name: support.type.irule
+              '2':
+                name: meta.class
+              '3':
+                name: meta.constant.irule
+              '4':
+                name: entity.function.name.irule
+          -
+            match: "(?<=\\s)\\s*(?![%.$])([^\\s\\]}\\[{;\n]*)"
+            captures:
+              '1':
+                name: variable
+                patterns:
+                  -
+                    include: '#variable-bare-italic'
+          -
+            include: '#format-brackets'
+      -
+        match: '(?:(?<=^|\[|{|;)\s*(::)?|(?<=::))\b(error|for|lsearch|while|format|lindex|linsert|concat|lsort|subst|upvar|uplevel|continue|break|split|switch|catch|join|lrange|lset|llength|list|return|puts|clock|variable|after|return)\b(::)?'
+        name: keyword.control.irule
+        captures:
+          '1':
+            name: support.type.ns.separator
+          '2':
+            name: keyword.control.irule
+          '3':
+            name: support.type.ns.separator
+  format-brackets:
+    patterns:
+      -
+        begin: '\s*({)'
+        end: '(})'
+        contentName: string.format.contents.irule
+        patterns:
+          -
+            include: '#variable-non-substituting'
+          -
+            include: '#format-brackets'
+          -
+            include: '#empty-brackets'
+          -
+            match: '([#0-9+-])([duioxXcsfegG]?)'
+            captures:
+              '1':
+                name: meta.constant
+              '2':
+                name: support.type
+          -
+            match: '\s*+(%)([.duioxXcsfegG])'
+            captures:
+              '1':
+                name: support.type.irule
+              '2':
+                name: entity.function.name.irule
+          -
+            match: '([;])'
+            name: string
+          -
+            include: '#constant-numeric'
+  regular-expression:
+    patterns:
+      -
+        match: "(?<!\\\\)(\\#.*)(?=\n|$)"
+        name: comment
+      -
+        match: '(\.)([?+*])'
+        captures:
+          '1':
+            name: support.type.re.anychar.irule
+          '2':
+            name: variable.re.modifier.irule
+      -
+        match: '(?<={|^)\s*(\^)'
+        name: meta.class.re.start.irule
+      -
+        match: "(?<!\\\\)(\\$)(?=\\s*}|\n)"
+        name: meta.class.re.end.irule
+      -
+        match: '(\\)(?=\s*})'
+        name: invalid.illegal.re.irule
+      -
+        match: '(?<!\\)(\|)'
+        name: meta.constant.re.or.irule
+      -
+        comment: 'the character whose value is 0'
+        match: '(?<!\\)(\\)0[^0-9a-fA-F]'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+      -
+        comment: '(where X is any character) the character whose low-order 5 bits are the same as those of X, and whose other bits are all zero'
+        match: '(?<!\\)(\\)(c)(.)'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+          '3':
+            name: entity.function.name.re.unicode.punctuation.italic.irule
+      -
+        comment: '(up to four hexadecimal digits) the Unicode character U+wxyz'
+        match: '(?<!\\)(\\)(u)([0-9a-fA-F]{1,4})'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+          '3':
+            name: entity.function.name.re.unicode.punctuation.italic.irule
+      -
+        comment: 'reserved for a Unicode extension up to 21 bits. The digits are parsed until the first non-hexadecimal character is encountered, the maximun of eight hexadecimal digits are reached, or an overflow would occur in the maximum value of U+10ffff.'
+        match: '(?<!\\)(\\)(U)([0-9a-fA-F]{1,8})'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+          '3':
+            name: entity.function.name.re.unicode.punctuation.italic.irule
+      -
+        comment: '(where hh is one or two hexadecimal digits) the character whose hexadecimal value is 0xhh'
+        match: '(?<!\\)(\\)(x)([0-9a-fA-F]{1,2})'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+          '3':
+            name: entity.function.name.re.unicode.punctuation.italic.irule
+      -
+        comment: 'the character whose octal value is 0xy?z?. The first digit must be in the range 0-3, otherwise the two-digit form is assumed.'
+        match: '(?<!\\)(\\)([0-3][0-7]{2}|[0-7]{2})'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+          '3':
+            name: entity.function.name.re.unicode.punctuation.italic.irule
+      -
+        match: '(?<!\\)(\\)([1-9][0-9]?[0-9]?)'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: meta.constant.numeric.irule
+      -
+        match: '(?<!\\)(\\)([abBefnrtv0dswDSWAmMyYZ])?'
+        captures:
+          '1':
+            name: support.type.re.escape.irule
+          '2':
+            name: support.type.re.escaped.value.irule
+      -
+        begin: '(?<!\\)(\()(\?[!:=])'
+        end: '(?<!\\)(\))'
+        beginCaptures:
+          '1':
+            name: meta.constant.re.lookahead.close.punctuation.italic.irule
+          '2':
+            name: meta.class.re.lookahead.type.irule
+        endCaptures:
+          '1':
+            name: meta.constant.re.lookahead.close.punctuation.italic.irule
+        patterns:
+          -
+            include: '#regular-expression'
+      -
+        begin: '(?<!\\)(\()(\?)(?![!:=\)])'
+        end: '(?<!\\)(\))'
+        contentName: entity.function.name.punctuation.italic.underline.re.meta.flags.irule
+        beginCaptures:
+          '1':
+            name: meta.constant.re.lookahead.open.punctuation.italic.irule
+          '2':
+            name: keyword.control.re.meta.irule
+        endCaptures:
+          '1':
+            name: meta.constant.re.lookahead.close.punctuation.italic.irule
+      -
+        begin: '(?<!\\)(\[)(\^)?'
+        end: '(?<!\\)([\]])([*?+]([?+]?))?'
+        beginCaptures:
+          '1':
+            name: meta.constant.re.lookahead.close.punctuation.italic.irule
+          '2':
+            name: meta.variable.re.negate.chars.irule
+        endCaptures:
+          '1':
+            name: meta.constant.re.lookahead.close.punctuation.italic.irule
+          '2':
+            name: variable.re.modifier.irule
+          '3':
+            name: support.type.re.nongreedy.punctuation.italic.irule
+        contentName: meta.class
+        patterns:
+          -
+            match: '(?<!\\)(\\)(.)'
+            captures:
+              '1':
+                name: support.type.re.escape.irule
+              '2':
+                name: meta.class
+          -
+            begin: '(?<!-)(\[[:=])'
+            end: '([:=]\])(?!-)'
+            beginCaptures:
+              '1':
+                name: entity.function.name.re.bracket.expression.open.punctuation.italic.irule
+            endCaptures:
+              '1':
+                name: entity.function.name.re.bracket.expression.close.punctuation.italic.irule
+            patterns:
+              -
+                match: '([^:=\]]*)(?=[:=]\])'
+                name: support.type.punctuation.italic.irule
+          -
+            match: '(\\)([abBefnrtv0dsw])'
+            captures:
+              '1':
+                name: support.type.re.escape.irule
+              '2':
+                name: support.type.re.escaped.value.irule
+          -
+            match: '(?<!(?<!\\)\\)(-)'
+            name: entity.function.name
+      -
+        begin: '(?<!\\)(\()'
+        end: '(?<!\\)(\))'
+        beginCaptures:
+          '1':
+            name: keyword.control
+        endCaptures:
+          '1':
+            name: keyword.control
+        patterns:
+          -
+            include: '#regular-expression'
+      -
+        match: '(?<!\\)({([0-9]*)(\,)?([0-9]*)?})'
+        captures:
+          '1':
+            name: entity.function.name
+          '2':
+            name: meta.constant.re.number.irule
+          '3':
+            name: support.type.re.expand.irule
+          '4':
+            name: meta.constant.re.number.irule
+      -
+        match: '(?:(?<!\\\.)(?<=\.))(?<=\.|\])((?<!\\)[*?+])'
+        name: meta.constant.re.irule
+      -
+        match: '(?<=\*|\+)((?<!\\)[*?+])'
+        name: support.type.re.irule
+      -
+        match: '(?<!\\)(\*)'
+        name: variable.re.modifier.irule
+      -
+        match: '((?<!\\)[.?^!$+])'
+        name: variable.re.modifier.irule
+      -
+        match: '(?<=\.)((?<!\\)[*?])'
+        name: variable.re.modifier.irule
+  expressions:
+    patterns:
+      -
+        include: '#variable'
+      -
+        include: '#curly-string-brackets'
+      -
+        include: '#square-brackets'
+      -
+        include: '#expression-functions'
+      -
+        include: '#constant-numeric'
+      -
+        include: '#expression-operators'
+      -
+        comment: order-of-operations
+        begin: (\()
+        end: '\s*(\))'
+        beginCaptures:
+          '1':
+            name: entity.function.name.expression.brace.ooo.open.irule
+        endCaptures:
+          '1':
+            name: entity.function.name.expression.brace.ooo.close.irule
+        patterns:
+          -
+            include: '#expressions'
+      -
+        include: '#quoted-string'
+  constant-numeric:
+    patterns:
+      -
+        match: '\s*+((?:#?|\.)?(?:\B[-+])?(?:\b0[bB][0-1]*|\b0[oO][0-7]*|\b(0([xX]))[0-9a-fA-F]*|(\B\.[0-9]+|\b[0-9]+(\.[0-9]*)?)([eE][-+]?[0-9]+)?))'
+        captures:
+          '1':
+            name: meta.constant.numeric
+          '2':
+            name: punctuation.italic
+          '3':
+            name: support.type
+      -
+        match: '\s*+\b(true|false|bool|entier|integer|float|null)\b'
+        name: meta.constant.punctuation.italic
+  expression-operators:
+    patterns:
+      -
+        comment: 'expression word operators'
+        match: \b(in|ni|eq|ne)\b
+        name: support.type.operator.punctuation.italic.irule
+      -
+        comment: 'expression operators'
+        match: '(=|\+|-|\*|/|%)'
+        name: support.type.operator.irule
+      -
+        comment: 'expression comparisons'
+        match: '([<>])'
+        name: support.type.expression.operator.irule
+      -
+        comment: 'expression bitwise'
+        match: '([|^&!~])'
+        name: support.type.expression.operator.irule
+      -
+        comment: 'expression ternary'
+        match: '([?:])'
+        name: support.type.expression.operator.irule
+  expression-functions:
+    patterns:
+      -
+        begin: \b(abs|acos|asin|atan|atan2|ceil|cos|cosh|double|exp|floor|fmod|hypot|int|log|log10|pow|rand|round|sin|sinh|sqrt|srand|tan|tanh|wide|)\b(\()
+        end: (\))
+        beginCaptures:
+          '1':
+            name: entity.function.name.math.function.punctuatio.italic.irule
+          '2':
+            name: entity.function.name.math.function.brace.open.irule
+        endCaptures:
+          '1':
+            name: entity.function.name.math.function.brace.close.irule
+        patterns:
+          -
+            include: '#expressions'
+  irule-proc:
+    patterns:
+      -
+        begin: "(?<=^|[\\[{;])\\s*(::)?\\b(proc)\\b\\s+([^\\s\n]+)\\s+(?={|\\b|\\[|\\\\$)"
+        end: '(?=(?<!\\)$)'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.proc.irule
+          '3':
+            patterns:
+              -
+                include: '#variable'
+              -
+                include: '#brackets'
+        patterns:
+          -
+            include: '#proc-arguments'
+          -
+            include: '#brackets'
+  irule-when:
+    patterns:
+      -
+        begin: '(?<=^|;)\s*\b(when)\b\s+\b([^\s]+)\b\s+([^\n{]*)(?={)'
+        end: '(?=(?<!\\)$)'
+        beginCaptures:
+          '1':
+            name: keyword.control.event.irule
+          '2':
+            patterns:
+              -
+                include: '#when-events'
+          '3':
+            name: keyword.options.event.irule
+        patterns:
+          -
+            include: '#brackets'
+          -
+            include: '#proc-call'
+  when-events:
+    patterns:
+      -
+        match: >
+          (?x)
+          (
+            ACCESS_ACL_ALLOWED
+            |ACCESS_ACL_DENIED
+            |ACCESS_PER_REQUEST_AGENT_EVENT
+            |ACCESS_POLICY_AGENT_EVENT
+            |ACCESS_POLICY_COMPLETED
+            |ACCESS_SAML_ASSERTION
+            |ACCESS_SAML_AUTHN
+            |ACCESS_SAML_SLO_REQ
+            |ACCESS_SAML_SLO_RESP
+            |ACCESS_SESSION_CLOSED
+            |ACCESS_SESSION_STARTED
+            |ADAPT_REQUEST_HEADERS
+            |ADAPT_REQUEST_RESULT
+            |ADAPT_RESPONSE_HEADERS
+            |ADAPT_RESPONSE_RESULT
+            |ANTIFRAUD_ALERT
+            |ANTIFRAUD_LOGIN
+            |ASM_REQUEST_BLOCKING
+            |ASM_REQUEST_DONE
+            |ASM_REQUEST_VIOLATION
+            |ASM_RESPONSE_VIOLATION
+            |AUTH_ERROR
+            |AUTH_FAILURE
+            |AUTH_RESULT
+            |AUTH_SUCCESS
+            |AUTH_WANTCREDENTIAL
+            |BOTDEFENSE_ACTION
+            |BOTDEFENSE_REQUEST
+            |CACHE_REQUEST
+            |CACHE_RESPONSE
+            |CACHE_UPDATE
+            |CATEGORY_MATCHED
+            |CLASSIFICATION_DETECTED
+            |CLIENT_ACCEPTED
+            |CLIENT_CLOSED
+            |CLIENT_DATA
+            |CLIENTSSL_CLIENTCERT
+            |CLIENTSSL_CLIENTHELLO
+            |CLIENTSSL_DATA
+            |CLIENTSSL_HANDSHAKE
+            |CLIENTSSL_PASSTHROUGH
+            |CLIENTSSL_SERVERHELLO_SEND
+            |DIAMETER_EGRESS
+            |DIAMETER_INGRESS
+            |DIAMETER_RETRANSMISSION
+            |DNS_REQUEST
+            |DNS_RESPONSE
+            |ECA_REQUEST_ALLOWED
+            |ECA_REQUEST_DENIED
+            |FIX_HEADER
+            |FIX_MESSAGE
+            |FLOW_INIT
+            |GENERICMESSAGE_EGRESS
+            |GENERICMESSAGE_INGRESS
+            |GTP_GPDU_EGRESS
+            |GTP_GPDU_INGRESS
+            |GTP_PRIME_EGRESS
+            |GTP_PRIME_INGRESS
+            |GTP_SIGNALLING_EGRESS
+            |GTP_SIGNALLING_INGRESS
+            |HTML_COMMENT_MATCHED
+            |HTML_TAG_MATCHED
+            |HTTP_CLASS_FAILED
+            |HTTP_CLASS_SELECTED
+            |HTTP_DISABLED
+            |HTTP_PROXY_CONNECT
+            |HTTP_PROXY_REQUEST
+            |HTTP_PROXY_RESPONSE
+            |HTTP_REJECT
+            |HTTP_REQUEST
+            |HTTP_REQUEST_DATA
+            |HTTP_REQUEST_RELEASE
+            |HTTP_REQUEST_SEND
+            |HTTP_RESPONSE
+            |HTTP_RESPONSE_CONTINUE
+            |HTTP_RESPONSE_DATA
+            |HTTP_RESPONSE_RELEASE
+            |ICAP_REQUEST
+            |ICAP_RESPONSE
+            |IN_DOSL7_ATTACK
+            |IVS_ENTRY_REQUEST
+            |IVS_ENTRY_RESPONSE
+            |L7CHECK_CLIENT_DATA
+            |L7CHECK_SERVER_DATA
+            |LB_FAILED
+            |LB_QUEUED
+            |LB_SELECTED
+            |MQTT_CLIENT_DATA
+            |MQTT_CLIENT_EGRESS
+            |MQTT_CLIENT_INGRESS
+            |MQTT_CLIENT_SHUTDOWN
+            |MQTT_SERVER_DATA
+            |MQTT_SERVER_EGRESS
+            |MQTT_SERVER_INGRESS
+            |MR_DATA
+            |MR_EGRESS
+            |MR_FAILED
+            |MR_INGRESS
+            |NAME_RESOLVED
+            |PCP_REQUEST
+            |PCP_RESPONSE
+            |PEM_POLICY
+            |PEM_SUBS_SESS_CREATED
+            |PEM_SUBS_SESS_DELETED
+            |PEM_SUBS_SESS_UPDATED
+            |PERSIST_DOWN
+            |PING_REQUEST_READY
+            |PING_RESPONSE_READY
+            |PROTOCOL_INSPECTION_MATCH
+            |QOE_PARSE_DONE
+            |RADIUS_AAA_ACCT_REQUEST
+            |RADIUS_AAA_ACCT_RESPONSE
+            |RADIUS_AAA_AUTH_REQUEST
+            |RADIUS_AAA_AUTH_RESPONSE
+            |REWRITE_REQUEST
+            |REWRITE_REQUEST_DONE
+            |REWRITE_RESPONSE
+            |REWRITE_RESPONSE_DONE
+            |RTSP_REQUEST
+            |RTSP_REQUEST_DATA
+            |RTSP_RESPONSE
+            |RTSP_RESPONSE_DATA
+            |RULE_INIT
+            |SA_PICKED
+            |SERVER_CLOSED
+            |SERVER_CONNECTED
+            |SERVER_DATA
+            |SERVER_INIT
+            |SERVERSSL_CLIENTHELLO_SEND
+            |SERVERSSL_DATA
+            |SERVERSSL_HANDSHAKE
+            |SERVERSSL_SERVERCERT
+            |SERVERSSL_SERVERHELLO
+            |SIP_REQUEST
+            |SIP_REQUEST_SEND
+            |SIP_RESPONSE
+            |SIP_RESPONSE_SEND
+            |SOCKS_REQUEST
+            |STREAM_MATCHED
+            |TAP_REQUEST
+            |TDS_REQUEST
+            |TDS_RESPONSE
+            |USER_REQUEST
+            |USER_RESPONSE
+            |WS_CLIENT_DATA
+            |WS_CLIENT_FRAME
+            |WS_CLIENT_FRAME_DONE
+            |WS_REQUEST
+            |WS_RESPONSE
+            |WS_SERVER_DATA
+            |WS_SERVER_FRAME
+            |WS_SERVER_FRAME_DONE
+            |XML_BEGIN_DOCUMENT
+            |XML_BEGIN_ELEMENT
+            |XML_CDATA
+            |XML_CONTENT_BASED_ROUTING
+            |XML_END_DOCUMENT
+            |XML_END_ELEMENT
+            |XML_EVENT
+          )
+        name: support.other.event.name.irule
+  irule-subst:
+    patterns:
+      -
+        begin: '(?<=^|[\[{;])\s*((?:::)?\bsubst\b)(?!\s*$)'
+        end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
+        beginCaptures:
+          '1':
+            name: keyword.control.subst.irule
+            patterns: []
+        patterns:
+          -
+            begin: '(?<=subst)\b((?:\s+(?:-nobackslashes|-nocommands|-novariables))?)(?!\s*$)'
+            end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
+            beginCaptures:
+              '1':
+                patterns:
+                  -
+                    include: '#opt'
+            patterns:
+              -
+                include: '#proc-call-args'
+  irule-binary:
+    patterns:
+      -
+        begin: "(?<=^|\\[|{|;)\\s*(::)?\\b(binary)\\b\\s+(?!\n)([^\\s\\[{;\n\\]]*)"
+        end: "\\s*(?=$|\n|\\]|;|})"
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.binary.irule
+          '3':
+            name: entity.function.name.binary.irule
+            patterns:
+              -
+                include: '#variable'
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            begin: "(?<=scan|format)\\s+(?!\n)"
+            end: "(?=(?<!\\\\)(?:$|[\n\\]};]))"
+            patterns:
+              -
+                include: '#line-escape'
+              -
+                include: '#variable'
+              -
+                include: '#glob-match'
+          -
+            include: '#proc-call-args'
+  irule-switch:
+    patterns:
+      -
+        begin: '(?<=^|\[|{|;)\s*(::)?\b(switch)\b'
+        end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.switch.irule
+          '3':
+            name: entity.function.name.state.irule
+        patterns:
+          -
+            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?:-|\\$)[^\\s\\n]*\\s+|\\[[^\\]\\n]*(?=\\])|\"[^\"\\n]*(?=\"))*+)(?!\\s*{|\\[|\\s*$)"
+            end: '(?=(?<!\\)(?:$|[;\]}]))'
+            beginCaptures:
+              '1':
+                patterns:
+                  -
+                    include: '#line-escape'
+                  -
+                    include: '#opt'
+                  -
+                    include: '#double-dash'
+                  -
+                    include: '#quoted-string'
+                  -
+                    include: '#variable'
+                  -
+                    include: '#square-brackets'
+            patterns:
+              -
+                include: '#line-escape'
+              -
+                include: '#variable'
+              -
+                match: (default)
+                name: keyword.control.default.switch.unbraced.irule
+              -
+                include: '#brackets'
+              -
+                include: '#bare-string'
+          -
+            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?:-|\\$)[^\\s]*\\s+|\\[[^\\]\n]*(?=\\]))*+)(?=\\s*{)"
+            end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
+            beginCaptures:
+              '1':
+                patterns:
+                  -
+                    include: '#line-escape'
+                  -
+                    include: '#opt'
+                  -
+                    include: '#double-dash'
+                  -
+                    include: '#variable'
+                  -
+                    include: '#square-brackets'
+            patterns:
+              -
+                include: '#line-escape'
+              -
+                include: '#variable'
+              -
+                begin: '\s*+({)'
+                end: '(})'
+                beginCaptures:
+                  '1':
+                    -
+                      name: meta.brace.switch.open.irule
+                endCaptures:
+                  '1':
+                    -
+                      name: meta.brace.switch.close.irule
+                patterns:
+                  -
+                    include: '#variable-non-substituting'
+                  -
+                    include: '#empty-brackets'
+                  -
+                    match: '\s?(-)\s'
+                    name: meta.constant.switch.next.irule
+                  -
+                    match: '\s*\b(default)\b\s+(?={)'
+                    name: keyword.control.punctuation.italic.irule
+                  -
+                    include: '#brackets'
+                  -
+                    include: '#glob-match'
+                  -
+                    include: '#bare-string'
+              -
+                match: (default)
+                name: keyword.control.default.switch.unbraced.irule
+              -
+                include: '#brackets'
+              -
+                include: '#bare-string'
+          -
+            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?!(?<!\\\\)$)(?:-|\\$)[^\\s]*(?:(?!\\s*$)\\s+)?|\\[[^\\]\n]*(?=\\]))*+)"
+            end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
+            beginCaptures:
+              '1':
+                patterns:
+                  -
+                    include: '#line-escape'
+                  -
+                    include: '#opt'
+                  -
+                    include: '#double-dash'
+                  -
+                    include: '#variable'
+                  -
+                    include: '#square-brackets'
+            patterns:
+              -
+                include: '#line-escape'
+              -
+                include: '#variable'
+              -
+                match: (default)
+                name: keyword.control.default.switch.unbraced.irule
+              -
+                include: '#brackets'
+              -
+                include: '#bare-string'
+  irule-puts:
+    patterns:
+      -
+        begin: '(?<=^|\[|{|;)\s*\b(puts)\b'
+        end: "(?=$|\n|}|\\]|;)"
+        beginCaptures:
+          '1':
+            name: keyword.control.puts.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#opt'
+          -
+            match: "(?:(?<=puts)|^|(?<=-nonewline))\\s*+(?!\n|$)([^\\s$\n;}\\]\\[{\"]*+)(?!\\s*(?:$|\n|}|\\]|;|^))"
+            name: support.type.puts.channel.punctuation.italic.irule
+          -
+            include: '#square-brackets'
+          -
+            include: '#curly-string-brackets'
+          -
+            include: '#quoted-string'
+          -
+            include: '#bare-string'
+  irule-global:
+    patterns:
+      -
+        begin: '(?<=^|{|\[|;)\s*\b(global)\b'
+        end: "(?=$|\n|\\]|}|;)"
+        captures:
+          '1':
+            name: keyword.control.global.irule
+        patterns:
+          -
+            include: '#variable-bare-italic'
+  irule-incr:
+    patterns:
+      -
+        begin: '(?<=^|\[|{|;)\s*(::)?\b(incr)\b'
+        end: "\\s*(?=$|\n|}|\\]|;)"
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.incr.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#constant-numeric'
+          -
+            include: '#brackets'
+          -
+            include: '#variable'
+          -
+            include: '#variable-bare-italic'
+  irule-entity-commands:
+    patterns:
+      -
+        begin: '(?<=^|[\[{;])\s*(::)?\b(info|eval|clock|array|binary|after)\b'
+        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.entity.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#opt'
+          -
+            match: "(?<=(?:info|clock|binary|array|after))\\s+(?:(?!$|{|\\[|;|\n)([^\\s\\]}\\[{;\n\"]*))?"
+            captures:
+              '1':
+                patterns:
+                  -
+                    include: '#variable'
+                  -
+                    include: '#constant-numeric'
+                  -
+                    include: '#opt'
+          -
+            include: '#proc-call-args'
+  irule-array:
+    patterns:
+      -
+        begin: '(?<=^|[\[{;]\s)\s*(?:::)?(array\b)'
+        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        beginCaptures:
+          '1':
+            name: keyword.control.array.irule
+        patterns:
+          -
+            include: '#irule-array-set'
+          -
+            include: '#irule-array-get'
+          -
+            include: '#irule-array-commands'
+  irule-array-commands:
+    patterns:
+      -
+        begin: '(?<=array)(?:::)?\s+(names|donesearch|anymore|exists|nextelement|size|startsearch|statistics|unset)\b'
+        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        beginCaptures:
+          '1':
+            name: entity.function.name.array.command.irule
+        patterns:
+          -
+            include: '#proc-call-args'
+  irule-array-set:
+    patterns:
+      -
+        begin: '(?<=array)(?:::)?\s+(set)\b'
+        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        beginCaptures:
+          '1':
+            name: entity.function.name.array.set.irule
+        patterns:
+          -
+            begin: "(?<=set)\\s+(?!$|[\n;}\\]])([^\\s\\];]*)"
+            end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+            beginCaptures:
+              '1':
+                patterns:
+                  -
+                    include: '#variable'
+                  -
+                    include: '#variable-bare'
+            patterns:
+              -
+                include: '#empty-brackets'
+              -
+                include: '#curly-string-brackets'
+              -
+                include: '#quoted-string'
+              -
+                include: '#bare-string'
+              # -
+              #   include: '#property-list-brackets'
+              -
+                include: '#proc-call-args'
+  irule-array-get:
+    patterns:
+      -
+        begin: '(?<=array)(?:::)?\s+(get)\b'
+        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        beginCaptures:
+          '1':
+            name: entity.function.name.array.get.irule
+        patterns:
+          -
+            begin: "(?<=get)(\\s+(?!$|[\n;\\]])[^\\s\\]};\n]*)"
+            end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+            captures:
+              '1':
+                patterns:
+                  -
+                    include: '#variable-bare'
+            patterns:
+              -
+                include: '#proc-call-args'
+  irule-expression-keywords:
+    patterns:
+      -
+        applyEndPatternLast: 1
+        begin: '\s*+((::|-)?(if|expr|while))\b\s+(?={)'
+        end: '(?<=})'
+        beginCaptures:
+          '1':
+            name: keyword.control.if.irule
+            patterns:
+              -
+                include: '#opt'
+          '2':
+            name: support.type
+          '3':
+            name: keyword.control.if.irule
+        endCaptures:
+          '1':
+            name: keyword.control.if.end.irule
+        patterns:
+          -
+            include: '#if-handlers'
+      -
+        begin: '(?<=^|\[|{|;)\s*(::|-)?(expr)\b'
+        end: '(?=$|;|}|\])'
+        beginCaptures:
+          '1':
+            name: support.type.expr.ns.irule
+          '2':
+            name: keyword.control.expr.unbraced.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#expressions'
+  if-handlers:
+    patterns:
+      -
+        include: '#expression-brackets'
+      -
+        include: '#if-else-if'
+      -
+        include: '#if-else'
+      -
+        include: '#curly-brackets'
+  if-else-if:
+    patterns:
+      -
+        begin: '(?<=\})\s+(elseif)\s+'
+        end: '\s*'
+        beginCaptures:
+          '1':
+            name: keyword.control.elseif.irule
+        patterns:
+          -
+            include: '#expression-brackets'
+          -
+            include: '#brackets'
+  if-else:
+    patterns:
+      -
+        begin: '(?<=\})\s+(else)\s+(?=\{)'
+        end: '(?<=\}|$)'
+        beginCaptures:
+          '1':
+            name: keyword.control.else.irule
+        patterns:
+          -
+            include: '#brackets'
+  if-block:
+    patterns:
+      -
+        applyEndPatternLast: 1
+        begin: '(?<=\})\s+(\{)'
+        end: '(\})'
+        beginCaptures:
+          '1':
+            name: keyword.control
+        patterns:
+          -
+            include: $self
+  irule-setters:
+    patterns:
+      -
+        include: '#irule-set'
+      -
+        include: '#irule-unset'
+      -
+        include: '#irule-append'
+  irule-set:
+    patterns:
+      -
+        begin: "(?<=^|[\\[{;])\\s*(::)?\\b(set|variable)\\b\\s+(?!\n|$)"
+        end: '(?=(?<!\\)(?:$|[;\]}]))'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.set.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#variable'
+          -
+            include: '#variable-bare'
+          -
+            include: '#regexp'
+          -
+            include: '#proc-call-args'
+  irule-append:
+    patterns:
+      -
+        begin: '(?<=^|[\[{;])\s*(::)?\b(append|lappend)\b(?:(\s+[^\s]*))?'
+        end: '(?=$|^|;|}|\])'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.set.irule
+          '3':
+            patterns:
+              -
+                include: '#variable-bare-italic'
+              -
+                include: '#variable'
+        patterns:
+          -
+            include: '#proc-call-args'
+  irule-unset:
+    patterns:
+      -
+        contentName: punctuation.variable.set.italic.irule
+        begin: '(?<=^|\[|{|;)\s*(::)?\b(unset)'
+        end: "\\s*(?=$|;|\n|}|\\])"
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.unset.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#opt'
+          -
+            include: '#brackets'
+          -
+            match: '\s*([^\s|}|\]|;]*)'
+            captures:
+              '1':
+                name: punctuation.variable.set.italic.irule
+  irule-foreach:
+    patterns:
+      -
+        begin: '(?<=^|\[|{|;)\s*(::)?\b(foreach)\b(?:(?=\s+{)\s+)?'
+        end: '(?=(?<!\\)$)|(?<=})'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.keyword.foreach.loop.irule
+        patterns:
+          -
+            include: '#arguments-braced'
+          -
+            include: '#brackets'
+          -
+            include: '#variable'
+          -
+            include: '#variable-bare-italic'
+  irule-catch:
+    patterns:
+      -
+        begin: '(?<=\[|{|^)\s*(::)?\b(catch)\b(?=\s)'
+        end: "(?=\\]|}|$|(?<!\\\\)\n|;)"
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.string.irule
+        patterns:
+          -
+            include: '#brackets'
+          -
+            include: '#variable-bare-italic'
+  irule-upvar:
+    patterns:
+      -
+        begin: '(?<=\[|\{|^)\s*(::)?\b(upvar)\b'
+        end: '\s*(?=\]|}|$|;)'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.string.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#constant-numeric'
+          -
+            include: '#variable'
+          -
+            include: '#variable-bare-italic'
+  irule-call:
+    patterns:
+      -
+        begin: '(?<=\[|\{|^)\s*(?::)?\b(call)\b\s+\b([^\s]+)\b'
+        end: '(?=(?<!\\)$|[\n;\]}])'
+        beginCaptures:
+          '1':
+            name: keyword.control.call.irule
+          '2':
+            name: keyword.control.proc.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#square-brackets'
+          -
+            include: '#proc-call-args'
+  irule-info:
+    patterns:
+      -
+        begin: '(?<=\[|\{|^)\s*(::)?\b(info)\b'
+        end: '(?=(?<!\\)$|[\n;\]}])'
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.string.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#square-brackets'
+          -
+            include: '#irule-info-exists'
+          -
+            include: '#irule-info-subcommands'
+  irule-info-exists:
+    patterns:
+      -
+        begin: \b(exists)\b
+        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        beginCaptures:
+          '1':
+            name: entity.function.name.info.exists.irule
+        patterns:
+          -
+            include: '#variable'
+          -
+            include: '#line-escape'
+          -
+            include: '#square-brackets'
+          -
+            include: '#variable-bare-italic'
+  irule-info-pattern-commands:
+    patterns:
+      -
+        begin: '\b(command(?:s)?|globals|locals|procs|vars|functions)\b'
+        end: "\\s*(?=$|\n|}|\\]|;)"
+        captures:
+          '1':
+            name: entity.function.name.irule
+        patterns:
+          -
+            include: '#constant-numeric'
+          -
+            include: '#glob-match'
+  irule-info-subcommands:
+    patterns:
+      -
+        include: '#irule-info-pattern-commands'
+      -
+        begin: '\b(level|frame|coroutine|nameofexecutable|nameofexe|args|body|cmdcount|complete|default|hostname|library|loaded|patchlevel|script|sharedlibextension|tclversion)\b\s*'
+        end: "\\s*(?=$|\n|}|\\]|;)"
+        captures:
+          '1':
+            name: entity.function.name.irule
+        patterns:
+          -
+            include: '#constant-numeric'
+          -
+            include: '#proc-call-args'
+  irule-string:
+    patterns:
+      -
+        begin: '(?<=^|[\[{;])\s*(::)?\b(string)\b'
+        end: "(?=}|\\]|;|$|\n)"
+        beginCaptures:
+          '1':
+            name: support.type
+          '2':
+            name: keyword.control.string.irule
+        patterns:
+          -
+            include: '#irule-string-is'
+          -
+            include: '#irule-string-match'
+          -
+            include: '#irule-string-matchfirst'
+          -
+            include: '#irule-string-map'
+          -
+            include: '#irule-string-subcommands'
+          -
+            include: '#proc-call-args'
+  irule-string-is:
+    patterns:
+      -
+        match: '\s*\b(is)\b\s+([^\s}\];]*)'
+        captures:
+          '1':
+            name: entity.function.name.string.is.irule
+          '2':
+            name: support.type
+            patterns:
+              -
+                include: '#variable'
+  irule-string-match:
+    patterns:
+      -
+        begin: '(?<=string)\s+\b(match)\b'
+        end: "(?=$|\n|\\]|}|;)"
+        captures:
+          '1':
+            name: entity.function.name.string.is.irule
+          '2':
+            name: string
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#variable'
+          -
+            include: '#glob-match'
+          -
+            include: '#curly-string-brackets'
+          -
+            include: '#square-brackets'
+          -
+            include: '#constant-numeric'
+  irule-string-matchfirst:
+    patterns:
+      -
+        begin: '\s*\b(matchfirst)\b'
+        end: '\s*(?=\]|}|$|;)'
+        captures:
+          '1':
+            name: entity.function.name.string.is.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#curly-string-brackets'
+          -
+            include: '#constant-numeric'
+          -
+            include: '#glob-match'
+          -
+            include: '#variable'
+  irule-string-map:
+    patterns:
+      -
+        begin: '(?<=string)\b\s+(map)\b'
+        end: "(?=$|\n|\\]|}|{|\\[)"
+        captures:
+          '1':
+            name: entity.function.name.string.map.irule
+        patterns:
+          -
+            include: '#square-brackets'
+          -
+            include: '#variable'
+          -
+            begin: '\s*({)'
+            end: '\s*(})'
+            patterns:
+              -
+                match: '(?<=[^\\]\\\\)(.)'
+                name: string
+              -
+                match: '([\[\]])'
+                name: string
+              -
+                include: '#quoted-string'
+              -
+                include: '#curly-string-brackets'
+              -
+                include: '#bare-string'
+  irule-string-subcommands:
+    patterns:
+      -
+        match: '(?<=string)\b\s+(match|compact|toupper|tolower|bytelength|compare|cat|first|index|is|last|length|map|range|repeat|replace|reverse|totitle|trim|trimleft|trimright|wordend|wordstart|equal)\s+'
+        name: entity.function.name.string.subcommands.irule
+  irule-illegal-tcl-commands:
+    patterns:
+      -
+        match: >
+          (?x)
+          (?<=\[|\{|^)\s*(
+            (?::)?
+            auto_execok
+            |auto_import
+            |auto_load
+            |auto_mkindex
+            |auto_mkindex_old
+            |auto_qualify
+            |auto_reset
+            |bgerror
+            |cd
+            |dict
+            |encoding
+            |eof
+            |exec
+            |exit
+            |fblocked
+            |fconfigure
+            |fcopy
+            |file
+            |fileevent
+            |filename
+            |flush
+            |gets
+            |glob
+            |http
+            |interp
+            |load
+            |lrepeat
+            |lreverse
+            |memory
+            |namespace
+            |open
+            |package
+            |pid
+            |pkg_mkIndex
+            |pkg::create
+            |pwd
+            |rename
+            |seek
+            |socket
+            |source
+            |tcl_findLibrary
+            |tell
+            |time
+            |trace
+            |unknown
+            |update
+            |vwait
+          )(?=(?<!\\)$|[\n;\]}])
+        name: invalid.illegal.disabled.command.irule
+  irule-commands:
+    begin: >
+      (?x)
+      (?<=\[|\{|^)\s*(
+        (?::)?
+          accumulate
+        |active_members
+        |active_nodes
+        |after
+        |b64decode
+        |b64encode
+        |call
+        |class
+        |client_addr
+        |client_port
+        |clientside
+        |clone
+        |close
+        |cname
+        |connect
+        |cpu
+        |crc32
+        |decode_uri
+        |discard
+        |domain
+        |drop
+        |event
+        |fasthash
+        |findclass
+        |findstr
+        |forward
+        |getfield
+        |host
+        |htonl
+        |htons
+        |http_cookie
+        |http_header
+        |http_host
+        |http_method
+        |http_uri
+        |http_version
+        |ifile
+        |imid
+        |ip_protocol
+        |ip_tos
+        |ip_ttl
+        |lasthop
+        |link_qos
+        |listen
+        |llookup
+        |local_addr
+        |local_port
+        |log
+        |matchclass
+        |matchregion
+        |md5
+        |member_priority
+        |members
+        |nexthop
+        |nodes_up
+        |nodes
+        |node
+        |ntohl
+        |ntohs
+        |peer
+        |pem_dtos
+        |persist
+        |pools
+        |pool
+        |priority
+        |qos_score
+        |qos_weight
+        |rateclass
+        |recv
+        |redirect
+        |reject
+        |relate_client
+        |relate_server
+        |remote_addr
+        |remote_port
+        |rmd160
+        |send
+        |server_addr
+        |server_port
+        |serverside
+        |session
+        |sha1
+        |sha256
+        |sha384
+        |sha512
+        |sharedvar
+        |snatpool
+        |snat
+        |substr
+        |table
+        |timing
+        |traffic_group
+        |translate
+        |ttl
+        |uptime
+        |urlcatblindquery
+        |urlcatquery
+        |use
+        |virtual
+        |vlan_id
+        |whereami
+        |whereis
+        |whoami
+        |wideip
+        |AAA::acct_result
+        |AAA::acct_send
+        |AAA::auth_result
+        |AAA::auth_send
+        |ACCESS::acl
+        |ACCESS::disable
+        |ACCESS::enable
+        |ACCESS::ephemeral-auth
+        |ACCESS::flowid
+        |ACCESS::log
+        |ACCESS::oauth
+        |ACCESS::perflow
+        |ACCESS::policy
+        |ACCESS::respond
+        |ACCESS::restrict_irule_events
+        |ACCESS::saml
+        |ACCESS::session
+        |ACCESS::user
+        |ACCESS::uuid
+        |ACCESS2::access2_proc
+        |ACL::action
+        |ACL::eval
+        |ADAPT::allow
+        |ADAPT::context_create
+        |ADAPT::context_current
+        |ADAPT::context_delete_all
+        |ADAPT::context_name
+        |ADAPT::context_static
+        |ADAPT::enable
+        |ADAPT::preview_size
+        |ADAPT::result
+        |ADAPT::select
+        |ADAPT::service_down_action
+        |ADAPT::timeout
+        |ADM::health
+        |ADM::is_ip_slowdown
+        |ADM::is_mitigated
+        |AES::decrypt
+        |AES::encrypt
+        |AES::key
+        |ANTIFRAUD::alert_additional_info
+        |ANTIFRAUD::alert_bait_signatures
+        |ANTIFRAUD::alert_component
+        |ANTIFRAUD::alert_defined_value
+        |ANTIFRAUD::alert_details
+        |ANTIFRAUD::alert_device_id
+        |ANTIFRAUD::alert_expected_value
+        |ANTIFRAUD::alert_fingerprint
+        |ANTIFRAUD::alert_forbidden_added_element
+        |ANTIFRAUD::alert_guid
+        |ANTIFRAUD::alert_html
+        |ANTIFRAUD::alert_http_referrer
+        |ANTIFRAUD::alert_id
+        |ANTIFRAUD::alert_license_id
+        |ANTIFRAUD::alert_min
+        |ANTIFRAUD::alert_origin
+        |ANTIFRAUD::alert_resolved_value
+        |ANTIFRAUD::alert_score
+        |ANTIFRAUD::alert_transaction_data
+        |ANTIFRAUD::alert_transaction_id
+        |ANTIFRAUD::alert_type
+        |ANTIFRAUD::alert_username
+        |ANTIFRAUD::alert_view_id
+        |ANTIFRAUD::client_id
+        |ANTIFRAUD::device_id
+        |ANTIFRAUD::disable_alert
+        |ANTIFRAUD::disable_app_layer_encryption
+        |ANTIFRAUD::disable_auto_transactions
+        |ANTIFRAUD::disable_injection
+        |ANTIFRAUD::disable_malware
+        |ANTIFRAUD::disable_phishing
+        |ANTIFRAUD::disable
+        |ANTIFRAUD::enable_log
+        |ANTIFRAUD::enable
+        |ANTIFRAUD::fingerprint
+        |ANTIFRAUD::geo
+        |ANTIFRAUD::guid
+        |ANTIFRAUD::result
+        |ANTIFRAUD::username
+        |ASM::captcha_age
+        |ASM::captcha_status
+        |ASM::captcha
+        |ASM::client_ip
+        |ASM::conviction
+        |ASM::deception
+        |ASM::disable
+        |ASM::enable
+        |ASM::fingerprint
+        |ASM::microservice
+        |ASM::payload
+        |ASM::policy
+        |ASM::raise
+        |ASM::severity
+        |ASM::signature
+        |ASM::status
+        |ASM::support_id
+        |ASM::threat_campaign
+        |ASM::unblock
+        |ASM::uncaptcha
+        |ASM::violation_data
+        |ASM::violation
+        |ASN1::decode
+        |ASN1::element
+        |ASN1::encode
+        |AUTH::abort
+        |AUTH::authenticate_continue
+        |AUTH::authenticate
+        |AUTH::cert_credential
+        |AUTH::cert_issuer_credential
+        |AUTH::last_event_session_id
+        |AUTH::password_credential
+        |AUTH::response_data
+        |AUTH::ssl_cc_ldap_status
+        |AUTH::ssl_cc_ldap_username
+        |AUTH::start
+        |AUTH::status
+        |AUTH::subscribe
+        |AUTH::unsubscribe
+        |AUTH::username_credential
+        |AUTH::wantcredential_prompt
+        |AUTH::wantcredential_prompt_style
+        |AUTH::wantcredential_type
+        |AVR::disable_cspm_injection
+        |AVR::disable
+        |AVR::enable
+        |AVR::log
+        |BIGPROTO::enable_fix_reset
+        |BIGTCP::release_flow
+        |BOTDEFENSE::action
+        |BOTDEFENSE::bot_anomalies
+        |BOTDEFENSE::bot_categories
+        |BOTDEFENSE::bot_name
+        |BOTDEFENSE::bot_signature_category
+        |BOTDEFENSE::bot_signature
+        |BOTDEFENSE::captcha_age
+        |BOTDEFENSE::captcha_status
+        |BOTDEFENSE::client_class
+        |BOTDEFENSE::client_type
+        |BOTDEFENSE::cookie_age
+        |BOTDEFENSE::cookie_status
+        |BOTDEFENSE::cs_allowed
+        |BOTDEFENSE::cs_attribute
+        |BOTDEFENSE::cs_possible
+        |BOTDEFENSE::device_id
+        |BOTDEFENSE::disable
+        |BOTDEFENSE::enable
+        |BOTDEFENSE::intent
+        |BOTDEFENSE::micro_service
+        |BOTDEFENSE::previous_action
+        |BOTDEFENSE::previous_request_age
+        |BOTDEFENSE::previous_support_id
+        |BOTDEFENSE::reason
+        |BOTDEFENSE::support_id
+        |BWC::color
+        |BWC::debug
+        |BWC::mark
+        |BWC::measure
+        |BWC::policy
+        |BWC::pps
+        |BWC::priority
+        |BWC::rate
+        |CACHE::accept_encoding
+        |CACHE::age
+        |CACHE::disabled
+        |CACHE::disable
+        |CACHE::enable
+        |CACHE::expire
+        |CACHE::headers
+        |CACHE::header
+        |CACHE::hits
+        |CACHE::payload
+        |CACHE::priority
+        |CACHE::trace
+        |CACHE::uri
+        |CACHE::useragent
+        |CACHE::userkey
+        |CATEGORY::analytics
+        |CATEGORY::filetype
+        |CATEGORY::lookup
+        |CATEGORY::matchtype
+        |CATEGORY::result
+        |CATEGORY::safesearch
+        |CLASSIFICATION::app
+        |CLASSIFICATION::category
+        |CLASSIFICATION::disable
+        |CLASSIFICATION::enable
+        |CLASSIFICATION::protocol
+        |CLASSIFICATION::result
+        |CLASSIFICATION::urlcat
+        |CLASSIFICATION::username
+        |CLASSIFY::application
+        |CLASSIFY::category
+        |CLASSIFY::defer
+        |CLASSIFY::disable
+        |CLASSIFY::urlcat
+        |CLASSIFY::username
+        |COMPRESS::buffer_size
+        |COMPRESS::disable
+        |COMPRESS::enable
+        |COMPRESS::gzip
+        |COMPRESS::method
+        |COMPRESS::nodelay
+        |CONNECTOR::disable
+        |CONNECTOR::enable
+        |CRYPTO::decrypt
+        |CRYPTO::encrypt
+        |CRYPTO::hash
+        |CRYPTO::keygen
+        |CRYPTO::sign
+        |CRYPTO::verify
+        |DATAGRAM::dns
+        |DATAGRAM::ip6
+        |DATAGRAM::ip
+        |DATAGRAM::l2
+        |DATAGRAM::tcp
+        |DATAGRAM::udp
+        |DECOMPRESS::disable
+        |DECOMPRESS::enable
+        |DEMANGLE::disable
+        |DEMANGLE::enable
+        |DHCP::version
+        |DHCPv4::chaddr
+        |DHCPv4::ciaddr
+        |DHCPv4::drop
+        |DHCPv4::giaddr
+        |DHCPv4::hlen
+        |DHCPv4::hops
+        |DHCPv4::htype
+        |DHCPv4::len
+        |DHCPv4::opcode
+        |DHCPv4::option
+        |DHCPv4::reject
+        |DHCPv4::secs
+        |DHCPv4::siaddr
+        |DHCPv4::type
+        |DHCPv4::xid
+        |DHCPv4::yiaddr
+        |DHCPv6::drop
+        |DHCPv6::hop_count
+        |DHCPv6::len
+        |DHCPv6::link_address
+        |DHCPv6::msg_type
+        |DHCPv6::option
+        |DHCPv6::peer_address
+        |DHCPv6::reject
+        |DHCPv6::transaction_id
+        |DIAMETER::avp
+        |DIAMETER::command
+        |DIAMETER::disconnect
+        |DIAMETER::drop
+        |DIAMETER::dynamic_route_insertion
+        |DIAMETER::dynamic_route_lookup
+        |DIAMETER::header
+        |DIAMETER::host
+        |DIAMETER::is_request
+        |DIAMETER::is_response
+        |DIAMETER::is_retransmission
+        |DIAMETER::length
+        |DIAMETER::message
+        |DIAMETER::payload
+        |DIAMETER::persist
+        |DIAMETER::realm
+        |DIAMETER::respond
+        |DIAMETER::result
+        |DIAMETER::retransmission_default
+        |DIAMETER::retransmission_reason
+        |DIAMETER::retransmission
+        |DIAMETER::retransmit
+        |DIAMETER::retry
+        |DIAMETER::route_status
+        |DIAMETER::session
+        |DIAMETER::state
+        |DNS::additional
+        |DNS::answer
+        |DNS::authority
+        |DNS::class
+        |DNS::disable
+        |DNS::drop
+        |DNS::edns0
+        |DNS::enable
+        |DNS::header
+        |DNS::is_wideip
+        |DNS::last_act
+        |DNS::len
+        |DNS::log
+        |DNS::name
+        |DNS::origin
+        |DNS::ptype
+        |DNS::query
+        |DNS::question
+        |DNS::rdata
+        |DNS::return
+        |DNS::rpz_policy
+        |DNS::rrname
+        |DNS::rrtype
+        |DNS::rr
+        |DNS::scrape
+        |DNS::tsig
+        |DNS::ttl
+        |DNS::type
+        |DNSMSG::header
+        |DNSMSG::record
+        |DNSMSG::section
+        |DOSL7::disable
+        |DOSL7::enable
+        |DOSL7::health
+        |DOSL7::is_ip_slowdown
+        |DOSL7::is_mitigated
+        |DOSL7::profile
+        |DOSL7::slowdown
+        |DSLITE::remote_addr
+        |ECA::disable
+        |ECA::domainname
+        |ECA::enable
+        |ECA::metadata
+        |ECA::status
+        |ECA::username
+        |FIX::tag
+        |FLOW::create_related
+        |FLOW::idle_duration
+        |FLOW::idle_timeout
+        |FLOW::peer
+        |FLOW::priority
+        |FLOW::refresh
+        |FLOW::this
+        |FLOWTABLE::count
+        |FLOWTABLE::limit
+        |FTP::allow_active_mode
+        |FTP::disable
+        |FTP::enable
+        |FTP::enforce_tls_session_reuse
+        |FTP::ftps_mode
+        |FTP::port
+        |GENERICMESSAGE::message
+        |GENERICMESSAGE::peer
+        |GENERICMESSAGE::route
+        |GTP::clone
+        |GTP::discard
+        |GTP::forward
+        |GTP::header
+        |GTP::ie
+        |GTP::length
+        |GTP::message
+        |GTP::new
+        |GTP::parse
+        |GTP::payload
+        |GTP::respond
+        |GTP::tunnel
+        |HA::status
+        |HSL::open
+        |HSL::send
+        |HTML::comment
+        |HTML::disable
+        |HTML::enable
+        |HTML::tag
+        |HTTP::class
+        |HTTP::close
+        |HTTP::collect
+        |HTTP::cookie
+        |HTTP::disable
+        |HTTP::enable
+        |HTTP::fallback
+        |HTTP::has_responded
+        |HTTP::header
+        |HTTP::host
+        |HTTP::hsts
+        |HTTP::is_keepalive
+        |HTTP::is_redirect
+        |HTTP::method
+        |HTTP::passthrough_reason
+        |HTTP::password
+        |HTTP::path
+        |HTTP::payload
+        |HTTP::proxy
+        |HTTP::query
+        |HTTP::redirect
+        |HTTP::reject_reason
+        |HTTP::release
+        |HTTP::request_num
+        |HTTP::request
+        |HTTP::respond
+        |HTTP::response
+        |HTTP::retry
+        |HTTP::status
+        |HTTP::uri
+        |HTTP::username
+        |HTTP::version
+        |HTTP2::active
+        |HTTP2::concurrency
+        |HTTP2::disable
+        |HTTP2::disconnect
+        |HTTP2::enable
+        |HTTP2::push
+        |HTTP2::requests
+        |HTTP2::stream
+        |HTTP2::version
+        |ICAP::header
+        |ICAP::method
+        |ICAP::status
+        |ICAP::uri
+        |IKE::auth_success
+        |IKE::cert
+        |IKE::san_dirname
+        |IKE::san_dns
+        |IKE::san_ediparty
+        |IKE::san_email
+        |IKE::san_ipadd
+        |IKE::san_othername
+        |IKE::san_rid
+        |IKE::san_uri
+        |IKE::san_x400
+        |IKE::subjectAltName
+        |ILX::call
+        |ILX::init
+        |ILX::notify
+        |IMAP::activation_mode
+        |IMAP::disable
+        |IMAP::enable
+        |IP::addr
+        |IP::client_addr
+        |IP::hops
+        |IP::idle_timeout
+        |IP::intelligence
+        |IP::local_addr
+        |IP::protocol
+        |IP::remote_addr
+        |IP::reputation
+        |IP::server_addr
+        |IP::stats
+        |IP::tos
+        |IP::ttl
+        |IP::version
+        |IPFIX::destination
+        |IPFIX::msg
+        |IPFIX::template
+        |ISESSION::deduplication
+        |ISTATS::get
+        |ISTATS::incr
+        |ISTATS::remove
+        |ISTATS::set
+        |IVS_ENTRY::result
+        |L7CHECK::protocol
+        |LB::bias
+        |LB::class
+        |LB::command
+        |LB::connect
+        |LB::connlimit
+        |LB::context_id
+        |LB::detach
+        |LB::down
+        |LB::dst_tag
+        |LB::enable_decisionlog
+        |LB::mode
+        |LB::persist
+        |LB::prime
+        |LB::queue
+        |LB::reselect
+        |LB::select
+        |LB::server
+        |LB::snat
+        |LB::src_tag
+        |LB::status
+        |LB::up
+        |LDAP::activation_mode
+        |LDAP::disable
+        |LDAP::enable
+        |LINK::lasthop
+        |LINK::nexthop
+        |LINK::qos
+        |LINK::vlan_id
+        |LSN::address
+        |LSN::disable
+        |LSN::inbound-entry
+        |LSN::inbound
+        |LSN::persistence-entry
+        |LSN::persistence
+        |LSN::pool
+        |LSN::port
+        |MESSAGE::field
+        |MESSAGE::proto
+        |MESSAGE::type
+        |MQTT::clean_session
+        |MQTT::client_id
+        |MQTT::collect
+        |MQTT::disable
+        |MQTT::disconnect
+        |MQTT::drop
+        |MQTT::dup
+        |MQTT::enable
+        |MQTT::insert
+        |MQTT::keep_alive
+        |MQTT::length
+        |MQTT::message
+        |MQTT::packet_id
+        |MQTT::password
+        |MQTT::payload
+        |MQTT::protocol_name
+        |MQTT::protocol_version
+        |MQTT::qos
+        |MQTT::release
+        |MQTT::replace
+        |MQTT::respond
+        |MQTT::retain
+        |MQTT::return_code_list
+        |MQTT::return_code
+        |MQTT::session_present
+        |MQTT::topic
+        |MQTT::type
+        |MQTT::username
+        |MQTT::will
+        |MR::collect
+        |MR::connect_back_port
+        |MR::connection_instance
+        |MR::connection_mode
+        |MR::equivalent_transport
+        |MR::flow_id
+        |MR::ignore_peer_port
+        |MR::instance
+        |MR::max_retries
+        |MR::message
+        |MR::payload
+        |MR::peer
+        |MR::prime
+        |MR::protocol
+        |MR::release
+        |MR::restore
+        |MR::retry
+        |MR::return
+        |MR::store
+        |MR::stream
+        |MR::transport
+        |NAME::lookup
+        |NAME::response
+        |NSH::chain
+        |NSH::context
+        |NSH::md1
+        |NSH::mimic
+        |NSH::mocksf
+        |NSH::path_id
+        |NSH::service_index
+        |NTLM::disable
+        |NTLM::enable
+        |OFFBOX::request
+        |ONECONNECT::detach
+        |ONECONNECT::label
+        |ONECONNECT::reuse
+        |ONECONNECT::select
+        |PCP::reject
+        |PCP::request
+        |PCP::response
+        |PEM::disable
+        |PEM::enable
+        |PEM::flow
+        |PEM::policy
+        |PEM::session
+        |PEM::subscriber
+        |PLUGIN::disable
+        |PLUGIN::enable
+        |POLICY::controls
+        |POLICY::names
+        |POLICY::rules
+        |POLICY::targets
+        |POP3::activation_mode
+        |POP3::disable
+        |POP3::enable
+        |PROFILE::access
+        |PROFILE::antifraud
+        |PROFILE::auth
+        |PROFILE::avr
+        |PROFILE::clientssl
+        |PROFILE::diameter
+        |PROFILE::exchange
+        |PROFILE::exists
+        |PROFILE::fasthttp
+        |PROFILE::fastl4
+        |PROFILE::fastL4
+        |PROFILE::ftp
+        |PROFILE::http
+        |PROFILE::httpclass
+        |PROFILE::httpcompression
+        |PROFILE::list
+        |PROFILE::oneconnect
+        |PROFILE::persist
+        |PROFILE::serverssl
+        |PROFILE::stream
+        |PROFILE::tcp
+        |PROFILE::tftp
+        |PROFILE::udp
+        |PROFILE::vdi
+        |PROFILE::webacceleration
+        |PROFILE::xml
+        |PROTOCOL_INSPECTION::disable
+        |PROTOCOL_INSPECTION::id
+        |PSC::aaa_reporting_interval
+        |PSC::attr
+        |PSC::auth_user_name
+        |PSC::calling_id
+        |PSC::imeisv
+        |PSC::imsi
+        |PSC::ip_address
+        |PSC::lease_time
+        |PSC::policy
+        |PSC::subscriber_id
+        |PSC::tower_id
+        |PSC::user_name
+        |QOE::disable
+        |QOE::enable
+        |QOE::video
+        |RADIUS::avp
+        |RADIUS::code
+        |RADIUS::id
+        |RADIUS::rtdom
+        |RADIUS::subscriber
+        |RESOLV::lookup
+        |RESOLVER::name_lookup
+        |RESOLVER::summarize
+        |REST::send
+        |REWRITE::disable
+        |REWRITE::enable
+        |REWRITE::payload
+        |REWRITE::post_process
+        |ROUTE::age
+        |ROUTE::bandwidth
+        |ROUTE::clear
+        |ROUTE::cwnd
+        |ROUTE::domain
+        |ROUTE::expiration
+        |ROUTE::mtu
+        |ROUTE::rttvar
+        |ROUTE::rtt
+        |RTSP::collect
+        |RTSP::header
+        |RTSP::method
+        |RTSP::msg_source
+        |RTSP::payload
+        |RTSP::release
+        |RTSP::respond
+        |RTSP::status
+        |RTSP::uri
+        |RTSP::version
+        |SCTP::client_port
+        |SCTP::collect
+        |SCTP::local_port
+        |SCTP::mss
+        |SCTP::payload
+        |SCTP::ppi
+        |SCTP::release
+        |SCTP::remote_port
+        |SCTP::respond
+        |SCTP::rto_initial
+        |SCTP::rto_max
+        |SCTP::rto_min
+        |SCTP::sack_timeout
+        |SCTP::server_port
+        |SDP::field
+        |SDP::media
+        |SDP::session_id
+        |SIP::call_id
+        |SIP::discard
+        |SIP::from
+        |SIP::header
+        |SIP::message
+        |SIP::method
+        |SIP::payload
+        |SIP::persist
+        |SIP::record-route
+        |SIP::respond
+        |SIP::response
+        |SIP::route_status
+        |SIP::route
+        |SIP::to
+        |SIP::uri
+        |SIP::via
+        |SIPALG::hairpin_default
+        |SIPALG::hairpin
+        |SIPALG::nonregister_subscriber_listener
+        |SMTP::disable
+        |SMTP::enable
+        |SMTPS::activation_mode
+        |SMTPS::disable
+        |SMTPS::enable
+        |SOCKS::allowed
+        |SOCKS::destination
+        |SOCKS::version
+        |SPDY::active
+        |SPDY::concurrency
+        |SPDY::disconnect
+        |SPDY::priority
+        |SPDY::requests
+        |SPDY::streamid
+        |SPDY::stream
+        |SPDY::version
+        |SSL::allow_dynamic_record_sizing
+        |SSL::alpn
+        |SSL::authenticate
+        |SSL::c3d
+        |SSL::cert_constraint
+        |SSL::cert
+        |SSL::cipher
+        |SSL::clientrandom
+        |SSL::collect
+        |SSL::disable
+        |SSL::enable
+        |SSL::extensions
+        |SSL::forward_proxy
+        |SSL::handshake
+        |SSL::is_renegotiation_secure
+        |SSL::maximum_record_size
+        |SSL::mode
+        |SSL::modssl_sessionid_headers
+        |SSL::nextproto
+        |SSL::payload
+        |SSL::profile
+        |SSL::release
+        |SSL::renegotiate
+        |SSL::respond
+        |SSL::secure_renegotiation
+        |SSL::sessionid
+        |SSL::sessionsecret
+        |SSL::sessionticket
+        |SSL::session
+        |SSL::sni
+        |SSL::tls13_secret
+        |SSL::unclean_shutdown
+        |SSL::verify_result
+        |STATS::get
+        |STATS::incr
+        |STATS::setmax
+        |STATS::setmin
+        |STATS::set
+        |STREAM::disable
+        |STREAM::enable
+        |STREAM::encoding
+        |STREAM::expression
+        |STREAM::match
+        |STREAM::max_matchsize
+        |STREAM::replace
+        |TAP::action
+        |TAP::config
+        |TAP::score
+        |TCP::abc
+        |TCP::analytics
+        |TCP::autowin
+        |TCP::bandwidth
+        |TCP::client_port
+        |TCP::close
+        |TCP::collect
+        |TCP::congestion
+        |TCP::delayed_ack
+        |TCP::dsack
+        |TCP::earlyrxmit
+        |TCP::ecn
+        |TCP::enhanced_loss_recovery
+        |TCP::idletime
+        |TCP::limxmit
+        |TCP::local_port
+        |TCP::lossfilterburst
+        |TCP::lossfilterrate
+        |TCP::lossfilter
+        |TCP::mss
+        |TCP::naglemode
+        |TCP::naglestate
+        |TCP::nagle
+        |TCP::notify
+        |TCP::offset
+        |TCP::option
+        |TCP::pacing
+        |TCP::payload
+        |TCP::proxybufferhigh
+        |TCP::proxybufferlow
+        |TCP::proxybuffer
+        |TCP::push_flag
+        |TCP::rcv_scale
+        |TCP::rcv_size
+        |TCP::recvwnd
+        |TCP::release
+        |TCP::remote_port
+        |TCP::respond
+        |TCP::rexmt_thresh
+        |TCP::rt_metrics_timeout
+        |TCP::rto
+        |TCP::rttvar
+        |TCP::rtt
+        |TCP::sendbuf
+        |TCP::server_port
+        |TCP::setmss
+        |TCP::snd_cwnd
+        |TCP::snd_scale
+        |TCP::snd_ssthresh
+        |TCP::snd_wnd
+        |TCP::unused_port
+        |TDS::msg
+        |TDS::session
+        |TMM::cmp_count
+        |TMM::cmp_groups
+        |TMM::cmp_group
+        |TMM::cmp_primary_group
+        |TMM::cmp_unit
+        |UDP::client_port
+        |UDP::debug_queue
+        |UDP::drop
+        |UDP::hold
+        |UDP::local_port
+        |UDP::max_rate
+        |UDP::mss
+        |UDP::payload
+        |UDP::release
+        |UDP::remote_port
+        |UDP::respond
+        |UDP::sendbuffer
+        |UDP::server_port
+        |UDP::unused_port
+        |URI::basename
+        |URI::compare
+        |URI::decode
+        |URI::encode
+        |URI::host
+        |URI::path
+        |URI::port
+        |URI::protocol
+        |URI::query
+        |VALIDATE::protocol
+        |WAM::disable
+        |WAM::enable
+        |WEBSSO::disable
+        |WEBSSO::enable
+        |WEBSSO::select
+        |WS::collect
+        |WS::disconnect
+        |WS::enabled
+        |WS::frame
+        |WS::masking
+        |WS::message
+        |WS::payload
+        |WS::release
+        |WS::request
+        |WS::response
+        |X509::cert_fields
+        |X509::extensions
+        |X509::hash
+        |X509::issuer
+        |X509::not_valid_after
+        |X509::not_valid_before
+        |X509::pem2der
+        |X509::serial_number
+        |X509::signature_algorithm
+        |X509::subject_public_key
+        |X509::subject_public_key_RSA_bits
+        |X509::subject_public_key_type
+        |X509::subject
+        |X509::verify_cert_error_string
+        |X509::version
+        |X509::whole
+        |XLAT::listen_lifetime
+        |XLAT::listen
+        |XLAT::src_addr
+        |XLAT::src_config
+        |XLAT::src_endpoint_reservation
+        |XLAT::src_nat_valid_range
+        |XLAT::src_port
+        |XML::address
+        |XML::collect
+        |XML::disable
+        |XML::element
+        |XML::enable
+        |XML::event
+        |XML::eventid
+        |XML::parse
+        |XML::payload
+        |XML::release
+        |XML::soap
+        |XML::subscribe
+      )
+    end: '(?=(?<!\\)$|[\n;\]}])'
+    beginCaptures:
+      '1':
+        name: keyword.control.command
+    patterns:
+      -
+        include: '#empty-brackets'
+      -
+        include: '#curly-string-brackets'
+      -
+        include: '#quoted-string'
+      -
+        include: '#bare-string'
+      -
+        include: '#proc-call-args'
+  property-list-brackets:
+    patterns:
+      -
+        begin: '\s*({)'
+        end: '(})'
+        patterns:
+          -
+            include: '#property-list'
+  property-list:
+    begin: '(?=.)'
+    end: '\s|(?=(?<!\\)$|[\]])|(?<=})'
+    patterns:
+      -
+        include: '#empty-brackets'
+      -
+        include: '#square-brackets'
+      -
+        include: '#irule-expression-keywords'
+      -
+        begin: '([^\s\]]*)\s+({)'
+        end: '(})'
+        beginCaptures:
+          '1':
+            name: variable
+            patterns:
+              -
+                include: '#variable'
+              -
+                include: '#opt'
+        patterns:
+          -
+            include: '#empty-brackets'
+          -
+            include: '#property-list'
+      -
+        begin: "\\s*(?!$|\\]|\\\\)([^\\s\\]}{]*)\\s+(?!$|[{\n])"
+        end: '(?=\s+|\]|(?<!\\)$)|(?<=})'
+        beginCaptures:
+          '1':
+            name: variable
+            patterns:
+              -
+                include: '#constant-numeric'
+              -
+                include: '#opt'
+              -
+                include: '#variable'
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#opt'
+          -
+            include: '#empty-brackets'
+          -
+            include: '#special-brackets'
+          -
+            include: '#square-brackets'
+          -
+            include: '#variable'
+          -
+            include: '#constant-numeric'
+          -
+            match: '(?!\s|\])([^\s\]]+)'
+            name: string
+      -
+        include: '#variable'
+      -
+        include: '#bare-string'
+  proc-arguments:
+    patterns:
+      -
+        include: '#proc-args-braced'
+      -
+        include: '#proc-args-singular'
+  proc-args-singular:
+    patterns:
+      -
+        match: '(?!{|\[|\s|}|\]|$)([^\s}\];]*)(?=\s|}|\])'
+        captures:
+          '1':
+            name: punctuation.definition.variable.irule
+  proc-args-braced:
+    begin: '(?={)({)'
+    end: '\s*(})'
+    beginCaptures:
+      '1':
+        name: meta.brace.curly.proc.args.open.irule
+    endCaptures:
+      '1':
+        name: meta.brace.curly.proc.args.close.irule
+    patterns:
+      -
+        include: '#proc-arguments-nested'
+      -
+        include: '#variable-bare'
+  proc-arguments-nested:
+    patterns:
+      -
+        begin: '\s*+({)'
+        end: '(})'
+        beginCaptures:
+          '1':
+            name: entity.function.name
+        endCaptures:
+          '1':
+            name: entity.function.name
+        patterns:
+          -
+            include: '#quoted-string'
+          -
+            include: '#empty-brackets'
+          -
+            match: '\s*([^\s|{|}]*)\s*([^\s|{|}]*)(?=\s*?})'
+            contentName: variable
+            captures:
+              '1':
+                name: variable
+              '2':
+                name: string.proc.argument
+                patterns:
+                  -
+                    include: '#constant-numeric'
+          -
+            include: '#curly-string-brackets'
+          -
+            match: '\s*([^\s|{|}]*)'
+            name: variable.proc.argument
+  arguments-braced:
+    patterns:
+      -
+        begin: "({)(?:(?!$|\n|\\]|}|;|\\[|{)\\s*)?"
+        end: '(})'
+        patterns:
+          -
+            match: "(?:(?!$|\n|\\]|}|;|\\[|{)\\s*)?([^\\s|{|}]*)(?:(?!$|\n|\\]|}|;|\\[|{)\\s*)?"
+            name: variable
+  double-dash:
+    match: \s(--)\s
+    captures:
+      '1':
+        name: keyword.control.irule
+  quoted-string:
+    patterns:
+      -
+        comment: 'when inside curly bracket, {"}'
+        match: '(?<={)\s*+("\s*(?=})(?!"))'
+        name: string.quoted.irule
+      -
+        begin: '\s*+(?<!\\)(")'
+        end: '(?<!\\)(")'
+        beginCaptures:
+          '1':
+            name: string.quoted.double.open.irule
+        endCaptures:
+          '1':
+            name: string.quoted.double.close.irule
+        patterns:
+          -
+            include: '#square-brackets'
+          -
+            include: '#string-content'
+          -
+            match: '(\*)'
+            name: bare.string
+          -
+            match: '([{}])'
+            name: string.quoted.irule
+  string-content:
+    patterns:
+      -
+        include: '#string-escapes'
+      -
+        include: '#variable'
+      -
+        include: '#square-brackets'
+      -
+        include: '#bare-string'
+  string-escapes:
+    patterns:
+      -
+        name: constant.character.escape.newline.irule
+        match: '\\\n'
+      -
+        name: constant.character.escape
+        match: '\s*+\\[\]"\\nrtbfv0`\[]'
+      -
+        name: constant.character.escape
+        match: '\\u(({[0-9a-fA-F]+\})|[0-9a-fA-F]{4})'
+      -
+        name: constant.character.escape
+        match: '\\x[0-9a-fA-F]{2}'
+      -
+        name: constant.character.escape
+        match: '(?<!\\)(\\)([;])'
+        captures:
+          '1':
+            name: constant.character.escape
+          '2':
+            name: string
+  bare-string:
+    patterns:
+      -
+        include: '#opt'
+      -
+        include: '#string-escapes'
+      -
+        match: '\s*(\$)(?=$|\n|\]|}|\"|;|\s)'
+        name: string.bare.quoted.irule
+      -
+        match: '(\\[^\]"\\nrtbfv0`\[])'
+        name: string.bare.quoted.irule
+      -
+        match: "(?<!::)(?!;|\\]|}|\\*|\"|;)([^\\*}\\\\;\\]{\\[\"\\$\n\\-\\)\\(]+)"
+        captures:
+          '1':
+            name: string.bare.quoted.irule
+            patterns:
+              -
+                match: '(?:(?<=::)|(?=[^\s:]*(?=::)))(?!\s)([^\s]*)'
+                captures:
+                  '1': {patterns: []}
+              -
+                include: '#variable'
+      -
+        match: '(-)(?=\s|;|}|\]|"|-)'
+        name: string.bare.quoted.irule
+      -
+        match: '(?<=-)(-)'
+        name: string.quoted.irule
+      -
+        include: '#variable'
+  html-curly-brackets:
+    begin: '\s*({)'
+    end: '(})'
+    patterns:
+      -
+        include: text.html.basic
+  regexp:
+    patterns:
+      -
+        begin: '(?<=^|\[|{|;)\s*(::)?\b(regexp|regsub)\b'
+        end: "(?=(?<!\\\\)(?:$|[\n;}\\]]))"
+        beginCaptures:
+          '1':
+            name: support.type.ns.separator.irule
+          '2':
+            name: keyword.control.regexp.irule
+        patterns:
+          -
+            include: '#line-escape'
+          -
+            include: '#double-dash'
+          -
+            include: '#quoted-string'
+          -
+            match: '\s*(->)'
+            name: meta.constant.re.trashvar.irule
+          -
+            include: '#opt'
+          -
+            begin: '\s*({|")'
+            end: "(}|\")(?=\\s+(?:\\\\\n|$|\n|\\[|\\$|\\b|\"|;|}|-))"
+            contentName: string.irule
+            patterns:
+              -
+                include: '#regular-expression'
+          -
+            include: '#quoted-string'
+          -
+            include: '#variable'
+          -
+            include: '#variable-bare-italic'
+      -
+        begin: '(?<=_regexp|_re)\s+(?={|")'
+        end: '(?=(?<!\\)$)|(?<=")|(?<=})'
+        patterns:
+          -
+            begin: '({)'
+            end: '(})'
+            contentName: string.irule
+            patterns:
+              -
+                include: '#regular-expression'
+          -
+            begin: '(")'
+            end: '(")'
+            contentName: string.irule
+            patterns:
+              -
+                include: '#regular-expression'
+  comment-blocks:
+    patterns:
+      -
+        contentName: comment.line.number-sign.irule
+        begin: '(?<=^|;|{)\s*((#))'
+        end: "(?=$|\n)|((#))(?=\\s*(?:[}\n]))"
+        captures:
+          '1':
+            name: comment.line.number-sign.irule
+          '2':
+            name: punctuation.definition.comment.irule
+      -
+        contentName: comment.block.irule
+        begin: '(?<=^|;|\{)\s*((?:\%\s+\{)|(?:\bif\s+{?0}?\s+{))'
+        end: '\s*(\})'
+        beginCaptures:
+          '1':
+            name: comment.block.multi.start.irule
+          '2':
+            name: punctuation.definition.comment.irule
+        endCaptures:
+          '1':
+            name: comment.block.multi.end.irule
+        patterns:
+          -
+            include: '#annotate'
+          -
+            include: '#variable-non-substituting'
+  annotate:
+    patterns:
+      -
+        include: '#annotate-control-block'
+      -
+        include: '#annotate-properties'
+      -
+        include: '#annotate-title'
+      -
+        include: '#annotate-header'
+      -
+        include: '#annotate-highlight'
+      -
+        include: '#annotate-type'
+      -
+        include: '#annotate-list'
+  annotate-title:
+    patterns:
+      -
+        comment: 'adding @ in a multi-line will make the line emphasized'
+        contentName: meta.class.comment.annotate.irule
+        begin: '\s*+(@)'
+        end: "(?={|\\s-|>)|(@|}|$|\n)|\\|"
+        beginCaptures:
+          '1':
+            name: support.type.annotate.irule
+        endCaptures:
+          '1':
+            name: support.type.annotate.irule
+        patterns:
+          -
+            include: '#variable-non-substituting'
+  annotate-properties:
+    begin: "(?=\\s*@[^\\s\n])"
+    end: "(?=$|[\n}@])"
+    patterns:
+      -
+        comment: 'special @ values that are meant as property values'
+        match: '\s*+(@)\b(type)\b(\s+[^{}|@\[<>-]*)?'
+        captures:
+          '1':
+            name: meta.constant.annotate.property.irule
+          '2':
+            name: support.type.name.irule
+          '3':
+            name: entity.function.property.name.irule
+      -
+        comment: 'special @ values that are meant as property values'
+        match: '\s*+(@)\b(arg(?:s)?|returns|key|prop|if|example|param|params|opt|option|argument|val|value)\b(\s+[^\/{}|@\[<>]*)?'
+        captures:
+          '1':
+            name: support.type.annotate.property.irule
+          '2':
+            name: variable.property.name.irule
+          '3':
+            name: support.type
+            patterns:
+              -
+                include: '#opt'
+      -
+        comment: '@<other> (no space after @)'
+        match: '\s*+(@)\b([^\s]*)\b(\s+[^\/{}|@\[<>-]*)?'
+        captures:
+          '1':
+            name: meta.constant.annotate.property.irule
+          '2':
+            name: entity.function.property.name.irule
+          '3':
+            name: support.type.irule
+      -
+        include: '#annotate'
+  annotate-control-block:
+    patterns:
+      -
+        comment: 'bracketed within a comment'
+        contentName: keyword.operator
+        begin: '^\s*+(?={)'
+        end: '(?<=})'
+        patterns:
+          -
+            include: '#brackets'
+  annotate-proc-call:
+    patterns:
+      -
+        begin: '(\[)'
+        end: '(\])'
+        beginCaptures:
+          '1':
+            name: support.type.annotate.proc-call.irule
+        endCaptures:
+          '1':
+            name: support.type.annotate.proc-call.irule
+        patterns:
+          -
+            include: '#proc-call'
+  annotate-type:
+    patterns:
+      -
+        comment: 'adding @ in a multi-line will make the line emphasized'
+        contentName: entity.function.name.comment.annotate.irule
+        begin: '\s*+({)'
+        end: '\s*(})'
+        beginCaptures:
+          '1':
+            name: meta.constant.comment.annotate.irule
+        endCaptures:
+          '1':
+            name: meta.constant.comment.annotate.irule
+        patterns:
+          -
+            include: '#annotate-regular-expression'
+          -
+            include: '#annotate-proc-call'
+          -
+            begin: (<)
+            end: '(>)|(?=[}])'
+            contentName: support.type.comment.annotate.property.punctuation.italic.irule
+            patterns:
+              -
+                include: '#annotate-regular-expression'
+              -
+                match: (\|)
+                name: entity.function.name.irule
+              -
+                include: '#variable-non-substituting'
+              -
+                match: '([,])'
+                name: entity.function.name.annotate.opt.irule
+              -
+                match: '([-])'
+                name: meta.constant.annotate.opt.irule
+          -
+            match: '(?:(?<={|\|)([?*])|([?*])(?=}|\|))'
+            name: variable.modifier.annotate.punctuation.italic.irule
+          -
+            match: (\|)
+            name: meta.constant.comment.annotate.irule
+  annotate-regular-expression:
+    patterns:
+      -
+        begin: (/)
+        end: (/|$)
+        beginCaptures:
+          '1':
+            name: support.type.annotate.re.brace.open.irule
+        endCaptures:
+          '1':
+            name: support.type.annotate.re.brace.close.irule
+        contentName: string.re.expression.comment.annotate.contents.irule
+        patterns:
+          -
+            include: '#regular-expression'
+  annotate-highlight:
+    patterns:
+      -
+        comment: 'adding | in a multi-line will make the line highlighted (string)'
+        match: '(?<=\|)\s*([^|]*)'
+        captures:
+          '1':
+            name: string.quote.annotate.comment.irule
+            patterns:
+              -
+                include: '#annotate-type'
+              -
+                include: '#annotate-proc-call'
+              -
+                include: '#variable-non-substituting'
+              -
+                match: '\b(http://([^\s]*))'
+                name: entity.function.name.markup.underline
+  annotate-header:
+    patterns:
+      -
+        comment: 'adding > in a multi-line will make the line emphasized'
+        begin: '\s*+(>)'
+        end: '(<)|(?=$|>)'
+        contentName: meta.constant.annotate.header.irule
+        captures:
+          '1':
+            name: entity.function.name.annotate.irule
+          '2':
+            name: meta.constant.annotate.header.irule
+        patterns:
+          -
+            include: '#annotate'
+  annotate-list:
+    patterns:
+      -
+        match: '^\s*([0-9]\.)\s+'
+        name: meta.class
+  opt:
+    patterns:
+      -
+        comment: 'Handle options sent to commands at various points (cmd -name1 value -name2 value)'
+        match: '\s*+(?<=\s|^|\"|\()((-)(?!-|\s|\"|;|\n|>)[^\s$\n\[\];\"{)(}]*)'
+        captures:
+          '1':
+            name: support.type.opt.irule
+          '2':
+            name: meta.constant.opt.start.irule
+  line-escape:
+    begin: "\\s*+(\\\\\n)$"
+    end: '(^)(?:\s*(?!$))?'
+    beginCaptures:
+      '1':
+        name: constant.character.escape.newline.irule
+    endCaptures:
+      '1':
+        name: meta.lineescape.highlight.irule
+  glob-match:
+    patterns:
+      -
+        begin: '({)'
+        end: '(})'
+        patterns:
+          -
+            include: '#glob-match'
+      -
+        match: '\s*+(\*)'
+        name: meta.class
+      -
+        include: '#string-escapes'
+      -
+        begin: '(?<!\\)(")'
+        end: '(?<!\\)(")'
+        beginCaptures:
+          '1':
+            name: string.double.quoted.glob.match.open.irule
+        endCaptures:
+          '1':
+            name: string.double.quoted.glob.match.close.irule
+        patterns:
+          -
+            include: '#glob-match'
+      -
+        begin: '(?<!\\)(\[)'
+        end: '(?<!\\)(\])'
+        contentName: support.type
+        beginCaptures:
+          '1':
+            name: meta.class
+        endCaptures:
+          '1':
+            name: meta.class
+      -
+        include: '#square-brackets'
+      -
+        include: '#bare-string'
+  variable-bare-italic:
+    patterns:
+      -
+        begin: "\\s*(?!$|[$\\[;\n{])"
+        end: "(?=(?<!\\\\)$|[\n\\];\\[{}\\s])"
+        patterns:
+          -
+            include: '#quoted-string'
+          -
+            include: '#variable'
+          -
+            include: '#brackets'
+          -
+            begin: '\s*(\()'
+            end: (\))
+            contentName: punctuation.italic
+            beginCaptures:
+              '1':
+                name: entity.function.name.array.open.irule
+            endCaptures:
+              '1':
+                name: entity.function.name.array.close.irule
+            patterns:
+              -
+                include: '#opt'
+              -
+                include: '#proc-call-args'
+          -
+            match: '(?!\s)([^\s\[(?:::){;\$"\]};]*)'
+            name: punctuation.italic.variable
+          -
+            match: '(?<=\*)(?!\s)([^\s\[(?:::){;$"\];}]*)'
+            name: punctuation.italic.variable
+  variable-bare:
+    patterns:
+      -
+        begin: "(?<=\\s|^|\\*|{)\\s*(?!$|[$\n;}{\\]\\[])"
+        end: "(?=(?<!\\\\)$|[\n\\];\\[{}]|(?=\\s))"
+        patterns:
+          -
+            include: '#variable'
+          -
+            include: '#quoted-string'
+          -
+            begin: (\()
+            end: (\))
+            contentName: punctuation.italic
+            beginCaptures:
+              '1':
+                name: entity.function.name.array.open.irule
+            endCaptures:
+              '1':
+                name: entity.function.name.array.close.irule
+            patterns:
+              -
+                include: '#opt'
+              -
+                include: '#proc-call-args'
+          -
+            match: '([,])'
+            name: variable
+          -
+            match: '(?!(?<!\\)$|\[|\])([^:\s}\]\[\({",;$]*)'
+            name: variable
+          -
+            match: '(?<=\*)(?!\s|$|\[|\])([^:\s}\[{\]",;]*)'
+            name: variable
+          -
+            match: '(:)'
+            name: string
+          -
+            include: '#proc-call-args'
+      -
+        include: '#variable'
+  variable-braced:
+    patterns:
+      -
+        begin: '(?={)({)'
+        end: '(}|\s)'
+        patterns:
+          -
+            include: '#variable-bare'
+  variable:
+    patterns:
+      -
+        match: '^\s*(\$)\s*(?=\n|$|\]|})'
+        name: support.type
+      -
+        match: "\\s*(?:(?![\\]\n\"};])|(?=[$]))(?<!(?<!\\\\)\\\\)(\\$)(?:({)([^}\\s\\]\"\\)\\(\\$]*)(\\([^\\(\\)]*\\))?(})([^\\s\\[\\];\n\"{}]*)?|(?=[A-Za-z0-9_:])([^\\s\\*\\[}\\]/\"\\);\\(\\\\$,\\-\\+'\\*]*)(\\([^\\s\\['\\\\;}\\]\")($,+*]*\\))?)"
+        captures:
+          '1':
+            name: support.type.variable.indicator.irule
+          '2':
+            name: entity.function.name.variable.brace.open.irule
+          '3':
+            patterns:
+              -
+                include: '#variable'
+              -
+                match: '([^\s:"}{]+)'
+                name: variable.name
+          '4':
+            patterns:
+              -
+                begin: (\()
+                end: (\))
+                contentName: punctuation.italic
+                beginCaptures:
+                  '1':
+                    -
+                      name: support.type
+                endCaptures:
+                  '1':
+                    -
+                      name: support.type
+                patterns:
+                  -
+                    include: '#opt'
+                  -
+                    include: '#proc-call-args'
+          '5':
+            name: entity.function.name.variable.brace.close.irule
+          '6':
+            patterns:
+              -
+                include: '#proc-call-args'
+              -
+                include: '#bare-string'
+          '7':
+            patterns:
+              -
+                match: '([^\s:"}{\\\]\[]+)'
+                name: variable.name
+          '8':
+            patterns:
+              -
+                begin: (\()
+                end: (\))
+                contentName: punctuation.italic
+                beginCaptures:
+                  '1':
+                    -
+                      name: entity.function.name.irule
+                endCaptures:
+                  '1':
+                    -
+                      name: entity.function.name.irule
+                patterns:
+                  -
+                    include: '#opt'
+                  -
+                    include: '#proc-call-args'
+  variable-non-substituting:
+    patterns:
+      -
+        match: '^\s*+(\$)\s*(?=\n|$)'
+        name: support.type
+      -
+        match: "\\s*+(?:(?!\\]|\n|\"|>|<|,))(?<!(?<!\\\\)\\\\)(\\$)(?:({)([^}\\s\\]\"\\)\\(\\$]*)(\\(.*\\))?(})|(?=[A-Za-z0-9_:])([^\\s\\,<>\\*}\\]/\"\\);\\(\\\\\\$,\\-\\+\\*]*)(\\([^\\s\\\\;\\*}\\]\"\\)\\(\\$,\\-\\+\\*<>]*\\))?)"
+        captures:
+          '1':
+            name: support.type.variable.indicator.irule
+          '2':
+            name: entity.function.name.variable.brace.open.irule
+          '3':
+            patterns:
+              -
+                include: '#variable'
+              -
+                match: '([^\s:"}{]+)'
+                name: meta.constant.irule
+          '4':
+            patterns:
+              -
+                begin: (\()
+                end: (\))
+                contentName: punctuation.italic.meta.constant
+                beginCaptures:
+                  '1':
+                    -
+                      name: support.type
+                endCaptures:
+                  '1':
+                    -
+                      name: support.type
+                patterns:
+                  -
+                    include: '#proc-call-args'
+          '5':
+            name: entity.function.name.variable.brace.close.irule
+          '6':
+            patterns:
+              -
+                match: '([^\s:"}{\\\]\[]+)'
+                name: meta.constant
+          '7':
+            patterns:
+              -
+                begin: (\()
+                end: (\))
+                contentName: punctuation.italic.meta.constant
+                beginCaptures:
+                  '1':
+                    -
+                      name: entity.function.name
+                endCaptures:
+                  '1':
+                    -
+                      name: entity.function.name
+                patterns:
+                  -
+                    include: '#proc-call-args'

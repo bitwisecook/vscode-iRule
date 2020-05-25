@@ -145,7 +145,6 @@ export function complete(document: vscode.TextDocument, position: vscode.Positio
                     new vscode.CompletionItem('MR_EGRESS', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('MR_FAILED', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('MR_INGRESS', vscode.CompletionItemKind.Event),
-                    new vscode.CompletionItem('NAME_RESOLVED', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('PCP_REQUEST', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('PCP_RESPONSE', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('PEM_POLICY', vscode.CompletionItemKind.Event),
@@ -190,11 +189,6 @@ export function complete(document: vscode.TextDocument, position: vscode.Positio
                     new vscode.CompletionItem('WS_SERVER_DATA', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('WS_SERVER_FRAME', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('WS_SERVER_FRAME_DONE', vscode.CompletionItemKind.Event),
-                    new vscode.CompletionItem('AUTH_ERROR', vscode.CompletionItemKind.Event),
-                    new vscode.CompletionItem('AUTH_FAILURE', vscode.CompletionItemKind.Event),
-                    new vscode.CompletionItem('AUTH_SUCCESS', vscode.CompletionItemKind.Event),
-                    new vscode.CompletionItem('AUTH_WANTCREDENTIAL', vscode.CompletionItemKind.Event),
-                    new vscode.CompletionItem('ASM_REQUEST_VIOLATION', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('XML_CONTENT_BASED_ROUTING', vscode.CompletionItemKind.Event),
                 ];
             } else if (words.length === 2) {

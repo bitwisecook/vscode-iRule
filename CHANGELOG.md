@@ -133,3 +133,9 @@ Improve the highlighting of all the diagnostics
 
 ### Added
 Add diagnostics for double substitution around if, while, for
+
+## 1.6.0
+
+### Changed
+Complete rewrite of the iRule language
+Overhaul of the diagnostics to improve their accuracy, reducing some false positives

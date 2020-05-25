@@ -4,6 +4,7 @@ import * as dochelp from "./documentHelpers";
 import * as format from "./formatProvider";
 import * as complete from "./completionProvider";
 import * as diagnostic from "./diagnosticsProvider";
+import * as codeAction from "./codeActionProvider";
 
 export function activate(context: vscode.ExtensionContext) {
     vscode.languages.registerDocumentFormattingEditProvider("irule-lang", {
@@ -90,6 +91,12 @@ export function activate(context: vscode.ExtensionContext) {
         },
         " ",
         "." // triggered whenever a ' ' or '.' is being typed
+    );
+
+    context.subscriptions.push(
+        vscode.languages.registerCodeActionsProvider('irule-lang', new codeAction.InvalidCharFix(), {
+            providedCodeActionKinds: codeAction.InvalidCharFix.providedCodeActionKinds
+        })
     );
 
     const collection = vscode.languages.createDiagnosticCollection(
