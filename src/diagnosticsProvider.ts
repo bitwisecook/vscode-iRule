@@ -13,14 +13,15 @@ export function updateDiagnostics(
             if (/^\s*#/.test(line)) {
                 continue;
             }
-            let match = /(^\s*((expr|eval|catch|after)\s+[^\{]+)|\[\s*((expr|eval|catch|after)\s+[^\{\}\];]+)(;|]|$))/.exec(
+            let match = /(?<=^|;|\[)\s*(expr|eval|catch)\s+[^{].*($|;|])/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.doublesubst.enable') && match) {
-                const idx = line.indexOf((match[4] ? match[4] : match[2]));
+                console.log(match);
+                const idx = line.indexOf(match[1]);
                 diags.push({
                     code: "",
-                    message: `\`${match[5] || match[3]}\` permits double substitution, wrap the expression in \`{...}\``,
+                    message: `\`${match[1]}\` permits double substitution or may have small performance impact, wrap the expression in \`{...}\``,
                     range: new vscode.Range(
                         new vscode.Position(lineNum, idx),
                         new vscode.Position(lineNum, line.length)
@@ -30,7 +31,7 @@ export function updateDiagnostics(
                 });
             }
 
-            match = /^\s*(if|while|uplevel)\s+(\{.*?\}|\w+)\s+([^\{]+)(;|]|$)/.exec(
+            match = /(?<=^|;|\[)\s*(if|while|uplevel)\s+[^{"$\[]*(\$|\[|("[^"$\[]*[$\[][^"$\[]*"))\s*.*?({|$)/.exec(
                 line
             );
             if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.doublesubst.enable') && match) {
@@ -38,7 +39,25 @@ export function updateDiagnostics(
                 const idx = line.indexOf(match[1]);
                 diags.push({
                     code: "",
-                    message: `\`${match[2]}\` permits double substitution, wrap the second argument in \`{...}\``,
+                    message: `\`${match[1]}\` permits double substitution, wrap the first argument in \`{...}\``,
+                    range: new vscode.Range(
+                        new vscode.Position(lineNum, idx),
+                        new vscode.Position(lineNum, line.length)
+                    ),
+                    severity: vscode.DiagnosticSeverity.Error,
+                    source: ""
+                });
+            }
+
+            match = /(?<=^|;|\[)\s*(after)\s+\d+(\s+-periodic)?\s+[^{"$\[]*(\$|\[|("[^"$\[]*[$\[][^"$\[]*"))/.exec(
+                line
+            );
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.doublesubst.enable') && match) {
+                console.log(match);
+                const idx = line.indexOf(match[1]);
+                diags.push({
+                    code: "",
+                    message: `\`${match[1]}\` permits double substitution, wrap the second argument in \`{...}\``,
                     range: new vscode.Range(
                         new vscode.Position(lineNum, idx),
                         new vscode.Position(lineNum, line.length)
