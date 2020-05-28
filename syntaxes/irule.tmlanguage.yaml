@@ -20,6 +20,10 @@ repository:
         include: '#comment-blocks'
       -
         include: '#irule-when'
+      -
+        include: '#irule-proc'
+      -
+        include: '#irule-timing'
   invariant:
     patterns:
       -
@@ -186,7 +190,10 @@ repository:
         include: '#bare-string'
       -
         begin: '(?=::)'
-        end: "\\s|(?=[\\]};\n])"
+        end: "\\s|(?=[\\]};\\n])"
+        patterns:
+          -
+            include: '#namespace-name'
   keywords:
     patterns:
       -
@@ -242,17 +249,19 @@ repository:
       -
         include: '#irule-core-commands'
       -
-        match: "(?:(?<=^|[\\[{;])\\s*|(?<=::)(?![\\s\"]))([^\\s}\\]{\\[;\\\\\"]*)(?=$|{}|[\\s\n\\]}\\[;])"
+        match: "(?:(?<=^|[\\[{;])\\s*|(?<=::)(?![\\s\"]))([^\\s}\\]{\\[;\\\\\"]*)(?=$|{}|[\\s\\n\\]}\\[;])"
         captures:
           '1':
-            patterns: []
+            patterns:
+              -
+                includes: '#namespace-name'
   irule-core-commands:
     patterns:
       -
         include: regexp
       -
         begin: '(?<=^|\[|{|;)\s*(::)?\b(format|scan)\b'
-        end: "(?=(?<!\\\\)(?:$|[\n\\]};]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n\\]};]))"
         captures:
           '1':
             name: support.type
@@ -281,10 +290,10 @@ repository:
               '4':
                 name: entity.function.name.irule
           -
-            match: "(?<=\\s)\\s*(?![%.$])([^\\s\\]}\\[{;\n]*)"
+            match: "(?<=\\s)\\s*(?![%.$])([^\\s\\]}\\[{;\\n]*)"
             captures:
               '1':
-                name: variable
+                name: variable.irule
                 patterns:
                   -
                     include: '#variable-bare-italic'
@@ -335,7 +344,7 @@ repository:
   regular-expression:
     patterns:
       -
-        match: "(?<!\\\\)(\\#.*)(?=\n|$)"
+        match: "(?<!\\\\)(\\#.*)(?=\\n|$)"
         name: comment
       -
         match: '(\.)([?+*])'
@@ -348,7 +357,7 @@ repository:
         match: '(?<={|^)\s*(\^)'
         name: meta.class.re.start.irule
       -
-        match: "(?<!\\\\)(\\$)(?=\\s*}|\n)"
+        match: "(?<!\\\\)(\\$)(?=\\s*}|\\n)"
         name: meta.class.re.end.irule
       -
         match: '(\\)(?=\s*})'
@@ -620,10 +629,15 @@ repository:
         patterns:
           -
             include: '#expressions'
+  irule-timing:
+    patterns:
+      -
+        match: '^\s*(timing\s+[^\s]+)\s*(;|$)'
+        name: keyword.control.timing.irule
   irule-proc:
     patterns:
       -
-        begin: "(?<=^|[\\[{;])\\s*(::)?\\b(proc)\\b\\s+([^\\s\n]+)\\s+(?={|\\b|\\[|\\\\$)"
+        begin: "(?<=^|[\\[{;])\\s*(::)?\\b(proc)\\b\\s+([^\\s\\n]+)\\s+(?={|\\b|\\[|\\\\$)"
         end: '(?=(?<!\\)$)'
         beginCaptures:
           '1':
@@ -636,6 +650,8 @@ repository:
                 include: '#variable'
               -
                 include: '#brackets'
+              -
+                include: '#namespace-name'
         patterns:
           -
             include: '#proc-arguments'
@@ -835,7 +851,9 @@ repository:
         beginCaptures:
           '1':
             name: keyword.control.subst.irule
-            patterns: []
+            patterns:
+              -
+                include: '#namespace-separator'
         patterns:
           -
             begin: '(?<=subst)\b((?:\s+(?:-nobackslashes|-nocommands|-novariables))?)(?!\s*$)'
@@ -851,8 +869,8 @@ repository:
   irule-binary:
     patterns:
       -
-        begin: "(?<=^|\\[|{|;)\\s*(::)?\\b(binary)\\b\\s+(?!\n)([^\\s\\[{;\n\\]]*)"
-        end: "\\s*(?=$|\n|\\]|;|})"
+        begin: "(?<=^|\\[|{|;)\\s*(::)?\\b(binary)\\b\\s+(?!\\n)([^\\s\\[{;\\n\\]]*)"
+        end: "\\s*(?=$|\\n|\\]|;|})"
         beginCaptures:
           '1':
             name: support.type
@@ -867,8 +885,8 @@ repository:
           -
             include: '#line-escape'
           -
-            begin: "(?<=scan|format)\\s+(?!\n)"
-            end: "(?=(?<!\\\\)(?:$|[\n\\]};]))"
+            begin: "(?<=scan|format)\\s+(?!\\n)"
+            end: "(?=(?<!\\\\)(?:$|[\\n\\]};]))"
             patterns:
               -
                 include: '#line-escape'
@@ -922,7 +940,7 @@ repository:
               -
                 include: '#bare-string'
           -
-            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?:-|\\$)[^\\s]*\\s+|\\[[^\\]\n]*(?=\\]))*+)(?=\\s*{)"
+            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?:-|\\$)[^\\s]*\\s+|\\[[^\\]\\n]*(?=\\]))*+)(?=\\s*{)"
             end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
             beginCaptures:
               '1':
@@ -978,7 +996,7 @@ repository:
               -
                 include: '#bare-string'
           -
-            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?!(?<!\\\\)$)(?:-|\\$)[^\\s]*(?:(?!\\s*$)\\s+)?|\\[[^\\]\n]*(?=\\]))*+)"
+            begin: "(?<=switch)\\b(\\s+(?!$)(?:(?!(?<!\\\\)$)(?:-|\\$)[^\\s]*(?:(?!\\s*$)\\s+)?|\\[[^\\]\\n]*(?=\\]))*+)"
             end: '(?=(?<!\\)(?:$|[;\]}]))|(?<=})'
             beginCaptures:
               '1':
@@ -1009,7 +1027,7 @@ repository:
     patterns:
       -
         begin: '(?<=^|\[|{|;)\s*\b(puts)\b'
-        end: "(?=$|\n|}|\\]|;)"
+        end: "(?=$|\\n|}|\\]|;)"
         beginCaptures:
           '1':
             name: keyword.control.puts.irule
@@ -1019,7 +1037,7 @@ repository:
           -
             include: '#opt'
           -
-            match: "(?:(?<=puts)|^|(?<=-nonewline))\\s*+(?!\n|$)([^\\s$\n;}\\]\\[{\"]*+)(?!\\s*(?:$|\n|}|\\]|;|^))"
+            match: "(?:(?<=puts)|^|(?<=-nonewline))\\s*+(?!\\n|$)([^\\s$\\n;}\\]\\[{\"]*+)(?!\\s*(?:$|\\n|}|\\]|;|^))"
             name: support.type.puts.channel.punctuation.italic.irule
           -
             include: '#square-brackets'
@@ -1033,7 +1051,7 @@ repository:
     patterns:
       -
         begin: '(?<=^|{|\[|;)\s*\b(global)\b'
-        end: "(?=$|\n|\\]|}|;)"
+        end: "(?=$|\\n|\\]|}|;)"
         captures:
           '1':
             name: keyword.control.global.irule
@@ -1044,7 +1062,7 @@ repository:
     patterns:
       -
         begin: '(?<=^|\[|{|;)\s*(::)?\b(incr)\b'
-        end: "\\s*(?=$|\n|}|\\]|;)"
+        end: "\\s*(?=$|\\n|}|\\]|;)"
         beginCaptures:
           '1':
             name: support.type
@@ -1065,7 +1083,7 @@ repository:
     patterns:
       -
         begin: '(?<=^|[\[{;])\s*(::)?\b(info|eval|clock|array|binary|after)\b'
-        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
             name: support.type
@@ -1077,7 +1095,7 @@ repository:
           -
             include: '#opt'
           -
-            match: "(?<=(?:info|clock|binary|array|after))\\s+(?:(?!$|{|\\[|;|\n)([^\\s\\]}\\[{;\n\"]*))?"
+            match: "(?<=(?:info|clock|binary|array|after))\\s+(?:(?!$|{|\\[|;|\\n)([^\\s\\]}\\[{;\\n\"]*))?"
             captures:
               '1':
                 patterns:
@@ -1087,13 +1105,17 @@ repository:
                     include: '#constant-numeric'
                   -
                     include: '#opt'
+                  -
+                    include: '#namespace-name'
           -
             include: '#proc-call-args'
   irule-array:
     patterns:
+      - 
+        include: '#namespace-separator'
       -
         begin: '(?<=^|[\[{;]\s)\s*(?:::)?(array\b)'
-        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
             name: keyword.control.array.irule
@@ -1108,7 +1130,7 @@ repository:
     patterns:
       -
         begin: '(?<=array)(?:::)?\s+(names|donesearch|anymore|exists|nextelement|size|startsearch|statistics|unset)\b'
-        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
             name: entity.function.name.array.command.irule
@@ -1119,14 +1141,14 @@ repository:
     patterns:
       -
         begin: '(?<=array)(?:::)?\s+(set)\b'
-        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
             name: entity.function.name.array.set.irule
         patterns:
           -
-            begin: "(?<=set)\\s+(?!$|[\n;}\\]])([^\\s\\];]*)"
-            end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+            begin: "(?<=set)\\s+(?!$|[\\n;}\\]])([^\\s\\];]*)"
+            end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
             beginCaptures:
               '1':
                 patterns:
@@ -1151,14 +1173,14 @@ repository:
     patterns:
       -
         begin: '(?<=array)(?:::)?\s+(get)\b'
-        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
             name: entity.function.name.array.get.irule
         patterns:
           -
-            begin: "(?<=get)(\\s+(?!$|[\n;\\]])[^\\s\\]};\n]*)"
-            end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+            begin: "(?<=get)(\\s+(?!$|[\\n;\\]])[^\\s\\]};\\n]*)"
+            end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
             captures:
               '1':
                 patterns:
@@ -1177,6 +1199,8 @@ repository:
           '1':
             name: keyword.control.if.irule
             patterns:
+              -
+                include: "#namespace-separator"
               -
                 include: '#opt'
           '2':
@@ -1259,7 +1283,7 @@ repository:
   irule-set:
     patterns:
       -
-        begin: "(?<=^|[\\[{;])\\s*(::)?\\b(set|variable)\\b\\s+(?!\n|$)"
+        begin: "(?<=^|[\\[{;])\\s*(::)?\\b(set|variable)\\b\\s+(?!\\n|$)"
         end: '(?=(?<!\\)(?:$|[;\]}]))'
         beginCaptures:
           '1':
@@ -1301,7 +1325,7 @@ repository:
       -
         contentName: punctuation.variable.set.italic.irule
         begin: '(?<=^|\[|{|;)\s*(::)?\b(unset)'
-        end: "\\s*(?=$|;|\n|}|\\])"
+        end: "\\s*(?=$|;|\\n|}|\\])"
         beginCaptures:
           '1':
             name: support.type
@@ -1319,6 +1343,25 @@ repository:
             captures:
               '1':
                 name: punctuation.variable.set.italic.irule
+  namespace-name: 
+    patterns: 
+      - 
+        include: '#line-escape'
+      - 
+        include: '#variable'
+      - 
+        include: '#namespace-separator'
+      - 
+        match: "(?![\\s{}\\[\\]])([^\\s:$\\[\\]}{;\\n]+)"
+        name: entity.function.name.irule
+  namespace-separator: 
+    patterns: 
+      - 
+        match: '(?<!:)(:)(?!:)|(?<=::)(:)(?!:)'
+        name: 'string'
+      - 
+        match: '(::)'
+        name: support.type
   irule-foreach:
     patterns:
       -
@@ -1342,7 +1385,7 @@ repository:
     patterns:
       -
         begin: '(?<=\[|{|^)\s*(::)?\b(catch)\b(?=\s)'
-        end: "(?=\\]|}|$|(?<!\\\\)\n|;)"
+        end: "(?=\\]|}|$|(?<!\\\\)\\n|;)"
         beginCaptures:
           '1':
             name: support.type
@@ -1412,7 +1455,7 @@ repository:
     patterns:
       -
         begin: \b(exists)\b
-        end: "(?=(?<!\\\\)(?:$|[\n;\\]}]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
             name: entity.function.name.info.exists.irule
@@ -1429,13 +1472,15 @@ repository:
     patterns:
       -
         begin: '\b(command(?:s)?|globals|locals|procs|vars|functions)\b'
-        end: "\\s*(?=$|\n|}|\\]|;)"
+        end: "\\s*(?=$|\\n|}|\\]|;)"
         captures:
           '1':
             name: entity.function.name.irule
         patterns:
           -
             include: '#constant-numeric'
+          - 
+            include: "#namespace-separator"
           -
             include: '#glob-match'
   irule-info-subcommands:
@@ -1444,20 +1489,22 @@ repository:
         include: '#irule-info-pattern-commands'
       -
         begin: '\b(level|frame|coroutine|nameofexecutable|nameofexe|args|body|cmdcount|complete|default|hostname|library|loaded|patchlevel|script|sharedlibextension|tclversion)\b\s*'
-        end: "\\s*(?=$|\n|}|\\]|;)"
+        end: "\\s*(?=$|\\n|}|\\]|;)"
         captures:
           '1':
             name: entity.function.name.irule
         patterns:
           -
             include: '#constant-numeric'
+          - 
+            include: "#namespace-separator"
           -
             include: '#proc-call-args'
   irule-string:
     patterns:
       -
         begin: '(?<=^|[\[{;])\s*(::)?\b(string)\b'
-        end: "(?=}|\\]|;|$|\n)"
+        end: "(?=}|\\]|;|$|\\n)"
         beginCaptures:
           '1':
             name: support.type
@@ -1492,7 +1539,7 @@ repository:
     patterns:
       -
         begin: '(?<=string)\s+\b(match)\b'
-        end: "(?=$|\n|\\]|}|;)"
+        end: "(?=$|\\n|\\]|}|;)"
         captures:
           '1':
             name: entity.function.name.string.is.irule
@@ -1534,7 +1581,7 @@ repository:
     patterns:
       -
         begin: '(?<=string)\b\s+(map)\b'
-        end: "(?=$|\n|\\]|}|{|\\[)"
+        end: "(?=$|\\n|\\]|}|{|\\[)"
         captures:
           '1':
             name: entity.function.name.string.map.irule
@@ -1628,10 +1675,8 @@ repository:
           accumulate
         |active_members
         |active_nodes
-        |after
         |b64decode
         |b64encode
-        |call
         |class
         |client_addr
         |client_port
@@ -1715,7 +1760,6 @@ repository:
         |snat
         |substr
         |table
-        |timing
         |traffic_group
         |translate
         |ttl
@@ -2652,7 +2696,7 @@ repository:
           -
             include: '#property-list'
       -
-        begin: "\\s*(?!$|\\]|\\\\)([^\\s\\]}{]*)\\s+(?!$|[{\n])"
+        begin: "\\s*(?!$|\\]|\\\\)([^\\s\\]}{]*)\\s+(?!$|[{\\n])"
         end: '(?=\s+|\]|(?<!\\)$)|(?<=})'
         beginCaptures:
           '1':
@@ -2748,11 +2792,11 @@ repository:
   arguments-braced:
     patterns:
       -
-        begin: "({)(?:(?!$|\n|\\]|}|;|\\[|{)\\s*)?"
+        begin: "({)(?:(?!$|\\n|\\]|}|;|\\[|{)\\s*)?"
         end: '(})'
         patterns:
           -
-            match: "(?:(?!$|\n|\\]|}|;|\\[|{)\\s*)?([^\\s|{|}]*)(?:(?!$|\n|\\]|}|;|\\[|{)\\s*)?"
+            match: "(?:(?!$|\\n|\\]|}|;|\\[|{)\\s*)?([^\\s|{|}]*)(?:(?!$|\\n|\\]|}|;|\\[|{)\\s*)?"
             name: variable
   double-dash:
     match: \s(--)\s
@@ -2830,7 +2874,7 @@ repository:
         match: '(\\[^\]"\\nrtbfv0`\[])'
         name: string.bare.quoted.irule
       -
-        match: "(?<!::)(?!;|\\]|}|\\*|\"|;)([^\\*}\\\\;\\]{\\[\"\\$\n\\-\\)\\(]+)"
+        match: "(?<!::)(?!;|\\]|}|\\*|\"|;)([^\\*}\\\\;\\]{\\[\"\\$\\n\\-\\)\\(]+)"
         captures:
           '1':
             name: string.bare.quoted.irule
@@ -2838,7 +2882,10 @@ repository:
               -
                 match: '(?:(?<=::)|(?=[^\s:]*(?=::)))(?!\s)([^\s]*)'
                 captures:
-                  '1': {patterns: []}
+                  '1': 
+                    patterns:
+                      - 
+                        include: "#namespace-name"
               -
                 include: '#variable'
       -
@@ -2859,7 +2906,7 @@ repository:
     patterns:
       -
         begin: '(?<=^|\[|{|;)\s*(::)?\b(regexp|regsub)\b'
-        end: "(?=(?<!\\\\)(?:$|[\n;}\\]]))"
+        end: "(?=(?<!\\\\)(?:$|[\\n;}\\]]))"
         beginCaptures:
           '1':
             name: support.type.ns.separator.irule
@@ -2879,7 +2926,7 @@ repository:
             include: '#opt'
           -
             begin: '\s*({|")'
-            end: "(}|\")(?=\\s+(?:\\\\\n|$|\n|\\[|\\$|\\b|\"|;|}|-))"
+            end: "(}|\")(?=\\s+(?:\\\\\n|$|\\n|\\[|\\$|\\b|\"|;|}|-))"
             contentName: string.irule
             patterns:
               -
@@ -2913,7 +2960,7 @@ repository:
       -
         contentName: comment.line.number-sign.irule
         begin: '(?<=^|;|{)\s*((#))'
-        end: "(?=$|\n)|((#))(?=\\s*(?:[}\n]))"
+        end: "(?=$|\\n)|((#))(?=\\s*(?:[}\\n]))"
         captures:
           '1':
             name: comment.line.number-sign.irule
@@ -2958,7 +3005,7 @@ repository:
         comment: 'adding @ in a multi-line will make the line emphasized'
         contentName: meta.class.comment.annotate.irule
         begin: '\s*+(@)'
-        end: "(?={|\\s-|>)|(@|}|$|\n)|\\|"
+        end: "(?={|\\s-|>)|(@|}|$|\\n)|\\|"
         beginCaptures:
           '1':
             name: support.type.annotate.irule
@@ -2968,9 +3015,11 @@ repository:
         patterns:
           -
             include: '#variable-non-substituting'
+          - 
+            include: "#namespace-separator"
   annotate-properties:
-    begin: "(?=\\s*@[^\\s\n])"
-    end: "(?=$|[\n}@])"
+    begin: "(?=\\s*@[^\\s\\n])"
+    end: "(?=$|[\\n}@])"
     patterns:
       -
         comment: 'special @ values that are meant as property values'
@@ -3130,14 +3179,14 @@ repository:
     patterns:
       -
         comment: 'Handle options sent to commands at various points (cmd -name1 value -name2 value)'
-        match: '\s*+(?<=\s|^|\"|\()((-)(?!-|\s|\"|;|\n|>)[^\s$\n\[\];\"{)(}]*)'
+        match: '\s*+(?<=\s|^|\"|\()((-)(?!-|\s|\"|;|\n|>)[^\s$\\n\[\];\"{)(}]*)'
         captures:
           '1':
             name: support.type.opt.irule
           '2':
             name: meta.constant.opt.start.irule
   line-escape:
-    begin: "\\s*+(\\\\\n)$"
+    begin: '\s*+(\\n)$'
     end: '(^)(?:\s*(?!$))?'
     beginCaptures:
       '1':
@@ -3187,8 +3236,8 @@ repository:
   variable-bare-italic:
     patterns:
       -
-        begin: "\\s*(?!$|[$\\[;\n{])"
-        end: "(?=(?<!\\\\)$|[\n\\];\\[{}\\s])"
+        begin: "\\s*(?!$|[$\\[;\\n{])"
+        end: "(?=(?<!\\\\)$|[\\n\\];\\[{}\\s])"
         patterns:
           -
             include: '#quoted-string'
@@ -3199,7 +3248,7 @@ repository:
           -
             begin: '\s*(\()'
             end: (\))
-            contentName: punctuation.italic
+            contentName: punctuation.italic.irule
             beginCaptures:
               '1':
                 name: entity.function.name.array.open.irule
@@ -3211,17 +3260,19 @@ repository:
                 include: '#opt'
               -
                 include: '#proc-call-args'
+          - 
+            include: '#namespace-separator'
           -
             match: '(?!\s)([^\s\[(?:::){;\$"\]};]*)'
-            name: punctuation.italic.variable
+            name: punctuation.italic.variable.irule
           -
             match: '(?<=\*)(?!\s)([^\s\[(?:::){;$"\];}]*)'
-            name: punctuation.italic.variable
+            name: punctuation.italic.variable.irule
   variable-bare:
     patterns:
       -
-        begin: "(?<=\\s|^|\\*|{)\\s*(?!$|[$\n;}{\\]\\[])"
-        end: "(?=(?<!\\\\)$|[\n\\];\\[{}]|(?=\\s))"
+        begin: "(?<=\\s|^|\\*|{)\\s*(?!$|[$\\n;}{\\]\\[])"
+        end: "(?=(?<!\\\\)$|[\\n\\];\\[{}]|(?=\\s))"
         patterns:
           -
             include: '#variable'
@@ -3242,6 +3293,8 @@ repository:
                 include: '#opt'
               -
                 include: '#proc-call-args'
+          - 
+            include: '#namespace-separator'
           -
             match: '([,])'
             name: variable
@@ -3272,7 +3325,7 @@ repository:
         match: '^\s*(\$)\s*(?=\n|$|\]|})'
         name: support.type
       -
-        match: "\\s*(?:(?![\\]\n\"};])|(?=[$]))(?<!(?<!\\\\)\\\\)(\\$)(?:({)([^}\\s\\]\"\\)\\(\\$]*)(\\([^\\(\\)]*\\))?(})([^\\s\\[\\];\n\"{}]*)?|(?=[A-Za-z0-9_:])([^\\s\\*\\[}\\]/\"\\);\\(\\\\$,\\-\\+'\\*]*)(\\([^\\s\\['\\\\;}\\]\")($,+*]*\\))?)"
+        match: "\\s*(?:(?![\\]\\n\"};])|(?=[$]))(?<!(?<!\\\\)\\\\)(\\$)(?:({)([^}\\s\\]\"\\)\\(\\$]*)(\\([^\\(\\)]*\\))?(})([^\\s\\[\\];\\n\"{}]*)?|(?=[A-Za-z0-9_:])([^\\s\\*\\[}\\]/\"\\);\\(\\\\$,\\-\\+'\\*]*)(\\([^\\s\\['\\\\;}\\]\")($,+*]*\\))?)"
         captures:
           '1':
             name: support.type.variable.indicator.irule
@@ -3280,6 +3333,8 @@ repository:
             name: entity.function.name.variable.brace.open.irule
           '3':
             patterns:
+              - 
+                include: '#namespace-separator'
               -
                 include: '#variable'
               -
@@ -3314,6 +3369,8 @@ repository:
                 include: '#bare-string'
           '7':
             patterns:
+              - 
+                include: '#namespace-separator'
               -
                 match: '([^\s:"}{\\\]\[]+)'
                 name: variable.name
@@ -3342,7 +3399,7 @@ repository:
         match: '^\s*+(\$)\s*(?=\n|$)'
         name: support.type
       -
-        match: "\\s*+(?:(?!\\]|\n|\"|>|<|,))(?<!(?<!\\\\)\\\\)(\\$)(?:({)([^}\\s\\]\"\\)\\(\\$]*)(\\(.*\\))?(})|(?=[A-Za-z0-9_:])([^\\s\\,<>\\*}\\]/\"\\);\\(\\\\\\$,\\-\\+\\*]*)(\\([^\\s\\\\;\\*}\\]\"\\)\\(\\$,\\-\\+\\*<>]*\\))?)"
+        match: "\\s*+(?:(?!\\]|\\n|\"|>|<|,))(?<!(?<!\\\\)\\\\)(\\$)(?:({)([^}\\s\\]\"\\)\\(\\$]*)(\\(.*\\))?(})|(?=[A-Za-z0-9_:])([^\\s\\,<>\\*}\\]/\"\\);\\(\\\\\\$,\\-\\+\\*]*)(\\([^\\s\\\\;\\*}\\]\"\\)\\(\\$,\\-\\+\\*<>]*\\))?)"
         captures:
           '1':
             name: support.type.variable.indicator.irule
@@ -3350,6 +3407,8 @@ repository:
             name: entity.function.name.variable.brace.open.irule
           '3':
             patterns:
+              - 
+                include: '#namespace-separator'
               -
                 include: '#variable'
               -
@@ -3376,6 +3435,8 @@ repository:
             name: entity.function.name.variable.brace.close.irule
           '6':
             patterns:
+              - 
+                include: '#namespace-separator'
               -
                 match: '([^\s:"}{\\\]\[]+)'
                 name: meta.constant
