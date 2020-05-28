@@ -35,6 +35,6 @@ out/syntaxes:
 	mkdir -p $@
 
 out/syntaxes/%.json: syntaxes/%.tmlanguage.yaml out/syntaxes
-	npx js-yaml $^ > $@
+	npx js-yaml $< > $@
 
 syntax: out/syntaxes/irule.json
