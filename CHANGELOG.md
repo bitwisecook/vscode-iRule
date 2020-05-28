@@ -2,6 +2,11 @@
 
 All notable changes to the "irule" extension will be documented in this file.
 
+## 1.6.2
+
+### Changed
+Clean up a bit
+
 ## 1.6.1
 
 ### Changed
