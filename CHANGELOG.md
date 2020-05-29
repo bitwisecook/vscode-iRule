@@ -2,6 +2,12 @@
 
 All notable changes to the "irule" extension will be documented in this file.
 
+## 1.6.3
+
+### Changed
+Fix option parsing to highlight the whole word and not just the first letter
+Fix binary to accept strings and commands
+
 ## 1.6.2
 
 ### Changed
