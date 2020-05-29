@@ -2,6 +2,14 @@
 
 All notable changes to the "irule" extension will be documented in this file.
 
+## 1.6.4
+
+### Added
+Command completions are now in the completionProvider and smarter
+
+### Changed
+Fix `for` snippet
+
 ## 1.6.3
 
 ### Changed
