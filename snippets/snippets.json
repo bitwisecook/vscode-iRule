@@ -19,7 +19,7 @@
   },
   "for": {
     "prefix": "for",
-    "body": "for {set ${1:i} 0} {${1} < ${2:10}} {incr ${1}} {\n\t${3}\n}\n",
+    "body": "for {set ${1:i} 0} {${1} < ${2:<count>}} {incr ${1}} {\n\t${3}\n}\n",
     "description": "for...",
     "scope": "source.iRule"
   },
