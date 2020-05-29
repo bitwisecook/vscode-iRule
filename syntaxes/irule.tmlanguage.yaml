@@ -88,8 +88,6 @@ repository:
           -
             include: '#invariant'
           -
-            include: '#special-brackets'
-          -
             include: '#curly-brackets'
           -
             include: '#proc-call'
@@ -893,6 +891,12 @@ repository:
               -
                 include: '#variable'
               -
+                include: '#quoted-string'
+              -
+                include: '#variable'
+              -
+                include: '#square-brackets'
+              -
                 include: '#glob-match'
           -
             include: '#proc-call-args'
@@ -1677,7 +1681,6 @@ repository:
         |active_nodes
         |b64decode
         |b64encode
-        |class
         |client_addr
         |client_port
         |clientside
@@ -2716,8 +2719,6 @@ repository:
           -
             include: '#empty-brackets'
           -
-            include: '#special-brackets'
-          -
             include: '#square-brackets'
           -
             include: '#variable'
@@ -3179,7 +3180,7 @@ repository:
     patterns:
       -
         comment: 'Handle options sent to commands at various points (cmd -name1 value -name2 value)'
-        match: '\s*+(?<=\s|^|\"|\()((-)(?!-|\s|\"|;|\n|>)[^\s$\\n\[\];\"{)(}]*)'
+        match: '\s*+(?<=\s|^|\"|\()((-)(?!-|\s|\"|;|\n|>)[^\s$\n\[\];\"{)(}]*)'
         captures:
           '1':
             name: support.type.opt.irule
