@@ -19,13 +19,13 @@
   },
   "for": {
     "prefix": "for",
-    "body": "for {${1:set i 0}} {${2:$i < $n}} {${3:incr i}} {\n\t${4}\n}\n",
+    "body": "for {set ${1:i} 0} {${1} < ${2:10}} {incr ${1}} {\n\t${3}\n}\n",
     "description": "for...",
     "scope": "source.iRule"
   },
   "foreach": {
     "prefix": "foreach",
-    "body": "foreach ${1:var} ${2:$list} {\n\t${3}\n}\n",
+    "body": "foreach ${1:var} ${2:list} {\n\t${3}\n}\n",
     "description": "foreach...",
     "scope": "source.iRule"
   },
