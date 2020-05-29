@@ -13,3 +13,4 @@ Makefile
 .yo-rc.json
 tsconfig.tsbuildinfo
 src/build.ts
+data/**
