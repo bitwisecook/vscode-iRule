@@ -24,13 +24,13 @@ export class InvalidCharFix implements vscode.CodeActionProvider {
     ];
 
     public provideCodeActions(document: vscode.TextDocument, range: vscode.Range): vscode.CodeAction[] | undefined {
-        console.log(`checking char '${document.lineAt(range.start.line).text[range.start.character]}'`);
+        // console.log(`checking char '${document.lineAt(range.start.line).text[range.start.character]}'`);
         const replace = this.isAtInvalidCharAuto(document, range);
-        console.log(`got '${replace}'`);
+        // console.log(`got '${replace}'`);
         if (!replace) {
             return;
         }
-        console.log('at invalid char');
+        // console.log('at invalid char');
 
         const replaceChar = this.createFix(document, range, replace.from_name, replace.to_name, replace.char);
 
