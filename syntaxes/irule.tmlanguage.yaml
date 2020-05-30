@@ -177,13 +177,13 @@ repository:
       -
         include: '#line-escape'
       -
+        include: '#constant-numeric'
+      -
         include: '#opt'
       -
         include: '#quoted-string'
       -
         include: '#variable'
-      -
-        include: '#constant-numeric'
       -
         include: '#bare-string'
       -
@@ -282,7 +282,7 @@ repository:
               '1':
                 name: support.type.irule
               '2':
-                name: meta.class
+                name: meta.core.class
               '3':
                 name: meta.constant.irule
               '4':
@@ -298,7 +298,7 @@ repository:
           -
             include: '#format-brackets'
       -
-        match: '(?:(?<=^|\[|{|;)\s*(::)?|(?<=::))\b(error|for|lsearch|while|format|lindex|linsert|concat|lsort|subst|upvar|uplevel|continue|break|split|switch|catch|join|lrange|lset|llength|list|return|puts|clock|variable|after|return)\b(::)?'
+        match: '(?:(?<=^|\[|{|;)\s*(::)?|(?<=::))\b(error|for|lreplace|lsearch|while|format|lindex|linsert|concat|lsort|subst|upvar|uplevel|continue|break|split|switch|catch|join|lrange|lset|llength|list|return|puts|clock|variable|after|return)\b(::)?'
         name: keyword.control.irule
         captures:
           '1':
@@ -889,13 +889,9 @@ repository:
               -
                 include: '#line-escape'
               -
-                include: '#variable'
-              -
                 include: '#quoted-string'
               -
                 include: '#variable'
-              -
-                include: '#square-brackets'
               -
                 include: '#glob-match'
           -
@@ -1115,7 +1111,7 @@ repository:
             include: '#proc-call-args'
   irule-array:
     patterns:
-      - 
+      -
         include: '#namespace-separator'
       -
         begin: '(?<=^|[\[{;]\s)\s*(?:::)?(array\b)'
@@ -1347,23 +1343,23 @@ repository:
             captures:
               '1':
                 name: punctuation.variable.set.italic.irule
-  namespace-name: 
-    patterns: 
-      - 
+  namespace-name:
+    patterns:
+      -
         include: '#line-escape'
-      - 
+      -
         include: '#variable'
-      - 
+      -
         include: '#namespace-separator'
-      - 
+      -
         match: "(?![\\s{}\\[\\]])([^\\s:$\\[\\]}{;\\n]+)"
         name: entity.function.name.irule
-  namespace-separator: 
-    patterns: 
-      - 
+  namespace-separator:
+    patterns:
+      -
         match: '(?<!:)(:)(?!:)|(?<=::)(:)(?!:)'
         name: 'string'
-      - 
+      -
         match: '(::)'
         name: support.type
   irule-foreach:
@@ -1483,7 +1479,7 @@ repository:
         patterns:
           -
             include: '#constant-numeric'
-          - 
+          -
             include: "#namespace-separator"
           -
             include: '#glob-match'
@@ -1500,7 +1496,7 @@ repository:
         patterns:
           -
             include: '#constant-numeric'
-          - 
+          -
             include: "#namespace-separator"
           -
             include: '#proc-call-args'
@@ -2825,8 +2821,7 @@ repository:
           -
             include: '#string-content'
           -
-            match: '(\*)'
-            name: bare.string
+            include: '#quoted-string-contents'
           -
             match: '([{}])'
             name: string.quoted.irule
@@ -2862,39 +2857,76 @@ repository:
             name: constant.character.escape
           '2':
             name: string
-  bare-string:
+  quoted-string-contents:
     patterns:
-      -
-        include: '#opt'
+      # -
+      #   include: '#opt'
       -
         include: '#string-escapes'
       -
         match: '\s*(\$)(?=$|\n|\]|}|\"|;|\s)'
-        name: string.bare.quoted.irule
+        name: string.quoted.irule
       -
         match: '(\\[^\]"\\nrtbfv0`\[])'
-        name: string.bare.quoted.irule
+        name: string.quoted.irule
       -
         match: "(?<!::)(?!;|\\]|}|\\*|\"|;)([^\\*}\\\\;\\]{\\[\"\\$\\n\\-\\)\\(]+)"
         captures:
           '1':
-            name: string.bare.quoted.irule
+            name: string.quoted.irule
             patterns:
               -
                 match: '(?:(?<=::)|(?=[^\s:]*(?=::)))(?!\s)([^\s]*)'
                 captures:
-                  '1': 
+                  '1':
                     patterns:
-                      - 
+                      -
                         include: "#namespace-name"
               -
                 include: '#variable'
       -
         match: '(-)(?=\s|;|}|\]|"|-)'
-        name: string.bare.quoted.irule
+        name: string.quoted.irule
       -
         match: '(?<=-)(-)'
         name: string.quoted.irule
+      -
+        include: '#variable'
+  bare-string:
+    patterns:
+      -
+        include: '#constant-numeric'
+      -
+        include: '#string-escapes'
+      -
+        include: '#square-brackets'
+      -
+        match: '\s*(\$)(?=$|\n|\]|}|\"|;|\s)'
+        name: string.bare.irule
+      -
+        match: '(\\[^\]"\\nrtbfv0`\[])'
+        name: string.bare.irule
+      -
+        match: "(?<!::)(?!;|\\]|}|\\*|\"|;)([^\\*}\\\\;\\]{\\[\"\\$\\n\\-\\)\\(]+)"
+        captures:
+          '1':
+            name: string.bare.irule
+            patterns:
+              -
+                match: '(?:(?<=::)|(?=[^\s:]*(?=::)))(?!\s)([^\s]*)'
+                captures:
+                  '1':
+                    patterns:
+                      -
+                        include: "#namespace-name"
+              -
+                include: '#variable'
+      -
+        match: '(-)(?=\s|;|}|\]|"|-)'
+        name: string.bare.irule
+      -
+        match: '(?<=-)(-)'
+        name: string.irule
       -
         include: '#variable'
   html-curly-brackets:
@@ -3016,7 +3048,7 @@ repository:
         patterns:
           -
             include: '#variable-non-substituting'
-          - 
+          -
             include: "#namespace-separator"
   annotate-properties:
     begin: "(?=\\s*@[^\\s\\n])"
@@ -3175,7 +3207,7 @@ repository:
     patterns:
       -
         match: '^\s*([0-9]\.)\s+'
-        name: meta.class
+        name: meta.annotate.class
   opt:
     patterns:
       -
@@ -3205,7 +3237,7 @@ repository:
             include: '#glob-match'
       -
         match: '\s*+(\*)'
-        name: meta.class
+        name: meta.glob.class
       -
         include: '#string-escapes'
       -
@@ -3226,10 +3258,10 @@ repository:
         contentName: support.type
         beginCaptures:
           '1':
-            name: meta.class
+            name: meta.glob.1.class
         endCaptures:
           '1':
-            name: meta.class
+            name: meta.glob.2.class
       -
         include: '#square-brackets'
       -
@@ -3261,7 +3293,7 @@ repository:
                 include: '#opt'
               -
                 include: '#proc-call-args'
-          - 
+          -
             include: '#namespace-separator'
           -
             match: '(?!\s)([^\s\[(?:::){;\$"\]};]*)'
@@ -3294,7 +3326,7 @@ repository:
                 include: '#opt'
               -
                 include: '#proc-call-args'
-          - 
+          -
             include: '#namespace-separator'
           -
             match: '([,])'
@@ -3334,7 +3366,7 @@ repository:
             name: entity.function.name.variable.brace.open.irule
           '3':
             patterns:
-              - 
+              -
                 include: '#namespace-separator'
               -
                 include: '#variable'
@@ -3356,8 +3388,8 @@ repository:
                     -
                       name: support.type
                 patterns:
-                  -
-                    include: '#opt'
+                  # -
+                  #   include: '#opt'
                   -
                     include: '#proc-call-args'
           '5':
@@ -3370,7 +3402,7 @@ repository:
                 include: '#bare-string'
           '7':
             patterns:
-              - 
+              -
                 include: '#namespace-separator'
               -
                 match: '([^\s:"}{\\\]\[]+)'
@@ -3408,7 +3440,7 @@ repository:
             name: entity.function.name.variable.brace.open.irule
           '3':
             patterns:
-              - 
+              -
                 include: '#namespace-separator'
               -
                 include: '#variable'
@@ -3436,7 +3468,7 @@ repository:
             name: entity.function.name.variable.brace.close.irule
           '6':
             patterns:
-              - 
+              -
                 include: '#namespace-separator'
               -
                 match: '([^\s:"}{\\\]\[]+)'
