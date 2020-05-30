@@ -2,6 +2,11 @@
 
 All notable changes to the "irule" extension will be documented in this file.
 
+## 1.6.5
+### Changed
+Start fixing opt vs contsant-numeric confusions
+Start cleaning up bare-string vs quoted-string
+
 ## 1.6.4
 
 ### Added
