@@ -90,7 +90,9 @@ export function activate(context: vscode.ExtensionContext) {
             }
         },
         " ",
-        "." // triggered whenever a ' ' or '.' is being typed
+        ".",
+        "[",
+        "{"
     );
 
     context.subscriptions.push(
