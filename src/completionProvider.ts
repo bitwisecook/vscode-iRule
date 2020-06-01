@@ -975,8 +975,211 @@ const all_commands = [
     'XML::subscribe',
 ];
 
+let http_status_codes: vscode.CompletionItem[] = [
+    new vscode.CompletionItem('100 Continue', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('101 Switching Protocols', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('102 Processing', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('103 Early Hints', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('200 OK', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('201 Created', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('202 Accepted', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('203 Non - Authoritative Information', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('204 No Content', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('205 Reset Content', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('206 Partial Content', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('207 Multi - Status', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('208 Already Reported', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('226 IM Used', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('300 Multiple Choices', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('301 Moved Permanently', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('302 Found', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('303 See Other', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('304 Not Modified', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('305 Use Proxy', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('306 Switch Proxy', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('307 Temporary Redirect', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('308 Permanent Redirect', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('400 Bad Request', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('401 Unauthorized', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('402 Payment Required', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('403 Forbidden', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('404 Not Found', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('405 Method Not Allowed', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('406 Not Acceptable', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('407 Proxy Authentication Required', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('408 Request Timeout', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('409 Conflict', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('410 Gone', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('411 Length Required', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('412 Precondition Failed', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('413 Payload Too Large', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('414 URI Too Long', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('415 Unsupported Media Type', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('416 Range Not Satisfiable', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('417 Expectation Failed', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('418 I\'m a teapot', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('421 Misdirected Request', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('422 Unprocessable Entity', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('423 Locked', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('424 Failed Dependency', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('425 Too Early', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('426 Upgrade Required', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('428 Precondition Required', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('429 Too Many Requests', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('431 Request Header Fields Too Large', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('451 Unavailable For Legal Reasons', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('500 Internal Server Error', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('501 Not Implemented', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('502 Bad Gateway', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('503 Service Unavailable', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('504 Gateway Timeout', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('505 HTTP Version Not Supported', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('506 Variant Also Negotiates', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('507 Insufficient Storage', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('508 Loop Detected', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('510 Not Extended', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('511 Network Authentication Required', vscode.CompletionItemKind.EnumMember),
+];
+
+for (let key in http_status_codes) {
+    http_status_codes[key].insertText = http_status_codes[key].label.split(' ')[0];
+}
+
+const http_response_headers: vscode.CompletionItem[] = [
+    new vscode.CompletionItem('Accept-Patch', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Accept-Ranges', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Age', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Allow', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Alt-Svc', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Cache-Control', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Connection', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Disposition', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Encoding', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Language', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Length', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Location', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Range', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Type', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Date', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Delta-Base', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('ETag', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Expires', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('IM', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Last-Modified', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Link', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Location', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Pragma', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Proxy-Authenticate', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Public-Key-Pins', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Retry-After', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Server', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Set-Cookie', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Strict-Transport-Security', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Trailer', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Transfer-Encoding', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Tk', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Upgrade', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Vary', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Via', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Warning', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('WWW-Authenticate', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Access-Control-Allow-Origin', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Access-Control-Allow-Credentials', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Access-Control-Expose-Headers', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Access-Control-Max-Age', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Access-Control-Allow-Methods', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Access-Control-Allow-Headers', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Content-Security-Policy', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('Refresh', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('X-Powered-By', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('X-Request-ID', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('X-UA-Compatible', vscode.CompletionItemKind.EnumMember),
+    new vscode.CompletionItem('X-XSS-Protection', vscode.CompletionItemKind.EnumMember),
+];
+
+const http_response_headers_values: Record<string, vscode.CompletionItem[]> = {
+    'Accept-Patch': [],
+    'Accept-Ranges': [],
+    'Age': [],
+    'Allow': [],
+    'Alt-Svc': [],
+    'Cache-Control': [
+        new vscode.CompletionItem('max-age=', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('must-revalidate', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('no-cache', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('no-store', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('public', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('private', vscode.CompletionItemKind.EnumMember),
+    ],
+    'Connection': [],
+    'Content-Disposition': [],
+    'Content-Encoding': [],
+    'Content-Language': [],
+    'Content-Length': [
+        new vscode.CompletionItem('[string length $payload', vscode.CompletionItemKind.EnumMember),
+    ],
+    'Content-Location': [],
+    'Content-Range': [],
+    'Content-Type': [
+        new vscode.CompletionItem('application/javascript', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('application/json', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('application/jwt', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('application/octet-stream', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('image/gif', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('image/heif', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('image/jpeg', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('image/png', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('image/webp', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('image/x-icon', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('multipart/byteranges', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('multipart/form-data', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('text/css', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('text/html', vscode.CompletionItemKind.EnumMember),
+        new vscode.CompletionItem('text/plain', vscode.CompletionItemKind.EnumMember),
+    ],
+    'Date': [],
+    'Delta-Base': [],
+    'ETag': [],
+    'Expires': [],
+    'IM': [],
+    'Last-Modified': [],
+    'Link': [],
+    'Location': [],
+    'Pragma': [],
+    'Proxy-Authenticate': [],
+    'Public-Key-Pins': [],
+    'Retry-After': [],
+    'Server': [],
+    'Set-Cookie': [],
+    'Strict-Transport-Security': [],
+    'Trailer': [],
+    'Transfer-Encoding': [
+        new vscode.CompletionItem('gzip', vscode.CompletionItemKind.EnumMember),
+    ],
+    'Tk': [],
+    'Upgrade': [],
+    'Vary': [
+        new vscode.CompletionItem('User-Agent', vscode.CompletionItemKind.EnumMember),
+    ],
+    'Via': [],
+    'Warning': [],
+    'WWW-Authenticate': [],
+    'Access-Control-Allow-Origin': [],
+    'Access-Control-Allow-Credentials': [],
+    'Access-Control-Expose-Headers': [],
+    'Access-Control-Max-Age': [],
+    'Access-Control-Allow-Methods': [],
+    'Access-Control-Allow-Headers': [],
+    'Content-Security-Policy': [],
+    'Refresh': [],
+    'X-Powered-By': [],
+    'X-Request-ID': [],
+    'X-UA-Compatible': [],
+    'X-XSS-Protection': [],
+};
+
 export function complete(document: vscode.TextDocument, position: vscode.Position) {
-    let words = document.lineAt(position).text.substr(0, position.character).trim().split(' ');
+    let words: string[] = document.lineAt(position).text.substr(0, position.character).trim().split(' ');
     switch (words[0]) {
         case "log": {
             if (words.length === 1 || (words.length === 2 && !(words[1].includes('.')))) {
@@ -1324,80 +1527,62 @@ export function complete(document: vscode.TextDocument, position: vscode.Positio
             }
         }
         case 'HTTP::respond': {
-            if (words.length < 2 || (words.length < 3 && words[1] === '-reset')) {
+            let check = words.slice(1);
+            if (check.length === 0 || (check.length === 1 && check[1] === '-reset')) {
+                const h: vscode.CompletionItem[] = http_status_codes.slice(0);
+                h.push(new vscode.CompletionItem('-reset', vscode.CompletionItemKind.Keyword));
+                return h;
+            }
+            if (check[0] === '-reset') {
+                check.shift();
+            }
+            if (check.length === 0) {
+                return http_status_codes;
+            }
+            check.shift();
+            if (check.length === 0) {
                 return [
-                    new vscode.CompletionItem('-reset', vscode.CompletionItemKind.Keyword),
-                    new vscode.CompletionItem('100', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('101', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('102', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('103', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('200', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('201', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('202', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('203', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('204', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('205', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('206', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('207', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('208', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('226', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('300', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('301', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('302', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('303', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('304', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('305', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('306', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('307', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('308', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('400', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('401', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('402', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('403', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('404', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('405', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('406', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('407', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('408', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('409', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('410', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('411', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('412', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('413', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('414', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('415', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('416', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('417', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('418', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('421', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('422', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('423', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('424', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('425', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('426', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('428', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('429', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('431', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('451', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('500', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('501', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('502', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('503', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('504', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('505', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('506', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('507', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('508', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('510', vscode.CompletionItemKind.EnumMember),
-                    new vscode.CompletionItem('511', vscode.CompletionItemKind.EnumMember),
+                    new vscode.CompletionItem('-version', vscode.CompletionItemKind.Keyword),
+                    new vscode.CompletionItem('content', vscode.CompletionItemKind.Keyword),
                 ];
-            } else {
-                if (words.length === 2) {
+            }
+            if (check[0] === '-version') {
+                if (check.length === 2) {
                     return [
-                        new vscode.CompletionItem('-version', vscode.CompletionItemKind.Keyword),
-                        new vscode.CompletionItem('content', vscode.CompletionItemKind.Keyword),
+                        new vscode.CompletionItem('1.0', vscode.CompletionItemKind.Enum),
+                        new vscode.CompletionItem('1.1', vscode.CompletionItemKind.Enum),
+                        new vscode.CompletionItem('auto', vscode.CompletionItemKind.Enum),
                     ];
+                } else {
+                    check.shift();
+                    check.shift();
                 }
+            }
+            if (check.length === 0) {
+                return [
+                    new vscode.CompletionItem('content', vscode.CompletionItemKind.Keyword),
+                ];
+            }
+            if (check[0] === 'content') {
+                if (check.length === 1) {
+                    let completes = [
+                        new vscode.CompletionItem('{...}', vscode.CompletionItemKind.Snippet),
+                        new vscode.CompletionItem('"..."', vscode.CompletionItemKind.Snippet),
+                        new vscode.CompletionItem('"<html>...</html>"', vscode.CompletionItemKind.Snippet),
+                    ];
+                    completes[0].insertText = new vscode.SnippetString('{${1}}');
+                    completes[1].insertText = new vscode.SnippetString('"${1}"');
+                    completes[2].insertText = new vscode.SnippetString('"<html><head><title>${1}</title></head><body><h1>${2}</h1><p>${3}</p></body></html>"');
+                    return completes;
+                } else {
+                    check.shift();
+                    check.shift();
+                }
+            }
+            if ((check.length & 1) === 0) {
+                return http_response_headers;
+            } else {
+                return http_response_headers_values[check[check.length - 1]];
             }
         }
         default: {
