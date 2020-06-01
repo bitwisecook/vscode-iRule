@@ -3,6 +3,11 @@
 All notable changes to the "irule" extension will be documented in this file.
 
 ---
+## 1.6.6
+### Added
+Build out completion for HTTP::respond
+
+---
 ## 1.6.5
 ### Changed
 Start fixing opt vs contsant-numeric confusions
