@@ -3,7 +3,7 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 15.1",
 	"publisher": "bitwisecook",
-	"version": "1.6.6",
+	"version": "1.6.7",
 	"keywords": [
 		"f5",
 		"f5networks",
@@ -138,17 +138,17 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/glob": "^7.1.1",
+		"@types/glob": "^7.1.2",
 		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.11.0",
+		"@types/node": "^13.13.10",
 		"@types/vscode": "^1.45.0",
 		"@typescript-eslint/eslint-plugin": "^2.30.0",
 		"@typescript-eslint/parser": "^2.30.0",
 		"eslint": "^6.8.0",
 		"glob": "^7.1.6",
-		"mocha": "^7.1.2",
-		"typescript": "^3.8.3",
-		"vscode-test": "^1.3.0"
+		"mocha": "^7.2.0",
+		"typescript": "^3.9.5",
+		"vscode-test": "^1.4.0"
 	},
 	"dependencies": {
 		"js-yaml": "^3.14.0"
