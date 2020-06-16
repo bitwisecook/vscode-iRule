@@ -206,6 +206,26 @@ export function updateDiagnostics(
                 );
             }
 
+            match = /(^|;|\[)\s*(set\s+(\$[^\s;\]]+))/.exec(
+                line
+            );
+            if (vscode.workspace.getConfiguration().get('conf.irule-lang.diag.set.dynamic.enable') && match) {
+                const idx = line.indexOf(match[2]);
+                diags.push(
+                    {
+                        code: "",
+                        message:
+                            `\`set\` targeting variable instead of name (${match[3]}), check if this is intended.`,
+                        range: new vscode.Range(
+                            new vscode.Position(lineNum, idx),
+                            new vscode.Position(lineNum, idx+match[2].length)
+                        ),
+                        severity: vscode.DiagnosticSeverity.Warning,
+                        source: ""
+                    }
+                );
+            }
+
         }
         collection.set(document.uri, diags);
     } else {

@@ -16,7 +16,7 @@
 		"big-ip"
 	],
 	"engines": {
-		"vscode": "^1.45.0"
+		"vscode": "^1.46.0"
 	},
 	"bugs": {
 		"url": "https://github.com/bitwisecook/vscode-iRule/issues"
@@ -52,6 +52,12 @@
 						"type": "boolean",
 						"default": true,
 						"description": "Enable/disable code diagnostic for when missing priority.",
+						"scope": "workspace"
+					},
+					"conf.irule-lang.diag.set.dynamic.enable": {
+						"type": "boolean",
+						"default": true,
+						"description": "Enable/disable code diagnostic for set targeting dynamic variable.",
 						"scope": "workspace"
 					},
 					"conf.irule-lang.diag.doublesubst.enable": {

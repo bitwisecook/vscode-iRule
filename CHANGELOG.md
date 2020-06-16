@@ -6,6 +6,7 @@ All notable changes to the "irule" extension will be documented in this file.
 ## 1.6.7
 ### Changed
 Completions trigger after `[` and `{`
+Added a diagnostic for set targeting dynamic variable (eg, `set $a "foo"`)
 
 ---
 ## 1.6.6
