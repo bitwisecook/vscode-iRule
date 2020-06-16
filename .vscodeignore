@@ -6,6 +6,7 @@
 **/*.ts
 **/tsconfig.json
 **/tslint.json
+**/.eslintrc.js
 data/**
 Makefile
 node_modules
@@ -17,3 +18,4 @@ syntaxes/**
 tsconfig.json
 tsconfig.tsbuildinfo
 webpack.config.js
+.eslintrc.js
