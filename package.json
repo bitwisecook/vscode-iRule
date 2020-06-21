@@ -3,7 +3,7 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 15.1",
 	"publisher": "bitwisecook",
-	"version": "1.6.8",
+	"version": "1.6.9",
 	"keywords": [
 		"f5",
 		"f5networks",
@@ -160,7 +160,7 @@
 		"typescript": "^3.9.5",
 		"vscode-test": "^1.4.0",
 		"webpack": "^4.43.0",
-		"webpack-cli": "^3.3.11"
+		"webpack-cli": "^3.3.12"
 	},
 	"dependencies": {
 		"js-yaml": "^3.14.0"
