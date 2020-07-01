@@ -8,12 +8,12 @@ export class InvalidCharFix implements vscode.CodeActionProvider {
             char: ' ',
         },
         '”': {
-            from_name: 'open smart-quote',
+            from_name: 'close smart-quote',
             to_name: 'quote',
             char: '"',
         },
         '“': {
-            from_name: 'close smart-quote',
+            from_name: 'open smart-quote',
             to_name: 'quote',
             char: '"',
         },
@@ -32,10 +32,10 @@ export class InvalidCharFix implements vscode.CodeActionProvider {
         }
         // console.log('at invalid char');
 
-        const replaceChar = this.createFix(document, range, replace.from_name, replace.to_name, replace.char);
+        const replaceBadChar = this.createFix(document, range, replace.from_name, replace.to_name, replace.char);
 
         return [
-            replaceChar
+            replaceBadChar
         ];
     }
 
