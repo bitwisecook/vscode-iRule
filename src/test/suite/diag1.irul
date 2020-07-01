@@ -1,0 +1,5 @@
+when CLIENT_ACCEPTED {
+                if {[IP::client_addr] eq “1.1.1.1”} {
+                           log local0.info “hi cloudflare!”
+                }
+}
