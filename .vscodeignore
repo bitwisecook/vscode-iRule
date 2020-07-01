@@ -2,7 +2,6 @@
 .vscode
 .vscode-test/**
 .yo-rc.json
-**/*.map
 **/*.ts
 **/tsconfig.json
 **/tslint.json
