@@ -7,6 +7,7 @@ All notable changes to the "irule" extension will be documented in this file.
 ### Changed
 Update README
 NPM updates
+Fix arg injection diagnostic
 
 ---
 ## 1.6.10
