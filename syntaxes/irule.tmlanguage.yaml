@@ -2377,6 +2377,12 @@ repository:
         |PSC::subscriber_id
         |PSC::tower_id
         |PSC::user_name
+        |PSM::FTP::disable
+        |PSM::FTP::enable
+        |PSM::HTTP::disable
+        |PSM::HTTP::enable
+        |PSM::SMTP::disable
+        |PSM::SMTP::enable
         |QOE::disable
         |QOE::enable
         |QOE::video
@@ -2511,6 +2517,8 @@ repository:
         |STREAM::replace
         |TAP::action
         |TAP::config
+        |TAP::insight
+        |TAP::insight_requested
         |TAP::score
         |TCP::abc
         |TCP::analytics
