@@ -3,6 +3,23 @@
 All notable changes to the "irule" extension will be documented in this file.
 
 ---
+## 1.6.11
+### Changed
+Update README
+NPM updates
+
+---
+## 1.6.10
+### Addded
+BIG-IP v16.0 iRules command changes
+
+---
+## 1.6.9
+### Changed
+Fix quotes in Diagnostics provider
+Include the source map in the production vsix
+
+---
 ## 1.6.8
 ### Added
 Added a diagnostic for set targeting dynamic variable (eg, `set $a "foo"`)
