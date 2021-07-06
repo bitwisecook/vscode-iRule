@@ -162,6 +162,9 @@
 		"webpack": "^4.43.0",
 		"webpack-cli": "^3.3.12"
 	},
+	"resolutions": {
+		"glob-parent": "^5.1.2"
+	},
 	"dependencies": {
 		"js-yaml": "^3.14.0"
 	}
