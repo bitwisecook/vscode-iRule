@@ -5,3 +5,5 @@ node_modules
 data/irule-schema*json
 data/**/*.3
 data/**/*.1
+data/**/*.lst
+data/*.lst

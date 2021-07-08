@@ -722,6 +722,7 @@ repository:
             |CLIENTSSL_HANDSHAKE
             |CLIENTSSL_PASSTHROUGH
             |CLIENTSSL_SERVERHELLO_SEND
+            |CONNECTOR_OPEN
             |DIAMETER_EGRESS
             |DIAMETER_INGRESS
             |DIAMETER_RETRANSMISSION
@@ -1976,6 +1977,8 @@ repository:
         |COMPRESS::nodelay
         |CONNECTOR::disable
         |CONNECTOR::enable
+        |CONNECTOR::profile
+        |CONNECTOR::remap
         |CRYPTO::decrypt
         |CRYPTO::encrypt
         |CRYPTO::hash
@@ -2043,6 +2046,7 @@ repository:
         |DIAMETER::retry
         |DIAMETER::route_status
         |DIAMETER::session
+        |DIAMETER::skip_capabilities_exchange
         |DIAMETER::state
         |DNS::additional
         |DNS::answer
@@ -2164,6 +2168,7 @@ repository:
         |HTTP2::disable
         |HTTP2::disconnect
         |HTTP2::enable
+        |HTTP2::header
         |HTTP2::push
         |HTTP2::requests
         |HTTP2::stream
@@ -2282,6 +2287,7 @@ repository:
         |MQTT::type
         |MQTT::username
         |MQTT::will
+        |MR::available_for_routing
         |MR::collect
         |MR::connect_back_port
         |MR::connection_instance
@@ -2471,6 +2477,7 @@ repository:
         |SPDY::stream
         |SPDY::version
         |SSL::allow_dynamic_record_sizing
+        |SSL::allow_nonssl
         |SSL::alpn
         |SSL::authenticate
         |SSL::c3d
@@ -2534,6 +2541,7 @@ repository:
         |TCP::ecn
         |TCP::enhanced_loss_recovery
         |TCP::idletime
+        |TCP::keepalive
         |TCP::limxmit
         |TCP::local_port
         |TCP::lossfilterburst
@@ -2584,6 +2592,7 @@ repository:
         |UDP::hold
         |UDP::local_port
         |UDP::max_rate
+        |UDP::max_buf_pkts
         |UDP::mss
         |UDP::payload
         |UDP::release
