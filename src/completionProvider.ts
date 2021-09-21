@@ -1262,6 +1262,7 @@ export function complete(document: vscode.TextDocument, position: vscode.Positio
                     new vscode.CompletionItem('CLIENTSSL_HANDSHAKE', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('CLIENTSSL_PASSTHROUGH', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('CLIENTSSL_SERVERHELLO_SEND', vscode.CompletionItemKind.Event),
+                    new vscode.CompletionItem('CONNECTOR_OPEN', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('DIAMETER_EGRESS', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('DIAMETER_INGRESS', vscode.CompletionItemKind.Event),
                     new vscode.CompletionItem('DIAMETER_RETRANSMISSION', vscode.CompletionItemKind.Event),
