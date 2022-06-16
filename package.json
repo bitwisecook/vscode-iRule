@@ -39,8 +39,7 @@
 		"Snippets"
 	],
 	"activationEvents": [
-		"onLanguage:irule-lang",
-		"*"
+		"onLanguage:irule-lang"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
