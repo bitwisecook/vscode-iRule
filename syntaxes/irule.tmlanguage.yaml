@@ -1678,6 +1678,7 @@ repository:
         |active_nodes
         |b64decode
         |b64encode
+        |class
         |client_addr
         |client_port
         |clientside
