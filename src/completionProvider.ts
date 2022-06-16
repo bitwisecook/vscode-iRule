@@ -935,6 +935,8 @@ const all_commands = [
     'WS::masking',
     'WS::message',
     'WS::payload',
+    'WS::payload_ivs',
+    'WS::payload_processing',
     'WS::release',
     'WS::request',
     'WS::response',
