@@ -3,6 +3,16 @@
 All notable changes to the "irule" extension will be documented in this file.
 
 ---
+## 1.6.14
+### Changed
+Update README for 17.0
+
+---
+## 1.6.13
+### Changed
+Add commands for 17.0
+
+---
 ## 1.6.12
 ### Changed
 Add CONNECTOR_OPEN to suggestions
