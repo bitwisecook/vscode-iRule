@@ -21,7 +21,7 @@ dist-clean: clean
 build: out/extension.js
 
 install: package
-	code --install-extension $(VSIX)
+	code --install-extension $(VSIX) --force
 
 uninstall:
 	code --uninstall-extension $(PKG_ID)
