@@ -3,7 +3,7 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 17.0",
 	"publisher": "bitwisecook",
-	"version": "1.6.14",
+	"version": "1.6.15",
 	"keywords": [
 		"f5",
 		"f5networks",
@@ -16,7 +16,7 @@
 		"big-ip"
 	],
 	"engines": {
-		"vscode": "^1.46.0"
+		"vscode": "^1.73.0"
 	},
 	"bugs": {
 		"url": "https://github.com/bitwisecook/vscode-iRule/issues"
@@ -145,26 +145,25 @@
 		"test": "node ./out/test/runTest.js"
 	},
 	"devDependencies": {
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^7.0.2",
-		"@types/node": "^13.13.13",
-		"@types/vscode": "^1.46.0",
-		"@typescript-eslint/eslint-plugin": "^2.34.0",
-		"@typescript-eslint/parser": "^2.34.0",
-		"eslint": "^6.8.0",
-		"eslint-config-prettier": "^6.11.0",
-		"glob": "^7.1.6",
-		"mocha": "^7.2.0",
-		"ts-loader": "^7.0.5",
-		"typescript": "^3.9.6",
-		"vscode-test": "^1.4.0",
-		"webpack": "^4.43.0",
-		"webpack-cli": "^3.3.12"
-	},
-	"resolutions": {
-		"glob-parent": "^5.1.2"
+		"@types/glob": "^8.0.0",
+		"@types/mocha": "^10.0.0",
+		"@types/node": "^18.11.9",
+		"@types/vscode": "^1.73.0",
+		"@typescript-eslint/eslint-plugin": "^5.42.0",
+		"@typescript-eslint/parser": "^5.42.0",
+		"@vscode/test-electron": "^2.2.0",
+		"eslint": "^8.27.0",
+		"eslint-config-prettier": "^8.5.0",
+		"glob": "^8.0.3",
+		"mocha": "^10.1.0",
+		"prettier": "^2.7.1",
+		"ts-loader": "^9.4.1",
+		"typescript": "^4.8.4",
+		"vsce": "^2.13.0",
+		"webpack": "^5.74.0",
+		"webpack-cli": "^4.10.0"
 	},
 	"dependencies": {
-		"js-yaml": "^3.14.0"
+		"js-yaml": "^4.1.0"
 	}
 }

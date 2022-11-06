@@ -1044,7 +1044,7 @@ let http_status_codes: vscode.CompletionItem[] = [
 ];
 
 for (let key in http_status_codes) {
-    http_status_codes[key].insertText = http_status_codes[key].label.split(' ')[0];
+    http_status_codes[key].insertText = (http_status_codes[key].label as string).split(' ')[0];
 }
 
 const http_response_headers: vscode.CompletionItem[] = [

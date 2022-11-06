@@ -10,7 +10,7 @@ node_modules/:
 	npm install
 
 out/%.js: src/%.ts node_modules/ out/syntaxes
-	npm run webpack
+	npx webpack
 
 clean:
 	rm -rf out $(VSIX)
@@ -29,7 +29,7 @@ uninstall:
 package: $(VSIX)
 
 $(VSIX): syntax
-	vsce package
+	npx vsce package
 
 vsix: $(VSIX)
 
