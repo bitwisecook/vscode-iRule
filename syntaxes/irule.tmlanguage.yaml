@@ -3012,7 +3012,7 @@ repository:
     patterns:
       -
         contentName: comment.line.number-sign.irule
-        begin: '(?<=^|;|{)\s*((#))'
+        begin: '(?<=^|;|{)\s*((#+))'
         end: "(?=$|\\n)|((#))(?=\\s*(?:[}\\n]))"
         captures:
           '1':
