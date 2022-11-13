@@ -3,6 +3,16 @@
 All notable changes to the "irule" extension will be documented in this file.
 
 ---
+## 1.6.17
+### Changed
+fix syntax handling of regexp/regsub
+
+---
+## 1.6.16
+### Changed
+A tonne of work to update to modern packages all through the code
+
+---
 ## 1.6.14
 ### Changed
 Update README for 17.0
