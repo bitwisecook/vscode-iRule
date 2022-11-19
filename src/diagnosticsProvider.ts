@@ -176,7 +176,7 @@ export function updateDiagnostics(
                     {
                         code: "",
                         message:
-                            `\`${match[2] || match[4]}\` permits argument injection, add \`--\` to terminate options (on v12+). Before v12 ensure the first argument doesn't start with a \`-\``,
+                            `\`${match[2] || match[4]}\` permits argument injection, add \`--\` to terminate options`,
                         range: new vscode.Range(
                             new vscode.Position(lineNum, idx),
                             new vscode.Position(lineNum, line.length)
