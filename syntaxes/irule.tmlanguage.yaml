@@ -5,8 +5,6 @@ fileTypes:
   - tcl
 scopeName: source.irule
 firstLineMatch: '^\s*(when|ltm\s+rule)\s+[^\s]+\s+[^{]+{\b'
-foldingStartMarker: '[{\[(]\s*$'
-foldingEndMarker: '^\s*[}\])]'
 name: iRule
 patterns:
   -
