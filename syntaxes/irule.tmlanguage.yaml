@@ -4,9 +4,9 @@ fileTypes:
   - iRule
   - tcl
 scopeName: source.irule
-firstLineMatch: '^\s*when\s+[^\s]+\s+[^{]+{\b'
-foldingStartMarker: '([{(\[])'
-foldingEndMarker: '([})\]])'
+firstLineMatch: '^\s*(when|ltm\s+rule)\s+[^\s]+\s+[^{]+{\b'
+foldingStartMarker: '[{\[(]\s*$'
+foldingEndMarker: '^\s*[}\])]'
 name: iRule
 patterns:
   -
@@ -18,6 +18,8 @@ repository:
         include: '#invariant'
       -
         include: '#comment-blocks'
+      -
+        include: '#ltm-rule'
       -
         include: '#irule-when'
       -
@@ -200,6 +202,8 @@ repository:
         include: '#irule-subst'
       -
         include: '#variable'
+      -
+        include: '#ltm-rule'
       -
         include: '#irule-when'
       -
@@ -655,6 +659,21 @@ repository:
             include: '#proc-arguments'
           -
             include: '#brackets'
+  ltm-rule:
+    patterns:
+      -
+        begin: '(?<=^|;)\s*\b(ltm\s+rule)\b\s+([^\s]+)\s+([^\n{]*)(?={)'
+        end: '(?=(?<!\\)$)'
+        beginCaptures:
+          '1':
+            name: keyword.control.rule.irule
+          '2':
+            name: support.other.name.irule
+          patterns:
+            -
+              include: '#irule-when'
+            -
+              include: '#irule-proc'
   irule-when:
     patterns:
       -

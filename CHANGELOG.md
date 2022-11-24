@@ -3,6 +3,11 @@
 All notable changes to the "irule" extension will be documented in this file.
 
 ---
+## 1.6.18
+### Changed
+support multiple irules in one file
+
+---
 ## 1.6.17
 ### Changed
 fix syntax handling of regexp/regsub
