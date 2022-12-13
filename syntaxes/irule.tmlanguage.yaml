@@ -4,7 +4,7 @@ fileTypes:
   - iRule
   - tcl
 scopeName: source.irule
-firstLineMatch: '^\s*(when|ltm\s+rule)\s+[^\s]+\s+[^{]+{\b'
+firstLineMatch: '^\s*(timing\s+(on|off)|proc|when|ltm\s+rule)\s+[^\s]+\s+[^{]+{\b'
 name: iRule
 patterns:
   -
