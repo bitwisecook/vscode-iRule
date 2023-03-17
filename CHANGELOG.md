@@ -3,6 +3,11 @@
 All notable changes to the "irule" extension will be documented in this file.
 
 ---
+## 1.7.0
+### Changed
+support new BIG-IP 17.1 events and commands
+
+---
 ## 1.6.18
 ### Changed
 support multiple irules in one file

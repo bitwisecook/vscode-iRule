@@ -717,6 +717,7 @@ repository:
             |ASM_REQUEST_BLOCKING
             |ASM_REQUEST_DONE
             |ASM_REQUEST_VIOLATION
+            |ASM_RESPONSE_LOGIN
             |ASM_RESPONSE_VIOLATION
             |AUTH_ERROR
             |AUTH_FAILURE
@@ -1879,6 +1880,8 @@ repository:
         |ASM::disable
         |ASM::enable
         |ASM::fingerprint
+        |ASM::is_authenticated
+        |ASM::login_status
         |ASM::microservice
         |ASM::payload
         |ASM::policy
@@ -1890,6 +1893,7 @@ repository:
         |ASM::threat_campaign
         |ASM::unblock
         |ASM::uncaptcha
+        |ASM::username
         |ASM::violation_data
         |ASM::violation
         |ASN1::decode
