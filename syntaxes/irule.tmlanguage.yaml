@@ -58,7 +58,7 @@ repository:
     patterns:
       -
         begin: '\s*+(?<!\\)(\[)'
-        end: '(?<!\\)(\])'
+        end: '(?:(?<!\\)|(?<=\\{2}))(\])'
         beginCaptures:
           '1':
             name: meta.brace.square.open.irule
@@ -2849,7 +2849,7 @@ repository:
         name: string.quoted.irule
       -
         begin: '\s*+(?<!\\)(")'
-        end: '(?<!\\)(")'
+        end: '(?<!\\)(?:\\\\)*(")'
         beginCaptures:
           '1':
             name: string.quoted.double.open.irule
@@ -2882,17 +2882,29 @@ repository:
         name: constant.character.escape.newline.irule
         match: '\\\n'
       -
-        name: constant.character.escape
-        match: '\s*+\\[\]"\\nrtbfv0`\[]'
+        name: constant.character.escape.backslash.irule
+        match: '(?<!\\)(\\\\)+'
       -
-        name: constant.character.escape
+        name: constant.character.escape.quote.irule
+        match: '\\"'
+      -
+        name: constant.character.escape.brace.square.open.irule
+        match: '\\\['
+      -
+        name: constant.character.escape.brace.square.close.irule
+        match: '\\\]'
+      -
+        name: constant.character.escape.letter.irule
+        match: '\\[nrtbfv0`]'
+      -
+        name: constant.character.escape.unicode.irule
         match: '\\u(({[0-9a-fA-F]+\})|[0-9a-fA-F]{4})'
       -
-        name: constant.character.escape
+        name: constant.character.escape.hex.irule
         match: '\\x[0-9a-fA-F]{2}'
       -
-        name: constant.character.escape
-        match: '(?<!\\)(\\)([;])'
+        name: constant.character.escape.semicolon.irule
+        match: '(?<!\\)(?:\\\\)(\\)(;)'
         captures:
           '1':
             name: constant.character.escape
@@ -3013,7 +3025,7 @@ repository:
             include: '#variable-bare-italic'
       -
         begin: '(?<=_regexp|_re)\s+(?={|")'
-        end: '(?=(?<!\\)$)|(?<=")|(?<=})'
+        end: '(?=(?<!\\)(?:\\\\)$)|(?<=")|(?<=})'
         patterns:
           -
             begin: '({)'
@@ -3282,8 +3294,8 @@ repository:
       -
         include: '#string-escapes'
       -
-        begin: '(?<!\\)(")'
-        end: '(?<!\\)(")'
+        begin: '(?<!\\)(?:\\\\)(")'
+        end: '(?<!\\)(?:\\\\)(")'
         beginCaptures:
           '1':
             name: string.double.quoted.glob.match.open.irule
@@ -3294,8 +3306,8 @@ repository:
           -
             include: '#glob-match'
       -
-        begin: '(?<!\\)(\[)'
-        end: '(?<!\\)(\])'
+        begin: '(?<!\\)(?:\\\\)(\[)'
+        end: '(?<!\\)(?:\\\\)(\])'
         contentName: support.type
         beginCaptures:
           '1':
