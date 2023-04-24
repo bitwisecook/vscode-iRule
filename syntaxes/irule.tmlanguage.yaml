@@ -300,7 +300,7 @@ repository:
           -
             include: '#format-brackets'
       -
-        match: '(?:(?<=^|\[|{|;)\s*(::)?|(?<=::))\b(error|for|lreplace|lsearch|while|format|lindex|linsert|concat|lsort|subst|upvar|uplevel|continue|break|split|switch|catch|join|lrange|lset|llength|list|return|puts|clock|variable|after|return)\b(::)?'
+        match: '(?:(?<=^|\[|{|;)\s*(::)?|(?<=::))\b(error|for|lreplace|lsearch|while|format|lindex|linsert|concat|lsort|subst|upvar|uplevel|continue|break|split|switch|catch|join|lrange|lset|llength|list|return|puts|variable|return)\b(::)?'
         name: keyword.control.irule
         captures:
           '1':
@@ -1101,7 +1101,7 @@ repository:
   irule-entity-commands:
     patterns:
       -
-        begin: '(?<=^|[\[{;])\s*(::)?\b(info|eval|clock|array|binary|after)\b'
+        begin: '(?<=^|[\[{;])\s*(::)?\b(eval|clock|after)\b'
         end: "(?=(?<!\\\\)(?:$|[\\n;\\]}]))"
         beginCaptures:
           '1':
@@ -1114,7 +1114,7 @@ repository:
           -
             include: '#opt'
           -
-            match: "(?<=(?:info|clock|binary|array|after))\\s+(?:(?!$|{|\\[|;|\\n)([^\\s\\]}\\[{;\\n\"]*))?"
+            match: "(?<=(?:eval|clock|after))\\s+(?:(?!$|{|\\[|;|\\n)([^\\s\\]}\\[{;\\n\"]*))?"
             captures:
               '1':
                 patterns:
@@ -1409,7 +1409,7 @@ repository:
           '1':
             name: support.type
           '2':
-            name: keyword.control.string.irule
+            name: keyword.control.catch.irule
         patterns:
           -
             include: '#brackets'
@@ -1424,7 +1424,7 @@ repository:
           '1':
             name: support.type
           '2':
-            name: keyword.control.string.irule
+            name: keyword.control.upvar.irule
         patterns:
           -
             include: '#line-escape'
@@ -1460,7 +1460,7 @@ repository:
           '1':
             name: support.type
           '2':
-            name: keyword.control.string.irule
+            name: keyword.control.info.irule
         patterns:
           -
             include: '#line-escape'
