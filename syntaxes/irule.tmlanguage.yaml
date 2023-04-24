@@ -3346,10 +3346,12 @@ repository:
                 include: '#opt'
               -
                 include: '#proc-call-args'
+              -
+                include: '#variable-bare-italic'
           -
             include: '#namespace-separator'
           -
-            match: '(?!\s)([^\s\[(?:::){;\$"\]};]*)'
+            match: '(?!\s)([^\s\[(?:::){;\$"\]};()]*)'
             name: punctuation.italic.variable.irule
           -
             match: '(?<=\*)(?!\s)([^\s\[(?:::){;$"\];}]*)'
@@ -3379,6 +3381,8 @@ repository:
                 include: '#opt'
               -
                 include: '#proc-call-args'
+              -
+                include: '#variable-bare'
           -
             include: '#namespace-separator'
           -
