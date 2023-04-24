@@ -3,7 +3,7 @@
 	"displayName": "F5 Networks iRules",
 	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 17.1",
 	"publisher": "bitwisecook",
-	"version": "1.7.1",
+	"version": "1.7.2",
 	"keywords": [
 		"f5",
 		"f5networks",
@@ -147,21 +147,21 @@
 	"devDependencies": {
 		"@types/glob": "^8.1.0",
 		"@types/mocha": "^10.0.1",
-		"@types/node": "^18.15.3",
+		"@types/node": "^18.16.0",
 		"@types/vscode": "^1.74.0",
-		"@typescript-eslint/eslint-plugin": "^5.55.0",
-		"@typescript-eslint/parser": "^5.55.0",
+		"@typescript-eslint/eslint-plugin": "^5.59.0",
+		"@typescript-eslint/parser": "^5.59.0",
 		"@vscode/test-electron": "^2.3.0",
-		"@vscode/vsce": "^2.18.0",
-		"eslint": "^8.36.0",
-		"eslint-config-prettier": "^8.7.0",
-		"glob": "^8.1.0",
+		"@vscode/vsce": "^2.19.0",
+		"eslint": "^8.39.0",
+		"eslint-config-prettier": "^8.8.0",
+		"glob": "^10.2.2",
 		"mocha": "^10.2.0",
-		"prettier": "^2.8.4",
+		"prettier": "^2.8.8",
 		"ts-loader": "^9.4.2",
-		"typescript": "^5.0.2",
-		"webpack": "^5.76.2",
-		"webpack-cli": "^5.0.1"
+		"typescript": "^5.0.4",
+		"webpack": "^5.80.0",
+		"webpack-cli": "^5.0.2"
 	},
 	"dependencies": {
 		"js-yaml": "^4.1.0"
