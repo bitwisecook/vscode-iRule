@@ -1,4 +1,6 @@
-# F5 Networks iRule Extension
+# [DEPRECATED] F5 Networks iRule Extension
+
+> **This extension is deprecated and no longer maintained.** Please switch to the [tcl-lsp](https://marketplace.visualstudio.com/items?itemName=bitwisecook.tcl-lsp) extension for continued support.
 
 F5 Networks iRule extension for Visual Studio Code. This extension gives Tcl based iRule language support for Visual Studio Code including syntax and intelliSense support for iRule events, commands and statements, up to BIG-IP v17.1.
 

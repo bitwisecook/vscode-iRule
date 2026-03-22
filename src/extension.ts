@@ -7,6 +7,15 @@ import * as diagnostic from "./diagnosticsProvider";
 import * as codeAction from "./codeActionProvider";
 
 export function activate(context: vscode.ExtensionContext) {
+    vscode.window.showWarningMessage(
+        "The iRules extension is deprecated and no longer maintained. Please switch to the tcl-lsp extension for continued support.",
+        "Install tcl-lsp"
+    ).then(selection => {
+        if (selection === "Install tcl-lsp") {
+            vscode.env.openExternal(vscode.Uri.parse("vscode:extension/bitwisecook.tcl-lsp"));
+        }
+    });
+
     vscode.languages.registerDocumentFormattingEditProvider("irule-lang", {
         provideDocumentFormattingEdits(
             document: vscode.TextDocument,

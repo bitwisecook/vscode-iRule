@@ -1,9 +1,9 @@
 {
 	"name": "irule",
-	"displayName": "F5 Networks iRules",
-	"description": "F5 Networks iRules Extension. Supports all BIG-IP versions up to 17.1",
+	"displayName": "[DEPRECATED] F5 Networks iRules",
+	"description": "[DEPRECATED - Use tcl-lsp instead] F5 Networks iRules Extension. Supports all BIG-IP versions up to 17.1",
 	"publisher": "bitwisecook",
-	"version": "1.7.4",
+	"version": "1.7.5",
 	"keywords": [
 		"f5",
 		"f5networks",
@@ -162,6 +162,9 @@
 		"typescript": "^5.0.4",
 		"webpack": "^5.80.0",
 		"webpack-cli": "^5.0.2"
+	},
+	"overrides": {
+		"serialize-javascript": "^7.0.4"
 	},
 	"dependencies": {
 		"js-yaml": "^4.1.0"
